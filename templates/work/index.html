@@ -47,7 +47,7 @@
           <a class="hover" href="{{ item.url }}" title="{{ item.title }} for {{ item.client.one().title }}">
             {% set image = item.image[0] ?? null %}
             {% if image %}
-              {{ elements.image(image) }}
+              {{ elements.image(image, 'normal', '16x9', '64rem') }}
             {% endif %}
           </a>
           <h3 class="mt1 fs-t1 fw-bold"><a class="ts-link" href="{{ item.url }}" title="{{ item.title }}">{{ item.title }}</a></h3>

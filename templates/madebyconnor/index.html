@@ -37,46 +37,6 @@
 
   </article>
 
-  {# -- LATEST POSTS -- #}
-  {% set posts = craft.entries({
-    section: 'blog',
-    limit: '3',
-    with: ['image']
-  }) %}
-
-  {% if posts %}
-    <section class="ctnr-l mv4 cf">
-      <div class="w100 mt3">
-        <h3 class="ts-app fs-s1"><a href="/blog">Latest Posts</a></h3>
-      </div>
-        {% for post in posts %}
-          <article class="w1-3 fl-left mv2">
-
-            {# Featured image or first image from matrix blocks? #}
-            {% if post.image[0] ?? null %}
-              {% set image = post.image[0] ?? null %}
-            {% else %}
-              {% set imageBlock = post.body.type('images').one() %}
-              {% if imageBlock %}
-                {% set image = imageBlock.image.one() %}
-              {% endif %}
-            {% endif %}
-
-            {% if image is defined and image %}
-
-              <a class="hover" href="{{ post.url }}" title="{{ post.title }}">
-                {{ elements.image(image, 'normal', '16x9', '42rem' ) }}
-              </a>
-
-            {% endif %}
-
-            <h3 class="mt2 fs-t1 fw-bold lh1"><a class="ts-link" href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h3>
-            <span class="ts-subtle fs-s1">{{ elements.date(post.postDate) }}{% if post.category is not empty %}&nbsp;·&nbsp;{{ elements.category(post) }}{% endif %}</span>
-          </article>
-        {% endfor %}
-    </section>
-  {% endif %}
-
   {# -- FEATURED ITEMS -- #}
   {% set featured = craft.entries({
     section: 'work',
