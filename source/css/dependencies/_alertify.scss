@@ -45,7 +45,8 @@ $box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .2);
     }
 
     &.error {
-      background-color: $oc-red-7;
+      background-color: $oc-one-7;
+      color: $oc-white;
     }
 
     &.success {

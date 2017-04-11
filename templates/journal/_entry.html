@@ -26,7 +26,7 @@
             <span class="header__meta mv2 fs-s1 ts-subtle"><ul>
 
               {% for tag in entry.tags %}
-                <li>{{ tag.title | capitalize }}</li>
+                <li>#{{ tag.title | lower }}{% if not loop.last %}, {% endif %}</li>
               {% endfor %}
 
             </ul></span>
@@ -35,12 +35,11 @@
       </header>
 
       {# -- CONTENT -- #}
-      <div class="blocks cf">
-
-        {# Body matrix #}
-        {{ entry.quill }}
-
-      </div>
+      <section class="ctnr-s">
+        <div class="w100">
+          {{ entry.quill }}
+        </div>
+      </section>
 
       {# -- SHARE -- #}
       {% if entry.passphrase is empty %}

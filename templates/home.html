@@ -14,9 +14,110 @@
 {% block head %}
   {{ parent() }}
 
-  <script>
-  loadjs(['{{ baseUrl ~ rev('js/vue.min.js') }}'], 'vue');
-  </script>
+  <link rel="preload" href="{{ baseUrl ~ rev('css/home.min.css') }}" as="style" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" type="text/css" href="{{ baseUrl ~ rev('css/home.min.css') }}"></noscript>
+{% endblock %}
+
+{% block critical %}
+  <style>
+    {{ source(_self ~ '.min.css', ignore_missing = true) }}
+  </style>
+{% endblock %}
+
+{% block body %}
+  {% cache %}
+  {% minify %}
+
+  <div id="app">
+
+    {# -- METABAR -- #}
+    <header id="metabar" class="metabar">
+      <div class="metabar__top">
+        <a class="metabar__brand ph2" href="{{ siteUrl }}#" title="Home">
+          {% include '_includes/logo' %}
+        </a>
+
+        <div class="metabar__cta ph2">
+          <a class="ts-subtle ts-link" href="http://www.thetimezoneconverter.com/" v-cloak>[[time]]</a>
+          <button class="metabar__darkMode" title="Toggle darkmode" onclick="toggleDarkness()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path d="M17.75,4.09L15.22,6.03L16.13,9.09L13.5,7.28L10.87,9.09L11.78,6.03L9.25,4.09L12.44,4L13.5,1L14.56,4L17.75,4.09M21.25,11L19.61,12.25L20.2,14.23L18.5,13.06L16.8,14.23L17.39,12.25L15.75,11L17.81,10.95L18.5,9L19.19,10.95L21.25,11M18.97,15.95C19.8,15.87 20.69,17.05 20.16,17.8C19.84,18.25 19.5,18.67 19.08,19.07C15.17,23 8.84,23 4.94,19.07C1.03,15.17 1.03,8.83 4.94,4.93C5.34,4.53 5.76,4.17 6.21,3.85C6.96,3.32 8.14,4.21 8.06,5.04C7.79,7.9 8.75,10.87 10.95,13.06C13.14,15.26 16.1,16.22 18.97,15.95M17.33,17.97C14.5,17.81 11.7,16.64 9.53,14.5C7.36,12.31 6.2,9.5 6.04,6.68C3.23,9.82 3.34,14.64 6.35,17.66C9.37,20.67 14.19,20.78 17.33,17.97Z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="main">
+      <article>
+        {% if currentUser and currentUser.username == "connorbaer" %}
+
+        {# -- HEADER -- #}
+        <header class="ctnr-s">
+          <div class="header w100 mv5">
+            <h1 id="greeting" class="header__title header__title--color">[[ greeting ]], Sir.&nbsp;</h1>
+            <h2 class="header__subtitle">Every day is a new opportunity.</h2>
+            <span class="header__meta mv2 ts-subtle fs-s1" v-cloak>{{ now | date("F d, Y") }}&nbsp;&nbsp;·&nbsp;&nbsp;☀️&nbsp;[[sunrise]]&nbsp;&nbsp;&nbsp;🌙&nbsp;[[sunset]]</span>
+          </div>
+        </header>
+
+        <div class="ctnr-s">
+
+          {# -- JOURNAL -- #}
+          {% set latestEntry = craft.entries.section('journal').one() %}
+
+          {% if latestEntry.dateCreated | date('j') == now | date('j') %}
+            {% set entry = latestEntry %}
+          {% endif %}
+
+          <section class="w100">
+            <h3 class="fs-t1">What did you do today?</h3>
+
+            <form id="journal" method="post" accept-charset="UTF-8" onsubmit="return quillSubmit()">
+              {{ csrfInput() }}
+              {{ redirectInput('journal/{slug}') }}
+              <input type="hidden" name="action" value="entries/save-entry">
+              <input type="hidden" name="sectionId" value="10">
+              <input type="hidden" name="enabled" value="1">
+
+              {% if entry is defined %}
+                <input type="hidden" name="entryId" value="{{ entry.id }}">
+              {% endif %}
+
+              <div class="mv2">
+                <input id="quill" name="fields[quill]" type="hidden"></input>
+                <div id="quill-editor">
+                  {% if entry is defined %}{{ entry.quill }}{% endif %}
+                </div>
+              </div>
+
+              <select id="tags" name="fields[tags][]" class="form__control" placeholder="Add a tag..." multiple required>
+
+                {% for tag in craft.tags.group('blog') %}
+                  <option value="{{ tag.id }}" {% if entry is defined and tag.id in entry.tags.ids %}selected{% endif %}>{{ tag.title }}</option>
+                {% endfor %}
+
+              </select>
+
+              <input class="button" type="submit" value="Publish">
+            </form>
+          </section>
+        </div>
+
+        {% else %}
+
+          {# -- HEADER -- #}
+          <header class="ctnr-s">
+            <div class="header w100 mv5">
+              <h1 id="greeting" class="header__title header__title--color">Hello stranger.&nbsp;</h1>
+              <h2 class="header__subtitle">You've discovered Area 51.</h2>
+            </div>
+          </header>
+
+        {% endif %}
+      </article>
+    </main>
+  </div>
 
   <script>
     loadjs(['{{ baseUrl ~ rev('js/quill.min.js') }}'], 'quill');
@@ -31,7 +132,7 @@
               [{ list: 'ordered' }, { list: 'bullet' }]
             ]
           },
-          placeholder: 'What did you do today?',
+          placeholder: 'Dear journal...',
           theme: 'snow'
         });
       }
@@ -39,7 +140,7 @@
   </script>
 
   <script>
-    loadjs(['{{ baseUrl ~ rev('js/choices.min.js') }}'], 'choices');
+    loadjs(['https://cdn.rawgit.com/jshjohnson/Choices/master/assets/scripts/dist/choices.min.js'], 'choices');
     loadjs.ready('choices', {
       success: function() {
         const choicesOptions = {
@@ -53,75 +154,9 @@
     });
   </script>
 
-  <!-- Theme included stylesheets -->
-  <link href="//cdn.quilljs.com/1.2.3/quill.snow.css" rel="stylesheet">
-{% endblock %}
-
-{% block body %}
-  {% cache %}
-  {% minify %}
-
-  <main id="main" class="main">
-    <article id="app">
-      {% if currentUser and currentUser.username == "connorbaer" %}
-
-      {# -- HEADER -- #}
-      <header class="ctnr-s">
-        <div class="header w100 mt4 mb5">
-          <h1 id="greeting" class="header__title header__title--color">[[ greeting ]] Sir.&nbsp;</h1>
-          <h2 class="header__subtitle">What did you do today?</h2>
-          <span class="header__meta mv2 ts-subtle fs-s1" v-cloak>{{ now | date("F d, Y") }}&nbsp;&nbsp;·&nbsp;&nbsp;[[hours]]:[[minutes]]</span>
-        </div>
-      </header>
-
-      <div class="ctnr-s">
-
-        {# -- JOURNAL -- #}
-
-        {% set latestEntry = craft.entries.section('journal').one() %}
-
-        {% if latestEntry.dateCreated | date('j') == now | date('j') %}
-          {% set entry = latestEntry %}
-        {% endif %}
-
-        <section class="w100">
-
-          <form id="journal" method="post" accept-charset="UTF-8" onsubmit="return validateForm()">
-            {{ csrfInput() }}
-            {{ redirectInput('journal/{slug}') }}
-            <input type="hidden" name="action" value="entries/save-entry">
-            <input type="hidden" name="sectionId" value="10">
-            <input type="hidden" name="enabled" value="1">
-
-            {% if entry is defined %}
-              <input type="hidden" name="entryId" value="{{ entry.id }}">
-            {% endif %}
-
-            <div class="mv2">
-              <input id="quill" name="fields[quill]" type="hidden"></input>
-              <div id="quill-editor">
-                {% if entry is defined %}{{ entry.quill }}{% endif %}
-              </div>
-            </div>
-
-            {# <div class="form__group">
-              <select id="tags" name="fields[tags][]" class="form__control" placeholder="Add a tag..." multiple required>
-
-                {% for tag in craft.tags.group('blog') %}
-                  <option value="{{ tag.id }}" {% if entry is defined and tag.id in entry.tags.ids %}selected{% endif %}>{{ tag.title }}</option>
-                {% endfor %}
-
-              </select>
-            </div> #}
-
-            <input class="button" type="submit" value="Publish">
-          </form>
-        </section>
-      </div>
-
-      {% endif %}
-    </article>
-  </main>
+  <script>
+  loadjs(['{{ baseUrl ~ rev('js/vue.min.js') }}'], 'vue');
+  </script>
 
   {% endminify %}
   {% endcache %}

@@ -74,6 +74,16 @@ loadjs.ready('scripts', {
       tolerance : 8,
     });
     headroom.init();
+
+    {% set error = craft.app.session.getFlash('error') %}
+    {% set notice = craft.app.session.getFlash('notice') %}
+
+    {% if error %}
+      alertify.error('{{ error }}');
+    {% endif %}
+    {% if notice %}
+      alertify.success('{{ notice }}');
+    {% endif %}
   }
 });
 </script>

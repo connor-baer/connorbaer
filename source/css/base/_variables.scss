@@ -115,7 +115,7 @@ $ls-small: .025em;
 
 .theme-dark {
   #{--oc-white}: $oc-gray-9;
-  #{--oc-black}: white;
+  #{--oc-black}: $oc-white;
 
   #{--oc-gray-0}: $oc-gray-9;
   #{--oc-gray-1}: $oc-gray-8;

@@ -32,7 +32,8 @@
     "dukt/twitter": "~2.0",
     "barrelstrength/sproutnotes": "^2.0",
     "nystudio107/craft3-imageoptim": "^1.0",
-    "clubstudioltd/craft3-asset-rev": "dev-master"
+    "clubstudioltd/craft3-asset-rev": "dev-master",
+    "selvinortiz/doxter": "^3.0"
   },
   "scripts": {
     "post-root-package-install": [

@@ -37,7 +37,7 @@
 /* eslint-disable indent, no-unused-vars, no-multiple-empty-lines, max-nested-callbacks, space-before-function-paren, quotes, comma-spacing */
 'use strict';
 
-var precacheConfig = [["assets/css/amp.min.css","c41aa0d3451a88c4584cb7d5321543cd"],["assets/css/choices.min.css","4a412d9f777ac6c98d9e45934815835b"],["assets/css/styles.min.css","8768d5d9a2a514e37d2a922501de1832"],["assets/js/choices.min.js","b4d81ccf1f4a5254f63fa411a7fb8cb8"],["assets/js/photoswipe.min.js","cc587507c916468d78f3cba9e491639e"],["assets/js/prism.min.js","f1ab1f831161beabcf188467c71a116d"],["assets/js/quill.min.js","9b1d8d65273bb6dfc2d59253e78d680a"],["assets/js/scripts.min.js","072d52f6193f67cd32e96a598c5899ee"],["assets/js/vue.min.js","8f6031a9466747edeb7d5591745ebd9d"]];
+var precacheConfig = [["assets/css/amp.min.css","c41aa0d3451a88c4584cb7d5321543cd"],["assets/css/home.min.css","a3d9ccb7853b12b6726c9a4656b61089"],["assets/css/styles.min.css","f761287714b78e595e2dd8221a099b37"],["assets/js/choices.min.js","b4d81ccf1f4a5254f63fa411a7fb8cb8"],["assets/js/photoswipe.min.js","cc587507c916468d78f3cba9e491639e"],["assets/js/prism.min.js","f1ab1f831161beabcf188467c71a116d"],["assets/js/quill.min.js","9b1d8d65273bb6dfc2d59253e78d680a"],["assets/js/scripts.min.js","173920568119f3fea3962d332b25f185"],["assets/js/vue.min.js","4cd4ab27bcea95fbc6f7f0af6decdf7b"]];
 var cacheName = 'sw-precache-v3-connorbaer-' + (self.registration ? self.registration.scope : '');
 
 

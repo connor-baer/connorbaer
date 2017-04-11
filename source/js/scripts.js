@@ -1,4 +1,17 @@
 /**
+ * Show an error message
+ *
+ * @param  {Object} error  Error object
+ */
+function error(err) {
+
+  alertify
+    .closeLogOnClick(true)
+    .error(err.message);
+}
+
+
+/**
  * Set a cookie
  *
  * @param {String} cookieName  Name of the cookie
@@ -13,6 +26,7 @@ function setCookie(cookieName, cookieValue, nDays = 1) {
   expire.setTime(today.getTime() + 3600000 * 24 * nDays);
   document.cookie = cookieName + '=' + escape(cookieValue) + ';expires=' + expire.toGMTString() + '; path=/';
 }
+
 
 /**
  * Get a cookie
@@ -30,6 +44,61 @@ function getCookie(cookieName) {
     return parts.pop().split(';').shift();
   }
 }
+
+
+/**
+ * Get user's current location
+ *
+ * @return  {Object}  Current GPS coordinates of the user
+ */
+function getLocation() {
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      return position;
+    }, function(error) {
+      switch(error.code) {
+        case error.PERMISSION_DENIED:
+          error('You didn’t share your location.');
+          break;
+        case error.POSITION_UNAVAILABLE:
+          error('Location information is unavailable.');
+          break;
+        case error.TIMEOUT:
+          error('The request to get your location timed out.');
+          break;
+        case error.UNKNOWN_ERROR:
+          error('An unknown error occurred.');
+          break;
+      }
+    }, {
+      timeout: 10000
+    });
+  } else {
+    const err = new Error('Geolocation is not supported by this browser.');
+
+    error(err);
+  }
+}
+
+
+/**
+ * Get sunrise and sunset times
+ *
+ * @param  {Object} position  GPS coordinates
+ * @param  {Object} date  DateTime object, default: now
+ *
+ * @return  {Object}  Sunrise and sunset times for the user's current location
+ */
+function sunTimes(position, date = new Date()) {
+
+  const lat = position.coords.latitude;
+  const long = position.coords.longitude;
+  const suntimes = SunCalc.getTimes(date, lat, long);
+
+  return suntimes;
+}
+
 
 /**
  * Toggle the dark theme
@@ -57,9 +126,9 @@ function toggleDarkness(darkMode) {
 /**
  * Ask to toggle dark theme based on time
  *
+ * @param  {Boolean} auto  Toggle darkmode automatically, default: false
  * @param  {Integer} sunrise  Time of sun rise, default: 0700
  * @param  {Integer} sunset  Time of sunset, default: 2000
- * @param  {Boolean} auto  Toggle darkmode automatically, default: false
  */
 function joinTheDarkSide(auto, sunrise = 700, sunset = 2100) {
 
@@ -100,7 +169,7 @@ function joinTheDarkSide(auto, sunrise = 700, sunset = 2100) {
   }
 
   // Run every 2 minutes.
-  setTimeout(joinTheDarkSide, 120000, sunrise, sunset, auto);
+  setTimeout(joinTheDarkSide, 120000, auto, sunrise, sunset);
 }
 
 /**
@@ -110,23 +179,10 @@ function joinTheDarkSide(auto, sunrise = 700, sunset = 2100) {
  * @param  {Integer} sunset  When the sun sets, default: 2000
  */
 function darthVader() {
-  if (navigator.geolocation) {
+  let times = sunTimes();
 
-    navigator.geolocation.getCurrentPosition(sunTimes, sunTimes);
-  } else {
-    console.log('Geolocation is not supported by this browser.');
-    sunTimes();
-  }
-
-  if (position) {
-    // Calculate accurate sunlight times.
-    const lat = position.coords.latitude;
-    const long = position.coords.longitude;
-    const times = SunCalc.getTimes(new Date(), lat, long);
-
-    sunrise = Number(('0' + times.sunrise.getHours()).slice(-2) + '' + ('0' + times.sunrise.getMinutes()).slice(-2));
-    sunset = Number(('0' + times.sunset.getHours()).slice(-2) + '' + ('0' + times.sunset.getMinutes()).slice(-2));
-  }
+  sunrise = Number(('0' + times.sunrise.getHours()).slice(-2) + '' + ('0' + times.sunrise.getMinutes()).slice(-2));
+  sunset = Number(('0' + times.sunset.getHours()).slice(-2) + '' + ('0' + times.sunset.getMinutes()).slice(-2));
 
   console.log('☀️ ' + sunrise + ' | 🌙 ' +  sunset);
 

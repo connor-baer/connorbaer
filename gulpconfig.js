@@ -60,6 +60,7 @@ module.exports = {
         modules + 'open-color/open-color.scss',
         modules + 'choices.js/assets/styles/scss/choices.scss',
         modules + 'photoswipe/dist/photoswipe.css',
+        modules + 'quill/dist/quill.snow.css',
       ],
       rename: {
         prefix: '_',
@@ -117,6 +118,7 @@ module.exports = {
       css: dist + assets + 'css/styles.min.css',
       files: [
         { url: '', template: 'index' },
+        { url: 'home', template: 'home' },
         { url: 'work', template: 'work/index' },
         { url: 'work/side-project/jekyll-themes', template: 'work/_entry' },
         { url: 'blog', template: 'blog/index' },
@@ -183,7 +185,6 @@ module.exports = {
         extname: '.min.js',
       },
     },
-    combined: 'combined.js',
     dest: dist + assets + 'js/',
     destInline: tmplts + '_inline/',
   },

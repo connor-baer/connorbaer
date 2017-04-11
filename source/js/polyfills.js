@@ -11,11 +11,10 @@ let cssVarPoly = {
     // Edge supports supports, so check for actual variable support
     if (window.CSS && window.CSS.supports && window.CSS.supports('(--foo: red)')) {
       // this browser does support variables, abort
-      console.log('Your browser supports CSS variables. Awesome!');
       return;
     } else {
       // edge barfs on console statements if the console is not open... lame!
-      console.log('No CSS variables support! Polyfill away!');
+      console.warn('No CSS variables support! Polyfill away!');
       document.querySelector('body').classList.add('polyfill-cssvars');
     }
 

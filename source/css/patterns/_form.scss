@@ -159,7 +159,7 @@ textarea {
   border-radius: 4px;
   outline: none;
   background-color: $oc-one-6;
-  color: white;
+  color: $oc-white;
   font-size: $fs-s2;
   line-height: 1;
   cursor: pointer;
@@ -172,7 +172,7 @@ textarea {
   }
 
   svg {
-    fill: white;
+    fill: $oc-white;
   }
 }
 
@@ -184,10 +184,10 @@ textarea {
   &:hover,
   &:focus {
     background-color: $oc-one-5;
-    color: white;
+    color: $oc-white;
 
     svg {
-      fill: white;
+      fill: $oc-white;
     }
   }
 
