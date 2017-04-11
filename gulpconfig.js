@@ -135,17 +135,21 @@ module.exports = {
 
   scripts: {
     src: {
-      combined: [
-        modules + 'lazysizes/lazysizes.js',
-        modules + 'fontfaceobserver/fontfaceobserver.js',
-        modules + 'object-fit-images/dist/ofi.js',
-        modules + 'headroom.js/dist/headroom.js',
-        modules + 'suncalc/suncalc.js',
-        src + 'js/alertify.js',
-        src + 'js/polyfills.js',
-        src + 'js/custom.js',
-      ],
-      single: {
+      bundles: {
+        scripts: [
+          modules + 'lazysizes/lazysizes.js',
+          modules + 'fontfaceobserver/fontfaceobserver.js',
+          modules + 'object-fit-images/dist/ofi.js',
+          modules + 'headroom.js/dist/headroom.js',
+          modules + 'suncalc/suncalc.js',
+          src + 'js/alertify.js',
+          src + 'js/polyfills.js',
+          src + 'js/scripts.js',
+        ],
+        vue: [
+          modules + 'vue/dist/vue.js',
+          src + 'js/vue.js',
+        ],
         prism: [
           modules + 'prismjs/prism.js',
           modules + 'prismjs/components/prism-json.js',
@@ -158,6 +162,13 @@ module.exports = {
         photoswipe: [
           modules + 'photoswipe/dist/photoswipe.js',
           src + 'js/photoswipe.js',
+        ],
+        choices: [
+          modules + 'choices.js/assets/scripts/dist/choices.min.js',
+        ],
+        quill: [
+          modules + 'quill/dist/quill.js',
+          src + 'js/quill.js',
         ],
       },
       inline: [

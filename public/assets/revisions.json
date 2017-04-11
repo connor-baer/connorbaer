@@ -1,7 +1,11 @@
 {
-  "css/amp.min.css": "css/amp-ed4792e400.min.css",
-  "css/styles.min.css": "css/styles-efc4880e0a.min.css",
-  "js/combined.min.js": "js/combined-072d52f619.min.js",
+  "css/amp.min.css": "css/amp-c41aa0d345.min.css",
+  "css/choices.min.css": "css/choices-4a412d9f77.min.css",
+  "css/styles.min.css": "css/styles-8768d5d9a2.min.css",
+  "js/choices.min.js": "js/choices-b4d81ccf1f.min.js",
   "js/photoswipe.min.js": "js/photoswipe-cc587507c9.min.js",
-  "js/prism.min.js": "js/prism-f1ab1f8311.min.js"
+  "js/prism.min.js": "js/prism-f1ab1f8311.min.js",
+  "js/quill.min.js": "js/quill-9b1d8d6527.min.js",
+  "js/scripts.min.js": "js/scripts-072d52f619.min.js",
+  "js/vue.min.js": "js/vue-8f6031a946.min.js"
 }

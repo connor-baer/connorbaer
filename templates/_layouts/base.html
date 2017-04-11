@@ -3,144 +3,14 @@
  # ------------------------
 -#}
 
-{# -- DRY -- #}
-{% set baseUrl = craft.app.config.getGeneral.baseUrl %}
-{% set devMode = craft.app.config.getGeneral.devMode %}
-{% set livePreview = craft.app.request.isLivePreview %}
+{% extends "_layouts/site" %}
 
-{# -- COOKIES -- #}
-{% set currentCache = getCookie('criticalCss') %}
-{% set fontFaceObserver = getCookie("fontFaceObserver") %}
-{% set darkMode = getCookie("darkMode") %}
-
-<!doctype html>
-<html lang="{{ craft.app.language }}" class="{% if fontFaceObserver == 'true' %}fonts-loaded {% endif %}{% if darkMode == 'true' %} theme-dark{% endif %}">
-<head>
-
-{% block head %}
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-  {# -- TITLE -- #}
-  <title>{% if entry is defined %}{{ entry.title }} · {% endif %}{{ siteName | split('·') | first }}</title>
-
-  {# -- CRITICAL CSS -- #}
-  {% set newCache = rev('css/styles.min.css') %}
-
-  {% if not currentCache or currentCache != newCache or devMode %}
-    {{ setCookie('criticalCss', newCache, now | date_modify("+7 days").timestamp ) }}
-
-    {% block critical %}{% endblock %}
-
-    <link rel="preload" href="{{ baseUrl ~ newCache }}" as="style" onload="this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" type="text/css" href="{{ baseUrl ~ newCache }}"></noscript>
-    <script>
-      {{ source('_includes/js/loadCSS.min.js') }}
-      {{ source('_includes/js/cssrelpreload.min.js') }}
-    </script>
-  {% else %}
-    <link id="styles" rel="stylesheet" type="text/css" href="{{ baseUrl ~ newCache }}">
-  {% endif %}
-
-  {# -- SERVICE WORKER -- #}
-  <script>
-    'serviceWorker'in navigator&&window.addEventListener('load',function(){navigator.serviceWorker.register('{{ baseUrl }}service-worker.js',{scope:'/'}).then(function(e){console.log('ServiceWorker registration successful with scope: ',e.scope),navigator.serviceWorker.controller&&navigator.serviceWorker.controller.postMessage({command:'trimCaches'})})['catch'](function(e){console.log('ServiceWorker registration failed: ',e)})});
-  </script>
-
-  {# -- LOADJS -- #}
-  <script>
-    {{ source('_includes/js/loadjs.min.js') }}
-  </script>
-
-  {# -- COMBINED JAVASCRIPT -- #}
-  <script>
-  loadjs(['{{ baseUrl ~ rev('js/combined.min.js') }}'], 'scripts');
-  loadjs.ready('scripts', {
-    success: function() {
-      const sansLight = new FontFaceObserver('Overpass', { weight: 300, });
-      const sans = new FontFaceObserver('Overpass', { weight: 400, });
-      const sansItalic = new FontFaceObserver('Overpass', { weight: 400, style: 'italic' });
-      const sansBold = new FontFaceObserver('Overpass', { weight: 700, });
-      const mono = new FontFaceObserver('Overpass Mono', { weight: 400, });
-      const html = document.documentElement;
-
-      html.classList.add('fonts-loading');
-
-      Promise.all([
-        sansLight.load(),
-        sans.load(),
-        sansItalic.load(),
-        sansBold.load(),
-        mono.load(),
-      ]).then(function () {
-        html.classList.remove('fonts-loading');
-        html.classList.add('fonts-loaded');
-        setCookie('fontFaceObserver', true, 7);
-      }).catch(function () {
-        html.classList.remove('fonts-loading');
-        html.classList.add('fonts-failed');
-      });
-
-      objectFitImages();
-
-      const body = document.getElementById('js-headroom');
-      const headroom = new Headroom(body, {
-        offset : 64,
-        tolerance : 8,
-      });
-      headroom.init();
-    }
-  });
-  </script>
-
-  {# -- UPDATE YOUR FUCKING BROWSER -- #}
-  <!--[if IE]>
-  <script>
-    if (window.confirm('You’re using an outdated browser. You won’t be able to use all functionality on this website. Please update to a new browser.')) {
-      window.open('http://outdatedbrowser.com/en', '_blank');
-    } else {
-      window.alert('Your choice! However, you’re vulnerable to security risks.')
-    };
-  </script>
-  <![endif]-->
-
-  {% cache %}
-  {% minify %}
-
-  {# -- SEOMATIC -- #}
-  {% hook 'seomaticRender' %}
-
-  {# -- ICONS -- #}
-  {% include '_includes/icons' %}
-
-  {# -- PRECONNECT -- #}
-  {% for block in navigation.navigation %}
-    {% if block.type == "navSingle" or block.type == "navSection" %}
-      {% set navLink = block.navEntry.one().url %}
-    {% elseif block.type == "navExternal" %}
-      {% set navLink = block.navLink %}
-    {% endif %}
-
-    <link rel="preconnect" href="{{ navLink }}">
-  {% endfor %}
-
-  <link rel="home" href="{{ siteUrl }}" />
-  <link rel="alternate" type="application/atom+xml" title="Atom" href="/feed.atom">
-  {% endminify %}
-  {% endcache %}
-{% endblock %}
-
-</head>
-
-{# -- BODY CLASS -- #}
-<body id="js-headroom" class="{{ entry is defined ? entry.section.handle : craft.app.request.segments | first }} {% if entry is defined %}{% if entry.image and entry.image.one() %} has-image{% endif %}{% endif %}">
-<!-- You know, rather than reading the source like a chump, you can see it all on GitHub like a champ: https://github.com/connor-baer/connorbaer.co -->
 {% block body %}
 
   {# -- METABAR -- #}
   {% include '_includes/metabar' %}
 
-  <main id="main" class="main" role="main">
+  <main id="main" class="main">
 
     {% block main %}{% endblock %}
 
@@ -150,21 +20,3 @@
   {% include '_includes/footer' %}
 
 {% endblock %}
-
-{% block foot %}
-  {# -- GOOGLE ANALYTICS -- #}
-  {% if not livePreview and not devMode %}
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-37412525-7', 'auto');
-      ga('send', 'pageview');
-    </script>
-  {% endif %}
-{% endblock %}
-
-</body>
-</html>

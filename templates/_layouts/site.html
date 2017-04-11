@@ -1,0 +1,83 @@
+{#
+ # The base layout template
+ # ------------------------
+-#}
+
+{# -- DRY -- #}
+{% set baseUrl = craft.app.config.getGeneral.baseUrl %}
+{% set devMode = craft.app.config.getGeneral.devMode %}
+{% set livePreview = craft.app.request.isLivePreview %}
+
+{# -- COOKIES -- #}
+{% set currentCache = getCookie('criticalCss') %}
+{% set fontFaceObserver = getCookie("fontFaceObserver") %}
+{% set darkMode = getCookie("darkMode") %}
+
+<!doctype html>
+<html {% if amp is defined %}amp{% endif %} lang="{{ craft.app.language }}" class="{% if fontFaceObserver == 'true' %}fonts-loaded {% endif %}{% if darkMode == 'true' %} theme-dark{% endif %}">
+<head>
+
+{% block head %}
+  <meta charset="utf-8" />
+
+  {% if amp is defined %}
+    {% include ('_includes/amp') %}
+  {% else %}
+    {% include ('_includes/head') %}
+  {% endif %}
+
+  {% cache %}
+  {% minify %}
+
+  {# -- TITLE -- #}
+  <title>{% if entry is defined %}{{ entry.title }} · {% endif %}{{ siteName | split('·') | first }}</title>
+
+  {# -- SEOMATIC -- #}
+  {% hook 'seomaticRender' %}
+
+  {# -- ICONS -- #}
+  {% include '_includes/icons' %}
+
+  {# -- PRECONNECT -- #}
+  {% for block in navigation.navigation %}
+    {% if block.type == "navSingle" or block.type == "navSection" %}
+      {% set navLink = block.navEntry.one().url %}
+    {% elseif block.type == "navExternal" %}
+      {% set navLink = block.navLink %}
+    {% endif %}
+
+    <link rel="preconnect" href="{{ navLink }}">
+  {% endfor %}
+
+  <link rel="home" href="{{ siteUrl }}" />
+  <link rel="alternate" type="application/atom+xml" title="Atom" href="/feed.atom">
+
+  {% endminify %}
+  {% endcache %}
+{% endblock %}
+
+</head>
+
+{# -- BODY CLASS -- #}
+<body id="js-headroom" class="{{ entry is defined ? entry.section.handle : craft.app.request.segments | first }}">
+<!-- You know, rather than reading the source like a chump, you can see it all on GitHub like a champ: https://github.com/connor-baer/connorbaer.co -->
+
+{% block body %}{% endblock %}
+
+{% block foot %}
+  {# -- GOOGLE ANALYTICS -- #}
+  {% if not amp is defined and not livePreview and not devMode %}
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-37412525-7', 'auto');
+      ga('send', 'pageview');
+    </script>
+  {% endif %}
+{% endblock %}
+
+</body>
+</html>

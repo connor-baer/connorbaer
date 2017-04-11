@@ -26,6 +26,7 @@
   "dependencies": {
     "Right-Height": "github:cferdinandi/right-height",
     "alertify.js": "^1.0.12",
+    "choices.js": "^2.7.8",
     "fg-loadcss": "^1.3.1",
     "fontfaceobserver": "^2.0.9",
     "headroom.js": "^0.9.3",
@@ -37,8 +38,10 @@
     "open-color": "^1.4.0",
     "photoswipe": "^4.1.1",
     "prismjs": "^1.6.0",
+    "quill": "^1.2.3",
     "suncalc": "^1.8.0",
-    "typi": "^3.0.0"
+    "typi": "^3.0.0",
+    "vue": "^2.2.6"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.22.0",

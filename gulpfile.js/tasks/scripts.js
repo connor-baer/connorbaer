@@ -6,19 +6,9 @@ const gulp    = require('gulp'),
 ;
 
 
-// Minify scripts in place.
-gulp.task('scripts-combined', () => {
-  return gulp.src(config.src.combined)
-    .pipe(plugins.concat(config.combined))
-    .pipe(plugins.babel({presets: [['es2015', { 'modules': false }]]}))
-    .pipe(plugins.uglify(config.minify.uglify))
-    .pipe(plugins.rename(config.minify.rename))
-    .pipe(gulp.dest(config.dest));
-});
-
-// Copy third-party JavaScript to the public assets folder.
-gulp.task('scripts-single', () => {
-  const bundles = config.src.single;
+// Bundle Javascript files.
+gulp.task('scripts-bundles', () => {
+  const bundles = config.src.bundles;
 
   Object.keys(bundles).forEach(function(key) {
     return gulp.src(bundles[key])
@@ -41,4 +31,4 @@ gulp.task('scripts-inline', () => {
 });
 
 // Master script task; lint -> bundle -> minify.
-gulp.task('scripts', ['scripts-combined', 'scripts-single', 'scripts-inline']);
+gulp.task('scripts', ['scripts-bundles', 'scripts-inline']);

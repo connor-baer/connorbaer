@@ -19,5 +19,5 @@
  */
 
 return [
-	'writing/<slug>/amp' => [ 'template' => 'writing/_amp' ],
+	'blog/<slug>/amp' => [ 'template' => 'blog/_amp' ],
 ];

@@ -7,8 +7,8 @@
  */
 function setCookie(cookieName, cookieValue, nDays = 1) {
 
-  let today = new Date();
-  let expire = new Date();
+  const today = new Date();
+  const expire = new Date();
 
   expire.setTime(today.getTime() + 3600000 * 24 * nDays);
   document.cookie = cookieName + '=' + escape(cookieValue) + ';expires=' + expire.toGMTString() + '; path=/';

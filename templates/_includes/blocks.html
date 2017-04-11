@@ -47,7 +47,7 @@
   {% endswitch %}
 
     {# Output the appropriate block #}
-    {% include ('_includes/blocks/_block_' ~ block.type.handle) %}
+    {% include ('_includes/blocks/block_' ~ block.type.handle) %}
 
     {# Adjust variables #}
     {% if block.type.handle == "image" %}

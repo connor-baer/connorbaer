@@ -1,0 +1,128 @@
+{#
+ # Home template
+ # ---------------
+ #
+ # See this page for details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layouts/site" %}
+
+{% import '_includes/elements' as elements %}
+{% import '_includes/helpers' as helpers %}
+
+{% block head %}
+  {{ parent() }}
+
+  <script>
+  loadjs(['{{ baseUrl ~ rev('js/vue.min.js') }}'], 'vue');
+  </script>
+
+  <script>
+    loadjs(['{{ baseUrl ~ rev('js/quill.min.js') }}'], 'quill');
+    loadjs.ready('quill', {
+      success: function() {
+        const quill = new Quill('#quill-editor', {
+          modules: {
+            toolbar: [
+              [{ 'header': 1 }, { 'header': 2 }],
+              ['bold', 'italic'],
+              ['link', 'blockquote', 'code-block'],
+              [{ list: 'ordered' }, { list: 'bullet' }]
+            ]
+          },
+          placeholder: 'What did you do today?',
+          theme: 'snow'
+        });
+      }
+    });
+  </script>
+
+  <script>
+    loadjs(['{{ baseUrl ~ rev('js/choices.min.js') }}'], 'choices');
+    loadjs.ready('choices', {
+      success: function() {
+        const choicesOptions = {
+          maxItemCount: 3,
+          duplicateItems: false,
+          itemSelectText: 'Press Enter to select',
+        };
+
+        const tags = new Choices('#tags', choicesOptions);
+      }
+    });
+  </script>
+
+  <!-- Theme included stylesheets -->
+  <link href="//cdn.quilljs.com/1.2.3/quill.snow.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+  {% cache %}
+  {% minify %}
+
+  <main id="main" class="main">
+    <article id="app">
+      {% if currentUser and currentUser.username == "connorbaer" %}
+
+      {# -- HEADER -- #}
+      <header class="ctnr-s">
+        <div class="header w100 mt4 mb5">
+          <h1 id="greeting" class="header__title header__title--color">[[ greeting ]] Sir.&nbsp;</h1>
+          <h2 class="header__subtitle">What did you do today?</h2>
+          <span class="header__meta mv2 ts-subtle fs-s1" v-cloak>{{ now | date("F d, Y") }}&nbsp;&nbsp;·&nbsp;&nbsp;[[hours]]:[[minutes]]</span>
+        </div>
+      </header>
+
+      <div class="ctnr-s">
+
+        {# -- JOURNAL -- #}
+
+        {% set latestEntry = craft.entries.section('journal').one() %}
+
+        {% if latestEntry.dateCreated | date('j') == now | date('j') %}
+          {% set entry = latestEntry %}
+        {% endif %}
+
+        <section class="w100">
+
+          <form id="journal" method="post" accept-charset="UTF-8" onsubmit="return validateForm()">
+            {{ csrfInput() }}
+            {{ redirectInput('journal/{slug}') }}
+            <input type="hidden" name="action" value="entries/save-entry">
+            <input type="hidden" name="sectionId" value="10">
+            <input type="hidden" name="enabled" value="1">
+
+            {% if entry is defined %}
+              <input type="hidden" name="entryId" value="{{ entry.id }}">
+            {% endif %}
+
+            <div class="mv2">
+              <input id="quill" name="fields[quill]" type="hidden"></input>
+              <div id="quill-editor">
+                {% if entry is defined %}{{ entry.quill }}{% endif %}
+              </div>
+            </div>
+
+            {# <div class="form__group">
+              <select id="tags" name="fields[tags][]" class="form__control" placeholder="Add a tag..." multiple required>
+
+                {% for tag in craft.tags.group('blog') %}
+                  <option value="{{ tag.id }}" {% if entry is defined and tag.id in entry.tags.ids %}selected{% endif %}>{{ tag.title }}</option>
+                {% endfor %}
+
+              </select>
+            </div> #}
+
+            <input class="button" type="submit" value="Publish">
+          </form>
+        </section>
+      </div>
+
+      {% endif %}
+    </article>
+  </main>
+
+  {% endminify %}
+  {% endcache %}
+{% endblock %}
