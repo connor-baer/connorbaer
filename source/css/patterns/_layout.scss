@@ -35,7 +35,7 @@
 
 .ctnr-s {
   @media #{$bp-small} {
-    max-width: $mw-large / 1.618;
+    max-width: $mw-large / 3 * 2;
   }
 }
 
