@@ -55,6 +55,32 @@
       </div>
     </article>
 
+    <script>
+    loadjs(['{{ baseUrl ~ rev('js/photoswipe.min.js') }}'], 'photoswipe');
+    loadjs.ready('photoswipe', {
+      success: function() {
+        initPhotoSwipeFromDOM('.js-photoswipe');
+      }
+    });
+    </script>
+
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+      <div class="pswp__bg"></div>
+
+      <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+          PhotoSwipe keeps only 3 of them in the DOM to save memory.
+          Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+          <div class="pswp__item"></div>
+          <div class="pswp__item"></div>
+          <div class="pswp__item"></div>
+        </div>
+      </div>
+    </div>
+
     {% endminify %}
     {% endcache %}
   {% else %}
