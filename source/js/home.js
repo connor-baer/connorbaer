@@ -6,7 +6,7 @@ new Vue({
   delimiters: ['[[', ']]'],
   data () {
     return {
-      time: '⌛️',
+      time: '🕓',
       sunrise: '⌛️',
       sunset: '⌛️',
     };

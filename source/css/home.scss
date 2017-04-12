@@ -13,7 +13,28 @@
 
 // Custom //
 
+.metabar__hover {
+  display: inline-block;
+  position: relative;
 
+  a:focus + ul,
+  &:hover ul,
+  &:focus ul {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.metabar__dropdown {
+  position: absolute;
+  top: 100%;
+  right: -1.25rem;
+  width: 10rem;
+  padding-top: $sp-tiny;
+  transition: opacity $an-short, visibility $an-short;
+  opacity: 0;
+  visibility: hidden;
+}
 
 
 // Simplemde //
@@ -21,6 +42,7 @@
 @import "dependencies/simplemde.min";
 
 .CodeMirror {
+  margin: $sp-medium 0;
   padding: 0;
   transition: background-color $an-short;
   border: 0;
@@ -34,7 +56,7 @@
 
 .CodeMirror,
 .CodeMirror-scroll {
-  min-height: $sp-huge;
+  min-height: $sp-large;
 }
 
 .editor-statusbar {

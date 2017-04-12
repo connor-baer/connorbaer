@@ -1,10 +1,9 @@
 /*
   FORM
 
-  Buttons
   Inputs
   Labels
-  Highlight
+  Buttons
 */
 
 
@@ -164,7 +163,7 @@
 
   display: inline-block;
   padding: $sp-tiny $sp-small;
-  transition: border-color $an-medium, box-shadow $an-medium, background-color $an-medium, color $an-medium;
+  transition: transform $an-medium, border-color $an-medium, box-shadow $an-medium, background-color $an-medium;
   border: 2px solid $oc-one-6;
   border-radius: 4px;
   outline: none;
@@ -176,6 +175,7 @@
 
   &:hover,
   &:focus {
+    transform: translateY(-1px);
     border-color: $oc-one-5;
     background-color: $oc-one-5;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
