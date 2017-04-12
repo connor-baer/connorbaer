@@ -84,24 +84,34 @@
 
 .block-text {
   > h1 {
+    margin-top: $sp-small;
+    margin-bottom: $sp-small;
     font-size: $fs-t3;
   }
 
   > h2 {
+    margin-top: $sp-small;
+    margin-bottom: $sp-small;
     font-size: $fs-t2;
   }
 
   > h3 {
+    margin-top: $sp-small;
+    margin-bottom: $sp-small;
     font-size: $fs-t2;
     font-weight: $fw-sans-bold;
   }
 
   > h4 {
+    margin-top: $sp-small;
+    margin-bottom: $sp-small;
     font-size: $fs-t1;
     font-weight: $fw-sans-bold;
   }
 
   > h5 {
+    margin-top: $sp-small;
+    margin-bottom: $sp-small;
     font-size: $fs-t1;
   }
 
@@ -112,6 +122,7 @@
     font-size: $fs-s1;
   }
 
+  > h6,
   > p,
   > blockquote {
     margin-top: $sp-tiny;
@@ -127,14 +138,14 @@
 
   ul,
   ol {
-    padding-left: 1rem;
+    padding-left: $sp-small;
   }
 
   > ol,
   > ul {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    padding-left: 1rem;
+    margin-top: $sp-small;
+    margin-bottom: $sp-small;
+    padding-left: $sp-small;
   }
 
   li > ol,
