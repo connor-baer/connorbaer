@@ -1,29 +1,6 @@
 /**
  * Vue Instance
  */
-
-function debounce(func, wait, immediate) {
-
-	var timeout;
-
-	return function() {
-		var context = this, args = arguments;
-		var later = function() {
-			timeout = null;
-			if (!immediate) {
-        func.apply(context, args);
-      }
-		};
-		var callNow = immediate && !timeout;
-
-		clearTimeout(timeout);
-		timeout = setTimeout(later, wait);
-		if (callNow) {
-      func.apply(context, args);
-    }
-	};
-}
-
 new Vue({
   el: '#app',
   delimiters: ['[[', ']]'],
@@ -32,11 +9,7 @@ new Vue({
       time: '⌛️',
       sunrise: '⌛️',
       sunset: '⌛️',
-      input: null
     };
-  },
-  created () {
-  	this.input = document.getElementById('markdown').innerHTML;
   },
   mounted () {
     setInterval(this.updateDateTime, 1000);
@@ -77,9 +50,6 @@ new Vue({
       let now = new Date();
       this.time = now.getHours() + ':' + ('0' + now.getMinutes()).slice(-2);
     },
-    update: debounce(function (e) {
-      this.input = e.target.value;
-    }, 300)
   },
   computed: {
     greeting() {
@@ -94,8 +64,5 @@ new Vue({
         return 'Good evening';
       }
     },
-    compiledMarkdown() {
-      return marked(this.input, { sanitize: true });
-    }
   }
 });

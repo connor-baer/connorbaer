@@ -15,22 +15,21 @@
   {{ parent() }}
 
   <script>
-    loadjs(['https://cdn.rawgit.com/jshjohnson/Choices/master/assets/scripts/dist/choices.min.js'], 'choices');
-    loadjs.ready('choices', {
-      success: function() {
-        const choicesOptions = {
-          maxItemCount: 3,
-          duplicateItems: false,
-          itemSelectText: 'Press Enter to select',
-        };
-
-        const tags = new Choices('#tags', choicesOptions);
-      }
-    });
-  </script>
-
-  <script>
-  loadjs(['{{ baseUrl ~ rev('js/vue.min.js') }}'], 'vue');
+  loadjs(['{{ baseUrl ~ rev('js/home.min.js') }}'], 'home');
+  loadjs.ready('home', {
+    success: function() {
+      var simplemde = new SimpleMDE({
+      	autofocus: true,
+      	autosave: {
+      		enabled: true,
+      		uniqueId: 'journal2',
+      		delay: 1000,
+      	},
+      	element: document.getElementById('markdown'),
+      	toolbar: false
+      });
+    }
+  });
   </script>
 
   <link rel="preload" href="{{ baseUrl ~ rev('css/home.min.css') }}" as="style" onload="this.rel='stylesheet'">
@@ -73,9 +72,9 @@
 
         {# -- HEADER -- #}
         <header class="ctnr-s">
-          <div class="header w100 mt4 mb5">
+          <div class="header w100 mv5">
             <h1 id="greeting" class="header__title header__title--color">[[ greeting ]], Sir.&nbsp;</h1>
-            <h2 class="header__subtitle">Every day is a new opportunity.</h2>
+            <h2 class="header__subtitle">Today is a new opportunity.</h2>
             <span class="header__meta mv2 ts-subtle fs-s1" v-cloak>🗓&nbsp;<a class="ts-link" href="https://calendar.google.com/calendar">{{ now | date("F d, Y") }}</a>&nbsp;&nbsp;☀️&nbsp;[[sunrise]]&nbsp;&nbsp;&nbsp;🌙&nbsp;[[sunset]]</span>
           </div>
         </header>
@@ -89,10 +88,11 @@
             {% set entry = latestEntry %}
           {% endif %}
 
-          <section class="w100">
+          <section class="w100 mv5">
             <form id="journal" method="post" accept-charset="UTF-8">
+
               {{ csrfInput() }}
-              {{ redirectInput('journal/{slug}') }}
+
               <input type="hidden" name="action" value="entries/save-entry">
               <input type="hidden" name="sectionId" value="10">
               <input type="hidden" name="enabled" value="1">
@@ -101,22 +101,10 @@
                 <input type="hidden" name="entryId" value="{{ entry.id }}">
               {% endif %}
 
-              <textarea id="markdown" class="form__textarea mv2" placeholder="What did you do today?" :value="input" @input="update">{% if entry is defined %}{{ entry.markdown.getRaw() }}{% endif %}</textarea>
-
-              <select id="tags" name="fields[tags][]" class="form__control" placeholder="Add a tag..." multiple required>
-
-                {% for tag in craft.tags.group('blog') %}
-                  <option value="{{ tag.id }}" {% if entry is defined and tag.id in entry.tags.ids %}selected{% endif %}>{{ tag.title }}</option>
-                {% endfor %}
-
-              </select>
+              <textarea id="markdown" class="form__textarea mv2" placeholder="What did you do today?" name="fields[markdown]">{% if entry is defined %}{{ entry.markdown.getRaw() }}{% endif %}</textarea>
 
               <input class="button" type="submit" value="Save">
             </form>
-          </section>
-
-          <section class="w100 mv5">
-            <div class="block-text" v-html="compiledMarkdown"></div>
           </section>
 
           {# -- JOURNAL ENTRIES -- #}
@@ -124,20 +112,14 @@
             section: 'journal',
           }) %}
 
-          {% for post in posts %}
+          {% for post in posts if post.dateCreated | date('j') < now | date('j') %}
+
             <article class="w100 mv5">
               <header class="ta-center">
                 <h2 class="mt3 fs-t2 fw-bold lh1"><a class="ts-link" href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h2>
-                <ul class="mv2">
-
-                  {% for tag in entry.tags %}
-                    <li class="fs-s1 ts-subtle">#{{ tag.title | lower }}{% if not loop.last %}, {% endif %}</li>
-                  {% endfor %}
-
-                </ul>
               </header>
               <section class="block-text">
-                {{ entry.markdown }}
+                {{ post.markdown }}
               </section>
             </article>
 
@@ -159,6 +141,10 @@
       </article>
     </main>
   </div>
+
+  <footer id="footer" class="footer">
+    <small class="footer-legal ph3 ta-center"><span>© {{ "now" | date("Y") }} {{ siteName | split('·') | first }}. {{ "All rights reserved." | translate }}</span>·<span>{{ "Tel" | translate }}: <a href="tel:+4915121208376" title="Call Connor">(+49) 151 2120 8376</a></span>·<span>{{ "Email" | translate }}: <a href="mailto:hello@connorbaer.co" title="Email Connor">hello@connorbaer.co</a></span>·<span><a href="/legal">{{ "Legal" | translate }}</a></span></small>
+  </footer>
 
   {% endminify %}
   {% endcache %}

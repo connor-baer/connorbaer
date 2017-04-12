@@ -2,7 +2,7 @@
   HOME
 
   Custom
-  Quill
+  Simplemde
   Choices
 */
 
@@ -16,9 +16,31 @@
 
 
 
-// Quill //
+// Simplemde //
 
-@import "dependencies/quill.snow";
+@import "dependencies/simplemde.min";
+
+.CodeMirror {
+  padding: 0;
+  transition: background-color $an-short;
+  border: 0;
+  background-color: var(--oc-white);
+  color: var(--oc-black);
+
+  pre {
+    padding: 0;
+  }
+}
+
+.CodeMirror,
+.CodeMirror-scroll {
+  min-height: $sp-huge;
+}
+
+.editor-statusbar {
+  color: var(--oc-gray-6);
+  font-weight: $fw-sans-light;
+}
 
 
 // Choices //

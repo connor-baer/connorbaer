@@ -39,6 +39,7 @@
     "open-color": "^1.4.0",
     "photoswipe": "^4.1.1",
     "prismjs": "^1.6.0",
+    "simplemde": "^1.11.2",
     "suncalc": "^1.8.0",
     "typi": "^3.0.0",
     "vue": "^2.2.6"

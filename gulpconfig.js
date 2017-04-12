@@ -59,6 +59,7 @@ module.exports = {
         modules + 'normalize.css/normalize.css',
         modules + 'open-color/open-color.scss',
         modules + 'choices.js/assets/styles/scss/choices.scss',
+        modules + 'simplemde/dist/simplemde.min.css',
         modules + 'photoswipe/dist/photoswipe.css',
       ],
       rename: {
@@ -93,6 +94,7 @@ module.exports = {
     },
     minify: {
       cssnano: {
+        zindex: false,
         autoprefixer: {
           add: true,
           browsers: ['> 3%', 'last 2 versions'], // This tool is magic and you should use it in all your projects :)
@@ -147,10 +149,10 @@ module.exports = {
           src + 'js/polyfills.js',
           src + 'js/scripts.js',
         ],
-        vue: [
-          modules + 'vue/dist/vue.js',
-          modules + 'marked/lib/marked.js',
-          src + 'js/vue.js',
+        home: [
+          modules + 'vue/dist/vue.min.js',
+          modules + 'simplemde/dist/simplemde.min.js',
+          src + 'js/home.js',
         ],
         prism: [
           modules + 'prismjs/prism.js',
