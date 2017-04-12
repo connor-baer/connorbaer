@@ -12,7 +12,7 @@
 {% import '_includes/helpers' as helpers %}
 
 {% block main %}
-  {% if entry.passphrase is empty or entry.passphrase == craft.app.request.getQueryParam('passphrase') or livePreview %}
+  {% if currentUser or entry.passphrase == craft.app.request.getQueryParam('passphrase') or livePreview %}
     {% cache %}
     {% minify %}
 
@@ -23,36 +23,29 @@
         <div class="ctnr-s mv4">
           <div class="header w100 ta-center">
             <h1 class="header__title fs-t4">{{ entry.title | striptags() }}&nbsp;</h1>
-            <span class="header__meta mv2 fs-s1 ts-subtle"><ul>
+            <ul class="header__meta mv2">
 
               {% for tag in entry.tags %}
-                <li>#{{ tag.title | lower }}{% if not loop.last %}, {% endif %}</li>
+                <li class="fs-s1 ts-subtle">#{{ tag.title | lower }}{% if not loop.last %}, {% endif %}</li>
               {% endfor %}
 
-            </ul></span>
+            </ul>
           </div>
         </div>
       </header>
 
       {# -- CONTENT -- #}
-      <section class="ctnr-s">
-        <div class="w100">
-          {{ entry.quill }}
+      <section class="ctnr-s mv5">
+        <div class="w100 block-text">
+          {{ entry.markdown }}
         </div>
       </section>
-
-      {# -- SHARE -- #}
-      {% if entry.passphrase is empty %}
-        <div class="ctnr-s mv4 ta-center">
-          {{ elements.share(entry.title) }}
-        </div>
-      {% endif %}
     </article>
 
     {# -- RELATED ENTRIES -- #}
     {% set relatedPosts = craft.entries({
       section: entry.section.handle,
-      relatedTo: ['or ', entry.tags, entry.category],
+      relatedTo: [entry.tags],
       id: 'not ' ~ entry.id,
       limit: '3',
     }) %}
@@ -67,20 +60,14 @@
           {% for post in relatedPosts %}
             <article class="w1-3 fl-left mv3">
 
-              {% set matrixBlock = post.body.type('image').one() %}
-
-              {% if matrixBlock %}
-                {% set image = matrixBlock.image.one() %}
-
-                {% if image is defined %}
-                  <a href="{{ post.url }}" title="{{ post.title }}">
-                    {{ elements.image(image, 'lazyload') }}
-                  </a>
-                {% endif %}
-              {% endif %}
-
               <h3 class="mt2 fs-t1"><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h3>
-              <span class="ts-app fs-s1">{{ elements.date(post.postDate) }}{% if post.category is not empty %}&nbsp;·&nbsp;{{ elements.category(post) }}{% endif %}</span>
+              <ul class="mv2">
+
+                {% for tag in entry.tags %}
+                  <li class="fs-s1 ts-subtle">#{{ tag.title | lower }}{% if not loop.last %}, {% endif %}</li>
+                {% endfor %}
+
+              </ul>
             </article>
           {% endfor %}
 

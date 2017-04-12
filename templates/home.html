@@ -14,6 +14,25 @@
 {% block head %}
   {{ parent() }}
 
+  <script>
+    loadjs(['https://cdn.rawgit.com/jshjohnson/Choices/master/assets/scripts/dist/choices.min.js'], 'choices');
+    loadjs.ready('choices', {
+      success: function() {
+        const choicesOptions = {
+          maxItemCount: 3,
+          duplicateItems: false,
+          itemSelectText: 'Press Enter to select',
+        };
+
+        const tags = new Choices('#tags', choicesOptions);
+      }
+    });
+  </script>
+
+  <script>
+  loadjs(['{{ baseUrl ~ rev('js/vue.min.js') }}'], 'vue');
+  </script>
+
   <link rel="preload" href="{{ baseUrl ~ rev('css/home.min.css') }}" as="style" onload="this.rel='stylesheet'">
   <noscript><link rel="stylesheet" type="text/css" href="{{ baseUrl ~ rev('css/home.min.css') }}"></noscript>
 {% endblock %}
@@ -54,16 +73,16 @@
 
         {# -- HEADER -- #}
         <header class="ctnr-s">
-          <div class="header w100 mv5">
+          <div class="header w100 mt4 mb5">
             <h1 id="greeting" class="header__title header__title--color">[[ greeting ]], Sir.&nbsp;</h1>
             <h2 class="header__subtitle">Every day is a new opportunity.</h2>
-            <span class="header__meta mv2 ts-subtle fs-s1" v-cloak>{{ now | date("F d, Y") }}&nbsp;&nbsp;·&nbsp;&nbsp;☀️&nbsp;[[sunrise]]&nbsp;&nbsp;&nbsp;🌙&nbsp;[[sunset]]</span>
+            <span class="header__meta mv2 ts-subtle fs-s1" v-cloak>🗓&nbsp;<a class="ts-link" href="https://calendar.google.com/calendar">{{ now | date("F d, Y") }}</a>&nbsp;&nbsp;☀️&nbsp;[[sunrise]]&nbsp;&nbsp;&nbsp;🌙&nbsp;[[sunset]]</span>
           </div>
         </header>
 
         <div class="ctnr-s">
 
-          {# -- JOURNAL -- #}
+          {# -- NEW JOURNAL -- #}
           {% set latestEntry = craft.entries.section('journal').one() %}
 
           {% if latestEntry.dateCreated | date('j') == now | date('j') %}
@@ -71,9 +90,7 @@
           {% endif %}
 
           <section class="w100">
-            <h3 class="fs-t1">What did you do today?</h3>
-
-            <form id="journal" method="post" accept-charset="UTF-8" onsubmit="return quillSubmit()">
+            <form id="journal" method="post" accept-charset="UTF-8">
               {{ csrfInput() }}
               {{ redirectInput('journal/{slug}') }}
               <input type="hidden" name="action" value="entries/save-entry">
@@ -84,12 +101,7 @@
                 <input type="hidden" name="entryId" value="{{ entry.id }}">
               {% endif %}
 
-              <div class="mv2">
-                <input id="quill" name="fields[quill]" type="hidden"></input>
-                <div id="quill-editor">
-                  {% if entry is defined %}{{ entry.quill }}{% endif %}
-                </div>
-              </div>
+              <textarea id="markdown" class="form__textarea mv2" placeholder="What did you do today?" :value="input" @input="update">{% if entry is defined %}{{ entry.markdown.getRaw() }}{% endif %}</textarea>
 
               <select id="tags" name="fields[tags][]" class="form__control" placeholder="Add a tag..." multiple required>
 
@@ -99,9 +111,38 @@
 
               </select>
 
-              <input class="button" type="submit" value="Publish">
+              <input class="button" type="submit" value="Save">
             </form>
           </section>
+
+          <section class="w100 mv5">
+            <div class="block-text" v-html="compiledMarkdown"></div>
+          </section>
+
+          {# -- JOURNAL ENTRIES -- #}
+          {% set posts = craft.entries({
+            section: 'journal',
+          }) %}
+
+          {% for post in posts %}
+            <article class="w100 mv5">
+              <header class="ta-center">
+                <h2 class="mt3 fs-t2 fw-bold lh1"><a class="ts-link" href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h2>
+                <ul class="mv2">
+
+                  {% for tag in entry.tags %}
+                    <li class="fs-s1 ts-subtle">#{{ tag.title | lower }}{% if not loop.last %}, {% endif %}</li>
+                  {% endfor %}
+
+                </ul>
+              </header>
+              <section class="block-text">
+                {{ entry.markdown }}
+              </section>
+            </article>
+
+          {% endfor %}
+
         </div>
 
         {% else %}
@@ -118,45 +159,6 @@
       </article>
     </main>
   </div>
-
-  <script>
-    loadjs(['{{ baseUrl ~ rev('js/quill.min.js') }}'], 'quill');
-    loadjs.ready('quill', {
-      success: function() {
-        const quill = new Quill('#quill-editor', {
-          modules: {
-            toolbar: [
-              [{ 'header': 1 }, { 'header': 2 }],
-              ['bold', 'italic'],
-              ['link', 'blockquote', 'code-block'],
-              [{ list: 'ordered' }, { list: 'bullet' }]
-            ]
-          },
-          placeholder: 'Dear journal...',
-          theme: 'snow'
-        });
-      }
-    });
-  </script>
-
-  <script>
-    loadjs(['https://cdn.rawgit.com/jshjohnson/Choices/master/assets/scripts/dist/choices.min.js'], 'choices');
-    loadjs.ready('choices', {
-      success: function() {
-        const choicesOptions = {
-          maxItemCount: 3,
-          duplicateItems: false,
-          itemSelectText: 'Press Enter to select',
-        };
-
-        const tags = new Choices('#tags', choicesOptions);
-      }
-    });
-  </script>
-
-  <script>
-  loadjs(['{{ baseUrl ~ rev('js/vue.min.js') }}'], 'vue');
-  </script>
 
   {% endminify %}
   {% endcache %}

@@ -60,7 +60,6 @@ module.exports = {
         modules + 'open-color/open-color.scss',
         modules + 'choices.js/assets/styles/scss/choices.scss',
         modules + 'photoswipe/dist/photoswipe.css',
-        modules + 'quill/dist/quill.snow.css',
       ],
       rename: {
         prefix: '_',
@@ -150,6 +149,7 @@ module.exports = {
         ],
         vue: [
           modules + 'vue/dist/vue.js',
+          modules + 'marked/lib/marked.js',
           src + 'js/vue.js',
         ],
         prism: [
@@ -164,13 +164,6 @@ module.exports = {
         photoswipe: [
           modules + 'photoswipe/dist/photoswipe.js',
           src + 'js/photoswipe.js',
-        ],
-        choices: [
-          modules + 'choices.js/assets/scripts/dist/choices.min.js',
-        ],
-        quill: [
-          modules + 'quill/dist/quill.js',
-          src + 'js/quill.js',
         ],
       },
       inline: [

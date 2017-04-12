@@ -56,8 +56,18 @@
   }
 }
 
-textarea {
-  resize: vertical;
+.form__textarea {
+  display: block;
+  width: 100%;
+  padding: 0;
+  transition: border-color $an-short;
+  border: 0;
+  outline: none;
+  background-color: var(--oc-white);
+  color: var(--oc-gray-9);
+  font-family: $ff-sans;
+  font-size: $fs-0;
+  resize: none;
 }
 
 .form__select {
