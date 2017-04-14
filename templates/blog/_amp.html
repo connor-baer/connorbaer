@@ -29,14 +29,14 @@
       <header>
         {% set image = entry.image.one() %}
         {% if image %}
-        <div class="header__image js-photoswipe">
+        <div class="header__image">
           <figure>
             {{ elements.image(image, 'amp', '16x9') }}
           <figure>
         </div>
         {% endif %}
 
-        <div  class="ctnr-s mv5">
+        <div class="ctnr-s mv4">
           <div class="header w100 ta-center">
             <h1 class="header__title fs-t4">{{ entry.title | striptags() }}&nbsp;</h1>
             <span class="header__meta mv2 fs-s1 ts-subtle">{{ elements.date(entry.postDate) }}{% if entry.category is not empty %}&nbsp;·&nbsp;{{ elements.category(entry) }}{% endif %}</span>

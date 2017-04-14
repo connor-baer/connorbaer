@@ -15,16 +15,8 @@ if ( file_exists( $root . '/.env' ) ) {
 	$dotenv->load();
 }
 
-// Craft.
 define( 'CRAFT_BASE_PATH', $root );
-
-// Get the site domain (without the domain extension).
-$site_handle = current( explode( '.', $_SERVER['HTTP_HOST'] ) );
-
-// Tell Craft to use the domain as the site name.
-define( 'CRAFT_SITE', $site_handle );
-
-/* ?> <h1><?php echo $site_handle; ?></h1><?php */
+define( 'CRAFT_SITE', 'connorbaer' );
 
 $app = require $root . '/vendor/craftcms/cms/bootstrap/web.php';
 $app->run();

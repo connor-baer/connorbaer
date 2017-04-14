@@ -51,28 +51,30 @@
   z-index: 999999;
 }
 
-.logo {
-  display: inline-block;
-  height: 2rem;
-  min-height: 36px;
-  margin-right: $sp-tiny;
-  vertical-align: middle;
-}
-
+.logo,
 .metabar__name {
   display: inline-block;
+  margin-right: $sp-tiny;
   transition: opacity $an-medium;
-  color: var(--oc-gray-9);
-  font-family: $ff-sans;
-  font-size: $fs-t1;
-  font-weight: $fw-sans-bold;
-  line-height: 1;
   vertical-align: middle;
 
   &:hover,
   &:focus {
     opacity: .75;
   }
+}
+
+.logo {
+  height: 2rem;
+  min-height: 36px;
+}
+
+.metabar__name {
+  color: var(--oc-gray-9);
+  font-family: $ff-sans;
+  font-size: $fs-t1;
+  font-weight: $fw-sans-bold;
+  line-height: 1;
 }
 
 
@@ -97,7 +99,7 @@
 
   &:hover,
   &:focus {
-    fill: var(--oc-one-6);
+    fill: $oc-one-6;
   }
 }
 

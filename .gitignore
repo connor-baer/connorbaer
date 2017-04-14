@@ -4,7 +4,12 @@
 /.idea
 /config/license.key
 /scripts/.env.sh
-/public/uploads/*
+
+/public/*
+!/public/favicons/
+!/public/index.php
+!/public/robots.txt
+!/public/sw.js
 
 # Install by running `bower install` #
 /bower_components/
