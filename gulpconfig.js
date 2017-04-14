@@ -29,8 +29,8 @@ module.exports = {
 
   clean: {
     tidy: [ root + '**/.DS_Store' ], // A glob pattern matching junk files to clean out of the webroot.
-    dev: [ root + 'revisions.json', dev + '*' ], // Clean the development directory for a fresh build.
-    dist: [ dist + '*', tmplts + '**/*.min.css' ], // Clean the distribution directory for a fresh build.
+    dev: [ dev + '**', dist + 'revisions.json', tmplts + '**/*.min.css' ], // Clean the development directory for a fresh build.
+    dist: [ dist + '**' ], // Clean the distribution directory for a fresh build.
   },
 
 

@@ -11,6 +11,8 @@
 !/public/robots.txt
 !/public/sw.js
 
+/templates/**/*.min.css
+
 # Install by running `bower install` #
 /bower_components/
 

@@ -8,23 +8,23 @@ const gulp = require( 'gulp' ),
   config = require( '../../gulpconfig' ).clean;
 
 
-// Totally wipe the compiled production files.
-gulp.task( 'clean-dist', () => {
-  return del( config.dist );
-} );
-
-
-// Totally wipe the compiled development files.
-gulp.task( 'clean-dev', () => {
-  return del( config.tmp );
-} );
-
-
 // Clean out junk files before build.
 gulp.task( 'clean-tidy', () => {
   return del( config.tidy );
 } );
 
 
+// Totally wipe the compiled development files.
+gulp.task( 'clean-dev', () => {
+  return del( config.dev );
+} );
+
+
 // Shortcut.
 gulp.task( 'clean', [ 'clean-tidy', 'clean-dev' ] );
+
+
+// Totally wipe the compiled production files.
+gulp.task( 'clean-dist', () => {
+  return del( config.dist );
+} );
