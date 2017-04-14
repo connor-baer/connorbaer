@@ -1,17 +1,13 @@
-/*
-  HOME
-
-  Custom
-  Simplemde
-  Choices
-*/
-
-
-@import "dependencies/open-color";
-@import "base/variables";
-
+// Home
+// ----
 
 // Custom //
+
+@import "lib/open-color";
+@import "variables/colors";
+@import "variables/typography";
+@import "variables/layout";
+@import "variables/animations";
 
 .metabar__hover {
   display: inline-block;
@@ -29,9 +25,13 @@
   position: absolute;
   top: 100%;
   right: -1.25rem;
+
   width: 10rem;
+
   padding-top: $sp-tiny;
+
   transition: opacity $an-short, visibility $an-short;
+
   opacity: 0;
   visibility: hidden;
 }
@@ -39,13 +39,16 @@
 
 // Simplemde //
 
-@import "dependencies/simplemde.min";
+@import "lib/simplemde.min";
 
 .CodeMirror {
   margin: $sp-medium 0;
   padding: 0;
+
   transition: background-color $an-short;
+
   border: 0;
+
   background-color: var(--oc-white);
   color: var(--oc-black);
 
@@ -61,6 +64,7 @@
 
 .editor-statusbar {
   color: var(--oc-gray-6);
+
   font-weight: $fw-sans-light;
 }
 
@@ -84,10 +88,7 @@ $choices-highlight-color: $choices-primary-color;
 $choices-button-dimension: .5rem;
 $choices-button-offset: .5rem;
 
-@import "dependencies/choices";
-
-
-// Form //
+@import "lib/choices";
 
 .form-group {
   padding-top: 1.5rem;
@@ -97,9 +98,6 @@ $choices-button-offset: .5rem;
   border-color: $oc-red-6;
 }
 
-
-// Choices //
-
 .#{$choices-selector}[data-type*="select-one"] {
   .#{$choices-selector}__inner {
     padding-top: 0;
@@ -108,11 +106,13 @@ $choices-button-offset: .5rem;
 
   .#{$choices-selector}__input {
     padding: .5rem .75rem;
+
     border-bottom: 1px solid $choices-keyline-color;
   }
 }
 
-.#{$choices-selector}[data-type*="select-multiple"], .#{$choices-selector}[data-type*="text"] {
+.#{$choices-selector}[data-type*="select-multiple"],
+.#{$choices-selector}[data-type*="text"] {
   .#{$choices-selector}__button {
     border-left: 1px solid darken($choices-primary-color, 10%);
   }
@@ -120,8 +120,11 @@ $choices-button-offset: .5rem;
 
 .#{$choices-selector}__inner {
   min-height: 0;
+
   padding: .125rem .75rem 0;
+
   border: 1px solid $choices-keyline-color;
+
   font-family: $ff-sans;
 
   .is-focused &,
@@ -139,12 +142,15 @@ $choices-button-offset: .5rem;
     margin-right: .25rem;
     margin-bottom: .25rem;
     padding: 0 .5rem;
+
     border: 1px solid $oc-gray-4;
+
     background-color: $oc-gray-2;
     color: $oc-gray-9;
 
     &.is-highlighted {
       border: 1px solid $oc-one-6;
+
       background-color: $oc-gray-2;
     }
 
@@ -156,6 +162,7 @@ $choices-button-offset: .5rem;
 
 .#{$choices-selector}__list--dropdown {
   margin-top: -1px;
+
   border: 1px solid $choices-keyline-color;
 
   .is-open & {
@@ -168,6 +175,7 @@ $choices-button-offset: .5rem;
 
   .#{$choices-selector}__item {
     padding: .25rem .75rem;
+
     font-family: $ff-sans;
     font-size: $fs-0;
     font-weight: $fw-sans-normal;
@@ -186,11 +194,13 @@ $choices-button-offset: .5rem;
 
 .#{$choices-selector}__heading {
   padding: .5rem;
+
   border-bottom: 1px solid lighten($choices-keyline-color, 10%);
 }
 
 .#{$choices-selector}__input {
   background-color: var(--oc-white);
+
   font-family: $ff-sans;
 }
 

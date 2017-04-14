@@ -1,41 +1,123 @@
-/*
-  RESET
-*/
+// Base
+// ----
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
   margin: 0;
   padding: 0;
+
   border: 0;
+
   font: inherit;
   font-size: 100%;
+
   vertical-align: baseline;
 }
 
 // HTML5 display-role reset for older browsers.
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
   display: block;
 }
 
 html {
   transition: background-color $an-short, color $an-short;
+
   background-color: var(--oc-gray-8);
   color: var(--oc-gray-9);
+
   font-family: Arial, sans-serif;
   font-size: 16px;
-  line-height: $lh-large;
+  line-height: $lh-normal;
+
   word-wrap: break-word;
   box-sizing: border-box;
 
@@ -65,15 +147,20 @@ html {
 
 body {
   position: relative;
+
   min-width: 100vw;
   min-height: 100vh;
+
   transition: background-color $an-short;
+
   background-color: var(--oc-white);
+
   overflow-x: hidden;
 }
 
-#main {
+.main {
   min-height: 60vh;
+
   padding-top: 6.8125rem;
 
   @media #{$bp-small} {
@@ -87,7 +174,9 @@ body {
 
 a {
   border: 0;
+
   color: inherit;
+
   text-decoration: none;
 }
 
@@ -106,7 +195,6 @@ blockquote::after,
 q::before,
 q::after {
   content: "";
-  content: none;
 }
 
 table {
@@ -117,12 +205,16 @@ table {
 hr {
   margin-top: $sp-medium;
   margin-bottom: $sp-medium;
+
   border: 0;
 
   &::before {
     display: block;
+
     height: 2px;
+
     background-color: var(--oc-gray-3);
+
     content: "";
   }
 }
@@ -150,13 +242,16 @@ pre {
 abbr,
 acronym {
   border-bottom: 1px dotted $oc-gray-3;
+
   cursor: help;
 }
 
 mark {
-  padding: 0.125em 0.25em;
+  padding: .125em .25em;
+
   background: $oc-orange-3;
   color: #fff;
+
   text-decoration: none;
 }
 

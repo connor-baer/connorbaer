@@ -1,42 +1,45 @@
-/*
-  STYLES
+// Dependencies and helpers
+// ------------------------
+@import "lib/deps";
+@import "helpers/helpers";
 
-  Dependencies
-  Base
-  Patterns
-  Elements
-*/
+// Variables
+// ---------
+@import "variables/colors";
+@import "variables/typography";
+@import "variables/layout";
+@import "variables/animations";
 
+// Reset and base files
+// --------------------
+@import "base/base";
 
-// Dependencies //
+// Layouts
+// -------
+@import "layouts/layouts";
 
-// Normalize: make browsers render things more consistently, from https://necolas.github.io/normalize.css/.
-@import "dependencies/normalize";
-// Open Color: an open-source color scheme, from https://yeun.github.io/open-color/.
-@import "dependencies/open-color";
+// Objects
+// -------
+@import "objects/inputs";
+@import "objects/typography";
+@import "objects/media";
 
+// Components
+// ----------
+@import "components/metabar";
+@import "components/header";
+@import "components/blocks";
+@import "components/pages";
+@import "components/footer";
 
-// Base //
+// Libraries
+// ---------
+@import "lib/lib";
 
-@import "base/variables";
-@import "base/reset";
+// Utilities
+// ----------
+@import "utilities";
 
-
-// Patterns //
-
-@import "patterns/prism";
-@import "patterns/type";
-@import "patterns/layout";
-@import "patterns/media";
-@import "patterns/form";
-
-
-// Elements //
-
-@import "elements/metabar";
-@import "elements/header";
-@import "elements/blocks";
-@import "elements/pages";
-@import "dependencies/photoswipe";
-@import "dependencies/alertify";
-@import "elements/footer";
+// Shame
+// -----
+// @import "shame";

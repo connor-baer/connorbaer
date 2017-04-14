@@ -52,17 +52,20 @@
   .position-drop-right > div,
   .position-drop-left > div {
     width: 24rem;
+
     margin-top: $sp-tiny;
     margin-bottom: $sp-tiny;
   }
 
   .position-drop-right > div {
     margin-left: $sp-small;
+
     float: right;
   }
 
   .position-drop-left > div {
     margin-right: $sp-small;
+
     float: left;
   }
 }
@@ -75,6 +78,7 @@
   .position-full & {
     margin-right: $sp-small;
     margin-left: $sp-small;
+
     text-align: center;
   }
 }
@@ -86,18 +90,21 @@
   > h1 {
     margin-top: $sp-small;
     margin-bottom: $sp-small;
+
     font-size: $fs-t3;
   }
 
   > h2 {
     margin-top: $sp-small;
     margin-bottom: $sp-small;
+
     font-size: $fs-t2;
   }
 
   > h3 {
     margin-top: $sp-small;
     margin-bottom: $sp-small;
+
     font-size: $fs-t2;
     font-weight: $fw-sans-bold;
   }
@@ -105,6 +112,7 @@
   > h4 {
     margin-top: $sp-small;
     margin-bottom: $sp-small;
+
     font-size: $fs-t1;
     font-weight: $fw-sans-bold;
   }
@@ -112,14 +120,15 @@
   > h5 {
     margin-top: $sp-small;
     margin-bottom: $sp-small;
+
     font-size: $fs-t1;
   }
 
   > h6 {
+    font-size: $fs-s1;
+
     @extend %ts-app;
     @extend %ts-subtle;
-
-    font-size: $fs-s1;
   }
 
   > h6,
@@ -129,11 +138,16 @@
     margin-bottom: $sp-tiny;
   }
 
-  a {
-    @extend %ts-link;
+  > p {
+    line-height: $lh-large;
+  }
 
+  a {
     color: $oc-one-6;
+
     font-weight: $fw-sans-bold;
+
+    @extend %ts-link;
   }
 
   ul,
@@ -163,7 +177,9 @@
 
   blockquote {
     padding-left: $sp-small;
+
     border-left: 4px solid $oc-one-2;
+
     color: var(--oc-gray-6);
 
     cite {
@@ -191,13 +207,16 @@
 
 .block-images {
   display: flex;
+
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
 .block-image {
   width: 100%;
+
   margin-bottom: $sp-small;
+
   background-color: var(--oc-gray-0);
 }
 
@@ -206,6 +225,7 @@
 .block-image4 {
   display: block;
   position: relative;
+
   margin-bottom: $sp-small;
 
   a {
@@ -218,7 +238,9 @@
 
   img {
     height: 100%;
+
     font-family: "object-fit: cover";
+
     object-fit: cover;
   }
 }
@@ -226,11 +248,13 @@
 .block-image2,
 .block-image4 {
   width: calc(50% - #{$sp-tiny});
+
   padding-bottom: calc(50% - #{$sp-tiny});
 }
 
 .block-image3 {
   width: calc(33% - #{$sp-tiny});
+
   padding-bottom: calc(33% - #{$sp-tiny});
 }
 
@@ -244,10 +268,14 @@
 
 .block-video {
   position: relative;
+
   max-width: 100%;
   height: 0;
+
   padding-bottom: 56.25%;
+
   clear: both;
+
   overflow: hidden;
 
 
@@ -257,6 +285,7 @@
     position: absolute;
     top: 0;
     left: 0;
+
     width: 100%;
     height: 100%;
   }

@@ -63,7 +63,7 @@
         {% endif %}
 
         <h2 class="mt3 fs-t2 fw-bold lh1"><a class="ts-link" href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h2>
-        <p class="mt1">{% if post.passphrase is empty %}{{ helpers.striptags(post.description) }}{% else %}This post is password-protected. Click to view the post.{% endif %}</p>
+        <p class="mt1 lh-large">{% if post.passphrase is empty %}{{ helpers.striptags(post.description) }}{% else %}This post is password-protected. Click to view the post.{% endif %}</p>
         <span class="ts-subtle fs-s1">{{ elements.date(post.postDate) }}{% if post.category is not empty %}&nbsp;·&nbsp;{{ elements.category(post) }}{% endif %}</span>
       </article>
 

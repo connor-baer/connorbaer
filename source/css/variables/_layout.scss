@@ -1,0 +1,25 @@
+// Layout
+// ------
+
+$bp-small-only: "screen and (max-width: 37.4375em)";
+$bp-small: "screen and (min-width: 37.5em)";
+$bp-medium: "screen and (min-width: 56.25em)";
+$bp-large: "screen and (min-width: 75em)";
+
+// Spacing //
+
+$sp-tiny: .5rem;
+$sp-small: $sp-tiny * 2;
+$sp-medium: $sp-tiny * 4;
+$sp-large: $sp-tiny * 8;
+$sp-huge: $sp-tiny * 16;
+
+// Width //
+
+$mw-large: 64rem + (2 * $sp-small) + (2 * $sp-large);
+
+// Animations //
+
+$an-short: .14s cubic-bezier(0, 0, .2, 1);
+$an-medium: .28s cubic-bezier(0, 0, .2, 1);
+$an-long: .49s cubic-bezier(0, 0, .2, 1);

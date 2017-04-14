@@ -44,6 +44,7 @@ module.exports = {
         modules + 'open-color/open-color.scss',
         modules + 'choices.js/assets/styles/scss/choices.scss',
         modules + 'simplemde/dist/simplemde.min.css',
+        modules + 'alertify.js/src/sass/alertify.scss',
         modules + 'photoswipe/dist/photoswipe.css',
       ],
       rename: {

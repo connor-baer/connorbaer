@@ -1,0 +1,59 @@
+// Colors
+// ------
+
+:root {
+  #{--oc-white}: $oc-white;
+  #{--oc-black}: $oc-black;
+
+  #{--oc-gray-0}: $oc-gray-0;
+  #{--oc-gray-1}: $oc-gray-1;
+  #{--oc-gray-2}: $oc-gray-2;
+  #{--oc-gray-3}: $oc-gray-3;
+  #{--oc-gray-4}: $oc-gray-4;
+  #{--oc-gray-5}: $oc-gray-5;
+  #{--oc-gray-6}: $oc-gray-6;
+  #{--oc-gray-7}: $oc-gray-7;
+  #{--oc-gray-8}: $oc-gray-8;
+  #{--oc-gray-9}: $oc-gray-9;
+}
+
+.theme-dark {
+  #{--oc-white}: $oc-gray-9;
+  #{--oc-black}: $oc-white;
+
+  #{--oc-gray-0}: $oc-gray-9;
+  #{--oc-gray-1}: $oc-gray-8;
+  #{--oc-gray-2}: $oc-gray-7;
+  #{--oc-gray-3}: $oc-gray-6;
+  #{--oc-gray-4}: $oc-gray-5;
+  #{--oc-gray-5}: $oc-gray-4;
+  #{--oc-gray-6}: $oc-gray-3;
+  #{--oc-gray-7}: $oc-gray-2;
+  #{--oc-gray-8}: $oc-gray-1;
+  #{--oc-gray-9}: $oc-gray-0;
+}
+
+$oc-one: #ee3a51; // #1fb7e3
+$oc-two: #ff512f; // #00ccd2
+
+$oc-one-0: scale-color($oc-one, $lightness: 96%);
+$oc-one-1: scale-color($oc-one, $lightness: 80%);
+$oc-one-2: scale-color($oc-one, $lightness: 64%);
+$oc-one-3: scale-color($oc-one, $lightness: 48%);
+$oc-one-4: scale-color($oc-one, $lightness: 32%);
+$oc-one-5: scale-color($oc-one, $lightness: 16%);
+$oc-one-6: $oc-one;
+$oc-one-7: scale-color($oc-one, $lightness: -15%);
+$oc-one-8: scale-color($oc-one, $lightness: -30%);
+$oc-one-9: scale-color($oc-one, $lightness: -45%);
+
+$oc-two-0: scale-color($oc-two, $lightness: 96%);
+$oc-two-1: scale-color($oc-two, $lightness: 80%);
+$oc-two-2: scale-color($oc-two, $lightness: 64%);
+$oc-two-3: scale-color($oc-two, $lightness: 48%);
+$oc-two-4: scale-color($oc-two, $lightness: 32%);
+$oc-two-5: scale-color($oc-two, $lightness: 16%);
+$oc-two-6: $oc-two;
+$oc-two-7: scale-color($oc-two, $lightness: -15%);
+$oc-two-8: scale-color($oc-two, $lightness: -30%);
+$oc-two-9: scale-color($oc-two, $lightness: -45%);

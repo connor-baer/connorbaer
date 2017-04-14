@@ -17,7 +17,7 @@ gulp.task( 'default', [ 'watch' ] );
 
 // Build task chain: clean -> styles & scripts
 gulp.task( 'build', ( callback ) => {
-  sequence( 'clean', [
+  sequence( [ 'clean', 'styles-update' ], [
     'styles',
     'scripts',
   ],

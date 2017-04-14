@@ -46,7 +46,7 @@
 
   {% if posts %}
     <section class="ctnr-l mv4 cf">
-      <div class="w100 mt3">
+      <div class="w100 mv3">
         <h3 class="ts-app fs-s1"><a href="/blog">Latest Posts</a></h3>
       </div>
         {% for post in posts %}
@@ -93,7 +93,7 @@
       </div>
 
       {% for item in featured %}
-        <article class="w100 mv2">
+        <article class="w100 mv4">
           <a class="hover" href="{{ item.url }}" title="{{ item.title }} for {{ item.client.one().title }}">
             {% set image = item.image[0] ?? null %}
             {% if image %}
