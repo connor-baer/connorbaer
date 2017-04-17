@@ -9,7 +9,7 @@
     .headroom--not-top & {
       padding: vr(.5) vr(1);
 
-      box-shadow: 0 0 vr(.5) rgba(black, .1);
+      box-shadow: 0 0 8px rgba(0, 0, 0, .1);
     }
 
     .headroom--pinned {

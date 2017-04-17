@@ -1,235 +1,199 @@
-$box-shadow: 0 2px 5px 0 rgba(0,0,0,.2);
 $padding-base: 12px;
-$success-color: rgba(76, 175, 80, .9);
-$danger-color: rgba(244, 67, 54, .8);
-$text-color: rgba(0, 0, 0, .8);
-$border-radius: 1px;
-
-.alertify-logs {
-    > * {
-        padding: $padding-base $padding-base * 2;
-        color: #fff;
-        box-shadow: $box-shadow;
-        border-radius: $border-radius;
-        &, &.default {
-            background: rgba(0, 0, 0, .8);
-        }
-        &.error {
-          background: $danger-color;
-        }
-        &.success {
-          background: $success-color;
-        }
-    }
-}
 
 .alertify {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 
-    position: fixed;
-    background-color: rgba(0, 0, 0, .3);
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, .3);
+
+  z-index: 99999;
+
+  &.hide {
+    opacity: 0;
+
+    pointer-events: none;
+  }
+
+  &,
+  &.show {
+    transition: all .33s cubic-bezier(.25, .8, .25, 1);
+  }
+
+  &,
+  * {
+    box-sizing: border-box;
+  }
+
+  .dialog {
+    padding: vr(1);
+  }
+
+  .dialog,
+  .alert {
+    position: relative;
+    top: 50%;
+
     width: 100%;
-    height: 100%;
-    z-index: 99999;
 
-    &.hide {
-        opacity: 0;
-        pointer-events: none;
+    margin: 0 auto;
+
+    transform: translateY(-50%);
+
+    > * {
+      width: 400px;
+      max-width: 95%;
+
+      margin: 0 auto;
+      padding: vr(1);
+
+      background: #fff;
+
+      text-align: center;
+
+      box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .14), 0 4px 5px 0 rgba(0, 0, 0, .098), 0 1px 10px 0 rgba(0, 0, 0, .084);
     }
 
-    &, &.show {
-        box-sizing: border-box;
-        transition: all .33s cubic-bezier(.25, .8, .25, 1);
+    .msg {
+      margin: 0;
+      margin-bottom: vr(1);
+
+      text-align: left;
     }
 
-    &, * {
-        box-sizing: border-box;
+    input:not(.form-control) {
+      width: 100%;
+
+      margin-bottom: vr(1);
+      padding: vr(.5);
+
+      font-size: 100%;
+
+      &:focus {
+        outline-offset: -2px;
+      }
+
+      &.invalid {
+        border-left: 2px solid oc(primary);
+      }
     }
 
-    .dialog {
-       padding: 12px;
-    }
+    nav {
+      text-align: right;
 
-    .dialog, .alert {
-
-        width: 100%;
-        margin: 0 auto;
+      button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button) {
+        display: inline-block;
         position: relative;
-        top: 50%;
-        transform: translateY(-50%);
 
-        > * {
-            width: 400px;
-            max-width: 95%;
-            margin: 0 auto;
-            text-align: center;
-            padding: $padding-base;
-            background: #fff;
-            box-shadow: 0 2px 4px -1px rgba(0,0,0,.14), 0 4px 5px 0 rgba(0,0,0,.098), 0 1px 10px 0 rgba(0,0,0,.084);
+        align-items: center;
+
+        min-width: 88px;
+        min-height: 36px;
+
+        margin: 0;
+        padding: 0;
+
+        border: 0;
+        border-radius: 2px;
+        outline: 0;
+
+        background: transparent;
+        color: rgba(0, 0, 0, .87);
+
+        font-size: 14px;
+        line-height: 36px;
+        text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
+        white-space: nowrap;
+
+        cursor: pointer;
+
+        box-sizing: border-box;
+
+        &:hover,
+        &:active {
+          background-color: rgba(0, 0, 0, .05);
         }
 
-        .msg {
-          padding: $padding-base;
-          margin-bottom: $padding-base;
-          margin: 0;
-          text-align: left;
+        &:focus {
+          border: 1px solid rgba(0, 0, 0, .1);
         }
+      }
 
-        input:not(.form-control){
-            margin-bottom: 15px;
-            width: 100%;
-            font-size: 100%;
-            padding: $padding-base;
-            &:focus {
-                outline-offset: -2px;
-            }
-            &.invalid {
-                border-left: 2px solid $danger-color;
-            }
-        }
-        nav {
-
-            text-align: right;
-
-            button:not(.btn):not(.pure-button):not(.md-button):not(.mdl-button) {
-
-              background: transparent;
-              box-sizing: border-box;
-              color: rgba(0,0,0,0.87);
-              position: relative;
-              outline: 0;
-              border: 0;
-              display: inline-block;
-              align-items: center;
-              padding: 0 6px;
-              margin: 6px 8px;
-              line-height: 36px;
-              min-height: 36px;
-              white-space: nowrap;
-              min-width: 88px;
-              text-align: center;
-              text-transform: uppercase;
-              font-size: 14px;
-              text-decoration: none;
-              cursor: pointer;
-              border: 1px solid transparent;
-              border-radius: 2px;
-
-              &:hover, &:active {
-                background-color: rgba(0,0,0,.05);
-              }
-
-              &:focus {
-                  border: 1px solid rgba(0, 0, 0, .1);
-              }
-
-            }
-
-            button.btn {
-                margin: 6px 4px;
-            }
-
-        }
+      button.btn {
+        margin: 6px 4px;
+      }
     }
+  }
 }
 
 .alertify-logs {
+  position: fixed;
+  bottom: vr(1);
+  left: vr(1);
 
-    position: fixed;
-    z-index: 99999;
+  z-index: 99999;
 
-    &.bottom, &:not(.top) {
-        bottom: 16px;
-        // Bottom left placement. Default. Use for transitions.
-        &.left, &:not(.right) {
-            > * {
+  > * {
+    position: relative;
 
-            }
-        }
-        // Top right placement
-        &.right {
-            > * {
+    height: auto;
+    max-height: 0;
 
-            }
-        }
+    margin: 0;
+    padding: vr(.5) vr(.75);
+
+    float: left;
+    clear: both;
+
+    transform: translate3d(0, 0, 0);
+
+    transition: all .4s cubic-bezier(.25, .8, .25, 1);
+
+    border-radius: 2px;
+
+    background: var(--oc-gray-9);
+    color: var(--oc-white);
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .2);
+    opacity: 0;
+    overflow: hidden;
+
+    backface-visibility: hidden;
+    perspective: 1000;
+    pointer-events: none;
+
+    &.show {
+      left: 0;
+
+      max-height: 1000px;
+
+      margin-top: vr(.5);
+
+      opacity: 1;
+
+      pointer-events: auto;
     }
 
-    // All left positions.
-    &.left, &:not(.right) {
-        left: 16px;
-        > * {
-            float: left;
-            transform: translate3d(0, 0, 0);
-            height: auto;
-
-            &.show {
-                left: 0;
-            }
-            &, &.hide {
-                left: -110%;
-            }
-        }
+    &,
+    &.hide {
+      left: -110%;
     }
 
-    &.right {
-        right: 16px;
-        > * {
-            float: right;
-            transform: translate3d(0, 0, 0);
-            &.show {
-                right: 0;
-                opacity: 1;
-            }
-            &, &.hide {
-                right: -110%;
-                opacity: 0;
-            }
-        }
+    &.error {
+      background: oc(primary);
+      color: $oc-white;
     }
 
-    &.top {
-        top: 0;
-        // Top left placement, use for transitions.
-        &.left, &:not(.right) {
-            > * {
-
-            }
-        }
-        // Top right placement, use for transitions
-        &.right {
-            > * {
-
-            }
-        }
+    &.success {
+      background: oc(teal);
+      color: $oc-white;
     }
-
-    > * {
-        box-sizing: border-box;
-        transition: all .4s cubic-bezier(.25, .8, .25, 1);
-        position: relative;
-        clear: both;
-        backface-visibility: hidden;
-        perspective: 1000;
-
-        & {
-            max-height: 0;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        &.show {
-            margin-top: $padding-base;
-            opacity: 1;
-            max-height: 1000px;
-            padding: $padding-base;
-            pointer-events: auto;
-        }
-    }
-
+  }
 }
