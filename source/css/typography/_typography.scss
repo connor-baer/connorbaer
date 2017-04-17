@@ -1,0 +1,32 @@
+// Text styles
+// -----------
+@mixin t-link {
+  transition: color $an-short;
+
+  &:hover,
+  &:focus {
+    color: oc(primary);
+  }
+}
+
+@mixin t-uppercase {
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.t-link {
+  @include t-link;
+}
+
+.ts-subtle,
+%ts-subtle {
+  color: var(--oc-gray-6);
+
+  font-weight: $fw-light;
+}
+
+.ts-app,
+%ts-app {
+  @include t-uppercase;
+}

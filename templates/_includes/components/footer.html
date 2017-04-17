@@ -1,0 +1,29 @@
+{#
+ # Site Footer include template
+ # --------------------------------
+ #
+ # This template is used to output HTML for the site footer.
+ #
+ # An `entry` variable is expected to be defined.
+-#}
+
+{% import '_includes/elements' as elements %}
+{% import '_includes/helpers' as helpers %}
+
+{% block footer %}
+  {% cache %}
+  {% minify %}
+
+  <footer class="c-footer">
+    {% if footer.description %}
+      <div class="c-footer__prefooter l-ctnr">
+        <h4 class="l-w100">{{ footer.description }}</h4>
+      </div>
+    {% endif %}
+
+    <small class="c-footer__legal l-w100"><span>© {{ "now" | date("Y") }} {{ siteName | split('·') | first }}. {{ "All rights reserved." | translate }}</span>·<span>{{ "Tel" | translate }}: <a href="tel:+4915121208376" title="Call Connor">(+49) 151 2120 8376</a></span>·<span>{{ "Email" | translate }}: <a href="mailto:hello@connorbaer.co" title="Email Connor">hello@connorbaer.co</a></span>·<span><a href="/legal">{{ "Legal" | translate }}</a></span></small>
+  </footer>
+
+  {% endminify %}
+  {% endcache %}
+{% endblock %}

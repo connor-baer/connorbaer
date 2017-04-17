@@ -5,7 +5,7 @@
 {% set author = user.name ~ ' (@' ~ user.screen_name ~ ') on Twitter' %}
 {% set quote = tweet.text %}
 
-<div class="block-tweet">
+<div class="c-block__tweet">
   <img src="{{ imageUrl }}"/>
 
   <cite><a href="{{ url }}" title="{{ author }}">{{ author ~ tweet }}</a></cite>

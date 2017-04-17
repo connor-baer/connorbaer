@@ -1,8 +1,8 @@
 {% import '_includes/helpers' as helpers %}
 
-<blockquote class="block-quote lh1">
+<blockquote class="c-block__quote">
   {{ block.quote }}
   {% if block.cite | length %}
-  <cite class="pt2 ts-subtle fs-s1 ta-right">— {{ helpers.striptags(block.cite) }}</cite>
+  <cite>— {{ helpers.striptags(block.cite) }}</cite>
   {% endif %}
 </blockquote>

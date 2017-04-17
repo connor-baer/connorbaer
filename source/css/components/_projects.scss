@@ -1,0 +1,48 @@
+// Blocks
+// ------
+.c-projects {
+  margin-bottom: vr(2);
+
+  img {
+    background-color: var(--oc-gray-1);
+  }
+}
+
+.blocks__title {
+  @include typi("t1");
+
+  font-weight: $fw-light;
+
+  .blocks--serif & {
+    font-family: $ff-serif;
+  }
+}
+
+
+// Project
+// -------
+.c-project {
+  margin-top: vr(2);
+  margin-bottom: vr(3);
+}
+
+.c-project__header {
+  @include typi("s1");
+  @include t-uppercase;
+
+  margin-top: vr(1);
+  margin-bottom: vr(.5);
+
+  color: var(--oc-gray-6);
+}
+
+.c-project__description {
+  @include typi("t2");
+
+  font-weight: $fw-light;
+  line-height: $lh-large;
+}
+
+.c-project__tags {
+  line-height: $lh-large;
+}

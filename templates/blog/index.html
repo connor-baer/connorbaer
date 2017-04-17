@@ -21,15 +21,13 @@
   {% minify %}
 
   {# -- Header -- #}
-  <header class="ctnr-s mv5">
-    <div class="header w100">
-      <h1 class="header__title header__title--color">{{ entry.title | striptags() }}&nbsp;</h1>
-      <h2 class="header__subtitle">{{ entry.description | striptags() }}</h2>
+  <header class="l-ctnr l-flex l-flex--center">
+    <div class="c-header l-w75">
     </div>
   </header>
 
   {# -- POSTS -- #}
-  <div class="ctnr-s">
+  <div class="l-ctnr l-flex l-flex--center">
 
     {% set section = craft.app.request.segments | first %}
 
@@ -39,32 +37,34 @@
     }) %}
 
     {% for post in posts %}
-      <article class="w100 mv4">
+      <article class="c-card l-w75">
+        <a href="{{ post.url }}" title="{{ post.title }}">
 
-        {% if post.featured %}
+          {% if post.featured %}
 
-          {# Featured image or first image from matrix blocks? #}
-          {% if post.image[0] ?? null %}
-            {% set image = post.image[0] ?? null %}
-          {% else %}
-            {% set imageBlock = post.body.type('images').one() %}
-            {% if imageBlock %}
-              {% set image = imageBlock.image.one() %}
+            {# Featured image or first image from matrix blocks? #}
+            {% if post.image[0] ?? null %}
+              {% set image = post.image[0] ?? null %}
+            {% else %}
+              {% set imageBlock = post.body.type('images').one() %}
+              {% if imageBlock %}
+                {% set image = imageBlock.image.one() %}
+              {% endif %}
+            {% endif %}
+
+            {% if image is defined and image %}
+
+              <figure class="c-card__image">
+                {{ elements.image(image, 'normal', '16x9', '42rem' ) }}
+              </figure>
+
             {% endif %}
           {% endif %}
 
-          {% if image is defined and image %}
-
-            <a class="hover" href="{{ post.url }}" title="{{ post.title }}">
-              {{ elements.image(image, 'normal', '16x9', '42rem' ) }}
-            </a>
-
-          {% endif %}
-        {% endif %}
-
-        <h2 class="mt3 fs-t2 fw-bold lh1"><a class="ts-link" href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h2>
-        <p class="mt1 lh-large">{% if post.passphrase is empty %}{{ helpers.striptags(post.description) }}{% else %}This post is password-protected. Click to view the post.{% endif %}</p>
-        <span class="ts-subtle fs-s1">{{ elements.date(post.postDate) }}{% if post.category is not empty %}&nbsp;·&nbsp;{{ elements.category(post) }}{% endif %}</span>
+          <h2 class="c-card__title">{{ post.title }}</h2>
+          <p class="c-card__body">{% if post.passphrase is empty %}{{ helpers.striptags(post.description, '<br><strong><em>') }}{% else %}This post is password-protected. Click to view the post.{% endif %}</p>
+        </a>
+        <span class="c-card__meta">{{ elements.date(post.postDate) }}{% if post.category is not empty %}&nbsp;·&nbsp;{{ elements.category(post) }}{% endif %}</span>
       </article>
 
     {% endfor %}

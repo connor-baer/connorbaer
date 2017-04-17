@@ -20,9 +20,9 @@
 
   {# -- HEADER -- #}
   <header class="ctnr-s mv5">
-    <div class="header w100">
-      <h1 class="header__title header__title--color">{{"Category" | t }}&nbsp;</h1>
-      <h2 class="header__subtitle">{{ category | capitalize }}{% if category.description is defined %}&nbsp;—&nbsp;{{ helpers.striptags(category.description) }}{% endif %}</h2>
+    <div class="c-header w100">
+      <h1 class="c-header__title c-header__title--color">{{"Category" | t }}&nbsp;</h1>
+      <h2 class="c-header__subtitle">{{ category | capitalize }}{% if category.description is defined %}&nbsp;—&nbsp;{{ helpers.striptags(category.description) }}{% endif %}</h2>
     </div>
   </header>
 
@@ -60,7 +60,7 @@
           {% endif %}
         {% endif %}
 
-        <h2 class="mt3 fs-t2 fw-bold lh1"><a class="ts-link" href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h2>
+        <h2 class="mt3 fs-t2 fw-bold lh1"><a class="t-link" href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h2>
         <p class="mt1">{% if post.passphrase is empty %}{{ helpers.striptags(post.description) }}{% else %}This post is password-protected. Click to view the post.{% endif %}</p>
         <span class="ts-subtle fs-s1">{{ elements.date(post.postDate) }}{% if post.category is not empty %}&nbsp;·&nbsp;{{ elements.category(post) }}{% endif %}</span>
       </article>

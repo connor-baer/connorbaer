@@ -1,50 +1,75 @@
-/*
-  HEADER
-*/
-
-.header {
-  max-width: $mw-large / 3 * 2;
-  font-size: $fs-t3;
-  line-height: $lh-small;
-
-  @media #{$bp-small} {
+// Header
+// ------
+.c-header {
+  @include mappy-bp(medium) {
     > * {
       display: inline;
     }
   }
+
+  max-width: $l-ctnr / 4 * 3;
+
+  margin-top: vr(2);
+  margin-bottom: vr(2);
 }
 
-.header__title {
-  font-weight: $fw-sans-bold;
+.c-header--tall {
+  margin-top: vr(4);
+  margin-bottom: vr(4);
 }
 
-.header__title--color {
-  color: $oc-one-6;
+.c-header__title {
+  @include typi("t3");
+
+  font-weight: $fw-bold;
 }
 
-.header__subtitle {
-  color: var(--oc-gray-8);
-  font-weight: $fw-sans-light;
+.c-header__title--color {
+  color: oc(primary);
+}
 
-  @media #{$bp-small-only} {
-    margin-top: $sp-tiny;
-    font-size: $fs-t2;
+.c-header__subtitle {
+  @include mappy-bp(max-width medium) {
+    @include typi("t2");
+
+    margin-top: vr(.5);
   }
+  @include typi("t3");
+
+  color: var(--oc-gray-8);
+
+  font-weight: $fw-light;
 }
 
-.header__meta {
+.c-header__meta {
+  @include typi("s1");
+
   display: block;
+
+  margin-top: vr(.25);
+
+  color: var(--oc-gray-6);
 }
 
-.header__image {
-  position: relative;
-  height: 14rem;
-  overflow: hidden;
+.c-header__image img {
+  height: vr(12);
 
-  > figure {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    transform: translateY(-50%);
+  font-family: "object-fit: cover";
+
+  object-fit: cover;
+}
+
+
+.c-header__image--split {
+  @include mappy-bp(large) {
+    position: fixed;
+    top: 0;
+    right: 0;
+
+    width: 50vw;
+
+    img {
+      height: 100vh;
+    }
   }
 }

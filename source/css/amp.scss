@@ -1,7 +1,7 @@
-// Dependencies and helpers
-// ------------------------
-@import "lib/deps";
-@import "helpers/helpers";
+// Helpers
+// -------
+@import "lib/normalize";
+@import "lib/helpers";
 
 // Variables
 // ---------
@@ -10,25 +10,33 @@
 @import "variables/layout";
 @import "variables/animations";
 
-// Reset and base files
-// --------------------
+// Base & resets
+// -------------
 @import "base/base";
 
 // Layouts
 // -------
 @import "layouts/layouts";
 
+
+// Typography
+// ----------
+@import "typography/typography";
+
 // Objects
 // -------
+@import "objects/buttons";
 @import "objects/inputs";
-@import "objects/typography";
 @import "objects/media";
 
 // Components
 // ----------
 @import "components/metabar";
 @import "components/header";
+@import "components/password";
 @import "components/blocks";
+@import "components/cards";
+@import "components/share";
 @import "components/footer";
 
 // Utilities

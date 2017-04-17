@@ -1,0 +1,90 @@
+// Cards
+// -----
+
+.c-cards__title {
+  @include t-uppercase;
+  @include typi("s1");
+
+  color: var(--oc-gray-7);
+
+  font-weight: $fw-bold;
+}
+
+
+// Card
+// ----
+.c-card {
+  margin-bottom: vr(2);
+}
+
+.c-card__title {
+  @include typi("t1");
+
+  transition: color $an-medium;
+
+  font-weight: $fw-bold;
+
+  a:hover &,
+  a:focus & {
+    color: oc(primary);
+  }
+}
+
+.c-card__body {
+  @include typi("s0");
+
+  margin-top: vr(.25);
+  margin-bottom: vr(.25);
+}
+
+.c-card__meta {
+  @include typi("s1");
+
+  color: var(--oc-gray-6);
+
+  font-weight: $fw-light;
+}
+
+.c-card__image {
+  display: block;
+  position: relative;
+
+  overflow: hidden;
+
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    transition: opacity $an-long;
+
+    background-color: $oc-black;
+
+    content: "";
+    opacity: 0;
+  }
+
+  img {
+    transition: transform $an-long;
+    will-change: transform;
+
+    backface-visibility: hidden;
+  }
+
+  a:hover &,
+  a:focus & {
+    &::after {
+      opacity: .12;
+    }
+
+    img {
+      transform: scale(1.04);
+    }
+  }
+
+  + .c-card__title {
+    margin-top: vr(.5);
+  }
+}

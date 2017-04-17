@@ -1,32 +1,15 @@
-/*
-  METABAR
-
-  Brand
-  Navigation
-  Call To Action
-*/
-
-
-.metabar {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  max-width: 100vw;
-  padding-top: .75rem;
-  padding-bottom: .75rem;
-  transition: box-shadow $an-short, background-color $an-short, transform $an-medium;
-  background-color: var(--oc-white);
-  z-index: 999;
-  will-change: transform;
-
-  @media #{$bp-small} {
+// Metabar
+// -------
+.c-metabar {
+  @include mappy-bp(medium) {
     position: fixed;
-    padding-right: $sp-tiny;
-    padding-left: $sp-tiny;
+
+    will-change: transform;
 
     .headroom--not-top & {
-      box-shadow: 0 0 $sp-tiny rgba(black, 0.1);
+      padding: vr(.5) vr(1);
+
+      box-shadow: 0 0 vr(.5) rgba(black, .1);
     }
 
     .headroom--pinned {
@@ -37,106 +20,140 @@
       transform: translateY(-100%);
     }
   }
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+
+  align-items: center;
+
+  max-width: 100vw;
+
+  padding: vr(1);
+
+  transition: box-shadow $an-short, background-color $an-short, padding $an-short, transform $an-medium;
+
+  background-color: var(--oc-white);
+
+  z-index: 999;
 }
 
-.metabar__top {
-  display: flex;
-  justify-content: space-between;
+
+// Brand
+// -----
+.c-metabar__brand {
+  @include mappy-bp(max-width medium) {
+    order: 1;
+  }
 }
 
-// Brand //
-
-.metabar__brand {
-  position: relative;
-  z-index: 999999;
-}
-
-.logo,
-.metabar__name {
+.c-logo {
   display: inline-block;
-  margin-right: $sp-tiny;
-  transition: opacity $an-medium;
+
+  height: 2rem;
+  min-height: 36px;
+
+  margin-right: vr(.5);
+
+  transition: transform $an-short;
+
   vertical-align: middle;
 
   &:hover,
   &:focus {
-    opacity: .75;
+    transform: scale(1.1);
   }
 }
 
-.logo {
-  height: 2rem;
-  min-height: 36px;
-}
+.c-metabar__name {
+  @include typi("t1");
 
-.metabar__name {
-  color: var(--oc-gray-9);
-  font-family: $ff-sans;
-  font-size: $fs-t1;
-  font-weight: $fw-sans-bold;
-  line-height: 1;
-}
-
-
-// Call To Action //
-
-.metabar__cta {
-  position: relative;
-  z-index: 999999;
-}
-
-.metabar__darkMode {
   display: inline-block;
-  padding: 0 $sp-small;
+
+  transition: color $an-short;
+
+  color: var(--oc-gray-9);
+
+  font-family: $ff-sans;
+  font-weight: $fw-bold;
+  line-height: 1;
+
+  vertical-align: middle;
+
+  &:hover,
+  &:focus {
+    color: oc(primary);
+  }
+}
+
+
+// Navigation
+// ----------
+.c-metabar__nav {
+  @include mappy-bp(max-width medium) {
+    order: 3;
+
+    width: 100%;
+
+    padding-top: vr(1);
+  }
+}
+
+.c-metabar__navList {
+  display: inline-flex;
+
+  justify-content: space-around;
+
+  width: 100%;
+}
+
+.c-metabar__navLink {
+  @include typi("s1");
+  @include t-uppercase;
+
+  display: inline-block;
+
+  padding-right: vr(1);
+  padding-left: vr(1);
+
+  transition: background-color $an-medium, color $an-medium;
+
+  color: var(--oc-gray-6);
+
+  .is-active {
+    color: var(--oc-gray-8);
+  }
+}
+
+
+// Call To Action
+// --------------
+.c-metabar__cta {
+  @include mappy-bp(max-width medium) {
+    order: 2;
+  }
+}
+
+.c-metabar__darkMode {
+  display: inline-block;
+
+  padding-right: vr(.5);
+
   transition: fill $an-medium;
+
   border: 0;
   outline: none;
+
   background-color: transparent;
+
   cursor: pointer;
   vertical-align: middle;
   z-index: 999;
+
   fill: var(--oc-gray-6);
 
-  &:hover,
-  &:focus {
-    fill: $oc-one-6;
-  }
-}
-
-
-// Navigation //
-
-.metabar__nav {
-  flex-basis: 100%;
-  padding-top: .75rem;
-  text-align: center;
-
-  @media #{$bp-small} {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-  }
-}
-
-.metabar__navList {
-  display: inline-flex;
-  justify-content: space-between;
-}
-
-.metabar__navLink {
-  display: block;
-  height: 100%;
-  transition: background-color $an-medium, color $an-medium;
-  color: var(--oc-gray-6);
-  text-align: center;
-
-  &:hover,
-  &:focus {
-    color: $oc-one-6;
-  }
-
-  &.is-active {
-    color: var(--oc-gray-9);
+  &:hover {
+    fill: oc(primary);
   }
 }

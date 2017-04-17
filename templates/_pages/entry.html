@@ -18,73 +18,44 @@
 {% endblock %}
 
 {% block main %}
+  {% cache %}
+  {% minify %}
 
-  {% if entry.passphrase is empty or entry.passphrase == craft.app.request.getQueryParam('passphrase') or livePreview %}
-    {% cache %}
-    {% minify %}
+  <article>
 
-    <article>
-
-      {# -- HEADER -- #}
-      <header>
-        {% set image = entry.image.one() %}
-        {% if image %}
-        <div class="header__image js-photoswipe">
-          <figure>
-            <a href="{{ image.getUrl('large') }}" data-size="{{ image.getWidth('large') }}x{{ image.getHeight('large') }}">
-              {{ elements.image(image, null, '16x9') }}
-            </a>
-          <figure>
-        </div>
-        {% endif %}
-
-        <div class="ctnr-s mv5">
-          <div class="header w100">
-            <h1 class="header__title header__title--color">{{ entry.title | striptags() }}&nbsp;</h1>
-            <h2 class="header__subtitle">{{ entry.description | striptags() }}</h2>
-          </div>
-        </div>
-      </header>
-
-      {# -- CONTENT -- #}
-      <div class="blocks cf">
-
-        {# Body matrix #}
-        {% include '_includes/blocks' %}
-
+    {# -- HEADER -- #}
+    <header>
+      {% set image = entry.image.one() %}
+      {% if image %}
+      <div class="c-header__image js-photoswipe">
+        <figure>
+          <a href="{{ image.getUrl('large') }}" data-size="{{ image.getWidth('large') }}x{{ image.getHeight('large') }}">
+            {{ elements.image(image, null, '16x9') }}
+          </a>
+        <figure>
       </div>
-    </article>
+      {% endif %}
 
-    <script>
-    loadjs(['{{ baseUrl ~ rev('js/photoswipe.min.js') }}'], 'photoswipe');
-    loadjs.ready('photoswipe', {
-      success: function() {
-        initPhotoSwipeFromDOM('.js-photoswipe');
-      }
-    });
-    </script>
-
-    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-      <div class="pswp__bg"></div>
-
-      <div class="pswp__scroll-wrap">
-
-        <!-- Container that holds slides.
-          PhotoSwipe keeps only 3 of them in the DOM to save memory.
-          Don't modify these 3 pswp__item elements, data is added later on. -->
-        <div class="pswp__container">
-          <div class="pswp__item"></div>
-          <div class="pswp__item"></div>
-          <div class="pswp__item"></div>
+      <div class="l-ctnr l-flex l-flex--center">
+        <div class="c-header l-w66">
+          <h1 class="c-header__title c-header__title--color">{{ entry.title | striptags() }}&nbsp;</h1>
+          <h2 class="c-header__subtitle">{{ entry.description | striptags() }}</h2>
         </div>
       </div>
+    </header>
+
+    {# -- CONTENT -- #}
+    <div class="c-blocks">
+
+      {# Body matrix #}
+      {% include '_includes/blocks' %}
+
     </div>
+  </article>
 
-    {% endminify %}
-    {% endcache %}
-  {% else %}
-    {{ elements.passphrase(entry) }}
-  {% endif %}
+  {# -- PHOTOSWIPE -- #}
+  {% include '_includes/photoswipe' %}
 
+  {% endminify %}
+  {% endcache %}
 {% endblock %}

@@ -23,16 +23,11 @@
   <article>
 
     {# -- HEADER -- #}
-    <header class="ctnr-l">
-      <div class="header w100 mv5">
-        <h1 class="header__title header__title--color">{{ entry.title | striptags() }}&nbsp;</h1>
-        <h2 class="header__subtitle">{{ entry.description | striptags() }}</h2>
+    <header class="l-ctnr">
+      <div class="c-header c-header--tall l-w100">
+        <h1 class="c-header__title c-header__title--color">{{ entry.title | striptags() }}&nbsp;</h1>
+        <h2 class="c-header__subtitle">{{ entry.description | striptags() }}</h2>
       </div>
-      {% if entry.image.one() %}
-        <div class="header__image w100 mv5">
-          {{ elements.image(entry.image.one(), '16x9') }}
-        </div>
-      {% endif %}
     </header>
 
   </article>
@@ -47,21 +42,24 @@
   }) %}
 
   {% if featured %}
-    <section class="ctnr-l mv5">
-      <div class="w100 mt3">
-        <h3 class="ts-app fs-s1"><a href="/work">Latest Work</a></h3>
+    <section class="l-ctnr l-flex">
+      <div class="l-w100">
+        <h3 class="c-cards__title"><a class="t-link" href="/work">Latest Work</a></h3>
       </div>
 
       {% for item in featured %}
-        <article class="w100 mv2">
-          <a class="hover" href="{{ item.url }}" title="{{ item.title }} for {{ item.client.one().title }}">
+        <article class="c-card l-w100">
+          <a class="o-image--hover" href="{{ item.url }}" title="{{ item.title }} for {{ item.client.one().title }}">
+
             {% set image = item.image[0] ?? null %}
             {% if image %}
-              {{ elements.image(image, 'normal', '16x9', '64rem') }}
+              <figure class="c-card__image">
+                {{ elements.image(image, 'normal', '16x9', '64rem') }}
+              </figure>
             {% endif %}
+            <h3 class="c-card__title">{{ item.title }}</h3>
+            <p class="c-card__meta">{{ item.client.one().title }}</p>
           </a>
-          <h3 class="mt1 fs-t1 fw-bold"><a class="ts-link" href="{{ item.url }}" title="{{ item.title }}">{{ item.title }}</a></h3>
-          <p class="fs-s1">{{ item.client.one().title }}</p>
         </article>
       {% endfor %}
     </section>

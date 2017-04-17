@@ -1,74 +1,24 @@
-/*
-  MEDIA
-
-  Ratios
-  Images
-  SVG
-  Videos
-*/
-
-
-// Ratios //
-
-.r16-9 {
-  display: block;
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%;
-
-  > * {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
-}
-
-.r1-1 {
-  display: block;
-  position: relative;
-  width: 100%;
-  padding-bottom: 100%;
-
-  > * {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
-}
-
-a.hover img,
-img.hover {
-  transition: opacity $an-medium;
-  backface-visibility: hidden;
-
-  &:hover,
-  &:focus {
-    opacity: 0.8;
-  }
-}
-
-
-// Images //
-
-.img-responsive,
+// Images
+// ------
+.o-image,
 img[data-sizes="auto"] {
   display: block;
+
   width: 100%;
   height: auto;
-  vertical-align: middle; // Make sure images are scaled correctly.
+
+  vertical-align: middle; // NOTE: Make sure images are scaled correctly.
 }
 
-// SVG //
 
-.svg-small {
-  width: $sp-small;
-  height: $sp-small;
-  margin-right: $sp-small;
+// SVG
+// ---
+.o-svg {
+  width: vr(.75);
+  height: vr(.75);
+
   vertical-align: middle;
+
   fill: var(--oc-gray-6);
 
   a & {
@@ -77,7 +27,8 @@ img[data-sizes="auto"] {
     &:hover,
     &:focus {
       transform: scale(1.1);
-      fill: $oc-one-6;
+
+      fill: oc(primary);
     }
   }
 }

@@ -1,54 +1,54 @@
 /**
  * Vue Instance
  */
-new Vue({
+new Vue( {
   el: '#app',
-  delimiters: ['[[', ']]'],
-  data () {
+  delimiters: [ '[[', ']]' ],
+  data() {
     return {
       time: '🕓',
-      sunrise: '⌛️',
-      sunset: '⌛️',
+      sunrise: '☀️',
+      sunset: '🌙',
     };
   },
-  mounted () {
-    setInterval(this.updateDateTime, 1000);
+  mounted() {
+    setInterval( this.updateDateTime, 1000 );
 
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(function(location) {
-        const suntimes = sunTimes(location);
+    if ( 'geolocation' in navigator ) {
+      navigator.geolocation.getCurrentPosition( function ( location ) {
+        const suntimes = sunTimes( location );
         const sunrise = suntimes.sunrise.getHours() + ':' + suntimes.sunrise.getMinutes();
         const sunset = suntimes.sunset.getHours() + ':' + suntimes.sunset.getMinutes();
 
         this.sunrise = sunrise;
         this.sunset = sunset;
-      }.bind(this), function(err) {
+      }.bind( this ), function ( err ) {
         let message = {};
 
-        switch(err.code) {
-          case err.PERMISSION_DENIED:
-            message = new Error('You didn’t share your location.');
-            break;
-          case err.POSITION_UNAVAILABLE:
-            message = new Error('Location information is unavailable.');
-            break;
-          case err.TIMEOUT:
-            message = new Error('The request to get your location timed out.');
-            break;
-          case err.UNKNOWN_ERROR:
-            message = new Error('An unknown error occurred.');
-            break;
+        switch ( err.code ) {
+        case err.PERMISSION_DENIED:
+          message = new Error( 'You didn’t share your location.' );
+          break;
+        case err.POSITION_UNAVAILABLE:
+          message = new Error( 'Location information is unavailable.' );
+          break;
+        case err.TIMEOUT:
+          message = new Error( 'The request to get your location timed out.' );
+          break;
+        case err.UNKNOWN_ERROR:
+          message = new Error( 'An unknown error occurred.' );
+          break;
         }
-        error(message);
+        error( message );
       }, {
         timeout: 10000
-      });
+      } );
     }
   },
   methods: {
-    updateDateTime () {
+    updateDateTime() {
       let now = new Date();
-      this.time = now.getHours() + ':' + ('0' + now.getMinutes()).slice(-2);
+      this.time = now.getHours() + ':' + ( '0' + now.getMinutes() ).slice( -2 );
     },
   },
   computed: {
@@ -63,6 +63,6 @@ new Vue({
       } else if ( now > 16 && now <= 21 ) {
         return 'Good evening';
       }
-    },
+    }
   }
-});
+} );

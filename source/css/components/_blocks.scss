@@ -1,165 +1,186 @@
-/*
-  BLOCKS
-
-  Positions
-  Caption
-  Text
-  Quote
-  Images
-  Video
-  Tweet
-  Code
-*/
-
-
-.blocks {
-  margin-top: $sp-medium;
-  margin-bottom: $sp-medium;
+// Blocks
+// ------
+.c-blocks {
+  margin-bottom: vr(2);
 
   img {
     background-color: var(--oc-gray-1);
   }
+}
 
-  @media #{$bp-small} {
-    margin-top: $sp-large;
-    margin-bottom: $sp-large;
+.c-blocks__title {
+  @include typi("t1");
+
+  font-weight: $fw-light;
+  line-height: $lh-large;
+
+  .c-blocks--serif & {
+    font-family: $ff-serif;
   }
 }
 
 
-// Positions //
-
-.position-center,
-.position-full,
-.position-drop-right,
-.position-drop-left {
-  margin-top: $sp-medium;
-  margin-bottom: $sp-medium;
+// Positions
+// ---------
+.c-block--center,
+.c-block--full,
+.c-block--drop-right,
+.c-block--drop-left,
+.c-block--text {
+  margin-top: vr(1);
+  margin-bottom: vr(1);
 }
 
-.position-text {
-  margin-top: $sp-medium;
-  margin-bottom: $sp-medium;
+.c-block--text > div {
+  margin: 0 auto;
 }
 
-@media #{$bp-small} {
-  .position-center,
-  .position-full {
-    margin-top: $sp-large;
-    margin-bottom: $sp-large;
+@include mappy-bp(medium) {
+  .c-block--center,
+  .c-block--full {
+    margin-top: vr(2);
+    margin-bottom: vr(2);
   }
 
-  .position-drop-right > div,
-  .position-drop-left > div {
+  .c-block--drop-right > div,
+  .c-block--drop-left > div {
     width: 24rem;
 
-    margin-top: $sp-tiny;
-    margin-bottom: $sp-tiny;
+    margin-top: vr(.5);
+    margin-bottom: vr(.5);
   }
 
-  .position-drop-right > div {
-    margin-left: $sp-small;
+  .c-block--drop-right > div {
+    margin-left: vr(1);
 
     float: right;
   }
 
-  .position-drop-left > div {
-    margin-right: $sp-small;
+  .c-block--drop-left > div {
+    margin-right: vr(1);
 
     float: left;
   }
 }
 
 
-// Caption //
+// Caption
+// -------
+.c-block__caption {
+  @include typi("s1");
 
-.block-caption {
-  .position-center &,
-  .position-full & {
-    margin-right: $sp-small;
-    margin-left: $sp-small;
+  margin-top: vr(.25);
+  margin-bottom: vr(.25);
+
+  color: var(--oc-gray-6);
+
+  .c-block--center &,
+  .c-block--full & {
+    margin-right: vr(1);
+    margin-left: vr(1);
 
     text-align: center;
   }
 }
 
 
-// Text //
-
-.block-text {
+// Text
+// ----
+.c-block__text {
   > h1 {
-    margin-top: $sp-small;
-    margin-bottom: $sp-small;
+    @include typi("t3");
 
-    font-size: $fs-t3;
+    margin-top: vr(2);
+    margin-bottom: vr(1);
+
+    font-weight: $fw-bold;
   }
 
   > h2 {
-    margin-top: $sp-small;
-    margin-bottom: $sp-small;
+    @include typi("t2");
 
-    font-size: $fs-t2;
+    margin-top: vr(1);
+    margin-bottom: vr(.5);
+
+    font-weight: $fw-bold;
   }
 
   > h3 {
-    margin-top: $sp-small;
-    margin-bottom: $sp-small;
+    @include typi("t2");
 
-    font-size: $fs-t2;
-    font-weight: $fw-sans-bold;
+    margin-top: vr(1);
+    margin-bottom: vr(.5);
   }
 
   > h4 {
-    margin-top: $sp-small;
-    margin-bottom: $sp-small;
+    @include typi("t1");
 
-    font-size: $fs-t1;
-    font-weight: $fw-sans-bold;
+    margin-top: vr(1);
+    margin-bottom: vr(.5);
+
+    font-weight: $fw-bold;
   }
 
   > h5 {
-    margin-top: $sp-small;
-    margin-bottom: $sp-small;
+    @include typi("t1");
 
-    font-size: $fs-t1;
+    margin-top: vr(1);
+    margin-bottom: vr(1);
   }
 
   > h6 {
-    font-size: $fs-s1;
+    @include typi("s1");
+    @include t-uppercase;
 
-    @extend %ts-app;
-    @extend %ts-subtle;
+    color: var(--oc-gray-6);
   }
 
   > h6,
   > p,
   > blockquote {
-    margin-top: $sp-tiny;
-    margin-bottom: $sp-tiny;
+    margin-top: vr(.25);
+    margin-bottom: vr(.5);
   }
 
   > p {
-    line-height: $lh-large;
+    @include typi("s0");
   }
 
   a {
-    color: $oc-one-6;
+    @include t-link;
 
-    font-weight: $fw-sans-bold;
+    transition: box-shadow $an-short;
 
-    @extend %ts-link;
+    color: oc(primary);
+
+    font-weight: $fw-bold;
+
+    &.anchor {
+      @include t-link;
+
+      color: oc(primary, 2);
+
+      font-weight: inherit;
+    }
+
+    &:hover,
+    &:focus {
+      box-shadow: inset 0 -.08em 0 0 oc(primary);
+    }
   }
 
   ul,
   ol {
-    padding-left: $sp-small;
+    @include typi("s0");
+
+    padding-left: vr(1);
   }
 
   > ol,
   > ul {
-    margin-top: $sp-small;
-    margin-bottom: $sp-small;
-    padding-left: $sp-small;
+    margin-top: vr(.5);
+    margin-bottom: vr(.5);
+    padding-left: vr(1);
   }
 
   li > ol,
@@ -175,10 +196,16 @@
     list-style: disc;
   }
 
-  blockquote {
-    padding-left: $sp-small;
+  li {
+    margin-bottom: vr(.25);
+  }
 
-    border-left: 4px solid $oc-one-2;
+  blockquote {
+    @include typi("s0");
+
+    padding-left: vr(1);
+
+    border-left: 4px solid oc(primary, 2);
 
     color: var(--oc-gray-6);
 
@@ -186,47 +213,64 @@
       display: block;
     }
   }
+
+  .c-blocks--serif & {
+    > p,
+    ul,
+    ol,
+    blockquote {
+      font-family: $ff-serif;
+    }
+  }
 }
 
 
-// Quote //
-
-.block-quote {
+// Quote
+// -----
+.c-block__quote {
   > p {
-    font-size: $fs-t2;
+    @include typi("t2");
+
+    font-family: $ff-serif;
     font-style: italic;
   }
 
   cite {
+    @include typi("s1");
+
     display: block;
+
+    margin-top: vr(.25);
+
+    color: var(--oc-gray-6);
   }
 }
 
 
-// Images //
-
-.block-images {
+// Images
+// ------
+.c-block__images {
   display: flex;
 
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
-.block-image {
+.c-block__image {
   width: 100%;
 
-  margin-bottom: $sp-small;
+  margin-bottom: vr(.5);
 
   background-color: var(--oc-gray-0);
 }
 
-.block-image2,
-.block-image3,
-.block-image4 {
+.c-block__image2,
+.c-block__image3,
+.c-block__image4 {
   display: block;
   position: relative;
 
-  margin-bottom: $sp-small;
+  margin-bottom: vr(.5);
 
   a {
     position: absolute;
@@ -245,18 +289,19 @@
   }
 }
 
-.block-image2,
-.block-image4 {
-  width: calc(50% - #{$sp-tiny});
+.c-block__image2,
+.c-block__image4 {
+  width: calc(50% - vr(.5));
 
-  padding-bottom: calc(50% - #{$sp-tiny});
+  padding-bottom: calc(50% - #{vr(.5)});
 }
 
-.block-image3 {
-  width: calc(33% - #{$sp-tiny});
+.c-block__image3 {
+  width: calc(33% - #{vr(.5)});
 
-  padding-bottom: calc(33% - #{$sp-tiny});
+  padding-bottom: calc(33% - #{vr(.5)});
 }
+
 
 // Photoswipe
 .pswp .pswp__bg {
@@ -264,9 +309,9 @@
 }
 
 
-// Video //
-
-.block-video {
+// Video
+// -----
+.c-block__video {
   position: relative;
 
   max-width: 100%;
@@ -292,14 +337,14 @@
 }
 
 
-// Code //
-
-.block-code {
+// Code
+// ----
+.c-block__code {
   background-color: var(--oc-gray-1);
 
-  .position-full & {
-    padding-top: $sp-small;
-    padding-bottom: $sp-small;
+  .c-block--full & {
+    padding-top: vr(1);
+    padding-bottom: vr(1);
   }
 
   code {

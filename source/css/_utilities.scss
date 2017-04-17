@@ -1,2 +1,109 @@
-// Utilities
-// ---------
+// Ratios
+// ------
+.r16-9 {
+  display: block;
+  position: relative;
+
+  width: 100%;
+
+  padding-bottom: 56.25%;
+
+  > * {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+
+.r1-1 {
+  display: block;
+  position: relative;
+
+  width: 100%;
+
+  padding-bottom: 100%;
+
+  > * {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+
+// Floats
+// ------
+.fl-left {
+  float: left;
+}
+
+.fl-center {
+  margin-right: auto;
+  margin-left: auto;
+
+  clear: both;
+}
+
+.fl-right {
+  float: right;
+}
+
+
+// Clearfix
+// -------
+.cf::after {
+  display: table;
+
+  clear: both;
+
+  content: "";
+}
+
+.cl::after {
+  display: table;
+
+  clear: left;
+
+  content: "";
+}
+
+.cr::after {
+  display: table;
+
+  clear: right;
+
+  content: "";
+}
+
+
+// Text Align
+// ----------
+.ta-right {
+  text-align: right;
+}
+
+.ta-center {
+  text-align: center;
+}
+
+.ta-left {
+  text-align: left;
+}
+
+
+// Font Families
+// -------------
+.ff-sans {
+  font-family: $ff-sans;
+}
+
+.ff-serif {
+  font-family: $ff-serif;
+}
+
+.ff-mono {
+  font-family: $ff-mono;
+}

@@ -12,9 +12,9 @@
     {% set size = '24rem' %}
 {% endswitch %}
 
-<div class="block-images js-photoswipe">
+<div class="c-block__images js-photoswipe">
   {% for image in block.images %}
-    <figure class="block-image{% if not amp is defined %} block-image{{ numberOfImages }}{% endif %}">
+    <figure class="c-block__image{% if not amp is defined %} c-block__image{{ numberOfImages }}{% endif %}">
       {% if lazyImage and not amp is defined %}
         <a href="{{ image.getUrl('large') }}" data-size="{{ image.getWidth('large') }}x{{ image.getHeight('large') }}">
           {{ elements.image(image, 'lazyload', '', size) }}
@@ -30,7 +30,7 @@
   {% endfor %}
 </div>
 {% if block.caption | length %}
-<figcaption class="block-caption mb2 ts-subtle fs-s1">
+<figcaption class="c-block__caption">
   {{ block.caption }}
 </figcaption>
 {% endif %}

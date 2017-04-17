@@ -1,6 +1,76 @@
-// Colors
-// ------
+//  Primary
+//  -------
+$oc-primary: #ee3a51; // #1fb7e3
+$oc-primary-list: (
+  "0": scale-color($oc-primary, $lightness: 96%),
+  "1": scale-color($oc-primary, $lightness: 80%),
+  "2": scale-color($oc-primary, $lightness: 64%),
+  "3": scale-color($oc-primary, $lightness: 48%),
+  "4": scale-color($oc-primary, $lightness: 32%),
+  "5": scale-color($oc-primary, $lightness: 16%),
+  "6": $oc-primary,
+  "7": scale-color($oc-primary, $lightness: -15%),
+  "8": scale-color($oc-primary, $lightness: -30%),
+  "9": scale-color($oc-primary, $lightness: -45%)
+);
 
+//  Secondary
+//  ---------
+$oc-secondary: #ff512f; // #00ccd2
+$oc-secondary-list: (
+  "0": scale-color($oc-secondary, $lightness: 96%),
+  "1": scale-color($oc-secondary, $lightness: 80%),
+  "2": scale-color($oc-secondary, $lightness: 64%),
+  "3": scale-color($oc-secondary, $lightness: 48%),
+  "4": scale-color($oc-secondary, $lightness: 32%),
+  "5": scale-color($oc-secondary, $lightness: 16%),
+  "6": $oc-secondary,
+  "7": scale-color($oc-secondary, $lightness: -15%),
+  "8": scale-color($oc-secondary, $lightness: -30%),
+  "9": scale-color($oc-secondary, $lightness: -45%)
+);
+
+//  Open Colors
+//  -----------
+// NOTE: Access with oc(), see https://yeun.github.io/open-color/
+@function oc($color, $spectrum: 6) {
+  @if $color == gray or $color == grey {
+    @return map-get($oc-gray-list, "#{$spectrum}");
+  } @else if $color == primary {
+    @return map-get($oc-primary-list, "#{$spectrum}");
+  } @else if $color == secondary {
+    @return map-get($oc-secondary-list, "#{$spectrum}");
+  } @else if $color == red {
+    @return map-get($oc-red-list, "#{$spectrum}");
+  } @else if $color == pink {
+    @return map-get($oc-pink-list, "#{$spectrum}");
+  } @else if $color == grape {
+    @return map-get($oc-grape-list, "#{$spectrum}");
+  } @else if $color == violet {
+    @return map-get($oc-violet-list, "#{$spectrum}");
+  } @else if $color == indigo {
+    @return map-get($oc-indigo-list, "#{$spectrum}");
+  } @else if $color == blue {
+    @return map-get($oc-blue-list, "#{$spectrum}");
+  } @else if $color == cyan {
+    @return map-get($oc-cyan-list, "#{$spectrum}");
+  } @else if $color == teal {
+    @return map-get($oc-teal-list, "#{$spectrum}");
+  } @else if $color == green {
+    @return map-get($oc-green-list, "#{$spectrum}");
+  } @else if $color == lime {
+    @return map-get($oc-lime-list, "#{$spectrum}");
+  } @else if $color == yellow {
+    @return map-get($oc-yellow-list, "#{$spectrum}");
+  } @else if $color == orange {
+    @return map-get($oc-orange-list, "#{$spectrum}");
+  } @else {
+    @error "`#{$color}` is not part of the open color palette.";
+  }
+}
+
+//  CSS Variables
+//  -------------
 :root {
   #{--oc-white}: $oc-white;
   #{--oc-black}: $oc-black;
@@ -17,8 +87,10 @@
   #{--oc-gray-9}: $oc-gray-9;
 }
 
+//  Themes
+//  ------
 .theme-dark {
-  #{--oc-white}: $oc-gray-9;
+  #{--oc-white}: #1b1f22;
   #{--oc-black}: $oc-white;
 
   #{--oc-gray-0}: $oc-gray-9;
@@ -32,28 +104,3 @@
   #{--oc-gray-8}: $oc-gray-1;
   #{--oc-gray-9}: $oc-gray-0;
 }
-
-$oc-one: #ee3a51; // #1fb7e3
-$oc-two: #ff512f; // #00ccd2
-
-$oc-one-0: scale-color($oc-one, $lightness: 96%);
-$oc-one-1: scale-color($oc-one, $lightness: 80%);
-$oc-one-2: scale-color($oc-one, $lightness: 64%);
-$oc-one-3: scale-color($oc-one, $lightness: 48%);
-$oc-one-4: scale-color($oc-one, $lightness: 32%);
-$oc-one-5: scale-color($oc-one, $lightness: 16%);
-$oc-one-6: $oc-one;
-$oc-one-7: scale-color($oc-one, $lightness: -15%);
-$oc-one-8: scale-color($oc-one, $lightness: -30%);
-$oc-one-9: scale-color($oc-one, $lightness: -45%);
-
-$oc-two-0: scale-color($oc-two, $lightness: 96%);
-$oc-two-1: scale-color($oc-two, $lightness: 80%);
-$oc-two-2: scale-color($oc-two, $lightness: 64%);
-$oc-two-3: scale-color($oc-two, $lightness: 48%);
-$oc-two-4: scale-color($oc-two, $lightness: 32%);
-$oc-two-5: scale-color($oc-two, $lightness: 16%);
-$oc-two-6: $oc-two;
-$oc-two-7: scale-color($oc-two, $lightness: -15%);
-$oc-two-8: scale-color($oc-two, $lightness: -30%);
-$oc-two-9: scale-color($oc-two, $lightness: -45%);

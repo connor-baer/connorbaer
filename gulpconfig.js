@@ -57,6 +57,7 @@ module.exports = {
       src: src + '**/**/*.scss',
       dest: dev,
       libsass: { // Requires the libsass implementation of Sass (included in this package)
+        includePaths: [ modules ],
         precision: 6,
         onError: function ( err ) {
           return console.log( err );
@@ -189,6 +190,7 @@ module.exports = {
     ui: false, // Set to false if you don't need the browsersync UI
     open: false, // Set to false if you don't like the browser window opening automatically
     reloadDelay: 1000, // Time, in milliseconds, to wait before reloading/injecting
+    logFileChanges: false, // Log information about changed files
     watchOptions: {
       debounceDelay: 4000, // This introduces a small delay when watching for file change events to avoid triggering too many reloads
     },
@@ -273,7 +275,7 @@ module.exports = {
       developerURL: 'https://connorbaer.co',
       background: '#ffffff',
       theme_color: '#000000',
-      path: 'favicons/',
+      path: '/favicons/',
       url: pkg.homepage,
       display: 'standalone',
       orientation: 'portrait',

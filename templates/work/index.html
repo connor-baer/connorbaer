@@ -23,14 +23,6 @@
   {% cache %}
   {% minify %}
 
-  {# -- Header -- #}
-  <header class="ctnr-l mv5">
-    <div class="header w100">
-      <h1 class="header__title header__title--color">{{ entry.title | striptags() }}&nbsp;</h1>
-      <h2 class="header__subtitle">{{ entry.description | striptags() }}</h2>
-    </div>
-  </header>
-
   {# -- FEATURED ITEMS -- #}
   {% set featured = craft.entries({
     section: section,
@@ -41,17 +33,19 @@
   }) %}
 
   {% if featured %}
-    <section class="ctnr-l">
+    <section class="l-ctnr">
       {% for item in featured %}
-        <article class="w100 mv5">
-          <a class="hover" href="{{ item.url }}" title="{{ item.title }} for {{ item.client.one().title }}">
+        <article class="c-card l-w100">
+          <a href="{{ item.url }}" title="{{ item.title }} for {{ item.client.one().title }}">
             {% set image = item.image[0] ?? null %}
             {% if image %}
-              {{ elements.image(image, 'normal', '16x9', '64rem') }}
+              <figure class="c-card__image">
+                {{ elements.image(image, 'normal', '16x9', '64rem') }}
+              </figure>
             {% endif %}
+            <h3 class="c-card__title">{{ item.title }}</h3>
+            <p class="c-card__meta">{{ item.client.one().title }}</p>
           </a>
-          <h3 class="mt1 fs-t1 fw-bold"><a class="ts-link" href="{{ item.url }}" title="{{ item.title }}">{{ item.title }}</a></h3>
-          <p class="fs-s1">{{ item.client.one().title }}</p>
         </article>
       {% endfor %}
     </section>
@@ -70,9 +64,9 @@
   }) %}
 
   {% if items %}
-    <section class="ctnr-l mv3 cf">
+    <section class="l-ctnr l-flex">
       {% for item in items %}
-        <article class="w1-2 fl-left mv2">
+        <article class="l-w50">
           <a href="{{ item.url }}" title="{{ item.title }} for {{ item.client.one().title }}">
             {% set image = item.image[0] ?? null %}
             {% if image %}

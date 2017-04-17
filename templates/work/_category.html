@@ -20,7 +20,7 @@
 
 
 {% block main %}
-  <div class="ctnr-l">
+  <div class="l-ctnr">
 
     {# Page title #}
     <header class="content-hero w100 ff-serif">
@@ -34,7 +34,7 @@
     {% set featured = craft.entries.section(section).relatedTo(craft.categories.slug(category)).featured('1').one() %}
 
     {% if featured %}
-      <article class="ctnr-l ff-serif">
+      <article class="l-ctnr ff-serif">
 
         {# First image in post #}
         {% set imageBlock = featured.body.type('image').one() %}

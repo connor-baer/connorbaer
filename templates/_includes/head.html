@@ -47,6 +47,9 @@ loadjs.ready('scripts', {
     const sansItalic = new FontFaceObserver('Overpass', { weight: 400, style: 'italic' });
     const sansBold = new FontFaceObserver('Overpass', { weight: 700, });
     const mono = new FontFaceObserver('Overpass Mono', { weight: 400, });
+    const serif = new FontFaceObserver('Lora', { weight: 400 });
+    const serifItalic = new FontFaceObserver('Lora', { weight: 400, style: 'italic' });
+    const serifBold = new FontFaceObserver('Lora', { weight: 700 });
     const html = document.documentElement;
 
     html.classList.add('fonts-loading');
@@ -54,9 +57,11 @@ loadjs.ready('scripts', {
     Promise.all([
       sansLight.load(),
       sans.load(),
-      sansItalic.load(),
       sansBold.load(),
       mono.load(),
+      serif.load(),
+      serifItalic.load(),
+      serifBold.load(),
     ]).then(function () {
       html.classList.remove('fonts-loading');
       html.classList.add('fonts-loaded');

@@ -12,130 +12,106 @@
 {% import '_includes/helpers' as helpers %}
 
 
+{% block critical %}
+  <style>
+    {{ source(_self ~ '.min.css', ignore_missing = true) }}
+  </style>
+{% endblock %}
+
+
 {% block main %}
+  {% cache %}
+  {% minify %}
 
-  {% if entry.passphrase is empty or entry.passphrase == craft.app.request.getQueryParam('passphrase') or livePreview %}
-    {% cache %}
-    {% minify %}
+  <article>
 
-    <article>
-
-      {# -- HEADER -- #}
-      <header>
-        <div class="ctnr-l">
-          <div class="header w100 mv5">
-            <h1 class="header__title header__title--color">{{ entry.title | striptags() }}&nbsp;</h1>
-            <h2 class="header__subtitle">{{ entry.description | striptags() }}</h2>
-          </div>
+    {# -- HEADER -- #}
+    <header>
+      <div class="l-ctnr">
+        <div class="c-header c-header--tall l-w100">
+          <h1 class="c-header__title c-header__title--color">{{ entry.title | striptags() }}&nbsp;</h1>
+          <h2 class="c-header__subtitle">{{ entry.description | striptags() }}</h2>
         </div>
-
-        {% set image = entry.image.one() %}
-
-        {% if image %}
-          <div class="mv5 js-photoswipe">
-            <figure>
-              <a href="{{ image.getUrl('large16x9') }}" data-size="{{ image.getWidth('large16x9') }}x{{ image.getHeight('large16x9') }}">
-                {{ elements.image(image, 'normal', '16x9', '100vw') }}
-              </a>
-            <figure>
-          </div>
-        {% endif %}
-
-        <div class="ctnr-l mv4 cf">
-          <div class="w2-3 fl-left mv2">
-            <h3 class="ts-app ts-subtle fs-s2 mb1">{{ "Overview" | translate }}</h3>
-            <h2 class="fs-t2 fw-light">{{ entry.introduction | striptags() }}</h2>
-          </div>
-          <div class="w1-3 fl-right mv2">
-            <h3 class="ts-app ts-subtle fs-s2 mb1">{{ "Involvement" | translate }}</h3>
-            <ul>
-
-              {% for tag in entry.skills %}
-                <li>{{ tag.title | capitalize }}</li>
-              {% endfor %}
-
-            </ul>
-          </div>
-          <div class="w1-3 fl-right mv2">
-            <h3 class="ts-app ts-subtle fs-s2 mb1">{{ "Client" | translate }}</h3>
-            <p>{% if entry.client.one().website %}<a class="ts-link" href="{{ entry.client.one().website }}" target="_blank" rel="noreferrer">{{ entry.client.one().title }}</a>{% else %}{{ entry.client.one().title }}{% endif %}</p>
-          </div>
-        </div>
-
-      </header>
-
-      {# -- CONTENT -- #}
-      <div class="blocks">
-
-        {# Body matrix #}
-        {% include '_includes/blocks' %}
-
       </div>
 
-      {# -- SHARE -- #}
-      <div class="ctnr-s mv4 ta-center">
-        {{ elements.share(entry.title) }}
-      </div>
-    </article>
+      {% set image = entry.image.one() %}
 
-    {# -- RELATED ENTRIES -- #}
-    {% set relatedItems = craft.entries({
-      section: entry.section.handle,
-      relatedTo: ['or ', entry.tags, entry.category],
-      id: 'not ' ~ entry.id,
-      with: 'image',
-      limit: '3',
-    }) %}
-
-    {% if relatedItems | length == '3' %}
-      <div class="ctnr-l mv4 cf">
-        <div class="w100 mt3 mb1">
-          <h3 class="ts-app fs-s1 fs-t1"><a href="/creating">Similar Projects</a></h3>
-        </div>
-        {% for item in relatedItems %}
-          <article class="w1-3 fl-left mv2">
-            <a class="r1-1" href="{{ item.url }}" title="{{ item.title }} for {{ item.client.one().title }}">
-              {% set image = item.image[0] ?? null %}
-              {% if image %}
-                {{ elements.image(image, null, '1x1', '36rem') }}
-              {% endif %}
+      {% if image %}
+        <div class="js-photoswipe">
+          <figure>
+            <a href="{{ image.getUrl('large16x9') }}" data-size="{{ image.getWidth('large16x9') }}x{{ image.getHeight('large16x9') }}">
+              {{ elements.image(image, 'normal', '16x9', '100vw') }}
             </a>
-            <h3 class="mt2 mb1 fs-t1"><a href="{{ item.url }}" title="{{ item.title }}">{{ item.title }}</a></h3>
-            <p class="ts-app fs-s1">{{ item.client.one().title }}</p>
-          </article>
-        {% endfor %}
-      </div>
-    {% endif %}
+          <figure>
+        </div>
+      {% endif %}
 
-    <script>
-    loadjs(['{{ baseUrl ~ rev('js/photoswipe.min.js') }}'], 'photoswipe');
-    loadjs.ready('photoswipe', {
-      success: function() {
-        initPhotoSwipeFromDOM('.js-photoswipe');
-      }
-    });
-    </script>
+      <div class="c-project l-ctnr l-flex">
+        <div class="l-w66">
+          <h3 class="c-project__header">{{ "Overview" | translate }}</h3>
+          <h2 class="c-project__description">{{ entry.introduction | striptags() }}</h2>
+        </div>
+        <div class="l-w33">
+          <h3 class="c-project__header">{{ "Involvement" | translate }}</h3>
+          <ul class="c-project__tags">
 
-    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+            {% for tag in entry.skills %}
+              <li>{{ tag.title | capitalize }}</li>
+            {% endfor %}
 
-      <div class="pswp__bg"></div>
-
-      <div class="pswp__scroll-wrap">
-
-        <!-- Container that holds slides.
-          PhotoSwipe keeps only 3 of them in the DOM to save memory.
-          Don't modify these 3 pswp__item elements, data is added later on. -->
-        <div class="pswp__container">
-          <div class="pswp__item"></div>
-          <div class="pswp__item"></div>
-          <div class="pswp__item"></div>
+          </ul>
+          <h3 class="c-project__header">{{ "Client" | translate }}</h3>
+          <p class="c-project__tags">{% if entry.client.one().website %}<a class="t-link" href="{{ entry.client.one().website }}" target="_blank" rel="noreferrer">{{ entry.client.one().title }}</a>{% else %}{{ entry.client.one().title }}{% endif %}</p>
         </div>
       </div>
+
+    </header>
+
+    {# -- CONTENT -- #}
+    <div class="c-blocks">
+
+      {# Body matrix #}
+      {% include '_includes/blocks' %}
+
     </div>
 
-    {% endminify %}
-    {% endcache %}
-  {% else %}
-    {{ elements.passphrase(entry) }}
+    {# -- SHARE -- #}
+    {% include '_includes/components/share' %}
+
+  </article>
+
+  {# -- RELATED ENTRIES -- #}
+  {% set relatedItems = craft.entries({
+    section: entry.section.handle,
+    relatedTo: ['or ', entry.tags, entry.category],
+    id: 'not ' ~ entry.id,
+    with: 'image',
+    limit: '3',
+  }) %}
+
+  {% if relatedItems | length == '3' %}
+    <div class="l-ctnr mv4 cf">
+      <div class="w100 mt3 mb1">
+        <h3 class="ts-app fs-s1 fs-t1"><a href="/creating">Similar Projects</a></h3>
+      </div>
+      {% for item in relatedItems %}
+        <article class="w1-3 fl-left mv2">
+          <a class="r1-1" href="{{ item.url }}" title="{{ item.title }} for {{ item.client.one().title }}">
+            {% set image = item.image[0] ?? null %}
+            {% if image %}
+              {{ elements.image(image, null, '1x1', '36rem') }}
+            {% endif %}
+          </a>
+          <h3 class="mt2 mb1 fs-t1"><a href="{{ item.url }}" title="{{ item.title }}">{{ item.title }}</a></h3>
+          <p class="ts-app fs-s1">{{ item.client.one().title }}</p>
+        </article>
+      {% endfor %}
+    </div>
   {% endif %}
+
+  {# -- PHOTOSWIPE -- #}
+  {% include '_includes/photoswipe' %}
+
+  {% endminify %}
+  {% endcache %}
 {% endblock %}

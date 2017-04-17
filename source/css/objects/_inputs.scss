@@ -9,9 +9,11 @@
 
 .form {
   position: relative;
+
   border: 1px solid var(--oc-gray-4);
   border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .06);
 
   &.form--error {
     border-color: $oc-red-6;
@@ -21,71 +23,95 @@
 .form__group {
   display: inline-block;
   position: relative;
-  padding: $sp-tiny $sp-small;
+
+  padding: vr(.5) vr(1);
 }
 
 
 // Inputs //
 
 .form__input {
+  @include typi("t1");
+
   display: block;
+
   width: 100%;
+
   padding: 0;
+
   transition: border-color $an-short;
+
   border: 0;
   outline: none;
+
   background-color: var(--oc-white);
+  color: var(--oc-gray-9);
+
   font-family: $ff-sans;
-  font-size: $fs-t1;
+
   resize: none;
 
   // Active state
 
   &:focus {
-    border-color: $oc-one-6;
+    border-color: oc(primary);
     outline: none;
 
     ~ .form-icon {
-      fill: $oc-one-6;
+      fill: oc(primary);
     }
 
     ~ .form-label {
-      color: $oc-one-6;
+      color: oc(primary);
     }
   }
 }
 
 .form__textarea {
+  @include typi("s0");
+
   display: block;
+
   width: 100%;
+
   padding: 0;
+
   transition: border-color $an-short;
+
   border: 0;
   outline: none;
+
   background-color: var(--oc-white);
   color: var(--oc-gray-9);
+
   font-family: $ff-sans;
-  font-size: $fs-0;
+
   resize: none;
 }
 
 .form__select {
   display: block;
+
   width: 100%;
   height: 2.25rem;
+
   margin: 2rem 0 .25rem;
   padding: .25rem 1rem;
+
   transition: border-color $an-short, background-color $an-short;
+
   border: 2px solid var(--oc-gray-6);
   border-radius: .5rem;
   outline: none;
+
   background-color: var(--oc-gray-0);
   color: var(--oc-gray-6);
 
   &:focus,
   &:active {
-    border-color: $oc-one-6;
-    background-color: $oc-one-0;
+    border-color: oc(primary);
+
+    background-color: oc(primary, 0);
   }
 
   &:valid {
@@ -95,11 +121,14 @@
 
 .form__highlight {
   position: absolute;
-  bottom: $sp-tiny;
-  left: $sp-small;
+  bottom: vr(.5);
+  left: vr(1);
+
   width: 50%;
-  height: $sp-medium;
-  opacity: 0.25;
+  height: vr(2);
+
+  opacity: .25;
+
   pointer-events: none;
 }
 
@@ -109,36 +138,42 @@
 
 @keyframes inputHighlighter {
   from {
-    background: $oc-one-2;
+    background: oc(primary, 2);;
   }
 
   to {
     width: 0;
+
     background: transparent;
   }
 }
 
 
-// Labels //
-
+// Labels
+// ------
 .form__label,
 .form__error {
+  @include typi("s1");
+
   display: block;
+
   color: var(--oc-gray-6);
-  font-size: $fs-s2;
 }
 
 .form__icon {
   position: absolute;
   top: .6rem;
   left: 1rem;
+
   width: 1.25rem;
   height: 1.25rem;
+
   fill: var(--oc-gray-6);
 }
 
 .form__error {
   display: none;
+
   color: $oc-red-6;
 
   .form--error & {
@@ -153,55 +188,7 @@
   position: absolute;
   top: -1px;
   right: -1px;
+
   min-width: 20%;
   height: calc(100% + 2px);
-}
-
-.button,
-[role="button"] {
-  @extend %ts-app;
-
-  display: inline-block;
-  padding: $sp-tiny $sp-small;
-  transition: transform $an-medium, border-color $an-medium, box-shadow $an-medium, background-color $an-medium;
-  border: 2px solid $oc-one-6;
-  border-radius: 4px;
-  outline: none;
-  background-color: $oc-one-6;
-  color: $oc-white;
-  font-size: $fs-s2;
-  line-height: 1;
-  cursor: pointer;
-
-  &:hover,
-  &:focus {
-    transform: translateY(-1px);
-    border-color: $oc-one-5;
-    background-color: $oc-one-5;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
-  }
-
-  svg {
-    fill: $oc-white;
-  }
-}
-
-.button--ghost {
-  transition: background-color $an-medium;
-  background-color: transparent;
-  color: $oc-one-6;
-
-  &:hover,
-  &:focus {
-    background-color: $oc-one-5;
-    color: $oc-white;
-
-    svg {
-      fill: $oc-white;
-    }
-  }
-
-  svg {
-    fill: $oc-one-6;
-  }
 }

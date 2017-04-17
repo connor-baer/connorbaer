@@ -5,18 +5,29 @@
 
 {% extends "_layouts/site" %}
 
+{% import '_includes/elements' as elements %}
+{% import '_includes/helpers' as helpers %}
+
 {% block body %}
 
   {# -- METABAR -- #}
-  {% include '_includes/metabar' %}
+  {% include '_includes/components/metabar' %}
 
-  <main id="main" class="main">
+  <main class="l-main">
 
-    {% block main %}{% endblock %}
+    {% if not entry.passphrase is defined or entry.passphrase is empty or entry.passphrase == craft.app.request.getQueryParam('passphrase') or livePreview %}
+
+      {% block main %}{% endblock %}
+
+    {% else %}
+
+      {% include '_includes/components/passphrase' %}
+
+    {% endif %}
 
   </main>
 
   {# -- FOOTER -- #}
-  {% include '_includes/footer' %}
+  {% include '_includes/components/footer' %}
 
 {% endblock %}

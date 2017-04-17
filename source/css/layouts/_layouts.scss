@@ -1,169 +1,120 @@
-// Layouts
-// -------
+// Main
+// ----
+.l-main {
+  @include mappy-bp(large) {
+    padding-top: 4.66rem;
+  }
 
-.ctnr-l,
-.ctnr-s {
+  min-height: 60vh;
+
+  padding-top: 7.7375rem;
+}
+
+@include mappy-bp(large) {
+  .is-split {
+    .c-metabar,
+    .l-main,
+    .c-footer {
+      width: 50vw;
+    }
+  }
+}
+
+
+// Container
+// ---------
+.l-ctnr {
+  @include mappy-bp(medium) {
+    padding-right: vr(1);
+    padding-left: vr(1);
+  }
+
   display: block;
 
   width: 100%;
+  max-width: $l-ctnr;
 
   margin-right: auto;
   margin-left: auto;
-  padding-right: $sp-small;
-  padding-left: $sp-small;
-
-  @media #{$bp-medium} {
-    padding-right: $sp-large;
-    padding-left: $sp-large;
-  }
-}
-
-.ctnr-l {
-  max-width: $mw-large;
-}
-
-.ctnr-s {
-  @media #{$bp-small} {
-    max-width: $mw-large / 3 * 2;
-  }
+  padding-right: vr(.5);
+  padding-left: vr(.5);
 }
 
 
-.w1-3,
-.w2-3,
-.w100 {
+// Flexbox Grid
+// ------------
+.l-flex {
+  display: flex;
+
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.l-flex--center {
+  justify-content: space-around;
+}
+
+[class*="l-w"] {
   display: block;
 
+  margin-top: vr(.5);
+  margin-bottom: vr(.5);
+  padding-right: vr(1);
+  padding-left: vr(1);
+}
+
+
+// Full
+// ----
+.l-w100 {
   width: 100%;
-
-  padding-right: $sp-small;
-  padding-left: $sp-small;
 }
 
-@media #{$bp-small} {
-  .w1-3 {
+
+// Thirds
+// ------
+.l-w33 {
+  @include mappy-bp(medium) {
     width: (100% / 2);
   }
-}
-
-@media #{$bp-medium} {
-  .w1-2 {
-    width: (100% / 2);
-  }
-
-  .w1-3 {
+  @include mappy-bp(large) {
     width: (100% / 3);
   }
 
-  .w2-3 {
-    width: (100% / 1.5);
+  width: 100%;
+}
+
+.l-w66 {
+  @include mappy-bp(large) {
+    width: (100% / 3 * 2);
   }
+
+  width: 100%;
 }
 
 
-.fl-left {
-  float: left;
-}
-
-.fl-center {
-  margin-right: auto;
-  margin-left: auto;
-
-  clear: both;
-}
-
-.fl-right {
-  float: right;
-}
-
-
-.ma0 {
-  margin: 0;
-}
-
-.mt0 {
-  margin: 0;
-}
-
-@for $i from 0 through 4 {
-  $counter: $i + 1;
-
-  .mt#{$counter} {
-    margin-top: $sp-tiny * pow(2, $i);
+// Quarters
+// --------
+.l-w25 {
+  @include mappy-bp(large) {
+    width: (100% / 4);
   }
+
+  width: (100% / 2);
 }
 
-.mb0 {
-  margin: 0;
-}
-
-@for $i from 0 through 4 {
-  $counter: $i + 1;
-
-  .mb#{$counter} {
-    margin-bottom: $sp-tiny * pow(2, $i);
+.l-w50 {
+  @include mappy-bp(medium) {
+    width: (100% / 2);
   }
+
+  width: 100%;
 }
 
-.mv0 {
-  margin: 0;
-}
-
-@for $i from 0 through 4 {
-  $counter: $i + 1;
-
-  .mv#{$counter} {
-    margin-top: $sp-tiny * pow(2, $i);
-    margin-bottom: $sp-tiny * pow(2, $i);
+.l-w75 {
+  @include mappy-bp(large) {
+    width: (100% / 4 * 3);
   }
-}
 
-
-.pa0 {
-  padding: 0;
-}
-
-@for $i from 0 through 4 {
-  $counter: $i + 1;
-
-  .pa#{$counter} {
-    padding: $sp-tiny * pow(2, $i);
-  }
-}
-
-.pr0 {
-  padding: 0;
-}
-
-@for $i from 0 through 4 {
-  $counter: $i + 1;
-
-  .pr#{$counter} {
-    padding-right: $sp-tiny * pow(2, $i);
-  }
-}
-
-.pl0 {
-  padding: 0;
-}
-
-@for $i from 0 through 4 {
-  $counter: $i + 1;
-
-  .pl#{$counter} {
-    padding-left: $sp-tiny * pow(2, $i);
-  }
-}
-
-.ph0 {
-  padding: 0;
-}
-
-@for $i from 0 through 4 {
-  $counter: $i + 1;
-
-  .ph#{$counter} {
-    padding-right: $sp-tiny * pow(2, $i);
-    padding-left: $sp-tiny * pow(2, $i);
-  }
+  width: 100%;
 }

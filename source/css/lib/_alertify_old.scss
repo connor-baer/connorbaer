@@ -2,8 +2,8 @@ $box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .2);
 
 .alertify-logs {
   position: fixed;
-  bottom: $sp-small;
-  left: $sp-small;
+  bottom: vr(1);
+  left: vr(1);
   z-index: 99999;
 
   > * {
@@ -11,7 +11,7 @@ $box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .2);
     height: auto;
     max-height: 0;
     margin: 0;
-    padding: $sp-tiny $sp-tiny * 2;
+    padding: vr(.5) vr(.5) * 2;
     float: left;
     clear: both;
     transform: translate3d(0, 0, 0);
@@ -28,7 +28,7 @@ $box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .2);
     &.show {
       left: 0;
       max-height: 1000px;
-      margin-top: $sp-tiny;
+      margin-top: vr(.5);
       opacity: 1;
       pointer-events: auto;
     }
@@ -41,11 +41,11 @@ $box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .2);
     &,
     &.default {
       background-color: var(--oc-gray-8);
-      font-size: $fs-s1;
+      font-size: ms(-1);
     }
 
     &.error {
-      background-color: $oc-one-6;
+      background-color: oc(primary);
       color: $oc-white;
     }
 
@@ -94,7 +94,7 @@ $box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .2);
       width: 400px;
       max-width: 95%;
       margin: 0 auto;
-      padding: $sp-tiny;
+      padding: vr(.5);
       background: #fff;
       text-align: center;
       box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .14), 0 4px 5px 0 rgba(0, 0, 0, .098), 0 1px 10px 0 rgba(0, 0, 0, .084);
@@ -102,15 +102,15 @@ $box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .2);
 
     .msg {
       margin: 0;
-      margin-bottom: $sp-tiny;
-      padding: $sp-tiny;
+      margin-bottom: vr(.5);
+      padding: vr(.5);
       text-align: left;
     }
 
     input:not(.form-control) {
       width: 100%;
       margin-bottom: 15px;
-      padding: $sp-tiny;
+      padding: vr(.5);
       font-size: 100%;
 
       &:focus {

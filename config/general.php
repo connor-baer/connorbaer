@@ -16,6 +16,8 @@ return [
 		'baseUrl' => 'https://connorbaer.co/',
 		'siteUrl' => array(
 			'connorbaer' => 'https://connorbaer.co/',
+			'madebyconnor' => 'https://madebyconnor.co/',
+			'madebyconnorDE' => 'https://madebyconnor.de/',
 		),
 	),
 	'.dev' => array(
@@ -26,6 +28,8 @@ return [
 		'baseUrl' => 'https://connorbaer.dev/',
 		'siteUrl' => array(
 			'connorbaer' => 'https://connorbaer.dev/',
+			'madebyconnor' => 'https://madebyconnor.dev/',
+			'madebyconnorDE' => 'https://de.madebyconnor.dev/',
 		),
 	),
 ];

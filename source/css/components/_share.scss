@@ -1,0 +1,16 @@
+// Share
+// -----
+.c-share {
+  margin-top: vr(2);
+  margin-bottom: vr(2);
+}
+
+.c-share__icon {
+  margin-right: vr(.5);
+}
+
+.c-share__hint {
+  @include typi("s1");
+
+  color: var(--oc-gray-6);
+}

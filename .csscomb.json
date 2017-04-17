@@ -28,6 +28,10 @@
     "vendor-prefix-align": true,
     "sort-order": [
         [
+            "$extend",
+            "$include"
+        ],
+        [
             "display",
             "position",
             "top",
@@ -94,7 +98,8 @@
             "transition-delay",
             "transition-duration",
             "transition-property",
-            "transition-timing-function"
+            "transition-timing-function",
+            "will-change"
         ],
         [
             "border",
