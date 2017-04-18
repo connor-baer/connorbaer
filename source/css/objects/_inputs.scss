@@ -1,13 +1,6 @@
-/*
-  FORM
-
-  Inputs
-  Labels
-  Buttons
-*/
-
-
-.form {
+// Form
+// ----
+.c-form {
   position: relative;
 
   border: 1px solid var(--oc-gray-4);
@@ -15,12 +8,12 @@
 
   box-shadow: 0 2px 4px rgba(0, 0, 0, .06);
 
-  &.form--error {
+  &.c-form--error {
     border-color: $oc-red-6;
   }
 }
 
-.form__group {
+.c-form__group {
   display: inline-block;
   position: relative;
 
@@ -30,7 +23,7 @@
 
 // Inputs
 // ------
-.form__input {
+.c-form__input {
   @include typi("t1");
 
   display: block;
@@ -57,17 +50,17 @@
     border-color: oc(primary);
     outline: none;
 
-    ~ .form-icon {
+    ~ .c-form-icon {
       fill: oc(primary);
     }
 
-    ~ .form-label {
+    ~ .c-form-label {
       color: oc(primary);
     }
   }
 }
 
-.form__textarea {
+.c-form__textarea {
   @include typi("s0");
 
   display: block;
@@ -89,7 +82,7 @@
   resize: none;
 }
 
-.form__select {
+.c-form__select {
   display: block;
 
   width: 100%;
@@ -119,26 +112,26 @@
   }
 }
 
-.form__highlight {
+.c-form__highlight {
   position: absolute;
   bottom: vr(.5);
   left: vr(1);
 
   width: 50%;
-  height: vr(2);
+  height: vr(1.5);
 
   opacity: .25;
 
   pointer-events: none;
 }
 
-.form__input:focus ~ .form__highlight {
+.c-form__input:focus ~ .c-form__highlight {
   animation: inputHighlighter $an-long;
 }
 
 @keyframes inputHighlighter {
   from {
-    background: oc(primary, 2);;
+    background: oc(primary, 2);
   }
 
   to {
@@ -151,8 +144,8 @@
 
 // Labels
 // ------
-.form__label,
-.form__error {
+.c-form__label,
+.c-form__error {
   @include typi("s1");
 
   display: block;
@@ -160,23 +153,12 @@
   color: var(--oc-gray-6);
 }
 
-.form__icon {
-  position: absolute;
-  top: .6rem;
-  left: 1rem;
-
-  width: 1.25rem;
-  height: 1.25rem;
-
-  fill: var(--oc-gray-6);
-}
-
-.form__error {
+.c-form__error {
   display: none;
 
   color: $oc-red-6;
 
-  .form--error & {
+  .c-form--error & {
     display: block;
   }
 }
@@ -184,7 +166,7 @@
 
 // Buttons
 // -------
-.form__button {
+.c-form__button {
   position: absolute;
   top: -1px;
   right: -1px;

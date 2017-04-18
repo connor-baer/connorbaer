@@ -19,7 +19,7 @@
   <header class="c-metabar{% if entry.type is defined %} c-metabar--{{entry.type }}{% endif %} l-flex">
 
     {# -- BRAND -- #}
-    <a class="c-metabar__brand" href="{{ siteUrl }}#" title="Home">
+    <a class="c-metabar__brand" href="{{ siteUrl }}{% if craft.app.request.url == '/' %}#{% endif %}" title="Home">
       {% include '_includes/logo' %}
       <h1 class="c-metabar__name">{{ siteName | split('·') | first }}</h1>
     </a>

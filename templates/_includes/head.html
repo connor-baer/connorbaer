@@ -20,8 +20,8 @@
   <link rel="preload" href="{{ baseUrl ~ newCache }}" as="style" onload="this.rel='stylesheet'">
   <noscript><link rel="stylesheet" type="text/css" href="{{ baseUrl ~ newCache }}"></noscript>
   <script>
-    {{ source('_includes/js/loadCSS.min.js') }}
-    {{ source('_includes/js/cssrelpreload.min.js') }}
+    {{ source('_inline/loadCSS.min.js') }}
+    {{ source('_inline/cssrelpreload.min.js') }}
   </script>
 {% else %}
   <link id="styles" rel="stylesheet" type="text/css" href="{{ baseUrl ~ newCache }}">
@@ -34,7 +34,7 @@
 
 {# -- LOADJS -- #}
 <script>
-  {{ source('_includes/js/loadjs.min.js') }}
+  {{ source('_inline/loadjs.min.js') }}
 </script>
 
 {# -- COMBINED JAVASCRIPT -- #}
@@ -79,6 +79,8 @@ loadjs.ready('scripts', {
       tolerance : 8,
     });
     headroom.init();
+
+    Barba.Pjax.start();
 
     {% set error = craft.app.session.getFlash('error') %}
     {% set notice = craft.app.session.getFlash('notice') %}

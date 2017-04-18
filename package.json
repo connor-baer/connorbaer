@@ -25,6 +25,7 @@
   "homepage": "https://connorbaer.co/",
   "dependencies": {
     "alertify.js": "^1.0.12",
+    "barba.js": "^1.0.0",
     "choices.js": "^2.7.8",
     "fg-loadcss": "^1.3.1",
     "fontfaceobserver": "^2.0.9",
