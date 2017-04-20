@@ -1,6 +1,6 @@
 // Animations
 // ----------
 
-$an-short: .14s cubic-bezier(0, 0, .2, 1);
-$an-medium: .28s cubic-bezier(0, 0, .2, 1);
-$an-long: .49s cubic-bezier(0, 0, .2, 1);
+$an-short: .14s cubic-bezier(0, 0, .2, 1) !default;
+$an-medium: .28s cubic-bezier(0, 0, .2, 1) !default;
+$an-long: .49s cubic-bezier(0, 0, .2, 1) !default;

@@ -3,27 +3,44 @@
 .c-form {
   position: relative;
 
+  margin-top: vr(.25);
+  margin-bottom: vr(.25);
+}
+
+
+// Input
+// ----
+.c-input {
+  display: inline-block;
+  position: relative;
+
+  width: 100%;
+
+  padding: vr(.5) vr(1);
+
   border: 1px solid var(--oc-gray-4);
   border-radius: 4px;
 
+  background-color: var(--oc-white);
+
   box-shadow: 0 2px 4px rgba(0, 0, 0, .06);
 
-  &.c-form--error {
+  &.c-input--error {
     border-color: $oc-red-6;
   }
 }
 
-.c-form__group {
-  display: inline-block;
-  position: relative;
 
-  padding: vr(.5) vr(1);
-}
-
-
-// Inputs
-// ------
-.c-form__input {
+// Text
+// ----
+.c-input__text,
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="url"],
+input[type="tel"] {
   @include typi("t1");
 
   display: block;
@@ -57,10 +74,18 @@
     ~ .c-form-label {
       color: oc(primary);
     }
+
+    ~ .c-input__highlight {
+      animation: inputHighlighter $an-long;
+    }
   }
 }
 
-.c-form__textarea {
+
+// Textarea
+// --------
+.c-input__textarea,
+input[type="textarea"] {
   @include typi("s0");
 
   display: block;
@@ -82,7 +107,11 @@
   resize: none;
 }
 
-.c-form__select {
+
+// Select
+// ------
+.c-input__select,
+input[type="select"] {
   display: block;
 
   width: 100%;
@@ -93,7 +122,7 @@
 
   transition: border-color $an-short, background-color $an-short;
 
-  border: 2px solid var(--oc-gray-6);
+  border: 1px solid var(--oc-gray-6);
   border-radius: .5rem;
   outline: none;
 
@@ -112,7 +141,10 @@
   }
 }
 
-.c-form__highlight {
+
+// Highlight
+// ---------
+.c-input__highlight {
   position: absolute;
   bottom: vr(.5);
   left: vr(1);
@@ -123,10 +155,6 @@
   opacity: .25;
 
   pointer-events: none;
-}
-
-.c-form__input:focus ~ .c-form__highlight {
-  animation: inputHighlighter $an-long;
 }
 
 @keyframes inputHighlighter {
@@ -144,8 +172,8 @@
 
 // Labels
 // ------
-.c-form__label,
-.c-form__error {
+.c-input__label,
+.c-input__error {
   @include typi("s1");
 
   display: block;
@@ -153,12 +181,12 @@
   color: var(--oc-gray-6);
 }
 
-.c-form__error {
+.c-input__error {
   display: none;
 
   color: $oc-red-6;
 
-  .c-form--error & {
+  .c-input--error & {
     display: block;
   }
 }
@@ -166,11 +194,11 @@
 
 // Buttons
 // -------
-.c-form__button {
+.c-input__button {
   position: absolute;
-  top: -1px;
-  right: -1px;
+  top: 0;
+  right: 0;
 
   min-width: 20%;
-  height: calc(100% + 2px);
+  height: 100%;
 }

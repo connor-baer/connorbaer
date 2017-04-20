@@ -135,7 +135,6 @@ module.exports = {
           modules + 'object-fit-images/dist/ofi.js',
           modules + 'headroom.js/dist/headroom.js',
           modules + 'suncalc/suncalc.js',
-          modules + 'barba.js/dist/barba.js',
           src + 'js/alertify.js',
           src + 'js/polyfills.js',
           src + 'js/scripts.js',

@@ -20,17 +20,18 @@
 
   line-height: 1;
 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .06);
   cursor: pointer;
 
   &:hover,
   &:focus {
-    transform: translateY(-1px);
+    transform: translateY(.5px);
 
     border-color: oc(primary, 5);
 
     background-color: oc(primary, 5);
 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .06);
+    box-shadow: none;
   }
 
   svg {

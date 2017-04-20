@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
 {# -- CRITICAL CSS -- #}
-{% set newCache = rev('css/styles.min.css') %}
+{% set newCache = rev('css/' ~ entry.site.handle ~ '.min.css') %}
 
 {% if not currentCache or currentCache != newCache or devMode %}
   {{ setCookie('criticalCss', newCache, now | date_modify("+7 days").timestamp ) }}
@@ -20,8 +20,8 @@
   <link rel="preload" href="{{ baseUrl ~ newCache }}" as="style" onload="this.rel='stylesheet'">
   <noscript><link rel="stylesheet" type="text/css" href="{{ baseUrl ~ newCache }}"></noscript>
   <script>
-    {{ source('_includes/js/loadCSS.min.js') }}
-    {{ source('_includes/js/cssrelpreload.min.js') }}
+    {{ source('_inline/loadCSS.min.js') }}
+    {{ source('_inline/cssrelpreload.min.js') }}
   </script>
 {% else %}
   <link id="styles" rel="stylesheet" type="text/css" href="{{ baseUrl ~ newCache }}">

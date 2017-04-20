@@ -1,6 +1,6 @@
 //  Primary
 //  -------
-$oc-primary: #ee3a51; // #1fb7e3
+$oc-primary: #1fb7e3 !default;
 $oc-primary-list: (
   "0": scale-color($oc-primary, $lightness: 96%),
   "1": scale-color($oc-primary, $lightness: 80%),
@@ -16,7 +16,7 @@ $oc-primary-list: (
 
 //  Secondary
 //  ---------
-$oc-secondary: #ff512f; // #00ccd2
+$oc-secondary: #00ccd2 !default;
 $oc-secondary-list: (
   "0": scale-color($oc-secondary, $lightness: 96%),
   "1": scale-color($oc-secondary, $lightness: 80%),

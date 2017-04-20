@@ -31,23 +31,23 @@ $typi: (
 
 // Font Weights
 // ------------
-$fw-light: 300;
-$fw-normal: 400;
-$fw-bold: 700;
+$fw-light: 300 !default;
+$fw-normal: 400 !default;
+$fw-bold: 700 !default;
 
 
 // Line Heights
 // ------------
-$lh-large: 1.75;
-$lh-normal: 1.33;
-$lh-small: 1.15;
+$lh-large: 1.75 !default;
+$lh-normal: 1.33 !default;
+$lh-small: 1.15 !default;
 
 
 // Font Families
 // -------------
-$ff-sans: "Overpass", Arial, sans-serif;
-$ff-serif: "Lora", Georgia, serif;
-$ff-mono: "Overpass Mono", Courier, monospace;
+$ff-sans: "Overpass", Arial, sans-serif !default;
+$ff-serif: "Lora", Georgia, serif !default;
+$ff-mono: "Overpass Mono", Courier, monospace !default;
 
 @font-face {
   font-family: "Overpass";

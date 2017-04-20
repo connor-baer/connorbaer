@@ -1,8 +1,11 @@
 {#
- # MACRO HELPERS
+ # Macro Helpers
+ # -------------
  #
  # Truncate
  # Strip Tags
+ # Has Error
+ # Error List
 -#}
 
 
@@ -30,4 +33,32 @@
 {% spaceless %}
 	{{ input | striptags(tags) | raw }}
 {% endspaceless %}
+{% endmacro %}
+
+
+{# Has Error #}
+
+{% macro hasError(context, field) %}
+	{% if submission is defined %}
+		{% set errors = submission.getErrors(field) %}
+
+		{% if errors %}c-input--error{% endif %}
+	{% endif %}
+{% endmacro %}
+
+
+{# Error List #}
+
+{% macro errorList(context, field) %}
+	{% if submission is defined %}
+		{% set errors = submission.getErrors(field) %}
+
+		{% if errors %}
+			<span class="c-input__error">
+				{% for error in errors %}
+					{{ error }}<br>
+				{% endfor %}
+			</span>
+		{% endif %}
+	{% endif %}
 {% endmacro %}
