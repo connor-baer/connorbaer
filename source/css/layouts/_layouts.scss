@@ -1,23 +1,13 @@
 // Main
 // ----
 .l-main {
-  @include mappy-bp(large) {
+  @include mappy-bp(medium) {
     padding-top: 4.66rem;
   }
 
   min-height: 60vh;
 
   padding-top: 7.7375rem;
-}
-
-@include mappy-bp(large) {
-  .is-split {
-    .c-metabar,
-    .l-main,
-    .c-footer {
-      width: 50vw;
-    }
-  }
 }
 
 
@@ -61,6 +51,27 @@
   margin-bottom: vr(.5);
   padding-right: vr(1);
   padding-left: vr(1);
+}
+
+
+// Column Grid
+// -----------
+.l-columns {
+  @include mappy-bp(medium) {
+    column-count: 2;
+  }
+
+  column-gap: vr(2);
+  column-count: 1;
+
+  column-break-inside: avoid;
+  // HACK: Fix webkit (i.e. Safari and Chrome) bugs related to multi column layout.
+  perspective: 1;
+
+  > * {
+    // HACK: Fix webkit (i.e. Safari and Chrome) bugs related to multi column layout.
+    -webkit-transform: translate3d(0, 0, 0);
+  }
 }
 
 

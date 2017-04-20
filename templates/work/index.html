@@ -23,62 +23,46 @@
   {% cache %}
   {% minify %}
 
-  {# -- FEATURED ITEMS -- #}
-  {% set featured = craft.entries({
-    section: section,
-    featured: '1',
-    passphrase: ':empty:',
-    with: ['image'],
-    limit: '2'
-  }) %}
+  <section class="l-ctnr">
+    <div class="l-w100 l-columns">
 
-  {% if featured %}
-    <section class="l-ctnr">
-      {% for item in featured %}
-        <article class="c-card l-w100">
+      {# -- HEADER -- #}
+      <div class="c-header">
+        <h1 class="c-header__title c-header__title--color">{{ helpers.striptags(entry.title) }}&nbsp;</h1>
+        <h2 class="c-header__subtitle">{{ helpers.striptags(entry.description) }}</h2>
+      </div>
+
+      {# -- ITEMS -- #}
+      {% set items = craft.entries({
+        section: section,
+        passphrase: ':empty:',
+        with: ['image']
+      }) %}
+
+      {% for item in items %}
+
+        <article class="c-card">
           <a href="{{ item.url }}" title="{{ item.title }} for {{ item.client.one().title }}">
+
             {% set image = item.image[0] ?? null %}
+
             {% if image %}
+
               <figure class="c-card__image">
-                {{ elements.image(image, 'normal', '16x9', '64rem') }}
+                {{ elements.image(image, null, '1x1', '35rem') }}
               </figure>
+
             {% endif %}
+
             <h3 class="c-card__title">{{ item.title }}</h3>
             <p class="c-card__meta">{{ item.client.one().title }}</p>
           </a>
         </article>
+
       {% endfor %}
-    </section>
-  {% endif %}
 
-  {# -- ITEMS -- #}
-
-  {# Get the ids of the featured items above #}
-  {% set featuredIds = featured.ids() %}
-
-  {# Get items in section which don't have an id in featuredIds #}
-  {% set items = craft.entries({
-    section: section,
-    id: 'and, not ' ~ featuredIds | join(', not '),
-    with: ['image']
-  }) %}
-
-  {% if items %}
-    <section class="l-ctnr l-flex">
-      {% for item in items %}
-        <article class="l-w50">
-          <a href="{{ item.url }}" title="{{ item.title }} for {{ item.client.one().title }}">
-            {% set image = item.image[0] ?? null %}
-            {% if image %}
-              {{ elements.image(image, 'lazyload') }}
-            {% endif %}
-          </a>
-          <h3 class="mt1 fs-t1"><a href="{{ item.url }}" title="{{ item.title }}">{{ item.title }}</a></h3>
-          <p class="fs-s1">{{ item.client.one().title }}</p>
-        </article>
-      {% endfor %}
-    </section>
-  {% endif %}
+    </div>
+  </section>
 
   {% endminify %}
   {% endcache %}

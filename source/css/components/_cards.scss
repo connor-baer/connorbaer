@@ -14,7 +14,9 @@
 // Card
 // ----
 .c-card {
-  margin-bottom: vr(2);
+  display: inline-block;
+
+  margin-top: vr(2);
 }
 
 .c-card__title {
@@ -49,6 +51,8 @@
   display: block;
   position: relative;
 
+  border-radius: 4px;
+
   overflow: hidden;
 
   &::after {
@@ -61,6 +65,7 @@
     transition: opacity $an-long;
 
     background-color: $oc-black;
+    background: radial-gradient(transparent, $oc-black);
 
     content: "";
     opacity: 0;
@@ -76,7 +81,7 @@
   a:hover &,
   a:focus & {
     &::after {
-      opacity: .12;
+      opacity: .1;
     }
 
     img {

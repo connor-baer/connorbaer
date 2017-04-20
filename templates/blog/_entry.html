@@ -39,14 +39,14 @@
       <div class="c-header__image {% if entry.type == "split" %}c-header__image--split {% endif %}js-photoswipe">
         <figure>
           <a href="{{ image.getUrl('large') }}" data-size="{{ image.getWidth('large') }}x{{ image.getHeight('large') }}">
-            {{ elements.image(image, null, '16x9') }}
+            {{ elements.image(image, null, '21x9') }}
           </a>
         </figure>
       </div>
       {% endif %}
 
       <div class="l-ctnr l-flex l-flex--center">
-        <div class="c-header l-w66">
+        <div class="c-header l-w75">
           <h1 class="c-header__title">{{ entry.title | striptags() }}&nbsp;</h1>
           <span class="c-header__meta">{{ elements.date(entry.postDate) }}{% if entry.category is not empty %}&nbsp;·&nbsp;{{ elements.category(entry) }}{% endif %}</span>
         </div>
@@ -58,7 +58,7 @@
 
       {# Post description #}
       <div class="l-ctnr l-flex l-flex--center">
-        <h2 class="c-blocks__title l-w66">{{ entry.description }}</h2>
+        <h2 class="c-blocks__title l-w75">{{ entry.description }}</h2>
       </div>
 
       {# Body matrix #}
@@ -86,6 +86,7 @@
     </div>
 
     {% for post in relatedPosts %}
+
       <article class="c-card l-w33">
         <a href="{{ post.url }}" title="{{ post.title }}">
 
@@ -101,7 +102,7 @@
 
           {% if image is defined and image %}
             <figure class="c-card__image">
-              {{ elements.image(image, 'lazyload', '16x9') }}
+              {{ elements.image(image, 'lazyload', '21x9') }}
             </figure>
           {% endif %}
 
@@ -109,6 +110,7 @@
         </a>
         <span class="c-card__meta">{{ elements.date(post.postDate) }}{% if post.category is not empty %}&nbsp;·&nbsp;{{ elements.category(post) }}{% endif %}</span>
       </article>
+
     {% endfor %}
 
   </div>
