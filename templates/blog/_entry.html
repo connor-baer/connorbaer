@@ -47,7 +47,7 @@
 
       <div class="l-ctnr l-flex l-flex--center">
         <div class="c-header l-w75">
-          <h1 class="c-header__title">{{ entry.title | striptags() }}&nbsp;</h1>
+          <h1 class="c-header__title">{{ entry.title | striptags() }}&ensp;</h1>
           <span class="c-header__meta">{{ elements.date(entry.postDate) }}{% if entry.category is not empty %}&nbsp;·&nbsp;{{ elements.category(entry) }}{% endif %}</span>
         </div>
       </div>
