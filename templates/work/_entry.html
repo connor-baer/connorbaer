@@ -34,18 +34,6 @@
         </div>
       </div>
 
-      {% set image = entry.image.one() %}
-
-      {% if image %}
-        <div class="js-photoswipe">
-          <figure>
-            <a href="{{ image.getUrl('large21x9') }}" data-size="{{ image.getWidth('large21x9') }}x{{ image.getHeight('large21x9') }}">
-              {{ elements.image(image, 'normal', '21x9', '100vw') }}
-            </a>
-          <figure>
-        </div>
-      {% endif %}
-
       <div class="c-project l-ctnr l-flex">
         <div class="l-w66">
           <h3 class="c-project__header">{{ "Overview" | translate }}</h3>
@@ -64,6 +52,20 @@
           <p class="c-project__tags">{% if entry.client.one().website %}<a class="t-link" href="{{ entry.client.one().website }}" target="_blank" rel="noreferrer">{{ entry.client.one().title }}</a>{% else %}{{ entry.client.one().title }}{% endif %}</p>
         </div>
       </div>
+
+      {% set image = entry.image.one() %}
+
+      {% if image %}
+
+        <div class="js-photoswipe">
+          <figure>
+            <a href="{{ image.getUrl('large21x9') }}" data-size="{{ image.getWidth('large21x9') }}x{{ image.getHeight('large21x9') }}">
+              {{ elements.image(image, 'normal', '21x9', '100vw') }}
+            </a>
+          <figure>
+        </div>
+
+      {% endif %}
 
     </header>
 
@@ -90,23 +92,37 @@
   }) %}
 
   {% if relatedItems | length == '3' %}
-    <div class="l-ctnr mv4 cf">
-      <div class="w100 mt3 mb1">
-        <h3 class="ts-app fs-s1 fs-t1"><a href="/creating">Similar Projects</a></h3>
+
+    <section class="l-ctnr">
+
+      {# -- HEADER -- #}
+      <div class="c-header">
+        <h1 class="c-header__title c-header__title--color">Related project we’ve loved to make.</h1>
       </div>
+
       {% for item in relatedItems %}
-        <article class="w1-3 fl-left mv2">
-          <a class="r1-1" href="{{ item.url }}" title="{{ item.title }} for {{ item.client.one().title }}">
+
+        <article class="c-card">
+          <a href="{{ item.url }}" title="{{ item.title }} for {{ item.client.one().title }}">
+
             {% set image = item.image[0] ?? null %}
+
             {% if image %}
-              {{ elements.image(image, null, '1x1', '36rem') }}
+
+              <figure class="c-card__image">
+                {{ elements.image(image, null, '1x1', '35rem') }}
+              </figure>
+
             {% endif %}
+
+            <h3 class="c-card__title">{{ item.title }}</h3>
+            <p class="c-card__meta">{{ item.client.one().title }}</p>
           </a>
-          <h3 class="mt2 mb1 fs-t1"><a href="{{ item.url }}" title="{{ item.title }}">{{ item.title }}</a></h3>
-          <p class="ts-app fs-s1">{{ item.client.one().title }}</p>
         </article>
+
       {% endfor %}
-    </div>
+    </section>
+
   {% endif %}
 
   {# -- PHOTOSWIPE -- #}
