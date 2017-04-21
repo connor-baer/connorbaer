@@ -2,12 +2,10 @@
 // -----
 
 .c-cards__title {
-  @include t-uppercase;
   @include typi("s1");
+  @include t-uppercase;
 
-  color: var(--oc-gray-7);
-
-  font-weight: $fw-bold;
+  color: var(--oc-gray-6);
 }
 
 

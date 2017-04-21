@@ -35,11 +35,11 @@
       </div>
 
       <div class="c-project l-ctnr l-flex">
-        <div class="l-w66">
+        <div class="l-w50">
           <h3 class="c-project__header">{{ "Overview" | translate }}</h3>
           <h2 class="c-project__description">{{ entry.introduction | striptags() }}</h2>
         </div>
-        <div class="l-w33">
+        <div class="l-w25">
           <h3 class="c-project__header">{{ "Involvement" | translate }}</h3>
           <ul class="c-project__tags">
 
@@ -48,24 +48,12 @@
             {% endfor %}
 
           </ul>
+        </div>
+        <div class="l-w25">
           <h3 class="c-project__header">{{ "Client" | translate }}</h3>
           <p class="c-project__tags">{% if entry.client.one().website %}<a class="t-link" href="{{ entry.client.one().website }}" target="_blank" rel="noreferrer">{{ entry.client.one().title }}</a>{% else %}{{ entry.client.one().title }}{% endif %}</p>
         </div>
       </div>
-
-      {% set image = entry.image.one() %}
-
-      {% if image %}
-
-        <div class="js-photoswipe">
-          <figure>
-            <a href="{{ image.getUrl('large21x9') }}" data-size="{{ image.getWidth('large21x9') }}x{{ image.getHeight('large21x9') }}">
-              {{ elements.image(image, 'normal', '21x9', '100vw') }}
-            </a>
-          <figure>
-        </div>
-
-      {% endif %}
 
     </header>
 
@@ -94,33 +82,36 @@
   {% if relatedItems | length == '3' %}
 
     <section class="l-ctnr">
+      <div class="l-w100 l-columns">
 
-      {# -- HEADER -- #}
-      <div class="c-header">
-        <h1 class="c-header__title c-header__title--color">Related project we’ve loved to make.</h1>
+        {# -- HEADER -- #}
+        <div class="c-header">
+          <h1 class="c-header__subtitle">Related projects we’ve loved to make.</h1>
+        </div>
+
+        {% for item in relatedItems %}
+
+          <article class="c-card">
+            <a href="{{ item.url }}" title="{{ item.title }} for {{ item.client.one().title }}">
+
+              {% set image = item.image[0] ?? null %}
+
+              {% if image %}
+
+                <figure class="c-card__image">
+                  {{ elements.image(image, null, '1x1', '35rem') }}
+                </figure>
+
+              {% endif %}
+
+              <h3 class="c-card__title">{{ item.title }}</h3>
+              <p class="c-card__meta">{{ item.client.one().title }}</p>
+            </a>
+          </article>
+
+        {% endfor %}
+
       </div>
-
-      {% for item in relatedItems %}
-
-        <article class="c-card">
-          <a href="{{ item.url }}" title="{{ item.title }} for {{ item.client.one().title }}">
-
-            {% set image = item.image[0] ?? null %}
-
-            {% if image %}
-
-              <figure class="c-card__image">
-                {{ elements.image(image, null, '1x1', '35rem') }}
-              </figure>
-
-            {% endif %}
-
-            <h3 class="c-card__title">{{ item.title }}</h3>
-            <p class="c-card__meta">{{ item.client.one().title }}</p>
-          </a>
-        </article>
-
-      {% endfor %}
     </section>
 
   {% endif %}

@@ -27,10 +27,10 @@
     <div class="l-w100 l-columns">
 
       {# -- HEADER -- #}
-      <div class="c-header">
+      <header class="c-header">
         <h1 class="c-header__title c-header__title--color">{{ helpers.striptags(entry.title) }}&ensp;</h1>
         <h2 class="c-header__subtitle">{{ helpers.striptags(entry.description) }}</h2>
-      </div>
+      </header>
 
       {# -- ITEMS -- #}
       {% set items = craft.entries({

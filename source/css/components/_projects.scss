@@ -8,16 +8,6 @@
   }
 }
 
-.blocks__title {
-  @include typi("t1");
-
-  font-weight: $fw-light;
-
-  .blocks--serif & {
-    font-family: $ff-serif;
-  }
-}
-
 
 // Project
 // -------
@@ -36,13 +26,9 @@
   color: var(--oc-gray-6);
 }
 
-.c-project__description {
-  @include typi("t2");
+.c-project__description,
+.c-project__tags {
+  @include typi("s0");
 
   font-weight: $fw-light;
-  line-height: $lh-large;
-}
-
-.c-project__tags {
-  line-height: $lh-large;
 }

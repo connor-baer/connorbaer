@@ -116,7 +116,7 @@
 }
 
 .l-w50 {
-  @include mappy-bp(medium) {
+  @include mappy-bp(large) {
     width: (100% / 2);
   }
 
