@@ -2,7 +2,7 @@
 // -------
 .c-metabar {
   @include mappy-bp(medium) {
-    .headroom {
+    .headroom & {
       position: fixed;
 
       will-change: transform;

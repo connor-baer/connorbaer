@@ -26,8 +26,7 @@
   color: var(--oc-gray-6);
 }
 
-.c-project__description,
-.c-project__tags {
+.c-project__description {
   @include typi("s0");
 
   font-weight: $fw-light;

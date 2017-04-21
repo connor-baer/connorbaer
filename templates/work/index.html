@@ -42,7 +42,7 @@
       {% for item in items %}
 
         <article class="c-card">
-          <a href="{{ item.url }}" title="{{ item.title }} for {{ item.client.one().title }}">
+          <a href="{{ item.url }}" title="{{ item.title }}">
 
             {% set image = item.image[0] ?? null %}
 
@@ -55,7 +55,7 @@
             {% endif %}
 
             <h3 class="c-card__title">{{ item.title }}</h3>
-            <p class="c-card__meta">{{ item.client.one().title }}</p>
+            <p class="c-card__meta">{% for tag in item.skills %}{{ tag.title }}{% if not loop.last %} + {% endif %}{% endfor %}</p>
           </a>
         </article>
 

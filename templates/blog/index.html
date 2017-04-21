@@ -65,7 +65,7 @@
           {% endif %}
 
           <h2 class="c-card__title">{{ post.title }}</h2>
-          <p class="c-card__body ff-serif">{% if post.passphrase is empty %}{{ helpers.striptags(post.description, '<br><strong><em>') }}{% else %}This post is password-protected. Click to view the post.{% endif %}</p>
+          <p class="c-card__body">{% if post.passphrase is empty %}{{ helpers.striptags(post.description, '<br><strong><em>') }}{% else %}This post is password-protected. Click to view the post.{% endif %}</p>
         </a>
         <span class="c-card__meta">{{ elements.date(post.postDate) }}{% if post.category is not empty %}&nbsp;·&nbsp;{{ elements.category(post) }}{% endif %}</span>
       </article>

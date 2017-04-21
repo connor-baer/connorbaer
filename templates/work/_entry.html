@@ -41,17 +41,17 @@
         </div>
         <div class="l-w25">
           <h3 class="c-project__header">{{ "Involvement" | translate }}</h3>
-          <ul class="c-project__tags">
+          <ul class="c-project__description">
 
             {% for tag in entry.skills %}
-              <li>{{ tag.title | capitalize }}</li>
+              <li>{{ tag.title }}</li>
             {% endfor %}
 
           </ul>
         </div>
         <div class="l-w25">
           <h3 class="c-project__header">{{ "Client" | translate }}</h3>
-          <p class="c-project__tags">{% if entry.client.one().website %}<a class="t-link" href="{{ entry.client.one().website }}" target="_blank" rel="noreferrer">{{ entry.client.one().title }}</a>{% else %}{{ entry.client.one().title }}{% endif %}</p>
+          <p class="c-project__description">{% if entry.client.one().website %}<a class="t-link" href="{{ entry.client.one().website }}" target="_blank" rel="noreferrer">{{ entry.client.one().title }}</a>{% else %}{{ entry.client.one().title }}{% endif %}</p>
         </div>
       </div>
 
@@ -92,7 +92,7 @@
         {% for item in relatedItems %}
 
           <article class="c-card">
-            <a href="{{ item.url }}" title="{{ item.title }} for {{ item.client.one().title }}">
+            <a href="{{ item.url }}" title="{{ item.title }}">
 
               {% set image = item.image[0] ?? null %}
 
@@ -105,7 +105,7 @@
               {% endif %}
 
               <h3 class="c-card__title">{{ item.title }}</h3>
-              <p class="c-card__meta">{{ item.client.one().title }}</p>
+              <p class="c-card__meta">{% for tag in item.skills %}{{ tag.title }}{% if not loop.last %} + {% endif %}{% endfor %}</p>
             </a>
           </article>
 
