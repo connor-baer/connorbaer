@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
 {# -- CRITICAL CSS -- #}
-{% set newCache = rev('css/' ~ entry.site.handle ~ '.min.css') %}
+{% set newCache = rev('css/' ~ craft.app.getSites().currentSite.handle ~ '.min.css') %}
 
 {% if not currentCache or currentCache != newCache or devMode %}
   {{ setCookie('criticalCss', newCache, now | date_modify("+7 days").timestamp ) }}
