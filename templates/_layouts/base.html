@@ -13,21 +13,20 @@
   {# -- METABAR -- #}
   {% include '_includes/components/metabar' %}
 
-  <div id="barba-wrapper">
-    <main class="l-main barba-container">
 
-      {% if not entry.passphrase is defined or entry.passphrase is empty or entry.passphrase == craft.app.request.getQueryParam('passphrase') or livePreview %}
+  <main class="l-main">
 
-        {% block main %}{% endblock %}
+    {% if not entry.passphrase is defined or entry.passphrase is empty or entry.passphrase == craft.app.request.getQueryParam('passphrase') or livePreview %}
 
-      {% else %}
+      {% block main %}{% endblock %}
 
-        {% include '_includes/components/passphrase' %}
+    {% else %}
 
-      {% endif %}
+      {% include '_includes/components/passphrase' %}
 
-    </main>
-  </div>
+    {% endif %}
+
+  </main>
 
   {# -- FOOTER -- #}
   {% include '_includes/components/footer' %}

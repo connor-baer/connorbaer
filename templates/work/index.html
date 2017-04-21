@@ -20,6 +20,7 @@
 {% set section = craft.app.request.segments | first %}
 
 {% block main %}
+  {% cache %}
   {% minify %}
 
   <section class="l-ctnr">
@@ -64,4 +65,5 @@
   </section>
 
   {% endminify %}
+  {% endcache %}
 {% endblock %}
