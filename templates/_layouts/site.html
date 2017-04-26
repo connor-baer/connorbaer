@@ -17,6 +17,7 @@
 <html {% if amp is defined %}amp{% endif %} lang="{{ craft.app.language }}" class="{% if fontFaceObserver == 'true' %}fonts-loaded {% endif %}{% if darkMode == 'true' %} theme-dark{% endif %}">
 <head>
 
+
 {% block head %}
   <meta charset="utf-8" />
 
@@ -56,13 +57,16 @@
   {% endcache %}
 {% endblock %}
 
+
 </head>
 
 {# -- BODY CLASS -- #}
 <body id="js-headroom" class="{{ entry is defined ? entry.section.handle : craft.app.request.segments | first }} {{ bodyClass is defined ? bodyClass }}">
 <!-- You know, rather than reading the source like a chump, you can see it all on GitHub like a champ: https://github.com/connor-baer/connorbaer.co -->
 
+
 {% block body %}{% endblock %}
+
 
 {% block foot %}
   {# -- GOOGLE ANALYTICS -- #}
@@ -78,6 +82,7 @@
     </script>
   {% endif %}
 {% endblock %}
+
 
 </body>
 </html>

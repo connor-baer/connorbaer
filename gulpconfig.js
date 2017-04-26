@@ -80,6 +80,8 @@ module.exports = {
     critical: {
       src: pkg.homepage,
       dest: '../' + tmplts,
+      minify: false,
+      inline: false,
       small: {
         height: 732,
         width: 412,
@@ -89,22 +91,22 @@ module.exports = {
         width: 1280,
       },
       base: root,
-      css: dev + 'css/styles.min.css',
+      css: dev + 'css/connorbaer.min.css',
       files: [
+        {
+          url: '503',
+          template: '503'
+        },
         {
           url: '',
           template: 'index'
-        },
-        {
-          url: 'home',
-          template: 'home'
         },
         {
           url: 'work',
           template: 'work/index'
         },
         {
-          url: 'work/side-project/jekyll-themes',
+          url: 'work/uwc-blogs',
           template: 'work/_entry'
         },
         {
