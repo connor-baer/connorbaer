@@ -33,7 +33,9 @@
     "nystudio107/craft3-imageoptimize": "^1.0",
     "clubstudioltd/craft3-asset-rev": "dev-master",
     "selvinortiz/doxter": "^3.0",
-    "venveo/maintenance-mode": "dev-master"
+    "venveo/maintenance-mode": "dev-master",
+    "craftcms/element-api": "^2.0",
+    "nystudio107/craft3-seomatic": "dev-develop"
   },
   "config": {
     "optimize-autoloader": true
@@ -50,6 +52,10 @@
     {
       "type": "vcs",
       "url": "https://github.com/venveo/craft3-maintenancemode.git"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/nystudio107/craft3-seomatic.git"
     }
   ]
 }
