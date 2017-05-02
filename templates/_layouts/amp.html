@@ -8,13 +8,19 @@
 {% set devMode = craft.app.config.getGeneral.devMode %}
 {% set livePreview = craft.app.request.isLivePreview %}
 
-<!doctype html>
-<html amp lang="{{ craft.app.language }}" class="fonts-loaded">
+{# -- COOKIES -- #}
+{% set currentCache = getCookie('criticalCss') %}
+{% set fontFaceObserver = getCookie("fontFaceObserver") %}
+{% set darkMode = getCookie("darkMode") %}
 
-{% cache %}
+<!doctype html>
+<html amp lang="{{ craft.app.language }}" class="fonts-loaded{% if darkMode == 'true' %} theme-dark{% endif %}">
 <head>
 
+
 {% block head %}
+  {% cache %}
+
   <meta charset="utf-8">
   <script async src="https://cdn.ampproject.org/v0.js"></script>
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
@@ -51,29 +57,17 @@
   <link rel="canonical" href="{{ entry.url | replace('/amp', '') }}" />
   <link rel="home" href="{{ siteUrl }}" />
   <link rel="alternate" type="application/atom+xml" title="Atom" href="/feed.atom">
+
+  {% endcache %}
 {% endblock %}
+
 
 </head>
-{% endcache %}
 
 {# -- BODY CLASS -- #}
-<body class="{% if entry is defined %}{% if entry.colors and entry.colors.type('color').one() %}has-color{% elseif entry.image and entry.image.one() %}has-image{% endif %}{% endif %} {{ entry is defined ? entry.section.handle : craft.app.request.segments | first }}">
+<body id="js-headroom" class="{{ entry is defined ? entry.section.handle : craft.app.request.segments | first }} {{ bodyClass is defined ? bodyClass }}">
 
-{% block body %}
-
-  {# -- METABAR -- #}
-  {% include '_includes/metabar' %}
-
-  <main id="main" class="main" role="main">
-
-    {% block main %}{% endblock %}
-
-  </main>
-
-  {# -- FOOTER -- #}
-  {% include '_includes/footer' %}
-
-{% endblock %}
+{% block body %}{% endblock %}
 
 </body>
 </html>

@@ -3,22 +3,24 @@
  # ------------------------
 -#}
 
-{% extends "_layouts/site" %}
+{% extends amp is defined ? "_layouts/amp" : "_layouts/site" %}
 
 {% import '_includes/elements' as elements %}
 {% import '_includes/helpers' as helpers %}
+
 
 {% block body %}
 
   {# -- METABAR -- #}
   {% include '_includes/components/metabar' %}
 
-
   <main class="l-main">
 
     {% if not entry.passphrase is defined or entry.passphrase is empty or entry.passphrase == craft.app.request.getQueryParam('passphrase') or livePreview %}
 
+
       {% block main %}{% endblock %}
+
 
     {% else %}
 

@@ -20,12 +20,108 @@
 
 {% block head %}
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
-  {% if amp is defined %}
-    {% include ('_includes/amp') %}
+  {# -- CRITICAL CSS -- #}
+  {% set newCache = rev('css/' ~ craft.app.getSites().currentSite.handle ~ '.min.css') %}
+
+  {% if not currentCache or currentCache != newCache or devMode %}
+    {{ setCookie('criticalCss', newCache, now | date_modify("+7 days").timestamp ) }}
+
+    {% block critical %}{% endblock %}
+
+    <link rel="preload" href="{{ baseUrl ~ newCache }}" as="style" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" type="text/css" href="{{ baseUrl ~ newCache }}"></noscript>
+    <script>
+      {{ source('_inline/loadCSS.min.js') }}
+      {{ source('_inline/cssrelpreload.min.js') }}
+    </script>
   {% else %}
-    {% include ('_includes/head') %}
+    <link id="styles" rel="stylesheet" type="text/css" href="{{ baseUrl ~ newCache }}">
   {% endif %}
+
+  {% block scripts %}
+    {% cache %}
+
+    {# -- SERVICE WORKER -- #}
+    <script>
+      'serviceWorker'in navigator&&window.addEventListener('load',function(){navigator.serviceWorker.register('{{ baseUrl }}service-worker.js',{scope:'/'}).then(function(e){console.log('ServiceWorker registration successful with scope: ',e.scope),navigator.serviceWorker.controller&&navigator.serviceWorker.controller.postMessage({command:'trimCaches'})})['catch'](function(e){console.log('ServiceWorker registration failed: ',e)})});
+    </script>
+
+    {# -- LOADJS -- #}
+    <script>
+      {{ source('_inline/loadjs.min.js') }}
+    </script>
+
+    {# -- COMBINED JAVASCRIPT -- #}
+    <script>
+    loadjs(['{{ baseUrl ~ rev('js/scripts.min.js') }}'], 'scripts');
+    loadjs.ready('scripts', {
+      success: function() {
+        const sansLight = new FontFaceObserver('Overpass', { weight: 300, });
+        const sans = new FontFaceObserver('Overpass', { weight: 400, });
+        const sansItalic = new FontFaceObserver('Overpass', { weight: 400, style: 'italic' });
+        const sansBold = new FontFaceObserver('Overpass', { weight: 700, });
+        const mono = new FontFaceObserver('Overpass Mono', { weight: 400, });
+        const serif = new FontFaceObserver('Lora', { weight: 400 });
+        const serifItalic = new FontFaceObserver('Lora', { weight: 400, style: 'italic' });
+        const serifBold = new FontFaceObserver('Lora', { weight: 700 });
+        const html = document.documentElement;
+
+        html.classList.add('fonts-loading');
+
+        Promise.all([
+          sansLight.load(),
+          sans.load(),
+          sansBold.load(),
+          mono.load(),
+          serif.load(),
+          serifItalic.load(),
+          serifBold.load(),
+        ]).then(function () {
+          html.classList.remove('fonts-loading');
+          html.classList.add('fonts-loaded');
+          setCookie('fontFaceObserver', true, 7);
+        }).catch(function () {
+          html.classList.remove('fonts-loading');
+          html.classList.add('fonts-failed');
+        });
+
+        objectFitImages();
+
+        const body = document.getElementById('js-headroom');
+        const headroom = new Headroom(body, {
+          offset : 64,
+          tolerance : 8,
+        });
+        headroom.init();
+
+        {% set error = craft.app.session.getFlash('error') %}
+        {% set notice = craft.app.session.getFlash('notice') %}
+
+        {% if error %}
+          alertify.error('{{ error }}');
+        {% endif %}
+        {% if notice %}
+          alertify.success('{{ notice }}');
+        {% endif %}
+      }
+    });
+    </script>
+
+    {# -- UPDATE YOUR FUCKING BROWSER -- #}
+    <!--[if IE]>
+    <script>
+      if (window.confirm('You’re using an outdated browser. You won’t be able to use all functionality on this website. Please update to a new browser.')) {
+        window.open('http://outdatedbrowser.com/en', '_blank');
+      } else {
+        window.alert('Your choice! However, you’re vulnerable to security risks.')
+      };
+    </script>
+    <![endif]-->
+
+    {% endcache %}
+  {% endblock %}
 
   {% cache %}
   {% minify %}
