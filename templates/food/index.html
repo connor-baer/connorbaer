@@ -1,0 +1,61 @@
+{#
+ # Structure overview template
+ # ---------------
+ #
+ # See this page for details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+
+{% extends "_layouts/base" %}
+
+{% import '_includes/elements' as elements %}
+{% import '_includes/helpers' as helpers %}
+
+
+{% block critical %}
+  <style>
+    {{ source(_self ~ '.min.css', ignore_missing = true) }}
+  </style>
+{% endblock %}
+
+
+{% block scripts %}
+  {{ parent() }}
+
+  {# -- REACT -- #}
+  <script>
+  loadjs(['{{ baseUrl ~ rev('js/collection.min.js') }}'], 'react');
+  </script>
+{% endblock %}
+
+{% block head %}
+  {{ parent() }}
+
+  <link rel="preload" href="{{ baseUrl ~ rev('css/food.min.css') }}" as="style" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" type="text/css" href="{{ baseUrl ~ rev('css/food.min.css') }}"></noscript>
+{% endblock %}
+
+
+{% set section = craft.app.request.segments | first %}
+
+
+{% block main %}
+  {% cache %}
+  {% minify %}
+
+  <section class="l-ctnr">
+
+    {# -- HEADER -- #}
+    <header class="c-header c-header--tall l-w100">
+      <h1 class="c-header__title c-header__title--color">{{ helpers.striptags(entry.title) }}&ensp;</h1>
+      <h2 class="c-header__subtitle">{{ helpers.striptags(entry.description) }}</h2>
+    </header>
+
+    {# -- ITEMS -- #}
+    <div id="app"></div>
+  </section>
+
+  {% endminify %}
+  {% endcache %}
+{% endblock %}

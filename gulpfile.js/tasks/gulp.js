@@ -20,6 +20,7 @@ gulp.task( 'build', ( callback ) => {
   sequence( [ 'clean', 'styles-update' ], [
     'styles',
     'scripts',
+    'webpack',
   ],
     callback );
 } );

@@ -11,4 +11,5 @@ const gulp = require( 'gulp' ),
 gulp.task( 'watch', [ 'browsersync' ], () => {
   gulp.watch( config.styles, [ 'styles' ] );
   gulp.watch( config.scripts, [ 'scripts' ] );
+  gulp.watch( config.webpack, [ 'webpack' ] );
 } );

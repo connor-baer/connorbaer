@@ -1,6 +1,0 @@
-# Ignore packages
-node_modules/
-bower_components/
-
-# Ignore built site
-public/

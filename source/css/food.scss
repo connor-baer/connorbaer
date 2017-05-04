@@ -1,0 +1,146 @@
+// Food
+// ----
+
+@import "lib/helpers";
+@import "variables/colors";
+@import "variables/typography";
+@import "variables/layout";
+@import "variables/animations";
+
+
+// Filters
+// -------
+
+.c-filter {
+  display: inline-block;
+
+  margin-top: vr(.5);
+  margin-right: vr(.75);
+}
+
+.c-filter__option {
+  display: inline-block;
+
+  margin-top: vr(.25);
+  margin-right: vr(.25);
+  padding: vr(.33) vr(1);
+
+  transition: background-color $an-short, color $an-short, box-shadow $an-short;
+
+  border-radius: 6px;
+
+  background-color: var(--oc-gray-6);
+  color: var(--oc-white);
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .06);
+  cursor: pointer;
+
+  user-select: none;
+
+  [type=checkbox]:checked ~ &,
+  &:hover,
+  &:focus {
+    background-color: oc(primary);
+    color: $oc-white;
+
+    box-shadow: none;
+  }
+}
+
+
+// Recipe Cards
+// ------------
+
+.c-recipe {
+  display: inline-block;
+  position: relative;
+
+  width: 100%;
+  height: vr(12);
+
+  margin-top: vr(2);
+  padding: vr(1);
+
+  border-radius: 6px;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .06);
+  overflow: hidden;
+
+  &::after {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    border-radius: 8px;
+
+    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, .25));
+
+    content: "";
+  }
+}
+
+.c-recipe__image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+
+    transition: transform $an-long;
+    will-change: transform;
+
+    object-fit: cover;
+    backface-visibility: hidden;
+  }
+
+  a:hover &,
+  a:focus & {
+    img {
+      transform: scale(1.04);
+    }
+  }
+}
+
+.c-recipe__content {
+  position: absolute;
+  bottom: vr(.75);
+
+  z-index: 99;
+}
+
+.c-recipe__title {
+  @include typi("t2");
+
+  margin-bottom: vr(.25);
+
+  transition: color $an-medium;
+
+  color: $oc-white;
+
+  font-weight: $fw-bold;
+}
+
+.c-recipe__icon {
+  vertical-align: middle;
+
+  fill: $oc-white;
+}
+
+.c-recipe__meta {
+  @include typi("s1");
+
+  color: $oc-white;
+
+  font-weight: $fw-bold;
+}

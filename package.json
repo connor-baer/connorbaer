@@ -1,11 +1,13 @@
 {
   "name": "connorbaer",
   "version": "4.0.3",
-  "description": "Problem-solving is my passion. This is my website.",
-  "main": "index.html",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "Website for Connor Bär.",
+  "main": "gulpfile.js",
+  "author": "Connor Bär, connorbaer <hello@connorbaer.co>",
+  "copyright": "connorbaer",
+  "license": "UNLICENSED",
+  "private": true,
+  "homepage": "https://connorbaer.co/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/connor-baer/connorbaer.co.git"
@@ -17,18 +19,27 @@
     "ai",
     "designer"
   ],
-  "author": "Connor Bär",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/connor-baer/connorbaer.co/issues"
   },
-  "homepage": "https://connorbaer.co/",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "config": {
+    "src": "./source/",
+    "root": "./public/",
+    "dev": "./public/dev/",
+    "dist": "./public/dist/",
+    "tmplts": "./templates/",
+    "modules": "./node_modules/"
+  },
   "dependencies": {
     "alertify.js": "^1.0.12",
     "choices.js": "^2.7.8",
     "fg-loadcss": "^1.3.1",
     "fontfaceobserver": "^2.0.9",
     "headroom.js": "^0.9.3",
+    "immutability-helper": "^2.2.0",
     "lazysizes": "^3.0.0-rc4",
     "loadjs": "^3.4.0",
     "mappy-breakpoints": "^0.2.3",
@@ -37,17 +48,26 @@
     "open-color": "^1.4.0",
     "photoswipe": "^4.1.1",
     "prismjs": "^1.6.0",
+    "query-string": "^4.3.4",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
     "simplemde": "^1.11.2",
     "suncalc": "^1.8.0",
     "typi": "^3.0.0",
     "vue": "^2.2.6",
-    "vue-resource": "^1.3.1"
+    "vue-resource": "^1.3.1",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-eslint": "^6.1.2",
+    "babel-loader": "^7.0.0",
     "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.24.1",
     "browser-sync": "^2.18.8",
     "critical": "^0.8.4",
     "del": "^2.2.2",
+    "eslint": "^3.19.0",
     "gulp": "^3.9.1",
     "gulp-babili": "0.0.2",
     "gulp-changed": "^2.0.0",
@@ -63,11 +83,15 @@
     "gulp-sass": "^3.0.0",
     "gulp-sourcemaps": "^2.4.1",
     "gulp-util": "^3.0.7",
+    "gulp-webpack": "^1.5.0",
+    "html-webpack-plugin": "^2.28.0",
     "jshint": "^2.9.4",
     "merge-stream": "^1.0.0",
     "node-sass": "^4.5.2",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.2.2",
-    "sw-precache": "^5.0.0"
+    "sw-precache": "^5.0.0",
+    "webpack": "^2.4.1",
+    "webpack-dev-server": "^2.4.5"
   }
 }

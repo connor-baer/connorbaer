@@ -1,0 +1,61 @@
+{#
+ # Entry template
+ # -------------------
+ #
+ # See this entry for details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+
+{% extends "_layouts/base" %}
+
+{% import '_includes/elements' as elements %}
+{% import '_includes/helpers' as helpers %}
+
+
+{% block head %}
+  {{ parent() }}
+
+  <link rel="amphtml" href="{{ entry.url }}/amp">
+{% endblock %}
+
+
+{% block critical %}
+  <style>
+    {{ source(_self ~ '.min.css', ignore_missing = true) }}
+    body {
+      --oc-one-6: red;
+    }
+  </style>
+{% endblock %}
+
+
+{% block scripts %}
+  {{ parent() }}
+
+  {# -- REACT -- #}
+  <script>
+  loadjs(['{{ baseUrl ~ rev('js/single.min.js') }}'], 'react');
+  </script>
+{% endblock %}
+
+
+{% block main %}
+  {% cache %}
+  {% minify %}
+
+  <article class="l-ctnr">
+    <div class="l-w100">
+
+      {# -- REACT -- #}
+      <div id="app"></div>
+
+    </div>
+  </article>
+
+  {# -- PHOTOSWIPE -- #}
+  {% include '_includes/photoswipe' %}
+
+  {% endminify %}
+  {% endcache %}
+{% endblock %}

@@ -4,6 +4,7 @@
  * Clean
  * Styles
  * Scripts
+ * Webpack
  * BrowserSync
  * Watch
  * Revisions
@@ -13,12 +14,12 @@
 
 
 const pkg = require( './package.json' ), // Allows access to the project metadata from the package.json file.
-  src = 'source/', // The raw material of the theme: custom scripts, SCSS source files, images, etc.; do not delete this folder!
-  root = 'public/', // The webroot directory that will be accessible on your server.
-  dev = root + 'dev/', // A folder for your assets in development.
-  dist = root + 'dist/', // A folder for your assets in production.
-  tmplts = 'templates/', // The CraftCMS template folder.
-  modules = 'node_modules/' // NPM packages.
+  src = pkg.config.src, // The raw material of the theme: custom scripts, SCSS source files, images, etc.; do not delete this folder!
+  root = pkg.config.root, // The webroot directory that will be accessible on your server.
+  dev = pkg.config.dev, // A folder for your assets in development.
+  dist = pkg.config.dist, // A folder for your assets in production.
+  tmplts = pkg.config.tmplts, // The CraftCMS template folder.
+  modules = pkg.config.modules // NPM packages.
 ;
 
 
@@ -121,6 +122,14 @@ module.exports = {
           url: 'legal',
           template: '_pages/entry'
         },
+        {
+          url: 'food',
+          template: 'food/index'
+        },
+        {
+          url: 'food/salmon-burger',
+          template: 'food/_entry'
+        },
       ],
     },
   },
@@ -181,6 +190,14 @@ module.exports = {
   },
 
 
+  // Webpack //
+
+  webpack: {
+    src: [src + 'js/single.js', src + 'js/collection.js'],
+    dest: dev + 'js/',
+  },
+
+
   // BrowserSync //
 
   browsersync: {
@@ -203,6 +220,7 @@ module.exports = {
   watch: {
     styles: src + 'css/**/*.scss',
     scripts: src + 'js/*.js',
+    webpack: src + 'js/components/*.js',
   },
 
 
