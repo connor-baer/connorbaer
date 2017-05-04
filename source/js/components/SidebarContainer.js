@@ -11,9 +11,23 @@ class SidebarContainer extends Component {
     };
   }
 
+  onClick() {
+    let newState = this.state.sidebar ? false : true;
+
+    this.setState({
+      sidebar: newState
+    });
+
+    if (newState) {
+      document.getElementById('js-body').classList.add('sidebar--open');
+    } else {
+      document.getElementById('js-body').classList.remove('sidebar--open');
+    }
+  }
+
   render() {
     return (
-      <Sidebar />
+      <Sidebar onClick={this.onClick.bind(this)} />
     )
   }
 

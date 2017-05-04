@@ -41,11 +41,31 @@
 
   padding: vr(1);
 
-  transition: width $an-short, box-shadow $an-short, background-color $an-short, padding $an-short, transform $an-medium, opacity $an-medium, visibility $an-medium;
+  transition: box-shadow $an-short, background-color $an-short, padding $an-short, transform $an-medium, opacity $an-medium, visibility $an-medium;
 
   background-color: transparent;
 
   z-index: 999;
+}
+
+// Light theme
+.headroom--top .c-metabar--light {
+  .c-metabar__name {
+    color: $oc-white;
+  }
+
+  .c-metabar__navLink,
+  .c-metabar__navLink .is-active {
+    color: $oc-white;
+  }
+
+  .c-metabar__darkMode {
+    fill: $oc-white;
+
+    &:hover {
+      fill: oc(primary);
+    }
+  }
 }
 
 

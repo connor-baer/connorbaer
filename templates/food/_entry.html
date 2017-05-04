@@ -45,12 +45,11 @@
 {% block body %}
 
   {# -- METABAR -- #}
-  {% include '_includes/components/metabar' %}
+  {% include '_includes/components/metabar' with {'class': 'c-metabar--light'} %}
 
+  {% cache %}
+  {% minify %}
   <main class="l-recipe">
-
-    {% cache %}
-    {% minify %}
 
     <article>
 
@@ -61,8 +60,8 @@
                  src="{{ entry.recipe.getImageUrl() }}"
                  alt="{{ entry.title }}" />
           </figure>
-          <div class="l-ctnr">
-            <div class="c-recipe__content l-w100">
+          <div class="c-recipe__bottom l-ctnr l-flex l-flex--center">
+            <div class="l-w75">
               <h1 class="c-recipe__title">{{ helpers.striptags(entry.title) }}</h1>
               <p class="c-recipe__meta">
                 <span><svg class="c-recipe__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42C16.07 4.74 14.12 4 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>{{ entry.recipe.totalTime }} mins</span>
@@ -72,8 +71,8 @@
           </div>
         </header>
 
-      <div class="l-ctnr">
-        <div class="l-w100">
+      <div class="l-ctnr l-flex l-flex--center">
+        <div class="l-w75">
 
           {# -- DESCRIPTION -- #}
           <h3 class="c-recipe__description">{{ entry.recipe.description }}</h3>
@@ -88,7 +87,7 @@
       </div>
 
       {# -- REACT -- #}
-      <div id="app" class="c-sidebar"></div>
+      <div id="app"></div>
     </article>
 
     {# -- RELATED RECIPES -- #}
@@ -114,7 +113,7 @@
         					 src="{{ item.recipe.getImageUrl() }}"
         					 alt="{{ item.title }}" />
             </figure>
-            <header class="c-recipe__content">
+            <header class="c-recipeCard__content">
               <h3 class="c-recipeCard__title">{{ item.title }}</h3>
               <p class="c-recipe__meta">
                 <span><svg class="c-recipe__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42C16.07 4.74 14.12 4 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>{{ item.recipe.totalTime }} mins</span>
@@ -129,13 +128,9 @@
     </div>
     {% endif %}
 
-    {# -- PHOTOSWIPE -- #}
-    {% include '_includes/photoswipe' %}
-
-    {% endminify %}
-    {% endcache %}
-
   </main>
+  {% endminify %}
+  {% endcache %}
 
   {# -- FOOTER -- #}
   {% include '_includes/components/footer' %}

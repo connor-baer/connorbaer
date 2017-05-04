@@ -5,7 +5,7 @@ import Recipes from './Recipes'
 
 
 const filters = [
-  { meal: ['Breakfast', 'Lunch', 'Dinner', 'Snacks'] },
+  { type: ['Meals', 'Drinks', 'Snacks'] },
   { time: ['20 mins'] },
   { main: ['Vegetarian', 'Meat', 'Fish'] },
   { origin: ['Asian', 'European', 'Latin American'] }
@@ -23,7 +23,7 @@ class RecipesContainer extends Component {
     this.state = {
       searchValue: '',
       filterValues: {
-        meal: '',
+        type: '',
         time: '',
         main: '',
         origin: ''

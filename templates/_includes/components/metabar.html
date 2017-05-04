@@ -16,7 +16,7 @@
   {% cache %}
   {% minify %}
 
-  <header class="c-metabar{% if entry.type is defined %} c-metabar--{{entry.type }}{% endif %} l-flex">
+  <header class="c-metabar{% if entry.type is defined %} c-metabar--{{ entry.type }}{% endif %}{% if class is defined %} {{ class }}{% endif %} l-flex">
 
     {# -- BRAND -- #}
     <a class="c-metabar__brand" href="{{ siteUrl }}{% if craft.app.request.url == '/' %}#{% endif %}" title="Home">
