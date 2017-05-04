@@ -14,7 +14,7 @@ class Recipes extends Component {
         title: '',
         description: '',
         image: '',
-        tags: '',
+        labels: '',
         ingredients: [],
         skill: '',
         totalTime: '',
@@ -55,22 +55,22 @@ class Recipes extends Component {
         {
           this.state.recipes.filter( function ( recipe ) {
             // Check if search matches title, ingredients or tags.
-            let search = _this.props.searchValue.length === 0 || recipe.title.toLowerCase().indexOf( _this.props.searchValue.toLowerCase() ) > -1 || JSON.stringify(recipe.ingredients).toLowerCase().indexOf( _this.props.searchValue.toLowerCase() ) > -1 || recipe.tags.toLowerCase().indexOf( _this.props.searchValue.toLowerCase() ) > -1;
+            let search = _this.props.searchValue.length === 0 || recipe.title.toLowerCase().indexOf( _this.props.searchValue.toLowerCase() ) > -1 || JSON.stringify(recipe.ingredients).toLowerCase().indexOf( _this.props.searchValue.toLowerCase() ) > -1 || recipe.labels.toLowerCase().indexOf( _this.props.searchValue.toLowerCase() ) > -1;
 
-            // Check which type.
-            let type = _this.props.filterValues.type.length === 0 || recipe.tags.toLowerCase().indexOf( _this.props.filterValues.type ) > -1;
+            // Check if categories match the filters.
+            let checks = [];
 
-            // Check if time is shorter.
-            let time = _this.props.filterValues.time.length === 0 || Number(recipe.totalTime) <= 20;
+            for (var key in _this.props.filterValues) {
+              let check = (_this.props.filterValues[key].length === 0 || recipe.labels.toLowerCase().indexOf( _this.props.filterValues[key] ) > -1);
 
-            // Check which main.
-            let main = _this.props.filterValues.main.length === 0 || recipe.tags.toLowerCase().indexOf( _this.props.filterValues.main ) > -1;
+              checks.push(check);
+            }
 
-            // Check where item originates.
-            let origin = _this.props.filterValues.origin.length === 0 || recipe.tags.toLowerCase().indexOf( _this.props.filterValues.origin ) > -1;
+            // TODO: Check if time is shorter.
+            // let time = _this.props.filterValues.time.length === 0 || Number(recipe.totalTime) <= 20;
 
-            // Show the item if it matches the filters.
-            if (search && type && time && main && origin) {
+            // Pass the item if it matches all filters.
+            if (search && checks.every((check) => check)) {
               return true;
             }
             return false;

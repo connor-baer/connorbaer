@@ -19,18 +19,34 @@ return [
     ],
 
     'endpoints' => [
-        'api/categories.json' => [
-            'elementType' => Category::class,
-            'criteria' => [
-                'group' => 'recipes',
-            ],
-            'transformer' => function (Category $category) {
-                return [
-                    'title' => $category->title,
-                    'id' => $category->id,
-                ];
-            },
-        ],
+
+        'api/categories/<categoryGroup:{slug}>.json' => function ($categoryGroup) {
+            return [
+                'elementType' => Category::class,
+                'criteria' => [
+                    'group' => $categoryGroup,
+                    'level' => 1,
+                    'with' => ['children.children']
+                ],
+                'transformer' => function (Category $category) {
+                    $categorySlug = $category->slug;
+
+                    $data = [
+                        $categorySlug => [],
+                    ];
+
+                    $children = $category->getChildren();
+
+                    if ($children) {
+                        foreach ($children as $child) {
+                            $data[$categorySlug][] = $child->title;
+                        }
+                    }
+
+                    return $data;
+                }
+            ];
+        },
 
         'api/food/recipes.json' => [
             'elementType' => Entry::class,
@@ -44,21 +60,21 @@ return [
 
                 $ingredients = [];
 
-                $tags = [];
+                $labels = [];
 
                 foreach ($entry['recipe']->getIngredients($measure, $people) as $ingredient) {
                     $ingredients[] = $ingredient;
                 }
 
-                foreach ($entry['tags_recipe'] as $tag) {
-                    $tags[] = $tag['title'];
+                foreach ($entry['labels'] as $label) {
+                    $labels[] = $label['title'];
                 }
 
                 return [
                     'title' => $entry['title'],
                     'description' => $entry['recipe']['description'],
                     'image' => $entry['recipe']->getImageUrl(),
-                    'tags' => implode(', ', $tags),
+                    'labels' => implode(', ', $labels),
                     'ingredients' => $ingredients,
                     'skill' => $entry['recipe']['skill'],
                     'totalTime' => $entry['recipe']['totalTime'],
@@ -81,8 +97,6 @@ return [
                     $ingredients = [];
                     $directions = [];
 
-                    $tags = [];
-
                     foreach ($entry['recipe']->getIngredients($measure, $people) as $ingredient) {
                         $ingredients[] = $ingredient;
                     }
@@ -91,15 +105,10 @@ return [
                         $directions[] = $direction;
                     }
 
-                    foreach ($entry['tags_recipe'] as $tag) {
-                        $tags[] = $tag['title'];
-                    }
-
                     return [
                         'title' => $entry['title'],
                         'description' => $entry['recipe']['description'],
                         'image' => $entry['recipe']->getImageUrl(),
-                        'tags' => implode(', ', $tags),
                         'ingredients' => $ingredients,
                         'directions' => $directions,
                         'skill' => $entry['recipe']['skill'],

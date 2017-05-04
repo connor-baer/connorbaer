@@ -16,6 +16,9 @@ class Ingredients extends Component {
     this.fetchData();
   }
 
+  /**
+   * Fetch ingredients, other meta data
+   */
   fetchData() {
     var _this = this;
 
@@ -36,26 +39,29 @@ class Ingredients extends Component {
       })
   }
 
-    /**
-     * Dynamically generate ingredient list
-     */
-    createIngredients() {
-      return this.state.ingredients.map((ingredient, index) => {
-        return (
-          <li key={index} className="o-ingredient">
-            <label key={index} htmlFor={encodeURIComponent(ingredient)}>
-              <input
-                type="checkbox"
-                className="o-ingredient__checkbox"
-                value={ingredient}
-                id={encodeURIComponent(ingredient)} />
-              <span className="o-ingredient__text">{ingredient}</span>
-            </label>
-          </li>
-        )
-      });
-    }
+  /**
+   * Dynamically generate ingredient list
+   */
+  createIngredients() {
+    return this.state.ingredients.map((ingredient, index) => {
+      return (
+        <li key={index} className="o-ingredient">
+          <label key={index} htmlFor={encodeURIComponent(ingredient)}>
+            <input
+              type="checkbox"
+              className="o-ingredient__checkbox"
+              value={ingredient}
+              id={encodeURIComponent(ingredient)} />
+            <span className="o-ingredient__text">{ingredient}</span>
+          </label>
+        </li>
+      )
+    });
+  }
 
+  /**
+   * Render ingredients list
+   */
   render() {
     return (
       <div>

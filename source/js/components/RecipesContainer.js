@@ -4,14 +4,6 @@ import Filters from './Filters'
 import Recipes from './Recipes'
 
 
-const filters = [
-  { type: ['Meals', 'Drinks', 'Snacks'] },
-  { time: ['20 mins'] },
-  { main: ['Vegetarian', 'Meat', 'Fish'] },
-  { origin: ['Asian', 'European', 'Latin American'] }
-];
-
-
 class RecipesContainer extends Component {
 
   /**
@@ -21,13 +13,9 @@ class RecipesContainer extends Component {
     super(props);
     // TODO: Dynamic filterValues
     this.state = {
+      filters: [],
       searchValue: '',
-      filterValues: {
-        type: '',
-        time: '',
-        main: '',
-        origin: ''
-      }
+      filterValues: {}
     };
   }
 
@@ -35,6 +23,8 @@ class RecipesContainer extends Component {
    * Set search and filter values from hash
    */
   componentWillMount() {
+    this.fetchData();
+
     let hashParams = Utils.getHashParam();
 
     if (hashParams) {
@@ -48,6 +38,34 @@ class RecipesContainer extends Component {
 
       this.setState(newState);
     }
+  }
+
+  /**
+   * Fetch the categories (filters)
+   */
+  fetchData() {
+    var _this = this;
+
+    let url = '/api/categories/food.json';
+
+    fetch(url)
+      .then(function(response) {
+        return response.json()
+      }).then(function(json) {
+        let filterValues = {};
+
+        json.data.map(function(group) {
+          let key = Object.keys(group)[0];
+          filterValues[key] = '';
+        });
+
+        _this.setState({
+          filters: json.data,
+          filterValues: filterValues
+        });
+      }).catch(function(ex) {
+        console.warn('parsing failed', ex)
+      })
   }
 
   /**
@@ -74,10 +92,10 @@ class RecipesContainer extends Component {
       newValue = value;
     }
 
-    let filters = Object.assign({}, this.state.filterValues, {[name]: newValue});
+    let newFilters = Object.assign({}, this.state.filterValues, {[name]: newValue});
 
     this.setState({
-      filterValues: filters
+      filterValues: newFilters
     });
 
     Utils.setHashParam(name, newValue);
@@ -93,7 +111,7 @@ class RecipesContainer extends Component {
         <Filters
           searchValue={this.state.searchValue}
           onSearchChange={this.handleSearchChange.bind(this)}
-          filters={filters}
+          filters={this.state.filters}
           filterValues={this.state.filterValues}
           onFilterChange={this.handleFilterChange.bind(this)} />
         <Recipes

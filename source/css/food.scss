@@ -267,6 +267,7 @@
     transform: translateX(100%);
 
     opacity: 1;
+    visibility: visible;
 
     .sidebar--open & {
       transform: translateX(0);
@@ -286,17 +287,19 @@
 
   transform: translateY(10%);
 
-  transition: transform $an-short, opacity $an-short;
+  transition: transform $an-short, visibility $an-short, opacity $an-short;
 
   background-color: var(--oc-white);
 
   opacity: 0;
+  visibility: hidden;
   z-index: 9999;
 
   .sidebar--open & {
     transform: translateY(0);
 
     opacity: 1;
+    visibility: visible;
   }
 }
 
@@ -337,7 +340,13 @@
 }
 
 .c-sidebar__content {
-  margin-top: vr(1.5);
+  position: absolute;
+  bottom: vr(1);
+  width: calc(100% - #{vr(3)});
+
+  max-height: calc(100vh - 4rem);
+
+  overflow-x: scroll;
 }
 
 .c-sidebar__title {
