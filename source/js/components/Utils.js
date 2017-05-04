@@ -11,7 +11,6 @@ export function setHashParam(key, value) {
   let parsed = queryString.parse(location.hash);
 
   if (value !== '') {
-    console.log(value);
     parsed[key] = value;
     location.hash = queryString.stringify(parsed);
   } else {

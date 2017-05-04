@@ -36,7 +36,7 @@ class Filters extends Component {
         <fieldset className="c-input">
           <input
             type="search"
-            placeholder="Search..."
+            placeholder="Search by name, ingredients, tags..."
             value={this.props.searchValue}
             onChange={this.props.onSearchChange}
             className="c-input__text"

@@ -5,10 +5,10 @@ import Recipes from './Recipes'
 
 
 const filters = [
-  { meal: ['Breakfast', 'Lunch', 'Dinner', 'Snack'] },
+  { meal: ['Breakfast', 'Lunch', 'Dinner', 'Snacks'] },
   { time: ['20 mins'] },
   { main: ['Vegetarian', 'Meat', 'Fish'] },
-  { origin: ['Asian', 'Italian', 'Latin American'] }
+  { origin: ['Asian', 'European', 'Latin American'] }
 ];
 
 

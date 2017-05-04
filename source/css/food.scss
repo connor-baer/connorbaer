@@ -13,37 +13,44 @@
 
 .c-filter {
   display: inline-block;
+  position: relative;
 
   margin-top: vr(.5);
   margin-right: vr(.75);
+
+  border: 1px solid var(--oc-gray-4);
+  border-radius: 6px;
+
+  background-color: var(--oc-white);
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .06);
+  overflow: hidden;
 }
 
 .c-filter__option {
   display: inline-block;
 
-  margin-top: vr(.25);
-  margin-right: vr(.25);
-  padding: vr(.33) vr(1);
+  padding: vr(.5) vr(1);
 
   transition: background-color $an-short, color $an-short, box-shadow $an-short;
 
-  border-radius: 6px;
+  border-right: 1px solid var(--oc-gray-4);
 
-  background-color: var(--oc-gray-6);
-  color: var(--oc-white);
+  color: var(--oc-gray-8);
 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .06);
   cursor: pointer;
 
   user-select: none;
+
+  label:last-child & {
+    border-right: 0;
+  }
 
   [type=checkbox]:checked ~ &,
   &:hover,
   &:focus {
     background-color: oc(primary);
     color: $oc-white;
-
-    box-shadow: none;
   }
 }
 
@@ -58,7 +65,7 @@
   width: 100%;
   height: vr(12);
 
-  margin-top: vr(2);
+  margin-top: vr(1);
   padding: vr(1);
 
   border-radius: 6px;

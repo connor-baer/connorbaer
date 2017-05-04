@@ -51,7 +51,7 @@ class Recipes extends Component {
     var _this = this;
 
     return (
-      <div>
+      <div className="cf">
         {
           this.state.recipes.filter( function ( recipe ) {
             // Check if search matches title, ingredients or tags.

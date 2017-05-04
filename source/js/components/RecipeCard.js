@@ -12,7 +12,7 @@ class RecipeCard extends Component {
     let recipe = this.props.recipe;
 
     return (
-      <a className="l-w33" href={'/food/' + recipe.slug} title={recipe.title}>
+      <a className="l-w33 fl-left" href={'/food/' + recipe.slug} title={recipe.title}>
         <article className="c-recipe">
           <figure className="c-recipe__image">
             <img className="o-image"
