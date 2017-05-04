@@ -58,7 +58,7 @@
 // Recipe Cards
 // ------------
 
-.c-recipe {
+.c-recipeCard {
   display: inline-block;
   position: relative;
 
@@ -69,10 +69,6 @@
   padding: vr(1);
 
   border-radius: 6px;
-
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
 
   box-shadow: 0 2px 4px rgba(0, 0, 0, .06);
   overflow: hidden;
@@ -88,6 +84,59 @@
     border-radius: 8px;
 
     background: linear-gradient(180deg, transparent, rgba(0, 0, 0, .25));
+
+    content: "";
+  }
+}
+
+.c-recipeCard__title {
+  @include typi("t2");
+
+  margin-bottom: vr(.25);
+
+  transition: color $an-medium;
+
+  color: $oc-white;
+
+  font-weight: $fw-bold;
+}
+
+
+// Recipe Single
+// -------------
+
+.c-footer,
+.l-recipe {
+  transition: width $an-short;
+}
+
+.c-metabar,
+.c-footer,
+.l-recipe {
+  width: 100vw;
+
+  .sidebar--open & {
+    width: calc(100vw - 20rem);
+  }
+}
+
+.c-recipe__header {
+  position: relative;
+
+  width: 100%;
+  height: vr(20);
+
+  overflow: hidden;
+
+  &::after {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background: linear-gradient(180deg, rgba(0, 0, 0, .33), transparent 20%, rgba(0, 0, 0, .33));
 
     content: "";
   }
@@ -121,17 +170,15 @@
 
 .c-recipe__content {
   position: absolute;
-  bottom: vr(.75);
+  bottom: vr(1);
 
   z-index: 99;
 }
 
 .c-recipe__title {
-  @include typi("t2");
+  @include typi("t4");
 
-  margin-bottom: vr(.25);
-
-  transition: color $an-medium;
+  margin-bottom: vr(.5);
 
   color: $oc-white;
 
@@ -150,4 +197,70 @@
   color: $oc-white;
 
   font-weight: $fw-bold;
+}
+
+.c-recipe__description {
+  @include typi("t1");
+
+  margin-top: vr(2);
+  margin-bottom: vr(2);
+
+  font-weight: $fw-light;
+  line-height: $lh-large;
+}
+
+.c-recipe__directions {
+  padding-left: vr(2);
+
+  counter-reset: descriptions;
+}
+
+.c-recipe__direction {
+  @include typi("s0");
+
+  position: relative;
+
+  margin-top: vr(1);
+  margin-bottom: vr(1);
+
+  &::before {
+    @include typi("t4");
+
+    position: absolute;
+    top: 0;
+    left: vr(-2);
+
+    font-weight: $fw-bold;
+
+    content: counter(descriptions);
+
+    counter-increment: descriptions;
+  }
+}
+
+
+// Ingredients
+// -----------
+
+.c-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  width: 20rem;
+
+  padding: vr(1);
+
+  transform: translateX(100%);
+
+  transition: transform $an-short;
+
+  background-color: var(--oc-white);
+
+  .sidebar--open & {
+    transform: translateX(0);
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .06);
+  }
 }

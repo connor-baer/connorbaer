@@ -11,6 +11,8 @@
     .headroom--not-top & {
       padding: vr(.5) vr(1);
 
+      background-color: var(--oc-white);
+
       box-shadow: 0 0 8px rgba(0, 0, 0, .1);
     }
 
@@ -39,9 +41,9 @@
 
   padding: vr(1);
 
-  transition: box-shadow $an-short, background-color $an-short, padding $an-short, transform $an-medium, opacity $an-medium, visibility $an-medium;
+  transition: width $an-short, box-shadow $an-short, background-color $an-short, padding $an-short, transform $an-medium, opacity $an-medium, visibility $an-medium;
 
-  background-color: var(--oc-white);
+  background-color: transparent;
 
   z-index: 999;
 }

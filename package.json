@@ -51,6 +51,7 @@
     "query-string": "^4.3.4",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-tabs": "^0.8.3",
     "simplemde": "^1.11.2",
     "suncalc": "^1.8.0",
     "typi": "^3.0.0",

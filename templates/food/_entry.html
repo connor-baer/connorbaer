@@ -7,7 +7,7 @@
  #}
 
 
-{% extends "_layouts/base" %}
+{% extends "_layouts/site" %}
 
 {% import '_includes/elements' as elements %}
 {% import '_includes/helpers' as helpers %}
@@ -16,6 +16,11 @@
 {% block head %}
   {{ parent() }}
 
+  <link rel="preload" href="{{ baseUrl ~ rev('css/food.min.css') }}" as="style" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" type="text/css" href="{{ baseUrl ~ rev('css/food.min.css') }}"></noscript>
+
+  {{ entry.recipe.renderRecipeJSONLD() }}
+
   <link rel="amphtml" href="{{ entry.url }}/amp">
 {% endblock %}
 
@@ -23,9 +28,6 @@
 {% block critical %}
   <style>
     {{ source(_self ~ '.min.css', ignore_missing = true) }}
-    body {
-      --oc-one-6: red;
-    }
   </style>
 {% endblock %}
 
@@ -40,22 +42,102 @@
 {% endblock %}
 
 
-{% block main %}
-  {% cache %}
-  {% minify %}
+{% block body %}
 
-  <article class="l-ctnr">
-    <div class="l-w100">
+  {# -- METABAR -- #}
+  {% include '_includes/components/metabar' %}
+
+  <main class="l-recipe">
+
+    {% cache %}
+    {% minify %}
+
+    <article>
+
+        {# -- HEADER -- #}
+        <header class="c-recipe__header">
+          <figure class="c-recipe__image">
+            <img class="o-image"
+                 src="{{ entry.recipe.getImageUrl() }}"
+                 alt="{{ entry.title }}" />
+          </figure>
+          <div class="l-ctnr">
+            <div class="c-recipe__content l-w100">
+              <h1 class="c-recipe__title">{{ helpers.striptags(entry.title) }}</h1>
+              <p class="c-recipe__meta">
+                <span><svg class="c-recipe__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42C16.07 4.74 14.12 4 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>{{ entry.recipe.totalTime }} mins</span>
+                <span><svg class="c-recipe__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/></svg>{% for tag in entry.tags_recipe %}{{ tag }}{% endfor %}</span>
+              </p>
+            </div>
+          </div>
+        </header>
+
+      <div class="l-ctnr">
+        <div class="l-w100">
+
+          {# -- DESCRIPTION -- #}
+          <h3 class="c-recipe__description">{{ entry.recipe.description }}</h3>
+
+          {# -- DIRECTIONS -- #}
+          <ul class="c-recipe__directions">
+            {% for direction in entry.recipe.getDirections() %}
+              <li class="c-recipe__direction">{{ direction }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
 
       {# -- REACT -- #}
-      <div id="app"></div>
+      <div id="app" class="c-sidebar"></div>
+    </article>
+
+    {# -- RELATED RECIPES -- #}
+    {% set relatedRecipes = craft.entries({
+    section: entry.section.handle,
+    relatedTo: entry.tags,
+    id: 'not ' ~ entry.id,
+    limit: '3',
+    }) %}
+
+    {% if relatedRecipes | length == '3' %}
+    <div class="l-ctnr cf">
+      <div class="l-w100">
+        <h4 class="c-cards__title">{{ "Related Recipes" | t}}</h4>
+      </div>
+
+      {% for item in relatedRecipes %}
+
+        <a class="l-w33 fl-left" href="{{ item.url }}" title="{{ item.title }}">
+          <article class="c-recipeCard">
+            <figure class="c-recipe__image">
+              <img class="o-image"
+        					 src="{{ item.recipe.getImageUrl() }}"
+        					 alt="{{ item.title }}" />
+            </figure>
+            <header class="c-recipe__content">
+              <h3 class="c-recipeCard__title">{{ item.title }}</h3>
+              <p class="c-recipe__meta">
+                <span><svg class="c-recipe__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42C16.07 4.74 14.12 4 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>{{ item.recipe.totalTime }} mins</span>
+                <span><svg class="c-recipe__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/></svg>{% for tag in item.tags %}{{ tags }}{% endfor %}</span>
+              </p>
+            </header>
+          </article>
+        </a>
+
+      {% endfor %}
 
     </div>
-  </article>
+    {% endif %}
 
-  {# -- PHOTOSWIPE -- #}
-  {% include '_includes/photoswipe' %}
+    {# -- PHOTOSWIPE -- #}
+    {% include '_includes/photoswipe' %}
 
-  {% endminify %}
-  {% endcache %}
+    {% endminify %}
+    {% endcache %}
+
+  </main>
+
+  {# -- FOOTER -- #}
+  {% include '_includes/components/footer' %}
+
 {% endblock %}
