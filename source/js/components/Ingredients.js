@@ -3,47 +3,11 @@ import React, { Component } from 'react'
 
 class Ingredients extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      ingredients: [],
-      skill: '',
-      serves: '',
-    };
-  }
-
-  componentWillMount() {
-    this.fetchData();
-  }
-
-  /**
-   * Fetch ingredients, other meta data
-   */
-  fetchData() {
-    var _this = this;
-
-    const path = ( window.location.pathname.substr(window.location.pathname.lastIndexOf('/') + 1) );
-    let url = '/api/food/recipe/' + path + '.json?measure=' + this.props.measure + '&people=' + this.props.measure;
-
-    fetch(url)
-      .then(function(response) {
-        return response.json()
-      }).then(function(json) {
-        _this.setState({
-          ingredients: json.data[0].ingredients,
-          skill: json.data[0].skill,
-          serves: json.data[0].serves
-        });
-      }).catch(function(ex) {
-        console.warn('parsing failed', ex)
-      })
-  }
-
   /**
    * Dynamically generate ingredient list
    */
   createIngredients() {
-    return this.state.ingredients.map((ingredient, index) => {
+    return this.props.ingredients.map((ingredient, index) => {
       return (
         <li key={index} className="o-ingredient">
           <label key={index} htmlFor={encodeURIComponent(ingredient)}>
@@ -66,6 +30,14 @@ class Ingredients extends Component {
     return (
       <div>
         <h3 className="c-sidebar__title">Ingredients</h3>
+        <label className="c-input__label">
+          Serves
+          <input
+            type="number"
+            placeholder="Persons"
+            value={this.props.people}
+            onChange={this.props.onPeopleChange}/>
+        </label>
         <ul>
           {
             this.createIngredients()

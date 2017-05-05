@@ -132,7 +132,7 @@ $choices-button-offset: .5rem;
 
   .is-focused &,
   .is-open & {
-    border-color: oc(primary);
+    border-color: var(--oc-primary-6);
   }
 }
 
@@ -152,7 +152,7 @@ $choices-button-offset: .5rem;
     color: $oc-gray-9;
 
     &.is-highlighted {
-      border: 1px solid oc(primary);
+      border: 1px solid var(--oc-primary-6);
 
       background-color: $oc-gray-2;
     }
@@ -169,7 +169,7 @@ $choices-button-offset: .5rem;
   border: 1px solid $choices-keyline-color;
 
   .is-open & {
-    border-color: oc(primary);
+    border-color: var(--oc-primary-6);
   }
 
   .is-flipped & {
@@ -209,5 +209,5 @@ $choices-button-offset: .5rem;
 
 .is-focused ~ .form-label,
 .is-open ~ .form-label {
-  color: oc(primary);
+  color: var(--oc-primary-6);
 }

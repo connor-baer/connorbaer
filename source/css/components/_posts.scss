@@ -6,7 +6,7 @@
   @include t-link;
   @include typi("s1");
 
-  color: oc(primary);
+  color: var(--oc-primary-6);
 
   font-weight: $fw-bold;
 }

@@ -79,7 +79,7 @@ $padding-base: 12px;
       }
 
       &.invalid {
-        border-left: 2px solid oc(primary);
+        border-left: 2px solid var(--oc-primary-6);
       }
     }
 
@@ -187,7 +187,7 @@ $padding-base: 12px;
     }
 
     &.error {
-      background: oc(primary);
+      background: var(--oc-primary-6);
       color: $oc-white;
     }
 

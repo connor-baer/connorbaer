@@ -28,7 +28,7 @@ img[data-sizes="auto"] {
     &:focus {
       transform: scale(1.1);
 
-      fill: oc(primary);
+      fill: var(--oc-primary-6);
     }
   }
 }

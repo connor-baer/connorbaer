@@ -64,15 +64,15 @@ input[type="tel"] {
   // Active state
 
   &:focus {
-    border-color: oc(primary);
+    border-color: var(--oc-primary-6);
     outline: none;
 
     ~ .c-form-icon {
-      fill: oc(primary);
+      fill: var(--oc-primary-6);
     }
 
     ~ .c-form-label {
-      color: oc(primary);
+      color: var(--oc-primary-6);
     }
 
     ~ .c-input__highlight {
@@ -110,8 +110,7 @@ input[type="textarea"] {
 
 // Select
 // ------
-.c-input__select,
-input[type="select"] {
+.c-input__select {
   display: block;
 
   width: 100%;
@@ -131,9 +130,9 @@ input[type="select"] {
 
   &:focus,
   &:active {
-    border-color: oc(primary);
+    border-color: var(--oc-primary-6);
 
-    background-color: oc(primary, 0);
+    background-color: var(--oc-primary-0);
   }
 
   &:valid {
@@ -159,7 +158,7 @@ input[type="select"] {
 
 @keyframes inputHighlighter {
   from {
-    background: oc(primary, 2);
+    background: var(--oc-primary-2);
   }
 
   to {

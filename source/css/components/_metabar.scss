@@ -54,6 +54,11 @@
     color: $oc-white;
   }
 
+  a:hover .c-metabar__name,
+  a:focus .c-metabar__name {
+    color: var(--oc-primary-6);
+  }
+
   .c-metabar__navLink,
   .c-metabar__navLink .is-active {
     color: $oc-white;
@@ -63,7 +68,22 @@
     fill: $oc-white;
 
     &:hover {
-      fill: oc(primary);
+      fill: var(--oc-primary-6);
+    }
+  }
+
+  .o-button {
+    border-color: $oc-white;
+
+    background-color: $oc-white;
+    color: var(--oc-primary-6);
+
+    &:hover,
+    &:focus {
+      border-color: var(--oc-primary-6);
+
+      background-color: var(--oc-primary-6);
+      color: $oc-white;
     }
   }
 }
@@ -112,7 +132,7 @@
 
   a:hover &,
   a:focus & {
-    color: oc(primary);
+    color: var(--oc-primary-6);
   }
 }
 
@@ -183,6 +203,6 @@
   fill: var(--oc-gray-6);
 
   &:hover {
-    fill: oc(primary);
+    fill: var(--oc-primary-6);
   }
 }

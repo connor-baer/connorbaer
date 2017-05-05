@@ -147,21 +147,21 @@
 
     transition: box-shadow $an-short;
 
-    color: oc(primary);
+    color: var(--oc-primary-6);
 
     font-weight: $fw-bold;
 
     &.anchor {
       @include t-link;
 
-      color: oc(primary, 2);
+      color: var(--oc-primary-2);
 
       font-weight: inherit;
     }
 
     &:hover,
     &:focus {
-      box-shadow: inset 0 -.08em 0 0 oc(primary);
+      box-shadow: inset 0 -.08em 0 0 var(--oc-primary-6);
     }
   }
 
@@ -201,7 +201,7 @@
 
     padding-left: vr(1);
 
-    border-left: 4px solid oc(primary, 2);
+    border-left: 4px solid var(--oc-primary-2);
 
     color: var(--oc-gray-6);
 

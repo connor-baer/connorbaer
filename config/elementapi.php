@@ -76,7 +76,7 @@ return [
                     'image' => $entry['recipe']->getImageUrl(),
                     'labels' => implode(', ', $labels),
                     'ingredients' => $ingredients,
-                    'skill' => $entry['recipe']['skill'],
+                    'skill' => ucfirst($entry['recipe']['skill']),
                     'totalTime' => $entry['recipe']['totalTime'],
                     'slug' => $entry['slug'],
                 ];
@@ -98,7 +98,7 @@ return [
                     $directions = [];
 
                     foreach ($entry['recipe']->getIngredients($measure, $people) as $ingredient) {
-                        $ingredients[] = $ingredient;
+                        $ingredients[] = html_entity_decode($ingredient);
                     }
 
                     foreach ($entry['recipe']->getDirections() as $direction) {
@@ -111,7 +111,7 @@ return [
                         'image' => $entry['recipe']->getImageUrl(),
                         'ingredients' => $ingredients,
                         'directions' => $directions,
-                        'skill' => $entry['recipe']['skill'],
+                        'skill' => ucfirst($entry['recipe']['skill']),
                         'totalTime' => $entry['recipe']['totalTime'],
                         'slug' => $entry['slug'],
                     ];

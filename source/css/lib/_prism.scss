@@ -82,7 +82,7 @@ pre[class*="language-"] {
 }
 
 .token.selector {
-  color: oc(primary);
+  color: var(--oc-primary-6);
 }
 
 .token.attr-name {
@@ -101,7 +101,7 @@ pre[class*="language-"] {
 .token.control,
 .token.directive,
 .token.unit {
-  color: oc(primary);
+  color: var(--oc-primary-6);
 }
 
 .token.statement,

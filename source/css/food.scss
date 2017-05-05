@@ -7,6 +7,22 @@
 @import "variables/layout";
 @import "variables/animations";
 
+$oc-primary: #ee3a51;
+$oc-secondary: #ff512f;
+
+:root {
+  #{--oc-primary-0}: scale-color($oc-primary, $lightness: 96%);
+  #{--oc-primary-1}: scale-color($oc-primary, $lightness: 80%);
+  #{--oc-primary-2}: scale-color($oc-primary, $lightness: 64%);
+  #{--oc-primary-3}: scale-color($oc-primary, $lightness: 48%);
+  #{--oc-primary-4}: scale-color($oc-primary, $lightness: 32%);
+  #{--oc-primary-5}: scale-color($oc-primary, $lightness: 16%);
+  #{--oc-primary-6}: $oc-primary;
+  #{--oc-primary-7}: scale-color($oc-primary, $lightness: -15%);
+  #{--oc-primary-8}: scale-color($oc-primary, $lightness: -30%);
+  #{--oc-primary-9}: scale-color($oc-primary, $lightness: -45%);
+}
+
 
 // Filters
 // -------
@@ -54,7 +70,7 @@
   [type=checkbox]:checked ~ &,
   &:hover,
   &:focus {
-    background-color: oc(primary);
+    background-color: var(--oc-primary-6);
     color: $oc-white;
   }
 }
@@ -189,18 +205,29 @@
   font-weight: $fw-bold;
 }
 
-.c-recipe__icon {
-  vertical-align: middle;
-
-  fill: $oc-white;
-}
-
 .c-recipe__meta {
   @include typi("s1");
 
+  display: inline-block;
+
+  margin-right: vr(.75);
+
   color: $oc-white;
 
-  font-weight: $fw-bold;
+  svg {
+    width: vr(1);
+    height: vr(1);
+
+    margin-right: vr(.25);
+
+    vertical-align: middle;
+
+    fill: $oc-white;
+  }
+
+  span {
+    vertical-align: middle;
+  }
 }
 
 .c-recipe__description {
@@ -251,7 +278,7 @@
 .c-metabar,
 .c-footer,
 .l-recipe {
-  @include mappy-bp(large) {
+  @include mappy-bp(wide) {
     .sidebar--open & {
       width: calc(100vw - 20rem);
     }
@@ -316,7 +343,7 @@
   border-radius: 100%;
   outline: none;
 
-  background-color: oc(primary);
+  background-color: var(--oc-primary-6);
   color: $oc-white;
 
   line-height: 1;
@@ -329,12 +356,15 @@
   &:focus {
     transform: translateY(.5px);
 
-    background-color: oc(primary, 5);
+    background-color: var(--oc-primary-5);
 
     box-shadow: none;
   }
 
   svg {
+    width: vr(1);
+    height: vr(1);
+
     fill: $oc-white;
   }
 }
@@ -346,7 +376,7 @@
 
   max-height: calc(100vh - 4rem);
 
-  overflow-x: scroll;
+  overflow-y: scroll;
 }
 
 .c-sidebar__title {

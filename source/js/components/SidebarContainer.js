@@ -11,7 +11,30 @@ class SidebarContainer extends Component {
     };
   }
 
-  onClick() {
+  /**
+   * Get stored state from localStorage
+   * Fetch recipe data
+   */
+  componentWillMount() {
+    if (localStorage.getItem( 'sidebar' )) {
+      this.setState(JSON.parse(localStorage.getItem( 'sidebar' )));
+    }
+  }
+
+  /**
+   * Store state in localStorage
+   *
+   * @param  {object} prevProps
+   * @param  {object} prevState
+   */
+  componentDidUpdate(prevProps, prevState) {
+    localStorage.setItem( 'sidebar', JSON.stringify( this.state ));
+  }
+
+  /**
+   * Toggle the sidebar state
+   */
+  handleClick() {
     let newState = this.state.sidebar ? false : true;
 
     this.setState({
@@ -25,12 +48,16 @@ class SidebarContainer extends Component {
     }
   }
 
+  /**
+   * Render the sidebar
+   */
   render() {
     return (
-      <Sidebar onClick={this.onClick.bind(this)} />
+      <Sidebar onClick={this.handleClick.bind(this)} />
     )
   }
 
 }
+
 
 export default SidebarContainer

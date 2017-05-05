@@ -11,11 +11,11 @@
 
   transition: transform $an-medium, border-color $an-medium, box-shadow $an-medium, background-color $an-medium;
 
-  border: 2px solid oc(primary);
+  border: 2px solid var(--oc-primary-6);
   border-radius: 6px;
   outline: none;
 
-  background-color: oc(primary);
+  background-color: var(--oc-primary-6);
   color: $oc-white;
 
   line-height: 1;
@@ -27,9 +27,9 @@
   &:focus {
     transform: translateY(.5px);
 
-    border-color: oc(primary, 5);
+    border-color: var(--oc-primary-5);
 
-    background-color: oc(primary, 5);
+    background-color: var(--oc-primary-5);
 
     box-shadow: none;
   }
@@ -43,11 +43,11 @@
   transition: background-color $an-medium;
 
   background-color: transparent;
-  color: oc(primary);
+  color: var(--oc-primary-6);
 
   &:hover,
   &:focus {
-    background-color: oc(primary, 5);
+    background-color: var(--oc-primary-5);
     color: $oc-white;
 
     svg {
@@ -56,6 +56,6 @@
   }
 
   svg {
-    fill: oc(primary);
+    fill: var(--oc-primary-6);
   }
 }
