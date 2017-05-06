@@ -17,7 +17,13 @@ class SidebarContainer extends Component {
    */
   componentWillMount() {
     if (localStorage.getItem( 'sidebar' )) {
-      this.setState(JSON.parse(localStorage.getItem( 'sidebar' )));
+      let savedState = JSON.parse(localStorage.getItem( 'sidebar' ));
+
+      this.setState(savedState);
+
+      if (savedState.sidebar) {
+        document.getElementById('js-body').classList.add('sidebar--open');
+      }
     }
   }
 
