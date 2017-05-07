@@ -11,9 +11,9 @@ class RecipesContainer extends Component {
    */
   constructor(props) {
     super(props);
-    // TODO: Dynamic filterValues
     this.state = {
       filters: [],
+      timeValue: '',
       searchValue: '',
       filterValues: {}
     };
@@ -30,9 +30,12 @@ class RecipesContainer extends Component {
     if (hashParams) {
       let hashSearch = hashParams.search;
       delete hashParams.search;
+      let hashTime = hashParams.time;
+      delete hashParams.time;
       let hashFilters = Object.assign({}, this.state.filterValues, hashParams);
       let newState = {
         searchValue: hashSearch ? hashSearch : '',
+        timeValue: hashTime ? hashTime : '',
         filterValues: hashFilters ? hashFilters : {}
       };
 
@@ -59,9 +62,11 @@ class RecipesContainer extends Component {
           filterValues[key] = '';
         });
 
+        let dataFilters = Object.assign({}, filterValues, _this.state.filterValues);
+
         _this.setState({
           filters: json.data,
-          filterValues: filterValues
+          filterValues: dataFilters
         });
       }).catch(function(ex) {
         console.warn('parsing failed', ex)
@@ -78,6 +83,18 @@ class RecipesContainer extends Component {
     });
 
     Utils.setHashParam('search', event.target.value);
+  }
+
+  /**
+   * Update search value state
+   * Store search value in hash
+   */
+  handleTimeChange(event) {
+    this.setState({
+      timeValue: event.target.value
+    });
+
+    Utils.setHashParam('time', event.target.value);
   }
 
   /**
@@ -111,11 +128,14 @@ class RecipesContainer extends Component {
         <Filters
           searchValue={this.state.searchValue}
           onSearchChange={this.handleSearchChange.bind(this)}
+          timeValue={this.state.timeValue}
+          onTimeChange={this.handleTimeChange.bind(this)}
           filters={this.state.filters}
           filterValues={this.state.filterValues}
           onFilterChange={this.handleFilterChange.bind(this)} />
         <Recipes
           searchValue={this.state.searchValue}
+          timeValue={this.state.timeValue}
           filterValues={this.state.filterValues} />
       </div>
     )

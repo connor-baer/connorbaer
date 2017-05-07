@@ -26,8 +26,21 @@ $oc-secondary: #ff512f;
 
 // Filters
 // -------
+.c-input--search,
+.c-input--time {
+  margin-top: vr(.5);
+  margin-right: vr(.75);
+}
 
-.c-input__text.c-input__text--search {
+.c-input--search {
+  width: 20rem;
+}
+
+.c-input--time {
+  width: 7rem;
+}
+
+.c-input__text {
   font-size: 1rem;
   line-height: 1;
 }
@@ -51,9 +64,9 @@ $oc-secondary: #ff512f;
 .c-filter__option {
   display: inline-block;
 
-  padding: vr(.5) vr(1);
+  padding: vr(.6) vr(1);
 
-  transition: background-color $an-short, color $an-short, box-shadow $an-short;
+  transition: background-color $an-short, color $an-short;
 
   border-right: 1px solid var(--oc-gray-4);
 
@@ -374,7 +387,7 @@ $oc-secondary: #ff512f;
   bottom: vr(1);
   width: calc(100% - #{vr(3)});
 
-  max-height: calc(100vh - 4rem);
+  max-height: calc(100vh - #{vr(4)});
 
   overflow-y: scroll;
 }

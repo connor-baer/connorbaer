@@ -57,6 +57,9 @@ class Recipes extends Component {
             // Check if search matches title, ingredients or tags.
             let search = _this.props.searchValue.length === 0 || recipe.title.toLowerCase().indexOf( _this.props.searchValue.toLowerCase() ) > -1 || JSON.stringify(recipe.ingredients).toLowerCase().indexOf( _this.props.searchValue.toLowerCase() ) > -1 || recipe.labels.toLowerCase().indexOf( _this.props.searchValue.toLowerCase() ) > -1;
 
+            // Check if preparation is below specified time.
+            let time = _this.props.timeValue.length === 0 || Number(recipe.totalTime) <= Number(_this.props.timeValue);
+
             // Check if categories match the filters.
             let checks = [];
 
@@ -66,11 +69,8 @@ class Recipes extends Component {
               checks.push(check);
             }
 
-            // TODO: Check if time is shorter.
-            // let time = _this.props.filterValues.time.length === 0 || Number(recipe.totalTime) <= 20;
-
             // Pass the item if it matches all filters.
-            if (search && checks.every((check) => check)) {
+            if (search && time && checks.every((check) => check)) {
               return true;
             }
             return false;

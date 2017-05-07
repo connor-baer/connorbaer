@@ -16,7 +16,7 @@
 
   width: 100%;
 
-  padding: vr(.5) vr(1);
+  padding: 0;
 
   border: 1px solid var(--oc-gray-4);
   border-radius: 6px;
@@ -24,6 +24,7 @@
   background-color: var(--oc-white);
 
   box-shadow: 0 2px 4px rgba(0, 0, 0, .06);
+  overflow: hidden;
 
   &.c-input--error {
     border-color: $oc-red-6;
@@ -33,21 +34,14 @@
 
 // Text
 // ----
-.c-input__text,
-input[type="text"],
-input[type="search"],
-input[type="email"],
-input[type="password"],
-input[type="number"],
-input[type="url"],
-input[type="tel"] {
+.c-input__text {
   @include typi("t1");
 
   display: block;
 
   width: 100%;
 
-  padding: 0;
+  padding: vr(.5) vr(1);
 
   transition: border-color $an-short;
 
@@ -84,8 +78,7 @@ input[type="tel"] {
 
 // Textarea
 // --------
-.c-input__textarea,
-input[type="textarea"] {
+.c-input__textarea {
   @include typi("s0");
 
   display: block;
@@ -149,7 +142,7 @@ input[type="textarea"] {
   left: vr(1);
 
   width: 50%;
-  height: vr(1.5);
+  height: vr(1.25);
 
   opacity: .25;
 

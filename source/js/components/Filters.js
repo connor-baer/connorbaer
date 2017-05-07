@@ -33,13 +33,23 @@ class Filters extends Component {
   render() {
     return (
       <div className="l-w100">
-        <fieldset className="c-input">
+        <fieldset className="c-input c-input--search">
           <input
             type="search"
-            placeholder="Search by name, ingredients, tags..."
+            placeholder="Search by name, ingredients, tags…"
             value={this.props.searchValue}
             onChange={this.props.onSearchChange}
-            className="c-input__text c-input__text--search"
+            className="c-input__text"
+          />
+          <span className="c-input__highlight"></span>
+        </fieldset>
+        <fieldset className="c-input c-input--time">
+          <input
+            type="number"
+            placeholder="Time…"
+            value={this.props.timeValue}
+            onChange={this.props.onTimeChange}
+            className="c-input__text"
           />
           <span className="c-input__highlight"></span>
         </fieldset>
