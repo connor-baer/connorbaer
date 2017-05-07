@@ -94,25 +94,40 @@ return [
                     $measure = Craft::$app->request->getQueryParam('measure');
                     $people = Craft::$app->request->getQueryParam('people');
 
-                    $ingredients = [];
                     $directions = [];
-
-                    foreach ($entry['recipe']->getIngredients($measure, $people) as $ingredient) {
-                        $ingredients[] = html_entity_decode($ingredient);
-                    }
+                    $ingredients = [];
+                    $nutritions = [];
 
                     foreach ($entry['recipe']->getDirections() as $direction) {
                         $directions[] = $direction;
                     }
 
+                    foreach ($entry['recipe']->getIngredients($measure, $people) as $ingredient) {
+                        $ingredients[] = html_entity_decode($ingredient);
+                    }
+
+                    $nutritions['servingSize'] = $entry['recipe']->servingSize;
+                    $nutritions['calories'] = $entry['recipe']->calories;
+                    $nutritions['carbohydrateContent'] = $entry['recipe']->carbohydrateContent;
+                    $nutritions['cholesterolContent'] = $entry['recipe']->cholesterolContent;
+                    $nutritions['fatContent'] = $entry['recipe']->fatContent;
+                    $nutritions['fiberContent'] = $entry['recipe']->fiberContent;
+                    $nutritions['proteinContent'] = $entry['recipe']->proteinContent;
+                    $nutritions['saturatedFatContent'] = $entry['recipe']->saturatedFatContent;
+                    $nutritions['sodiumContent'] = $entry['recipe']->sodiumContent;
+                    $nutritions['sugarContent'] = $entry['recipe']->sugarContent;
+                    $nutritions['transFatContent'] = $entry['recipe']->transFatContent;
+                    $nutritions['unsaturatedFatContent'] = $entry['recipe']->unsaturatedFatContent;
+
                     return [
                         'title' => $entry['title'],
                         'description' => $entry['recipe']['description'],
                         'image' => $entry['recipe']->getImageUrl(),
-                        'ingredients' => $ingredients,
                         'directions' => $directions,
                         'skill' => ucfirst($entry['recipe']['skill']),
                         'totalTime' => $entry['recipe']['totalTime'],
+                        'ingredients' => $ingredients,
+                        'nutritions' => $nutritions,
                         'slug' => $entry['slug'],
                     ];
                 },

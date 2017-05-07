@@ -8,6 +8,7 @@ class IngredientsContainer extends Component {
     super(props);
     this.state = {
       ingredients: [''],
+      nutritions: {},
       people: '2',
     };
   }
@@ -59,6 +60,7 @@ class IngredientsContainer extends Component {
       }).then(function(json) {
         _this.setState({
           ingredients: json.data[0].ingredients,
+          nutritions: json.data[0].nutritions,
         });
       }).catch(function(ex) {
         console.warn('parsing failed', ex)
@@ -75,6 +77,28 @@ class IngredientsContainer extends Component {
   }
 
   /**
+   * Decrease people state
+   */
+  handleMinusClick(event) {
+    let minus = (Number(this.state.people) - 1).toString();
+
+    this.setState({
+      people: minus
+    });
+  }
+
+  /**
+   * Increase people state
+   */
+  handlePlusClick(event) {
+    let plus = (Number(this.state.people) + 1).toString();
+
+    this.setState({
+      people: plus
+    });
+  }
+
+  /**
    * Render ingredients list
    */
   render() {
@@ -82,7 +106,9 @@ class IngredientsContainer extends Component {
       <Ingredients
         ingredients={this.state.ingredients}
         people={this.state.people}
-        onPeopleChange={this.handlePeopleChange.bind(this)} />
+        onPeopleChange={this.handlePeopleChange.bind(this)}
+        onMinusClick={this.handleMinusClick.bind(this)}
+        onPlusClick={this.handlePlusClick.bind(this)} />
     )
   }
 

@@ -398,6 +398,50 @@ $oc-secondary: #ff512f;
   font-weight: $fw-bold;
 }
 
+.c-sidebar__serves {
+  display: inline-block;
+  width: 2.5rem;
+}
+
+.c-sidebar__stepper {
+  @include typi("s1");
+
+  display: inline-block;
+
+  padding: vr(.2) vr(.4);
+
+  transition: box-shadow $an-medium, background-color $an-medium, color $an-medium;
+
+  border: 2px solid var(--oc-primary-6);
+  outline: none;
+
+  background-color: var(--oc-white);
+  color: var(--oc-primary-6);
+
+  font-weight: $fw-bold;
+  line-height: 1;
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .06);
+  cursor: pointer;
+
+  &:nth-of-type(1) {
+    border-right: 0;
+    border-radius: 6px 0 0 6px;
+  }
+
+  &:nth-of-type(2) {
+    border-radius: 0 6px 6px 0;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: var(--oc-primary-6);
+    color: $oc-white;
+
+    box-shadow: none;
+  }
+}
+
 .o-ingredient {
   margin-top: vr(.5);
   margin-bottom: vr(.5);

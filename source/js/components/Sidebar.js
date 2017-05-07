@@ -18,15 +18,18 @@ class Sidebar extends Component {
           <Tabs>
             <TabList className="c-metabar__navList">
               <Tab className="c-metabar__navLink">Ingredients</Tab>
-              <Tab className="c-metabar__navLink">Groceries</Tab>
+              <Tab className="c-metabar__navLink">Nutrition</Tab>
             </TabList>
 
             <TabPanel className="c-sidebar__content">
               <IngredientsContainer />
             </TabPanel>
             <TabPanel className="c-sidebar__content">
-              <h3 className="c-sidebar__title">Work in progress...</h3>
-              <p>Soon you will be able to add recipe ingredients to a handy grocery list.</p>
+              <h3 className="c-sidebar__title">Nutrition</h3>
+              <p className="c-input__label">Per serving</p>
+              <ul>
+                <li>Work in progress...</li>
+              </ul>
             </TabPanel>
           </Tabs>
         </div>

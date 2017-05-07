@@ -30,14 +30,22 @@ class Ingredients extends Component {
     return (
       <div>
         <h3 className="c-sidebar__title">Ingredients</h3>
-        <label className="c-input__label">
-          Serves
+        <fieldset>
+          <label className="c-input__label">Serves</label>
           <input
             type="number"
             placeholder="Persons"
+            className="c-input__text c-sidebar__serves"
             value={this.props.people}
-            onChange={this.props.onPeopleChange}/>
-        </label>
+            onChange={this.props.onPeopleChange} />
+          <span className="c-input__highlight"></span>
+          <button
+            onClick={this.props.onMinusClick}
+            className="c-sidebar__stepper">-</button>
+          <button
+            onClick={this.props.onPlusClick}
+            className="c-sidebar__stepper">+</button>
+        </fieldset>
         <ul>
           {
             this.createIngredients()

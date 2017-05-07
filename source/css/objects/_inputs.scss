@@ -16,7 +16,7 @@
 
   width: 100%;
 
-  padding: 0;
+  padding: vr(.5) vr(1);
 
   border: 1px solid var(--oc-gray-4);
   border-radius: 6px;
@@ -41,7 +41,7 @@
 
   width: 100%;
 
-  padding: vr(.5) vr(1);
+  padding: 0;
 
   transition: border-color $an-short;
 
