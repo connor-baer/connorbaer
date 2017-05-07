@@ -15,7 +15,7 @@
       {{ csrfInput() }}
       <fieldset class="c-input{% if passphrase and entry.passphrase != passphrase %} c-input--error{% endif %}">
         <label class="c-input__label" for="passphrase">Enter the passphrase to view it:</label>
-        <input id="passphrase" class="c-input__input" type="password" name="passphrase" autocomplete="off" autofocus="true" maxlength="16" placeholder="Passphrase" required="true">
+        <input id="passphrase" class="c-input__text" type="password" name="passphrase" autocomplete="off" autofocus="true" maxlength="16" placeholder="Passphrase" required="true">
         <span class="c-input__highlight"></span>
         {% if passphrase and entry.passphrase != passphrase %}
           <span class="c-input__error">The passphrase '{{ passphrase }}' is not correct. Please try again.</span>
