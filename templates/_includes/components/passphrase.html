@@ -10,7 +10,7 @@
 
 <div class="c-password l-ctnr l-flex">
   <div class="l-w66">
-    <h1 class="c-password__title">"{{ entry.title }}" is password-protected.&nbsp;🔐</h1>
+    <h1 class="c-password__title">“{{ entry.title }}” is password-protected.&nbsp;🔐</h1>
     <form class="c-form" action="{{ craft.app.request.getUrl() }}" method="GET" accept-charset="utf-8">
       {{ csrfInput() }}
       <fieldset class="c-input{% if passphrase and entry.passphrase != passphrase %} c-input--error{% endif %}">
@@ -18,7 +18,7 @@
         <input id="passphrase" class="c-input__text" type="password" name="passphrase" autocomplete="off" autofocus="true" maxlength="16" placeholder="Passphrase" required="true">
         <span class="c-input__highlight"></span>
         {% if passphrase and entry.passphrase != passphrase %}
-          <span class="c-input__error">The passphrase '{{ passphrase }}' is not correct. Please try again.</span>
+          <span class="c-input__error">The passphrase ‘{{ passphrase }}’ is not correct. Please try again.</span>
         {% endif %}
       </fieldset>
       <button class="o-button c-input__button" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></button>
