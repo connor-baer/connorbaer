@@ -38,6 +38,8 @@
     </script>
   {% else %}
     <link id="styles" rel="stylesheet" type="text/css" href="{{ baseUrl ~ newCache }}">
+
+    {% block noCritical %}{% endblock %}
   {% endif %}
 
   {% block scripts %}
