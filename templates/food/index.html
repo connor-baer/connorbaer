@@ -32,8 +32,12 @@
 {% block head %}
   {{ parent() }}
 
-  <link rel="preload" href="{{ baseUrl ~ rev('css/food.min.css') }}" as="style" onload="this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" type="text/css" href="{{ baseUrl ~ rev('css/food.min.css') }}"></noscript>
+  {% if not currentCache or currentCache != newCache or devMode %}
+    <link rel="preload" href="{{ baseUrl ~ rev('css/food.min.css') }}" as="style" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" type="text/css" href="{{ baseUrl ~ rev('css/food.min.css') }}"></noscript>
+  {% else %}
+    <link id="styles" rel="stylesheet" type="text/css" href="{{ baseUrl ~ newCache }}">
+  {% endif %}
 {% endblock %}
 
 
