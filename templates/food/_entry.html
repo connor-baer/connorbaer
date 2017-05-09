@@ -16,13 +16,6 @@
 {% block head %}
   {{ parent() }}
 
-  {% if not currentCache or currentCache != newCache or devMode %}
-    <link rel="preload" href="{{ baseUrl ~ rev('css/food.min.css') }}" as="style" onload="this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" type="text/css" href="{{ baseUrl ~ rev('css/food.min.css') }}"></noscript>
-  {% else %}
-    <link id="styles" rel="stylesheet" type="text/css" href="{{ baseUrl ~ newCache }}">
-  {% endif %}
-
   {{ entry.recipe.renderRecipeJSONLD() }}
 
   <link rel="amphtml" href="{{ entry.url }}/amp">
@@ -33,6 +26,13 @@
   <style>
     {{ source(_self ~ '.min.css', ignore_missing = true) }}
   </style>
+  <link rel="preload" href="{{ baseUrl ~ rev('css/food.min.css') }}" as="style" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" type="text/css" href="{{ baseUrl ~ rev('css/food.min.css') }}"></noscript>
+{% endblock %}
+
+
+{% block noCritical %}
+  <link id="styles" rel="stylesheet" type="text/css" href="{{ baseUrl ~ rev('css/food.min.css') }}">
 {% endblock %}
 
 
