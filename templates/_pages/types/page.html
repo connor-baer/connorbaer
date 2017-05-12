@@ -1,0 +1,42 @@
+{% import '_includes/elements' as elements %}
+{% import '_includes/helpers' as helpers %}
+
+
+<article>
+
+  {# -- HEADER -- #}
+  <header>
+
+    {% set image = entry.image.one() %}
+
+    {% if image %}
+
+    <div class="c-header__image js-photoswipe">
+      <figure>
+        <a href="{{ image.getUrl('large') }}" data-size="{{ image.getWidth('large') }}x{{ image.getHeight('large') }}">
+          {{ elements.image(image, null, '21x9') }}
+        </a>
+      </figure>
+    </div>
+
+    {% endif %}
+
+    <div class="l-ctnr l-flex l-flex--center">
+      <div class="c-header l-w75">
+        <h1 class="c-header__title c-header__title--color">{{ entry.title | striptags() }}&ensp;</h1>
+        <h2 class="c-header__subtitle">{{ entry.description | striptags() }}</h2>
+      </div>
+    </div>
+  </header>
+
+  {# -- CONTENT -- #}
+  <div class="c-blocks">
+
+    {# Body matrix #}
+    {% include '_includes/blocks' %}
+
+  </div>
+</article>
+
+{# -- PHOTOSWIPE -- #}
+{% include '_includes/photoswipe' %}

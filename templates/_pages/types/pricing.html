@@ -1,0 +1,79 @@
+{% import '_includes/elements' as elements %}
+{% import '_includes/helpers' as helpers %}
+
+
+<article>
+
+  {# -- HEADER -- #}
+  <header class="l-ctnr">
+    <div class="c-header c-header--tall l-w100">
+      <h1 class="c-header__title c-header__title--color">{{ entry.title | striptags() }}&nbsp;</h1>
+      <h2 class="c-header__subtitle">{{ entry.description | striptags() }}</h2>
+    </div>
+  </header>
+
+
+  {# -- PRICING -- #}
+  {% if entry.pricing | length %}
+
+    <div class="l-ctnr">
+      <table class="l-w100 c-pricing">
+        <thead class="c-pricing__head">
+          <tr>
+            <td></td>
+            <th>
+              <h2>Basic</h2>
+              <h3>8 €</h3>
+              <h4>or 80 € annually</h4>
+            </th>
+            <th>
+              <h2>Advanced</h2>
+              <h3>16 €</h3>
+              <h4>or 160 € annually</h4>
+            </th>
+            <th>
+              <h2>Premium</h2>
+              <h3>32 €</h3>
+              <h4>or 320 € annually</h4>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="c-pricing__body">
+
+          {% for row in entry.pricing %}
+            <tr>
+              <th><a class="t-link" href="#{{ helpers.slugify(row.title) }}">{{ row.title }}</a></th>
+              <td>{{ (row.basic == '1') ? '✓' : row.basic }}</td>
+              <td>{{ (row.advanced == '1') ? '✓' : row.advanced }}</td>
+              <td>{{ (row.premium == '1') ? '✓' : row.premium }}</td>
+            </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+
+    <div class="l-ctnr l-flex l-flex--center">
+      <div class="l-w75 c-block__text">
+        <h1>Details</h1>
+
+        {% for row in entry.pricing %}
+          <h4 id="{{ helpers.slugify(row.title) }}">{{ row.title }}</h4>
+          <p>{{ row.description }}</p>
+        {% endfor %}
+
+      </div>
+    </div>
+
+  {% endif %}
+
+
+  {# -- FAQ -- #}
+  <div class="c-blocks">
+
+    {# Body matrix #}
+    {% include '_includes/blocks' %}
+
+  </div>
+
+</article>

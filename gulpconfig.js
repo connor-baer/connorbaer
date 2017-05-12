@@ -145,6 +145,7 @@ module.exports = {
           modules + 'fontfaceobserver/fontfaceobserver.js',
           modules + 'object-fit-images/dist/ofi.js',
           modules + 'headroom.js/dist/headroom.js',
+          modules + 'smooth-scroll/dist/js/smooth-scroll.js',
           modules + 'suncalc/suncalc.js',
           src + 'js/alertify.js',
           src + 'js/polyfills.js',

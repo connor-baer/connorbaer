@@ -4,6 +4,7 @@
  #
  # Truncate
  # Strip Tags
+ # Slugify
  # Has Error
  # Error List
 -#}
@@ -32,6 +33,15 @@
 {% macro striptags(input, tags = '<a><br><strong><em>') %}
 {% spaceless %}
 	{{ input | striptags(tags) | raw }}
+{% endspaceless %}
+{% endmacro %}
+
+
+{# Slugify #}
+
+{% macro slugify(input) %}
+{% spaceless %}
+	{{ input | lower | replace(' ', '-') | replace('&', '+') | replace('#', '') }}
 {% endspaceless %}
 {% endmacro %}
 

@@ -98,6 +98,11 @@
         });
         headroom.init();
 
+        smoothScroll.init({
+          selector: 'a[href*="#"]',
+          offset: 24
+        });
+
         {% set error = craft.app.session.getFlash('error') %}
         {% set notice = craft.app.session.getFlash('notice') %}
 

@@ -39,7 +39,7 @@
           {% endswitch %}
 
           <li class="c-metabar__navLink">
-            <a class="t-link{% if block.navEntry and craft.app.request.segments | first == block.navEntry.one().uri %} is-active{% endif %}" href="{{ navLink }}" title="{{ navTitle }}">{{ navTitle }}</a>
+            <a class="t-link{{ (block.navEntry and craft.app.request.segments | first == block.navEntry.one().uri) ? 'is-active' }}" href="{{ navLink }}" title="{{ navTitle }}">{{ navTitle }}</a>
           </li>
         {% endfor %}
 
