@@ -43,9 +43,9 @@
           {% for row in entry.pricing %}
             <tr>
               <th><a class="t-link" href="#{{ helpers.slugify(row.title) }}">{{ row.title }}</a></th>
-              <td>{{ (row.basic == '1') ? '✓' : row.basic }}</td>
-              <td>{{ (row.advanced == '1') ? '✓' : row.advanced }}</td>
-              <td>{{ (row.premium == '1') ? '✓' : row.premium }}</td>
+              <td>{{ ((row.basic == '') ? '&nbsp;' : row.basic) | raw }}</td>
+              <td>{{ ((row.advanced == '') ? '&nbsp;' : row.advanced) | raw }}</td>
+              <td>{{ ((row.premium == '') ? '&nbsp;' : row.premium) | raw }}</td>
             </tr>
           {% endfor %}
 
