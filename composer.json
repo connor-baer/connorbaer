@@ -34,8 +34,7 @@
     "clubstudioltd/craft3-asset-rev": "dev-master",
     "selvinortiz/doxter": "^3.0",
     "venveo/maintenance-mode": "dev-master",
-    "craftcms/element-api": "^2.0",
-    "nystudio107/craft3-seomatic": "dev-develop"
+    "craftcms/element-api": "^2.0"
   },
   "config": {
     "optimize-autoloader": true
