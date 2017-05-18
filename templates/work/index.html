@@ -11,13 +11,16 @@
 {% import '_includes/elements' as elements %}
 {% import '_includes/helpers' as helpers %}
 
+
 {% block critical %}
   <style>
     {{ source(_self ~ '.min.css', ignore_missing = true) }}
   </style>
 {% endblock %}
 
+
 {% set section = craft.app.request.segments | first %}
+
 
 {% block main %}
   {% cache %}
