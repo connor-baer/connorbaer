@@ -36,7 +36,7 @@
       {% endif %}
 
       <div class="l-ctnr l-flex l-flex--center">
-        <div class="c-header l-w66">
+        <div class="c-header l-w75">
           <h1 class="c-header__title">{{ entry.title | striptags() }}&ensp;</h1>
           <span class="c-header__meta">{{ elements.date(entry.postDate) }}{% if entry.category is not empty %}&nbsp;·&nbsp;{{ elements.category(entry) }}{% endif %}</span>
         </div>
@@ -44,11 +44,11 @@
     </header>
 
     {# -- CONTENT -- #}
-    <div class="blocks blocks--serif">
+    <div class="c-blocks c-blocks--serif">
 
       {# Post description #}
       <div class="l-ctnr l-flex l-flex--center">
-        <h2 class="blocks__title l-w66">{{ entry.description }}</h2>
+        <h2 class="c-blocks__title l-w75">{{ entry.description }}</h2>
       </div>
 
       {# Body matrix #}
