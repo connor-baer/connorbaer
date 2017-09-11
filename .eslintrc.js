@@ -25,7 +25,10 @@ module.exports = {
         singleQuote: true
       }
     ],
-    'react/prop-types': [1, { ignore: ['i18n'] }],
+    'react/prop-types': [1, { ignore: ['i18n', 'children'] }],
+    'react/display-name': 0,
+    'react/react-in-jsx-scope': 0,
+    'react/require-default-props': 0,
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'import/prefer-default-export': 0
   },
@@ -47,13 +50,6 @@ module.exports = {
     }
   },
   env: {
-    browser: true
-  },
-  settings: {
-    'import/resolver': {
-      webpack: {
-        config: 'webpack.config.client.js'
-      }
-    }
+    node: true
   }
 };
