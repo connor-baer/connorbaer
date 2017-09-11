@@ -7,29 +7,27 @@
  *
  * @returns {Function} Returns the new debounced function.
  */
-function debounce( func, wait, immediate ) {
-
+function debounce(func, wait, immediate) {
   let timeout;
 
-  return function () {
+  return function() {
     const context = this,
       args = arguments;
-    var later = function () {
+    var later = function() {
       timeout = null;
-      if ( !immediate ) {
-        func.apply( context, args );
+      if (!immediate) {
+        func.apply(context, args);
       }
     };
     let callNow = immediate && !timeout;
 
-    clearTimeout( timeout );
-    timeout = setTimeout( later, wait );
-    if ( callNow ) {
-      func.apply( context, args );
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) {
+      func.apply(context, args);
     }
   };
 }
-
 
 /**
  * Throttle a function
@@ -39,35 +37,28 @@ function debounce( func, wait, immediate ) {
  *
  * @returns {Function} Returns the new throttled function.
  */
-function throttle( func, limit ) {
-
+function throttle(func, limit) {
   let timer = null;
 
-  return function () {
-
+  return function() {
     let context = this,
       args = arguments;
 
-    clearTimeout( timer );
-    timer = setTimeout( function () {
-      func.apply( context, args );
-    }, limit );
+    clearTimeout(timer);
+    timer = setTimeout(function() {
+      func.apply(context, args);
+    }, limit);
   };
 }
-
 
 /**
  * Show an error message
  *
  * @param  {Object} error  Error object
  */
-function error( err ) {
-
-  alertify
-    .closeLogOnClick( true )
-    .error( err.message );
+function error(err) {
+  alertify.closeLogOnClick(true).error(err.message);
 }
-
 
 /**
  * Set a cookie
@@ -76,15 +67,19 @@ function error( err ) {
  * @param {String} cookieValue  Value of the cookie
  * @param {Integer} nDays  Number of days after which the cookie will expire, default: 1
  */
-function setCookie( cookieName, cookieValue, nDays = 1 ) {
-
+function setCookie(cookieName, cookieValue, nDays = 1) {
   const today = new Date();
   const expire = new Date();
 
-  expire.setTime( today.getTime() + 3600000 * 24 * nDays );
-  document.cookie = cookieName + '=' + escape( cookieValue ) + ';expires=' + expire.toGMTString() + '; path=/';
+  expire.setTime(today.getTime() + 3600000 * 24 * nDays);
+  document.cookie =
+    cookieName +
+    '=' +
+    escape(cookieValue) +
+    ';expires=' +
+    expire.toGMTString() +
+    '; path=/';
 }
-
 
 /**
  * Get a cookie
@@ -93,16 +88,17 @@ function setCookie( cookieName, cookieValue, nDays = 1 ) {
  *
  * @return {String}  Value of the cookie
  */
-function getCookie( cookieName ) {
-
+function getCookie(cookieName) {
   let value = '; ' + document.cookie;
-  let parts = value.split( '; ' + cookieName + '=' );
+  let parts = value.split('; ' + cookieName + '=');
 
-  if ( parts.length === 2 ) {
-    return parts.pop().split( ';' ).shift();
+  if (parts.length === 2) {
+    return parts
+      .pop()
+      .split(';')
+      .shift();
   }
 }
-
 
 /**
  * Get user's current location
@@ -110,35 +106,37 @@ function getCookie( cookieName ) {
  * @return  {Object}  Current GPS coordinates of the user
  */
 function getLocation() {
-
-  if ( navigator.geolocation ) {
-    navigator.geolocation.getCurrentPosition( function ( position ) {
-      return position;
-    }, function ( error ) {
-      switch ( error.code ) {
-      case error.PERMISSION_DENIED:
-        error( 'You didn’t share your location.' );
-        break;
-      case error.POSITION_UNAVAILABLE:
-        error( 'Location information is unavailable.' );
-        break;
-      case error.TIMEOUT:
-        error( 'The request to get your location timed out.' );
-        break;
-      case error.UNKNOWN_ERROR:
-        error( 'An unknown error occurred.' );
-        break;
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
+        return position;
+      },
+      function(error) {
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            error('You didn’t share your location.');
+            break;
+          case error.POSITION_UNAVAILABLE:
+            error('Location information is unavailable.');
+            break;
+          case error.TIMEOUT:
+            error('The request to get your location timed out.');
+            break;
+          case error.UNKNOWN_ERROR:
+            error('An unknown error occurred.');
+            break;
+        }
+      },
+      {
+        timeout: 10000
       }
-    }, {
-      timeout: 10000
-    } );
+    );
   } else {
-    const err = new Error( 'Geolocation is not supported by this browser.' );
+    const err = new Error('Geolocation is not supported by this browser.');
 
-    error( err );
+    error(err);
   }
 }
-
 
 /**
  * Get sunrise and sunset times
@@ -148,42 +146,34 @@ function getLocation() {
  *
  * @return  {Object}  Sunrise and sunset times for the user's current location
  */
-function sunTimes( position, date = new Date() ) {
-
+function sunTimes(position, date = new Date()) {
   const lat = position.coords.latitude;
   const long = position.coords.longitude;
-  const suntimes = SunCalc.getTimes( date, lat, long );
+  const suntimes = SunCalc.getTimes(date, lat, long);
 
   return suntimes;
 }
-
 
 /**
  * Toggle the dark theme
  *
  * @param  {Boolean} darkMode  Turn darkmode on/off, optional
  */
-function toggleDarkness( darkMode ) {
-
-  darkCookie = ( getCookie( 'darkMode' ) === 'true' ) ? true : false;
-  darkMode = ( typeof darkMode !== 'undefined' ) ? darkMode : !darkCookie;
+function toggleDarkness(darkMode) {
+  darkCookie = getCookie('darkMode') === 'true' ? true : false;
+  darkMode = typeof darkMode !== 'undefined' ? darkMode : !darkCookie;
 
   const html = document.documentElement;
 
-  if ( darkMode && !darkCookie ) {
-    html.classList.add( 'theme-dark' );
-    alertify
-      .closeLogOnClick( true )
-      .log( 'Darkmode turned on.' );
-  } else if ( !darkMode && darkCookie ) {
-    html.classList.remove( 'theme-dark' );
-    alertify
-      .closeLogOnClick( true )
-      .log( 'Darkmode turned off.' );
+  if (darkMode && !darkCookie) {
+    html.classList.add('theme-dark');
+    alertify.closeLogOnClick(true).log('Darkmode turned on.');
+  } else if (!darkMode && darkCookie) {
+    html.classList.remove('theme-dark');
+    alertify.closeLogOnClick(true).log('Darkmode turned off.');
   }
-  setCookie( 'darkMode', darkMode, 1 );
+  setCookie('darkMode', darkMode, 1);
 }
-
 
 /**
  * Ask to toggle dark theme based on time
@@ -192,48 +182,54 @@ function toggleDarkness( darkMode ) {
  * @param  {Integer} sunrise  Time of sun rise, default: 0700
  * @param  {Integer} sunset  Time of sunset, default: 2000
  */
-function joinTheDarkSide( auto, sunrise = 700, sunset = 2100 ) {
-
-  auto = ( typeof auto !== 'undefined' ) ? auto : getCookie( 'darthVader' );
+function joinTheDarkSide(auto, sunrise = 700, sunset = 2100) {
+  auto = typeof auto !== 'undefined' ? auto : getCookie('darthVader');
 
   let now = new Date();
-  let time = Number( ( '0' + now.getHours() ).slice( -2 ) + '' + ( '0' + now.getMinutes() ).slice( -2 ) );
-  let darkMode = ( getCookie( 'darkMode' ) === null ) ? false : getCookie( 'darkMode' );
+  let time = Number(
+    ('0' + now.getHours()).slice(-2) + '' + ('0' + now.getMinutes()).slice(-2)
+  );
+  let darkMode = getCookie('darkMode') === null ? false : getCookie('darkMode');
 
-  if ( time < sunrise || time > sunset ) {
-    let askedDark = ( sessionStorage.getItem( 'askedDark' ) === null ) ? false : sessionStorage.getItem( 'askedDark' );
+  if (time < sunrise || time > sunset) {
+    let askedDark =
+      sessionStorage.getItem('askedDark') === null
+        ? false
+        : sessionStorage.getItem('askedDark');
 
-    if ( !darkMode && auto ) {
-      toggleDarkness( true );
-    } else if ( !darkMode && !askedDark ) {
-      sessionStorage.setItem( 'askedDark', true );
+    if (!darkMode && auto) {
+      toggleDarkness(true);
+    } else if (!darkMode && !askedDark) {
+      sessionStorage.setItem('askedDark', true);
       alertify
-        .okBtn( 'Turn On' )
-        .cancelBtn( 'Cancel' )
-        .confirm( 'It’s getting late! Want to turn on dark mode?', function () {
-          toggleDarkness( true );
-        } );
+        .okBtn('Turn On')
+        .cancelBtn('Cancel')
+        .confirm('It’s getting late! Want to turn on dark mode?', function() {
+          toggleDarkness(true);
+        });
     }
   } else {
-    let askedLight = ( sessionStorage.getItem( 'askedLight' ) === null ) ? false : sessionStorage.getItem( 'askedLight' );
+    let askedLight =
+      sessionStorage.getItem('askedLight') === null
+        ? false
+        : sessionStorage.getItem('askedLight');
 
-    if ( darkMode && auto ) {
-      toggleDarkness( false );
-    } else if ( darkMode && !askedLight ) {
-      sessionStorage.setItem( 'askedLight', true );
+    if (darkMode && auto) {
+      toggleDarkness(false);
+    } else if (darkMode && !askedLight) {
+      sessionStorage.setItem('askedLight', true);
       alertify
-        .okBtn( 'Turn Off' )
-        .cancelBtn( 'Cancel' )
-        .confirm( 'Dawn is here! Want to turn off dark mode?', function () {
-          toggleDarkness( false );
-        } );
+        .okBtn('Turn Off')
+        .cancelBtn('Cancel')
+        .confirm('Dawn is here! Want to turn off dark mode?', function() {
+          toggleDarkness(false);
+        });
     }
   }
 
   // Run every 2 minutes.
-  setTimeout( joinTheDarkSide, 120000, auto, sunrise, sunset );
+  setTimeout(joinTheDarkSide, 120000, auto, sunrise, sunset);
 }
-
 
 /**
  * Automatically toggle dark theme (daytime)
@@ -244,12 +240,20 @@ function joinTheDarkSide( auto, sunrise = 700, sunset = 2100 ) {
 function darthVader() {
   let times = sunTimes();
 
-  sunrise = Number( ( '0' + times.sunrise.getHours() ).slice( -2 ) + '' + ( '0' + times.sunrise.getMinutes() ).slice( -2 ) );
-  sunset = Number( ( '0' + times.sunset.getHours() ).slice( -2 ) + '' + ( '0' + times.sunset.getMinutes() ).slice( -2 ) );
+  sunrise = Number(
+    ('0' + times.sunrise.getHours()).slice(-2) +
+      '' +
+      ('0' + times.sunrise.getMinutes()).slice(-2)
+  );
+  sunset = Number(
+    ('0' + times.sunset.getHours()).slice(-2) +
+      '' +
+      ('0' + times.sunset.getMinutes()).slice(-2)
+  );
 
-  console.log( '☀️ ' + sunrise + ' | 🌙 ' + sunset );
+  console.log('☀️ ' + sunrise + ' | 🌙 ' + sunset);
 
-  joinTheDarkSide( sunrise, sunset );
+  joinTheDarkSide(sunrise, sunset);
 }
 
 /**
@@ -257,10 +261,13 @@ function darthVader() {
  *
  * @param  {object} event  Ambient light event
  */
-window.addEventListener( 'devicelight', throttle( ( event ) => {
-  if ( event.value < 20 ) {
-    toggleDarkness( true );
-  } else {
-    toggleDarkness( false );
-  }
-}, 1000 ) );
+window.addEventListener(
+  'devicelight',
+  throttle(event => {
+    if (event.value < 20) {
+      toggleDarkness(true);
+    } else {
+      toggleDarkness(false);
+    }
+  }, 1000)
+);

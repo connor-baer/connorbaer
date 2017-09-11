@@ -1,23 +1,13 @@
-# CraftCMS #
+# Project #
 ############
-/.env
-/.idea
-/config/license.key
-/scripts/.env.sh
-
-/public/*
-!/public/favicons/
-!/public/index.php
-!/public/robots.txt
-!/public/sw.js
-
-/templates/**/*.min.css
-
-# Install by running `bower install` #
-/bower_components/
+config.js
+data/*
+app.js
+.next
 
 # Install by running `npm install` #
 /node_modules/
+package-lock.json
 
 # Install by running `composer update` #
 /vendor/

@@ -1,11 +1,9 @@
 (function() {
-
   'use strict';
 
   var TRANSITION_FALLBACK_DURATION = 500;
   var hideElement = function(el) {
-
-    if (! el) {
+    if (!el) {
       return;
     }
 
@@ -21,17 +19,14 @@
 
     // Fallback for no transitions.
     setTimeout(removeThis, TRANSITION_FALLBACK_DURATION);
-
   };
 
   function Alertify() {
-
     /**
      * Alertify private object
      * @type {Object}
      */
     var _alertify = {
-
       parent: document.body,
       version: '1.0.12',
       defaultOkLabel: 'Ok',
@@ -78,11 +73,13 @@
        * @return {String}     An HTML string of the message box
        */
       build: function(item) {
-
         var btnTxt = this.dialogs.buttons.ok;
-        var html = '<div class="dialog hide">' + '<div>' + this.dialogs.message.replace('{{message}}', item.message);
+        var html =
+          '<div class="dialog hide">' +
+          '<div>' +
+          this.dialogs.message.replace('{{message}}', item.message);
 
-        if(item.type === 'confirm' || item.type === 'prompt') {
+        if (item.type === 'confirm' || item.type === 'prompt') {
           btnTxt = this.dialogs.buttons.cancel + this.dialogs.buttons.ok;
         }
 
@@ -96,11 +93,10 @@
           .replace('{{cancel}}', this.cancelLabel);
 
         return html;
-
       },
 
       setCloseLogOnClick: function(bool) {
-        this.closeLogOnClick = !! bool;
+        this.closeLogOnClick = !!bool;
       },
 
       /**
@@ -112,7 +108,6 @@
        * @return {undefined}
        */
       close: function(elem, wait) {
-
         if (this.closeLogOnClick) {
           elem.addEventListener('click', function() {
             hideElement(elem);
@@ -123,12 +118,11 @@
 
         if (wait < 0) {
           hideElement(elem);
-        } else if(wait > 0) {
+        } else if (wait > 0) {
           setTimeout(function() {
             hideElement(elem);
           }, wait);
         }
-
       },
 
       /**
@@ -162,7 +156,6 @@
        * @return {Object}
        */
       log: function(message, type, click) {
-
         var existing = document.querySelectorAll('.alertify-logs > div');
         if (existing) {
           var diff = existing.length - this.maxLogItems;
@@ -181,10 +174,9 @@
       },
 
       setupLogContainer: function() {
-
         var elLog = document.querySelector('.alertify-logs');
         var className = this.logContainerClass;
-        if (! elLog) {
+        if (!elLog) {
           elLog = document.createElement('div');
           elLog.className = className;
           this.parent.appendChild(elLog);
@@ -196,7 +188,6 @@
         }
 
         return elLog;
-
       },
 
       /**
@@ -211,11 +202,10 @@
        * @return {undefined}
        */
       notify: function(message, type, click) {
-
         var elLog = this.setupLogContainer();
         var log = document.createElement('div');
 
-        log.className = (type || 'default');
+        log.className = type || 'default';
         if (_alertify.logTemplateMethod) {
           log.innerHTML = _alertify.logTemplateMethod(message);
         } else {
@@ -233,7 +223,6 @@
         }, 10);
 
         this.close(log, this.delay);
-
       },
 
       /**
@@ -242,7 +231,6 @@
        * @return {undefined}
        */
       setup: function(item) {
-
         var el = document.createElement('div');
         el.className = 'alertify hide';
         el.innerHTML = this.build(item);
@@ -256,11 +244,10 @@
           // 27 = Esc key
           if (event.which === 27) {
             // prompt/confirm have a cancel button
-            if(btnCancel) {
+            if (btnCancel) {
               btnCancel.click();
-            }
-            // alert only has ok button
-            else {
+            } else {
+              // alert only has ok button
               btnOK.click();
             }
             document.removeEventListener('keyup', handleEscKey);
@@ -283,24 +270,23 @@
           }
         }
 
-        function isPrompt () {
-          return (
-            input &&
-            item.type &&
-            item.type === 'prompt'
-          );
+        function isPrompt() {
+          return input && item.type && item.type === 'prompt';
         }
 
         function setupHandlers(resolve) {
           if ('function' !== typeof resolve) {
             // promises are not available so resolve is a no-op
-            resolve = function () {};
+            resolve = function() {};
           }
 
           if (btnOK) {
             btnOK.addEventListener('click', function(ev) {
-
-              if (isPrompt() && item.isValid && 'function' === typeof item.isValid) {
+              if (
+                isPrompt() &&
+                item.isValid &&
+                'function' === typeof item.isValid
+              ) {
                 if (!item.isValid(input.value)) {
                   input.classList.add('invalid');
                   return;
@@ -368,7 +354,7 @@
         setTimeout(function() {
           el.classList.remove('hide');
           el.classList.add('show');
-          if(isPrompt()) {
+          if (isPrompt()) {
             input.select();
             input.focus();
           } else {
@@ -412,7 +398,7 @@
         this.setCloseLogOnClick(this.closeLogOnClickDefault);
         this.setLogPosition('bottom left');
         this.logTemplateMethod = null;
-      },
+      }
     };
 
     return {
@@ -431,7 +417,9 @@
         return _alertify.dialog(message, 'confirm', onOkay, onCancel) || this;
       },
       prompt: function(message, onOkay, onCancel, isValid) {
-        return _alertify.dialog(message, 'prompt', onOkay, onCancel, isValid) || this;
+        return (
+          _alertify.dialog(message, 'prompt', onOkay, onCancel, isValid) || this
+        );
       },
       log: function(message, click) {
         _alertify.log(message, 'default', click);
@@ -470,7 +458,7 @@
         return this;
       },
       closeLogOnClick: function(bool) {
-        _alertify.setCloseLogOnClick(!! bool);
+        _alertify.setCloseLogOnClick(!!bool);
         return this;
       },
       logPosition: function(str) {
@@ -490,4 +478,4 @@
   }
 
   window.alertify = new Alertify();
-}());
+})();

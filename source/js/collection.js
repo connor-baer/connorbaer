@@ -1,14 +1,12 @@
-import React, { Component } from 'react'
-import { render } from 'react-dom'
-import RecipesContainer from './components/RecipesContainer'
-
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import RecipesContainer from './components/RecipesContainer';
 
 // Set some sane defaults
 let defaultState = {
-  measure: "metric",
+  measure: 'metric',
   people: 2
-}
-
+};
 
 class App extends Component {
   constructor(props) {
@@ -20,8 +18,8 @@ class App extends Component {
    * Get stored state from localStorage
    */
   componentWillMount() {
-    if (localStorage.getItem( 'state' )) {
-      this.state = JSON.parse(localStorage.getItem( 'state' ));
+    if (localStorage.getItem('state')) {
+      this.state = JSON.parse(localStorage.getItem('state'));
     }
   }
 
@@ -32,16 +30,17 @@ class App extends Component {
    * @param  {object} prevState
    */
   componentDidUpdate(prevProps, prevState) {
-    localStorage.setItem( 'state', JSON.stringify( this.state ));
+    localStorage.setItem('state', JSON.stringify(this.state));
   }
 
   render() {
-    return <RecipesContainer measure={this.state.measure} people={this.state.people} />
+    return (
+      <RecipesContainer
+        measure={this.state.measure}
+        people={this.state.people}
+      />
+    );
   }
-
 }
 
-render(
-  <App />,
-  document.getElementById('app')
-)
+render(<App />, document.getElementById('app'));

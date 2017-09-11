@@ -1,9 +1,7 @@
-import React, { Component } from 'react'
-import Sidebar from './Sidebar'
-
+import React, { Component } from 'react';
+import Sidebar from './Sidebar';
 
 class SidebarContainer extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -16,8 +14,8 @@ class SidebarContainer extends Component {
    * Fetch recipe data
    */
   componentWillMount() {
-    if (localStorage.getItem( 'sidebar' )) {
-      let savedState = JSON.parse(localStorage.getItem( 'sidebar' ));
+    if (localStorage.getItem('sidebar')) {
+      let savedState = JSON.parse(localStorage.getItem('sidebar'));
 
       this.setState(savedState);
 
@@ -34,7 +32,7 @@ class SidebarContainer extends Component {
    * @param  {object} prevState
    */
   componentDidUpdate(prevProps, prevState) {
-    localStorage.setItem( 'sidebar', JSON.stringify( this.state ));
+    localStorage.setItem('sidebar', JSON.stringify(this.state));
   }
 
   /**
@@ -58,12 +56,8 @@ class SidebarContainer extends Component {
    * Render the sidebar
    */
   render() {
-    return (
-      <Sidebar onClick={this.handleClick.bind(this)} />
-    )
+    return <Sidebar onClick={this.handleClick.bind(this)} />;
   }
-
 }
 
-
-export default SidebarContainer
+export default SidebarContainer;

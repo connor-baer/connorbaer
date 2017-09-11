@@ -1,11 +1,9 @@
-import React, { Component } from 'react'
-import * as Utils from './Utils'
-import Filters from './Filters'
-import Recipes from './Recipes'
-
+import React, { Component } from 'react';
+import * as Utils from './Utils';
+import Filters from './Filters';
+import Recipes from './Recipes';
 
 class RecipesContainer extends Component {
-
   /**
    * State for search and filter values
    */
@@ -53,8 +51,9 @@ class RecipesContainer extends Component {
 
     fetch(url)
       .then(function(response) {
-        return response.json()
-      }).then(function(json) {
+        return response.json();
+      })
+      .then(function(json) {
         let filterValues = {};
 
         json.data.map(function(group) {
@@ -62,15 +61,20 @@ class RecipesContainer extends Component {
           filterValues[key] = '';
         });
 
-        let dataFilters = Object.assign({}, filterValues, _this.state.filterValues);
+        let dataFilters = Object.assign(
+          {},
+          filterValues,
+          _this.state.filterValues
+        );
 
         _this.setState({
           filters: json.data,
           filterValues: dataFilters
         });
-      }).catch(function(ex) {
-        console.warn('parsing failed', ex)
       })
+      .catch(function(ex) {
+        console.warn('parsing failed', ex);
+      });
   }
 
   /**
@@ -109,7 +113,9 @@ class RecipesContainer extends Component {
       newValue = value;
     }
 
-    let newFilters = Object.assign({}, this.state.filterValues, {[name]: newValue});
+    let newFilters = Object.assign({}, this.state.filterValues, {
+      [name]: newValue
+    });
 
     this.setState({
       filterValues: newFilters
@@ -132,16 +138,16 @@ class RecipesContainer extends Component {
           onTimeChange={this.handleTimeChange.bind(this)}
           filters={this.state.filters}
           filterValues={this.state.filterValues}
-          onFilterChange={this.handleFilterChange.bind(this)} />
+          onFilterChange={this.handleFilterChange.bind(this)}
+        />
         <Recipes
           searchValue={this.state.searchValue}
           timeValue={this.state.timeValue}
-          filterValues={this.state.filterValues} />
+          filterValues={this.state.filterValues}
+        />
       </div>
-    )
+    );
   }
-
 }
 
-
-export default RecipesContainer
+export default RecipesContainer;

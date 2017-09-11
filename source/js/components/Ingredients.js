@@ -1,8 +1,6 @@
-import React, { Component } from 'react'
-
+import React, { Component } from 'react';
 
 class Ingredients extends Component {
-
   /**
    * Dynamically generate ingredient list
    */
@@ -15,11 +13,12 @@ class Ingredients extends Component {
               type="checkbox"
               className="o-ingredient__checkbox"
               value={ingredient}
-              id={encodeURIComponent(ingredient)} />
+              id={encodeURIComponent(ingredient)}
+            />
             <span className="o-ingredient__text">{ingredient}</span>
           </label>
         </li>
-      )
+      );
     });
   }
 
@@ -37,25 +36,26 @@ class Ingredients extends Component {
             placeholder="Persons"
             className="c-input__text c-sidebar__serves"
             value={this.props.people}
-            onChange={this.props.onPeopleChange} />
-          <span className="c-input__highlight"></span>
+            onChange={this.props.onPeopleChange}
+          />
+          <span className="c-input__highlight" />
           <button
             onClick={this.props.onMinusClick}
-            className="c-sidebar__stepper">-</button>
+            className="c-sidebar__stepper"
+          >
+            -
+          </button>
           <button
             onClick={this.props.onPlusClick}
-            className="c-sidebar__stepper">+</button>
+            className="c-sidebar__stepper"
+          >
+            +
+          </button>
         </fieldset>
-        <ul>
-          {
-            this.createIngredients()
-          }
-        </ul>
+        <ul>{this.createIngredients()}</ul>
       </div>
-    )
+    );
   }
-
 }
 
-
-export default Ingredients
+export default Ingredients;

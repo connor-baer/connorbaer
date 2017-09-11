@@ -12,28 +12,22 @@
  * Favicons
  */
 
-
-const pkg = require( './package.json' ), // Allows access to the project metadata from the package.json file.
+const pkg = require('./package.json'), // Allows access to the project metadata from the package.json file.
   src = pkg.config.src, // The raw material of the theme: custom scripts, SCSS source files, images, etc.; do not delete this folder!
   root = pkg.config.root, // The webroot directory that will be accessible on your server.
   dev = pkg.config.dev, // A folder for your assets in development.
   dist = pkg.config.dist, // A folder for your assets in production.
   tmplts = pkg.config.tmplts, // The CraftCMS template folder.
-  modules = pkg.config.modules // NPM packages.
-;
-
+  modules = pkg.config.modules; // NPM packages.
 
 module.exports = {
-
-
   // Clean //
 
   clean: {
-    tidy: [ root + '**/.DS_Store' ], // A glob pattern matching junk files to clean out of the webroot.
-    dev: [ dev + '**', dist + 'revisions.json', tmplts + '**/*.min.css' ], // Clean the development directory for a fresh build.
-    dist: [ dist + '**' ], // Clean the distribution directory for a fresh build.
+    tidy: [root + '**/.DS_Store'], // A glob pattern matching junk files to clean out of the webroot.
+    dev: [dev + '**', dist + 'revisions.json', tmplts + '**/*.min.css'], // Clean the development directory for a fresh build.
+    dist: [dist + '**'] // Clean the distribution directory for a fresh build.
   },
-
 
   // Styles //
 
@@ -45,38 +39,39 @@ module.exports = {
         modules + 'open-color/open-color.scss',
         modules + 'choices.js/assets/styles/scss/choices.scss',
         modules + 'simplemde/dist/simplemde.min.css',
-        modules + 'photoswipe/dist/photoswipe.css',
+        modules + 'photoswipe/dist/photoswipe.css'
       ],
       rename: {
         prefix: '_',
-        extname: '.scss',
+        extname: '.scss'
       },
-      dest: src + 'css/lib/',
+      dest: src + 'css/lib/'
     },
     compile: {
       src: src + '**/**/*.scss',
       dest: dev,
-      libsass: { // Requires the libsass implementation of Sass (included in this package)
-        includePaths: [ modules ],
+      libsass: {
+        // Requires the libsass implementation of Sass (included in this package)
+        includePaths: [modules],
         precision: 6,
-        onError: function ( err ) {
-          return console.log( err );
-        },
+        onError: function(err) {
+          return console.log(err);
+        }
       },
       cssnano: {
         zindex: false,
         autoprefixer: {
           add: true,
-          browsers: [ '> 3%', 'last 2 versions' ], // This tool is magic and you should use it in all your projects :)
-        },
+          browsers: ['> 3%', 'last 2 versions'] // This tool is magic and you should use it in all your projects :)
+        }
       },
       rename: {
-        extname: '.min.css',
-      },
+        extname: '.min.css'
+      }
     },
     amp: {
       src: dev + 'css/amp.min.css',
-      dest: tmplts + '_layouts/',
+      dest: tmplts + '_layouts/'
     },
     critical: {
       src: pkg.homepage,
@@ -85,11 +80,11 @@ module.exports = {
       inline: false,
       small: {
         height: 732,
-        width: 412,
+        width: 412
       },
       large: {
         height: 1280,
-        width: 1280,
+        width: 1280
       },
       base: root,
       css: dev + 'css/connorbaer.min.css',
@@ -129,11 +124,10 @@ module.exports = {
         {
           url: 'food/salmon-burger',
           template: 'food/_entry'
-        },
-      ],
-    },
+        }
+      ]
+    }
   },
-
 
   // Scripts //
 
@@ -149,12 +143,12 @@ module.exports = {
           modules + 'suncalc/suncalc.js',
           src + 'js/alertify.js',
           src + 'js/polyfills.js',
-          src + 'js/scripts.js',
+          src + 'js/scripts.js'
         ],
         home: [
           modules + 'vue/dist/vue.min.js',
           modules + 'simplemde/dist/simplemde.min.js',
-          src + 'js/home.js',
+          src + 'js/home.js'
         ],
         prism: [
           modules + 'prismjs/prism.js',
@@ -163,46 +157,44 @@ module.exports = {
           modules + 'prismjs/components/prism-python.js',
           modules + 'prismjs/components/prism-php.js',
           modules + 'prismjs/components/prism-scss.js',
-          modules + 'prismjs/components/prism-twig.js',
+          modules + 'prismjs/components/prism-twig.js'
         ],
         photoswipe: [
           modules + 'photoswipe/dist/photoswipe.js',
-          src + 'js/photoswipe.js',
-        ],
+          src + 'js/photoswipe.js'
+        ]
       },
-      dest: dev + 'js/',
+      dest: dev + 'js/'
     },
     inline: {
       src: [
         modules + 'fg-loadcss/src/loadCSS.js',
         modules + 'fg-loadcss/src/cssrelpreload.js',
-        modules + 'loadjs/dist/loadjs.js',
+        modules + 'loadjs/dist/loadjs.js'
       ],
-      dest: tmplts + '_inline/',
+      dest: tmplts + '_inline/'
     },
     babili: {
       mangle: {
         keepClassNames: true
-      },
+      }
     },
     rename: {
-      extname: '.min.js',
-    },
+      extname: '.min.js'
+    }
   },
-
 
   // Webpack //
 
   webpack: {
     src: [src + 'js/single.js', src + 'js/collection.js'],
-    dest: dev + 'js/',
+    dest: dev + 'js/'
   },
-
 
   // BrowserSync //
 
   browsersync: {
-    files: [ dev + '**/*', tmplts + '**/*' ],
+    files: [dev + '**/*', tmplts + '**/*'],
     port: 5000, // Port number for the live version of the site.
     proxy: 'http://' + pkg.name + '.dev/', // We need to use a proxy instead of the built-in server because CraftCMS has to do some server-side rendering for the website to work.
     notify: false, // In-line notifications (the blocks of text saying whether you are connected to the BrowserSync server or not)
@@ -211,35 +203,32 @@ module.exports = {
     reloadDelay: 1000, // Time, in milliseconds, to wait before reloading/injecting
     logFileChanges: false, // Log information about changed files
     watchOptions: {
-      debounceDelay: 4000, // This introduces a small delay when watching for file change events to avoid triggering too many reloads
-    },
+      debounceDelay: 4000 // This introduces a small delay when watching for file change events to avoid triggering too many reloads
+    }
   },
-
 
   // Watch //
 
   watch: {
     styles: src + 'css/**/*.scss',
     scripts: src + 'js/*.js',
-    webpack: src + 'js/components/*.js',
+    webpack: src + 'js/components/*.js'
   },
-
 
   // Revisions //
 
   revisions: {
     src: {
       css: dev + '**/*.css',
-      js: dev + '**/*.js',
+      js: dev + '**/*.js'
     },
     dest: dist,
     manifest: 'revisions.json',
     options: {
       base: dist,
-      merge: true,
-    },
+      merge: true
+    }
   },
-
 
   // Service Worker //
 
@@ -248,7 +237,7 @@ module.exports = {
     name: 'service-worker.js',
     config: {
       cacheId: pkg.name,
-      importScripts: [ 'sw.js' ],
+      importScripts: ['sw.js'],
       /*
       dynamicUrlToDependencies: {
         'dynamic/page1': [
@@ -261,28 +250,26 @@ module.exports = {
         ]
       },
       */
-      runtimeCaching: [ {
-        // See https://github.com/GoogleChrome/sw-toolbox#methods
-        urlPattern: /runtime-caching/,
-        handler: 'cacheFirst',
-        // See https://github.com/GoogleChrome/sw-toolbox#options
-        options: {
-          cache: {
-            maxEntries: 1,
-            name: 'runtime-cache',
-          },
-        },
-      }, ],
-      staticFileGlobs: [
-        dist + '/css/**.css',
-        dist + '/js/**.js',
+      runtimeCaching: [
+        {
+          // See https://github.com/GoogleChrome/sw-toolbox#methods
+          urlPattern: /runtime-caching/,
+          handler: 'cacheFirst',
+          // See https://github.com/GoogleChrome/sw-toolbox#options
+          options: {
+            cache: {
+              maxEntries: 1,
+              name: 'runtime-cache'
+            }
+          }
+        }
       ],
+      staticFileGlobs: [dist + '/css/**.css', dist + '/js/**.js'],
       stripPrefix: root,
       // verbose defaults to false, but for the purposes of this demo, log more.
-      verbose: true,
-    },
+      verbose: true
+    }
   },
-
 
   // Favicons //
 
@@ -310,10 +297,10 @@ module.exports = {
         coast: {
           offset: 15
         }, // Create Opera Coast icon with offset 15%. `boolean` or `{ offset: offsetInPercentage }`
-        yandex: false, // Create Yandex browser icon. `boolean`
-      },
+        yandex: false // Create Yandex browser icon. `boolean`
+      }
     },
     destHtml: '',
-    dest: root + 'favicons/',
-  },
+    dest: root + 'favicons/'
+  }
 };
