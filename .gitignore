@@ -2,8 +2,8 @@
 ############
 config.js
 data/*
-app.js
 .next
+.esm-cache
 
 # Install by running `npm install` #
 /node_modules/

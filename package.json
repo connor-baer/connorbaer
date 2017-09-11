@@ -22,30 +22,22 @@
     "url": "https://github.com/connor-baer/connorbaer.co/issues"
   },
   "scripts": {
-    "build": "npm run prebuild && npm run build:server && npm run build:client",
-    "build:client": "NODE_ENV=production next build",
-    "build:server": "NODE_ENV=production webpack --config webpack.config.js",
-    "clean": "rm -f app.js",
-    "fix": "npm run fix:prettier; npm run fix:eslint; npm run fix:stylelint",
+    "build": "NODE_ENV=production next build",
+    "dev": "nodemon --watch server --inspect index.js",
+    "fix": "npm run fix:prettier; npm run fix:eslint",
     "fix:eslint": "eslint --fix --quiet \"**/*.js\" \"**/*.js\"",
     "fix:prettier": "prettier --single-quote --write \"**/*.js\" \"**/*.js\"",
-    "fix:stylelint": "stylelint \"src/**/*.scss\" --syntax scss --config stylelint.config.js --fix",
-    "prebuild": "npm run clean",
-    "start": "npm run prebuild && webpack --config webpack.config.js --display-error-details",
-    "precommit": "lint-staged",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "NODE_ENV=production node index.js",
+    "precommit": "lint-staged"
   },
   "lint-staged": {
     "*.js": [
       "npm run fix:prettier",
       "git add"
-    ],
-    "*.scss": [
-      "npm run fix:stylelint",
-      "git add"
     ]
   },
   "dependencies": {
+    "@std/esm": "^0.8.3",
     "body-parser": "^1.18.0",
     "choices.js": "^2.7.8",
     "express": "^4.15.4",
@@ -59,21 +51,26 @@
     "morgan": "^1.8.2",
     "next": "^3.2.2",
     "normalize.css": "^6.0.0",
+    "nprogress": "^0.2.0",
     "object-fit-images": "^3.1.3",
     "open-color": "^1.4.0",
     "photoswipe": "^4.1.1",
+    "postcss": "^6.0.11",
+    "postcss-cssnext": "^2.11.0",
     "prismjs": "^1.6.0",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "smooth-scroll": "github:cferdinandi/smooth-scroll",
     "start-server-webpack-plugin": "^2.2.0",
+    "styled-jsx-postcss": "^0.2.0",
     "suncalc": "^1.8.0",
     "typi": "^3.0.0",
     "whatwg-fetch": "^2.0.3",
     "winston": "^2.3.1"
   },
   "devDependencies": {
+    "babel-eslint": "^7.2.3",
     "eslint": "^4.6.1",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-config-airbnb-base": "^11.3.2",
@@ -87,8 +84,6 @@
     "eslint-plugin-react": "^7.3.0",
     "husky": "^0.13.4",
     "lint-staged": "^3.6.0",
-    "prettier": "^1.4.1",
-    "stylelint-config-sass-guidelines": "^3.1.0",
-    "stylelint-config-standard": "^17.0.0"
+    "prettier": "^1.4.1"
   }
 }
