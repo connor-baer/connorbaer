@@ -9,7 +9,11 @@ let cssVarPoly = {
     // first lets see if the browser supports CSS variables
     // No version of IE supports window.CSS.supports, so if that isn't supported in the first place we know CSS variables is not supported
     // Edge supports supports, so check for actual variable support
-    if (window.CSS && window.CSS.supports && window.CSS.supports('(--foo: red)')) {
+    if (
+      window.CSS &&
+      window.CSS.supports &&
+      window.CSS.supports('(--foo: red)')
+    ) {
       // this browser does support variables, abort
       return;
     } else {
@@ -29,7 +33,9 @@ let cssVarPoly = {
 
   // find all the css blocks, save off the content, and look for variables
   findCSS() {
-    let styleBlocks = document.querySelectorAll('style:not(.inserted),link[rel="stylesheet"]');
+    let styleBlocks = document.querySelectorAll(
+      'style:not(.inserted),link[rel="stylesheet"]'
+    );
 
     // we need to track the order of the style/link elements when we save off the CSS, set a counter
     let counter = 1;
@@ -44,7 +50,10 @@ let cssVarPoly = {
         cssVarPoly.findSetters(theCSS, counter);
       } else if (block.nodeName === 'LINK') {
         // console.log("link");
-        cssVarPoly.getLink(block.getAttribute('href'), counter, function(counter, request) {
+        cssVarPoly.getLink(block.getAttribute('href'), counter, function(
+          counter,
+          request
+        ) {
           cssVarPoly.findSetters(request.responseText, counter);
           cssVarPoly.oldCSS[counter] = request.responseText;
           cssVarPoly.updateCSS();
@@ -71,7 +80,10 @@ let cssVarPoly = {
     // loop through the css blocks (styles and links)
     for (let curCSSID in cssVarPoly.oldCSS) {
       // console.log("curCSS:",oldCSS[curCSSID]);
-      let newCSS = cssVarPoly.replaceGetters(cssVarPoly.oldCSS[curCSSID], cssVarPoly.ratifiedVars);
+      let newCSS = cssVarPoly.replaceGetters(
+        cssVarPoly.oldCSS[curCSSID],
+        cssVarPoly.ratifiedVars
+      );
       // put it back into the page
       // first check to see if this block exists already
       if (document.querySelector('#inserted' + curCSSID)) {
@@ -112,7 +124,6 @@ let cssVarPoly = {
           // find the fallback within the getter
           curCSS = curCSS.replace(match, match.match(/var\(.+,\s*(.+)\)/)[1]);
         });
-
       }
 
       // curCSS = curCSS.replace(getterRegex2,varList[theVar]);
@@ -167,7 +178,6 @@ let cssVarPoly = {
 
     request.send();
   }
-
 };
 
 cssVarPoly.init();

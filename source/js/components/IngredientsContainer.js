@@ -1,15 +1,13 @@
-import React, { Component } from 'react'
-import Ingredients from './Ingredients'
-
+import React, { Component } from 'react';
+import Ingredients from './Ingredients';
 
 class IngredientsContainer extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       ingredients: [''],
       nutritions: {},
-      people: '2',
+      people: '2'
     };
   }
 
@@ -18,8 +16,11 @@ class IngredientsContainer extends Component {
    * Fetch recipe data
    */
   componentWillMount() {
-    if (localStorage.getItem( 'state' )) {
-      this.setState(JSON.parse(localStorage.getItem( 'state' )), this.fetchData(this.state.measure, this.state.people));
+    if (localStorage.getItem('state')) {
+      this.setState(
+        JSON.parse(localStorage.getItem('state')),
+        this.fetchData(this.state.measure, this.state.people)
+      );
     }
   }
 
@@ -42,7 +43,7 @@ class IngredientsContainer extends Component {
    * @param  {object} prevState
    */
   componentDidUpdate(prevProps, prevState) {
-    localStorage.setItem( 'state', JSON.stringify( this.state ));
+    localStorage.setItem('state', JSON.stringify(this.state));
   }
 
   /**
@@ -51,20 +52,28 @@ class IngredientsContainer extends Component {
   fetchData(people) {
     var _this = this;
 
-    let path = ( window.location.pathname.substr(window.location.pathname.lastIndexOf('/') + 1) );
-    let url = '/api/food/recipe/' + path + '.json?measure=metric&people=' + this.state.people;
+    let path = window.location.pathname.substr(
+      window.location.pathname.lastIndexOf('/') + 1
+    );
+    let url =
+      '/api/food/recipe/' +
+      path +
+      '.json?measure=metric&people=' +
+      this.state.people;
 
     fetch(url)
       .then(function(response) {
-        return response.json()
-      }).then(function(json) {
+        return response.json();
+      })
+      .then(function(json) {
         _this.setState({
           ingredients: json.data[0].ingredients,
-          nutritions: json.data[0].nutritions,
+          nutritions: json.data[0].nutritions
         });
-      }).catch(function(ex) {
-        console.warn('parsing failed', ex)
       })
+      .catch(function(ex) {
+        console.warn('parsing failed', ex);
+      });
   }
 
   /**
@@ -108,11 +117,10 @@ class IngredientsContainer extends Component {
         people={this.state.people}
         onPeopleChange={this.handlePeopleChange.bind(this)}
         onMinusClick={this.handleMinusClick.bind(this)}
-        onPlusClick={this.handlePlusClick.bind(this)} />
-    )
+        onPlusClick={this.handlePlusClick.bind(this)}
+      />
+    );
   }
-
 }
 
-
-export default IngredientsContainer
+export default IngredientsContainer;

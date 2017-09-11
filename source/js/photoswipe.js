@@ -1,5 +1,4 @@
 function initPhotoSwipeFromDOM(gallerySelector) {
-
   // parse slide data (url, title, size ...) from DOM elements
   // (children of gallerySelector)
   function parseThumbnailElements(el) {
@@ -12,12 +11,11 @@ function initPhotoSwipeFromDOM(gallerySelector) {
       size,
       item;
 
-    for(var i = 0; i < numNodes; i++) {
-
+    for (var i = 0; i < numNodes; i++) {
       figureEl = thumbElements[i]; // <figure> element
 
       // include only element nodes
-      if(figureEl.nodeType !== 1) {
+      if (figureEl.nodeType !== 1) {
         continue;
       }
 
@@ -31,12 +29,12 @@ function initPhotoSwipeFromDOM(gallerySelector) {
         h: parseInt(size[1], 10)
       };
 
-      if(figureEl.children.length > 1) {
+      if (figureEl.children.length > 1) {
         // <figcaption> content
         item.title = figureEl.children[1].innerHTML;
       }
 
-      if(linkEl.children.length > 0) {
+      if (linkEl.children.length > 0) {
         // <img> thumbnail element, retrieving thumbnail url
         item.msrc = linkEl.children[0].getAttribute('src');
       }
@@ -50,22 +48,22 @@ function initPhotoSwipeFromDOM(gallerySelector) {
 
   // find nearest parent element
   function closest(el, fn) {
-    return el && ( fn(el) ? el : closest(el.parentNode, fn) );
+    return el && (fn(el) ? el : closest(el.parentNode, fn));
   }
 
   // triggers when user clicks on thumbnail
   function onThumbnailsClick(e) {
     e = e || window.event;
-    e.preventDefault ? e.preventDefault() : e.returnValue = false;
+    e.preventDefault ? e.preventDefault() : (e.returnValue = false);
 
     var eTarget = e.target || e.srcElement;
 
     // find root element of slide
     var clickedListItem = closest(eTarget, function(el) {
-      return (el.tagName && el.tagName.toUpperCase() === 'FIGURE');
+      return el.tagName && el.tagName.toUpperCase() === 'FIGURE';
     });
 
-    if(!clickedListItem) {
+    if (!clickedListItem) {
       return;
     }
 
@@ -78,20 +76,20 @@ function initPhotoSwipeFromDOM(gallerySelector) {
       index;
 
     for (var i = 0; i < numChildNodes; i++) {
-      if(childNodes[i].nodeType !== 1) {
+      if (childNodes[i].nodeType !== 1) {
         continue;
       }
 
-      if(childNodes[i] === clickedListItem) {
+      if (childNodes[i] === clickedListItem) {
         index = nodeIndex;
         break;
       }
       nodeIndex++;
     }
 
-    if(index >= 0) {
+    if (index >= 0) {
       // open PhotoSwipe if valid index found
-      openPhotoSwipe( index, clickedGallery );
+      openPhotoSwipe(index, clickedGallery);
     }
     return false;
   }
@@ -99,25 +97,25 @@ function initPhotoSwipeFromDOM(gallerySelector) {
   // parse picture index and gallery index from URL (#&pid=1&gid=2)
   function photoswipeParseHash() {
     var hash = window.location.hash.substring(1),
-    params = {};
+      params = {};
 
-    if(hash.length < 5) {
+    if (hash.length < 5) {
       return params;
     }
 
     var vars = hash.split('&');
     for (var i = 0; i < vars.length; i++) {
-      if(!vars[i]) {
+      if (!vars[i]) {
         continue;
       }
       var pair = vars[i].split('=');
-      if(pair.length < 2) {
+      if (pair.length < 2) {
         continue;
       }
       params[pair[0]] = pair[1];
     }
 
-    if(params.gid) {
+    if (params.gid) {
       params.gid = parseInt(params.gid, 10);
     }
 
@@ -134,7 +132,6 @@ function initPhotoSwipeFromDOM(gallerySelector) {
 
     // define options (if needed)
     options = {
-
       bgOpacity: 0.95,
       showHideOpacity: true,
 
@@ -144,21 +141,21 @@ function initPhotoSwipeFromDOM(gallerySelector) {
       getThumbBoundsFn: function(index) {
         // See Options -> getThumbBoundsFn section of documentation for more info
         var thumbnail = items[index].el.getElementsByTagName('img')[0], // find thumbnail
-          pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
+          pageYScroll =
+            window.pageYOffset || document.documentElement.scrollTop,
           rect = thumbnail.getBoundingClientRect();
 
-        return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
+        return { x: rect.left, y: rect.top + pageYScroll, w: rect.width };
       }
-
     };
 
     // PhotoSwipe opened from URL
-    if(fromURL) {
-      if(options.galleryPIDs) {
+    if (fromURL) {
+      if (options.galleryPIDs) {
         // parse real index when custom PIDs are used
         // http://photoswipe.com/documentation/faq.html#custom-pid-in-url
-        for(var j = 0; j < items.length; j++) {
-          if(items[j].pid === index) {
+        for (var j = 0; j < items.length; j++) {
+          if (items[j].pid === index) {
             options.index = j;
             break;
           }
@@ -172,30 +169,30 @@ function initPhotoSwipeFromDOM(gallerySelector) {
     }
 
     // exit if index not found
-    if( isNaN(options.index) ) {
+    if (isNaN(options.index)) {
       return;
     }
 
-    if(disableAnimation) {
+    if (disableAnimation) {
       options.showAnimationDuration = 0;
     }
 
     // Pass data to PhotoSwipe and initialize it
-    gallery = new PhotoSwipe( pswpElement, null, items, options);
+    gallery = new PhotoSwipe(pswpElement, null, items, options);
     gallery.init();
   }
 
   // loop through all gallery elements and bind events
-  var galleryElements = document.querySelectorAll( gallerySelector );
+  var galleryElements = document.querySelectorAll(gallerySelector);
 
-  for(var i = 0, l = galleryElements.length; i < l; i++) {
-    galleryElements[i].setAttribute('data-pswp-uid', i+1);
+  for (var i = 0, l = galleryElements.length; i < l; i++) {
+    galleryElements[i].setAttribute('data-pswp-uid', i + 1);
     galleryElements[i].onclick = onThumbnailsClick;
   }
 
   // Parse URL and open gallery if it contains #&pid=3&gid=1
   var hashData = photoswipeParseHash();
-  if(hashData.pid && hashData.gid) {
-    openPhotoSwipe( hashData.pid ,  galleryElements[ hashData.gid - 1 ], true, true );
+  if (hashData.pid && hashData.gid) {
+    openPhotoSwipe(hashData.pid, galleryElements[hashData.gid - 1], true, true);
   }
 }

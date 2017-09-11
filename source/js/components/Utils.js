@@ -1,5 +1,4 @@
-import queryString from 'query-string'
-
+import queryString from 'query-string';
 
 /**
  * Store a key value pair in the URL hash
@@ -16,15 +15,18 @@ export function setHashParam(key, value) {
   } else {
     delete parsed[key];
 
-    if ( Object.keys(parsed).length > 0 ) {
+    if (Object.keys(parsed).length > 0) {
       location.hash = queryString.stringify(parsed);
     } else {
       // Remove trailing # to prevent scrolling.
-      history.replaceState( '', document.title, window.location.pathname + window.location.search );
+      history.replaceState(
+        '',
+        document.title,
+        window.location.pathname + window.location.search
+      );
     }
   }
 }
-
 
 /**
  * Retrieve a value from the URL hash

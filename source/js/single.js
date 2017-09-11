@@ -1,20 +1,14 @@
-import React, { Component } from 'react'
-import { render } from 'react-dom'
-import SidebarContainer from './components/SidebarContainer'
-
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import SidebarContainer from './components/SidebarContainer';
 
 class App extends Component {
-
   /**
    * Render the app
    */
   render() {
-    return <SidebarContainer />
+    return <SidebarContainer />;
   }
-
 }
 
-render(
-  <App />,
-  document.getElementById('app')
-)
+render(<App />, document.getElementById('app'));

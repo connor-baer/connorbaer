@@ -1,8 +1,6 @@
-import React, { Component } from 'react'
-
+import React, { Component } from 'react';
 
 class Filters extends Component {
-
   /**
    * Dynamically generate checkboxes
    */
@@ -12,17 +10,18 @@ class Filters extends Component {
     return filter[name].map((option, index) => {
       return (
         <label key={index} htmlFor={option.toLowerCase()}>
-          <input type="checkbox"
-                 style={{display: 'none'}}
-                 value={option.toLowerCase()}
-                 id={option.toLowerCase()}
-                 name={name}
-                 checked={this.props.filterValues[name] === option.toLowerCase()}
-                 onChange={this.props.onFilterChange.bind(this, name)}
-                  />
+          <input
+            type="checkbox"
+            style={{ display: 'none' }}
+            value={option.toLowerCase()}
+            id={option.toLowerCase()}
+            name={name}
+            checked={this.props.filterValues[name] === option.toLowerCase()}
+            onChange={this.props.onFilterChange.bind(this, name)}
+          />
           <span className="c-filter__option">{option}</span>
         </label>
-      )
+      );
     });
   }
 
@@ -41,7 +40,7 @@ class Filters extends Component {
             onChange={this.props.onSearchChange}
             className="c-input__text"
           />
-          <span className="c-input__highlight"></span>
+          <span className="c-input__highlight" />
         </fieldset>
         <fieldset className="c-input c-input--time">
           <input
@@ -51,24 +50,18 @@ class Filters extends Component {
             onChange={this.props.onTimeChange}
             className="c-input__text"
           />
-          <span className="c-input__highlight"></span>
+          <span className="c-input__highlight" />
         </fieldset>
-        {
-          this.props.filters.map((filter, index) => {
-            return (
-              <fieldset key={index} className="c-filter">
-                {
-                  this.createCheckboxes(filter)
-                }
-              </fieldset>
-            );
-          })
-        }
+        {this.props.filters.map((filter, index) => {
+          return (
+            <fieldset key={index} className="c-filter">
+              {this.createCheckboxes(filter)}
+            </fieldset>
+          );
+        })}
       </div>
-    )
+    );
   }
-
 }
 
-
-export default Filters
+export default Filters;
