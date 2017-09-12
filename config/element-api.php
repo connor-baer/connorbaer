@@ -21,31 +21,31 @@ return [
 
     'endpoints' => [
 
-      'api/global/<handle:{handle}.json>' => function($handle) {
-          return [
-              'elementType' => GlobalSet::class,
-              'criteria' => ['handle' => $handle],
-              'first' => true,
-              'transformer' => function(GlobalSet $globalSet) {
-                  $links = [];
+        'api/global/<handle:{handle}>.json' => function($handle) {
+            return [
+                'elementType' => GlobalSet::class,
+                'criteria' => ['handle' => $handle],
+                'first' => true,
+                'transformer' => function(GlobalSet $globalSet) {
+                    $links = [];
 
-                  foreach ($globalSet->navigation as $block) {
+                    foreach ($globalSet->navigation as $block) {
 
-                     switch ($block->type->handle) {
-                         default:
-                             $links[] = [
-                              'label' => $block->type->navTitle,
-                              'link' => $block->type->navLink
-                             ];
-                     }
-                  }
+                        switch ($block->type->handle) {
+                            default:
+                                $links[] = [
+                                    'label' => $block->type->navTitle,
+                                    'link' => $block->type->navLink
+                                ];
+                        }
+                    }
 
-                  return [
-                      'description' => $globalSet->description,
-                      'links' => $links
-                  ];
-              }
-          ];
+                    return [
+                        'description' => $globalSet->description,
+                        'links' => $links
+                    ];
+                }
+            ];
         },
 
         'api/categories/<categoryGroup:{slug}>.json' => function ($categoryGroup) {
