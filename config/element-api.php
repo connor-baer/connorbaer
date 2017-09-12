@@ -46,42 +46,7 @@ return [
                   ];
               }
           ];
-        }
-
-        'api/global/recipes.json' => [
-            'elementType' => Entry::class,
-            'criteria' => [
-                'section' => 'food',
-                'orderBy' => 'title',
-            ],
-            'transformer' => function (Entry $entry) {
-                $measure = Craft::$app->request->getQueryParam('measure');
-                $people = Craft::$app->request->getQueryParam('people');
-
-                $ingredients = [];
-
-                $labels = [];
-
-                foreach ($entry['recipe']->getIngredients($measure, $people) as $ingredient) {
-                    $ingredients[] = $ingredient;
-                }
-
-                foreach ($entry['labels'] as $label) {
-                    $labels[] = $label['title'];
-                }
-
-                return [
-                    'title' => $entry['title'],
-                    'description' => $entry['recipe']['description'],
-                    'image' => $entry['recipe']->getImageUrl(),
-                    'labels' => implode(', ', $labels),
-                    'ingredients' => $ingredients,
-                    'skill' => ucfirst($entry['recipe']['skill']),
-                    'totalTime' => $entry['recipe']['totalTime'],
-                    'slug' => $entry['slug'],
-                ];
-            }
-        ],
+        },
 
         'api/categories/<categoryGroup:{slug}>.json' => function ($categoryGroup) {
             return [
