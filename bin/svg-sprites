@@ -1,0 +1,155 @@
+#!/usr/bin/env node
+
+const yargs = require('yargs');
+const path = require('path');
+const fs = require('mz/fs');
+const flow = require('lodash/fp/flow');
+const map = require('lodash/fp/map');
+const filter = require('lodash/fp/filter');
+const Svgo = require('svgo');
+const svgstore = require('svgstore');
+
+const svgo = new Svgo({
+  plugins: [
+    { cleanupIDs: false },
+    { convertPathData: false },
+    { removeViewBox: false },
+    { removeUselessStrokeAndFill: false },
+    { removeHiddenElems: false }
+  ]
+});
+const executionDir = process.cwd();
+
+const pathExists = (path, directory) => {
+  return new Promise((resolve, reject) => {
+    fs.stat(path, (err, stats) => {
+      if (err) {
+        return reject(err);
+      }
+      const isDirectory = stats.isDirectory();
+      const isFile = stats.isFile();
+      if ((directory && isDirectory) || (!directory && isFile)) {
+        return resolve(stats);
+      }
+      return reject(stats);
+    });
+  });
+};
+
+const fileExists = path => pathExists(path, false);
+const directoryExists = path => pathExists(path, true);
+
+const getSubfolders = dir => {
+  return fs
+    .readdirSync(dir)
+    .filter(file => fs.statSync(path.join(dir, file)).isDirectory())
+    .map(folderName => path.join(dir, folderName));
+};
+
+const options = yargs
+  .alias('s', 'source')
+  .alias('d', 'destination')
+  .describe('d', 'Destination folder')
+  .describe('s', 'Source folder')
+  .demandOption(['s', 'd']).argv;
+
+const sourceDir = path.resolve(executionDir, options.source);
+const destinationDir = path.resolve(executionDir, options.destination);
+
+const checkingDirectories = [
+  directoryExists(sourceDir),
+  directoryExists(destinationDir)
+];
+
+Promise.all(checkingDirectories)
+  .then(() => {
+    const subFolders = getSubfolders(sourceDir);
+    const creatingSprites = subFolders.map(subFolder =>
+      createSprite(subFolder)
+        .then(data => {
+          const name = path.basename(subFolder);
+          return { name, data };
+        })
+        .catch(err => {
+          console.error(
+            `A problem occured creating the sprite for folder ${subFolder}`
+          );
+          console.error(err);
+        })
+    );
+
+    return Promise.all(creatingSprites)
+      .then(sprites =>
+        map(sprite => {
+          const name = sprite.name;
+          const data = sprite.data;
+          const filename = `${name}.svg`;
+          const spritePath = path.join(destinationDir, filename);
+          return fs
+            .writeFile(spritePath, data)
+            .then(() => {
+              console.log(
+                `Successfully created sprite ${name} at ${spritePath}.`
+              );
+            })
+            .catch(err => {
+              console.error('Failed to write sprite ${name}');
+              console.error(err);
+              process.exit(1);
+            });
+        }, sprites)
+      )
+      .catch(err => {
+        console.error('An error occured when creating the sprites.');
+        console.error(err);
+      });
+  })
+  .catch(err => {
+    console.error('Sprite source or destination directory does not exist.');
+    console.error(err);
+    process.exit(1);
+  });
+
+function createSprite(directory) {
+  return fs
+    .readdir(directory)
+    .then(files =>
+      flow(
+        filter(file => file.includes('.svg')),
+        map(svgFile => path.join(directory, svgFile)),
+        map(readSprite),
+        sprites => Promise.all(sprites)
+      )(files)
+    )
+    .then(svgs => {
+      const optimizingSvgs = map(
+        svg =>
+          optimizeSvg(svg.data).then(optimizedData => ({
+            id: svg.id,
+            data: optimizedData
+          })),
+        svgs
+      );
+      return Promise.all(optimizingSvgs);
+    })
+    .then(optimizedSvgs =>
+      optimizedSvgs.reduce(
+        // TODO: Tweak svgstore options
+        (sprite, svg) => sprite.add(svg.id, svg.data),
+        svgstore()
+      )
+    );
+}
+
+function readSprite(svgPath) {
+  const name = path.basename(svgPath, '.svg');
+  const id = `icon-${name}`;
+  const readingData = fs.readFile(svgPath, 'utf8');
+  return readingData.then(data => ({ id, data }));
+}
+
+function optimizeSvg(data) {
+  return new Promise((resolve, reject) => {
+    svgo.optimize(data, optimizedSvg => resolve(optimizedSvg.data));
+  });
+}
