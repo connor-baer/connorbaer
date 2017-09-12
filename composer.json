@@ -1,12 +1,7 @@
 {
   "name": "craftcms/craft",
   "description": "Craft CMS",
-  "keywords": [
-    "craft",
-    "cms",
-    "craftcms",
-    "project"
-  ],
+  "keywords": ["craft", "cms", "craftcms", "project"],
   "license": "MIT",
   "homepage": "https://craftcms.com/",
   "type": "project",
@@ -21,7 +16,7 @@
   "minimum-stability": "beta",
   "require": {
     "php": ">=7.0.0",
-    "craftcms/cms": "^3.0.0-beta.14",
+    "craftcms/cms": "3.0.0-beta.26",
     "craftcms/plugin-installer": "^1.0.0",
     "vlucas/phpdotenv": "^2.4.0",
     "roave/security-advisories": "dev-master",
@@ -29,12 +24,12 @@
     "nystudio107/craft3-cookies": "^1.1",
     "nystudio107/craft3-recipe": "^1.0",
     "craftcms/mailgun": "1.0.0.1",
-    "dukt/twitter": "~2.0",
-    "nystudio107/craft3-imageoptimize": "^1.0",
+    "dukt/twitter": "2.0.0-beta.4",
+    "nystudio107/craft3-imageoptimize": "1.2.2",
     "clubstudioltd/craft3-asset-rev": "dev-master",
     "selvinortiz/doxter": "^3.0",
     "venveo/maintenance-mode": "dev-master",
-    "craftcms/element-api": "^2.0",
+    "craftcms/element-api": "2.4.2",
     "craftcms/anchors": "^2.0"
   },
   "config": {
@@ -45,10 +40,7 @@
       "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
     ]
   },
-  "repositories": [{
-      "type": "composer",
-      "url": "https://asset-packagist.org"
-    },
+  "repositories": [
     {
       "type": "vcs",
       "url": "https://github.com/venveo/craft3-maintenancemode.git"
