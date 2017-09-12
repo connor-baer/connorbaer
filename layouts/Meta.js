@@ -11,7 +11,7 @@ Router.onRouteChangeError = () => NProgress.done();
 const Meta = ({ children, title = '', index = true, follow = true }) => (
   <div>
     <Head>
-      <title>{`${title} | Connor Bär`}</title>
+      <title>{`${title} · Connor Bär`}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -23,7 +23,7 @@ const Meta = ({ children, title = '', index = true, follow = true }) => (
       />
       <link rel="icon" type="image/png" href="/static/favicon.png" />
     </Head>
-    {children}
+    <main className="l-main">{children}</main>
 
     {/* global styles */}
     <style jsx global>{`
@@ -219,7 +219,7 @@ const Meta = ({ children, title = '', index = true, follow = true }) => (
         }
 
         @media (min-width: ${breakpoints.wide}) {
-          font-size: 125%;
+          font-size: 110%;
         }
 
         transition: background-color ${animations.short},
@@ -278,13 +278,13 @@ const Meta = ({ children, title = '', index = true, follow = true }) => (
       hr {
         margin-top: 1rem;
         margin-bottom: 1.25rem;
-        =: 0;
+        border: 0;
 
         &::before {
           display: block;
           height: 2px;
-          =: ${colors.gray[3]};
-          =: '';
+          background-color: ${colors.gray[3]};
+          content: '';
         }
       }
 
@@ -306,6 +306,117 @@ const Meta = ({ children, title = '', index = true, follow = true }) => (
       samp,
       pre {
         font-family: ${fonts.family.mono};
+      }
+
+      .l-main {
+        min-height: 60vh;
+        padding-top: 3.75rem;
+      }
+
+      .l-ctnr {
+        display: block;
+        width: 100%;
+        max-width: 60rem;
+        margin-right: auto;
+        margin-left: auto;
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+
+        @media (min-width: ${breakpoints.medium}) {
+          padding-right: 1rem;
+          padding-left: 1rem;
+        }
+      }
+
+      .l-flex {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+      .l-flex--center {
+        justify-content: space-around;
+      }
+
+      [class*='l-w'] {
+        display: block;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        padding-right: 1rem;
+        padding-left: 1rem;
+      }
+
+      .l-columns {
+        column-gap: 2rem;
+        column-count: 1;
+        column-break-inside: avoid;
+        /* HACK: Fix webkit (i.e. Safari and Chrome) bugs related to multi column layout. */
+        perspective: 1;
+
+        @media (min-width: ${breakpoints.medium}) {
+          column-count: 2;
+        }
+
+        & > * {
+          /* HACK: Fix webkit (i.e. Safari and Chrome) bugs related to multi column layout. */
+          -webkit-transform: translate3d(0, 0, 0);
+        }
+      }
+
+      .l-w100 {
+        width: 100%;
+      }
+
+      .l-w33 {
+        width: 100%;
+
+        @media (min-width: ${breakpoints.medium}) {
+          width: calc(100% / 2);
+        }
+
+        @media (min-width: ${breakpoints.large}) {
+          width: calc(100% / 3);
+        }
+      }
+
+      .l-w66 {
+        width: 100%;
+
+        @media (min-width: ${breakpoints.large}) {
+          width: calc(100% / 3 * 2);
+        }
+      }
+
+      .l-w25 {
+        width: calc(100% / 2);
+
+        @media (min-width: ${breakpoints.large}) {
+          width: calc(100% / 4);
+        }
+      }
+
+      .l-w50 {
+        width: 100%;
+
+        @media (min-width: ${breakpoints.large}) {
+          width: calc(100% / 2);
+        }
+      }
+
+      .l-w75 {
+        width: 100%;
+
+        @media (min-width: ${breakpoints.large}) {
+          width: calc(100% / 4 * 3);
+        }
+      }
+
+      .cf::after {
+        display: table;
+
+        clear: both;
+
+        content: '';
       }
 
       /* loading progress bar styles */

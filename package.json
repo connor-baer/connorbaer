@@ -22,12 +22,15 @@
     "url": "https://github.com/connor-baer/connorbaer.co/issues"
   },
   "scripts": {
-    "build": "NODE_ENV=production next build",
-    "dev": "nodemon --watch server --inspect index.js",
+    "build": "npm run prebuild && NODE_ENV=production next build",
+    "clean": "rm -rf static/svg && mkdir -p static/svg",
+    "dev": "npm run prebuild && nodemon --watch server --inspect index.js",
     "fix": "npm run fix:prettier; npm run fix:eslint",
     "fix:eslint": "eslint --fix --quiet \"**/*.js\" \"**/*.js\"",
     "fix:prettier": "prettier --single-quote --write \"**/*.js\" \"**/*.js\"",
+    "sprites": "mkdir -p static/svgs; ./bin/svg-sprites --source source/svgs --destination static/svgs",
     "start": "NODE_ENV=production node index.js",
+    "prebuild": "npm run clean && npm run sprites",
     "precommit": "lint-staged"
   },
   "lint-staged": {
@@ -62,8 +65,10 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "smooth-scroll": "github:cferdinandi/smooth-scroll",
-    "start-server-webpack-plugin": "^2.2.0",
     "styled-jsx-postcss": "^0.2.0",
+    "svgo": "^0.7.2",
+    "svgstore": "^2.0.2",
+    "svgxuse": "^1.2.4",
     "suncalc": "^1.8.0",
     "typi": "^3.0.0",
     "whatwg-fetch": "^2.0.3",
