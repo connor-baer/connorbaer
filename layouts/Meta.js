@@ -192,12 +192,9 @@ const Meta = ({ children, title = '', index = true, follow = true }) => (
       video {
         margin: 0;
         padding: 0;
-
         border: 0;
-
         font: inherit;
         font-size: 100%;
-
         vertical-align: baseline;
       }
 
@@ -217,15 +214,16 @@ const Meta = ({ children, title = '', index = true, follow = true }) => (
       }
 
       html {
-        @media (max-width 350px) {
+        @media (max-width: ${breakpoints.small}) {
           font-size: 87.5%;
         }
 
-        @media (min-width ${breakpoints.wide}) {
+        @media (min-width: ${breakpoints.wide}) {
           font-size: 125%;
         }
 
-        transition: background-color ${animations.short}, color ${animations.short};
+        transition: background-color ${animations.short},
+          color ${animations.short};
         background-color: ${colors.gray[8]};
         color: ${colors.gray[9]};
         font-family: ${fonts.family.sans};
@@ -269,7 +267,7 @@ const Meta = ({ children, title = '', index = true, follow = true }) => (
       blockquote::after,
       q::before,
       q::after {
-        content: "";
+        content: '';
       }
 
       table {
@@ -279,14 +277,14 @@ const Meta = ({ children, title = '', index = true, follow = true }) => (
 
       hr {
         margin-top: 1rem;
-        margin-bottom: 1.25rem;=
-        border: 0;
+        margin-bottom: 1.25rem;
+        =: 0;
 
         &::before {
           display: block;
-          height: 2px;=
-          background-color: ${colors.gray[3]};=
-          content: "";
+          height: 2px;
+          =: ${colors.gray[3]};
+          =: '';
         }
       }
 
@@ -310,29 +308,30 @@ const Meta = ({ children, title = '', index = true, follow = true }) => (
         font-family: ${fonts.family.mono};
       }
 
-
       /* loading progress bar styles */
       #nprogress {
         pointer-events: none;
-      }
-      #nprogress .bar {
-        background: ${colors.primary};
-        position: fixed;
-        z-index: 1031;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 2px;
-      }
-      #nprogress .peg {
-        display: block;
-        position: absolute;
-        right: 0px;
-        width: 100px;
-        height: 100%;
-        box-shadow: 0 0 10px ${colors.primary}, 0 0 5px ${colors.primary};
-        opacity: 1;
-        transform: rotate(3deg) translate(0px, -4px);
+
+        & .bar {
+          background: ${colors.primary};
+          position: fixed;
+          z-index: 1031;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 2px;
+        }
+
+        & .peg {
+          display: block;
+          position: absolute;
+          right: 0px;
+          width: 100px;
+          height: 100%;
+          box-shadow: 0 0 10px ${colors.primary}, 0 0 5px ${colors.primary};
+          opacity: 1;
+          transform: rotate(3deg) translate(0px, -4px);
+        }
       }
     `}</style>
   </div>

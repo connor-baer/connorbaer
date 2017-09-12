@@ -11,7 +11,7 @@ export default class Page extends Component {
     const siteUrl = req ? `${protocol}://${req.get('Host')}` : '';
     // const res = await fetch(`${baseUrl}/api/slack`);
     // const json = await res.json();
-    const isHome = !!originalUrl;
+    const isHome = !originalUrl;
     return { isHome, siteUrl };
   }
 
