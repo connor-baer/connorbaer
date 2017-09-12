@@ -1,9 +1,9 @@
 const breakpoints = {
-  small: '300px',
-  medium: '600px',
-  large: '900px',
-  wide: '1200px',
-  mega: '1500px'
+  small: '20em',
+  medium: '40em',
+  large: '60em',
+  wide: '80em',
+  mega: '100em'
 };
 
 export { breakpoints };
