@@ -145,7 +145,7 @@
   {% include '_includes/icons' %}
 
   {# -- PRECONNECT -- #}
-  {% for block in navigation.navigation %}
+  {% for block in navigation.navigation.all() %}
     {% if block.type == "navSingle" or block.type == "navSection" %}
       {% set navLink = block.navEntry.one().url %}
     {% elseif block.type == "navExternal" %}

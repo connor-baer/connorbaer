@@ -28,7 +28,7 @@
     <nav class="c-metabar__nav">
       <ul class="c-metabar__navList">
 
-        {% for block in navigation.navigation %}
+        {% for block in navigation.navigation.all() %}
           {% switch block.type %}
             {% case "navExternal" %}
               {% set navLink = block.navLink %}

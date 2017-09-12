@@ -4,6 +4,8 @@
 /.idea
 /config/license.key
 /scripts/.env.sh
+.esm-cache
+.next
 
 /public/*
 !/public/favicons/

@@ -45,7 +45,7 @@
 
     <section class="l-ctnr l-flex">
 
-        {% for post in posts %}
+        {% for post in posts.all() %}
 
           <article class="c-card l-w33">
             <a class="o-card__link" href="{{ post.url }}" title="{{ post.title }}">
