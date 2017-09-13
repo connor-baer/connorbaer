@@ -76,7 +76,56 @@ return [
             ];
         },
 
-        'api/food/recipes.json' => [
+        'api/posts.json' => [
+            'elementType' => Entry::class,
+            'criteria' => [
+                'section' => 'blog',
+                'orderBy' => 'title',
+            ],
+            'transformer' => function (Entry $entry) {
+
+                $categories = [];
+
+                foreach ($entry['categories'] as $category) {
+                    $categories[] = $category['title'];
+                }
+
+                return [
+                    'title' => $entry['title'],
+                    'description' => $entry['description'],
+                    'categories' => implode(', ', $categories),
+                    'slug' => $entry['slug'],
+                ];
+            }
+        ],
+
+        'api/post/<postSlug:{slug}>.json' => function ($postSlug) {
+            return [
+                'elementType' => Entry::class,
+                'criteria' => [
+                    'slug' => $postSlug,
+                    'section' => 'blog',
+                ],
+                'first' => true,
+                'transformer' => function (Entry $entry) {
+
+                    $categories = [];
+
+                    foreach ($entry['categories'] as $category) {
+                        $categories[] = $category['title'];
+                    }
+
+                    return [
+                      'title' => $entry['title'],
+                      'description' => $entry['description'],
+                      'categories' => implode(', ', $categories),
+                      'slug' => $entry['slug'],
+                    ];
+                },
+            ];
+        }
+
+        'api/recipes.json' => [
             'elementType' => Entry::class,
             'criteria' => [
                 'section' => 'food',
@@ -111,13 +160,14 @@ return [
             }
         ],
 
-        'api/food/recipe/<recipeSlug:{slug}>.json' => function ($recipeSlug) {
+        'api/recipe/<recipeSlug:{slug}>.json' => function ($recipeSlug) {
             return [
                 'elementType' => Entry::class,
                 'criteria' => [
                     'slug' => $recipeSlug,
                     'section' => 'food',
                 ],
+                'first' => true,
                 'transformer' => function (Entry $entry) {
                     $measure = Craft::$app->request->getQueryParam('measure');
                     $people = Craft::$app->request->getQueryParam('people');

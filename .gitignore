@@ -6,6 +6,7 @@
 /scripts/.env.sh
 .esm-cache
 .next
+package-lock.json
 
 /public/*
 !/public/favicons/
