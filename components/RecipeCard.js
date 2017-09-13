@@ -1,18 +1,24 @@
 import PropTypes from 'prop-types';
 import { Link } from 'components/Link';
+import { Image } from 'components/Image';
 import { RecipeMeta } from 'components/RecipeMeta';
 import { animations, colors, fonts } from '../styles';
 
 const RecipeCard = ({ recipe: { title, slug, skill, totalTime, image } }) => (
-  <Link to={`/food/${slug}`}>
+  <Link route="recipe" params={{ slug }}>
     <a className="l-w33" title={title}>
       <article>
-        <figure>
-          <img className="o-image" src={image} alt={title} />
-        </figure>
+        <Image
+          src={image}
+          alt={title}
+          className="recipeCard__image"
+          width="100%"
+          height="100%"
+          cover
+        />
         <div>
           <h3>{title}</h3>
-          <RecipeMeta totalTime={totalTime} skill={skill} />
+          <RecipeMeta totalTime={totalTime} skill={skill} light />
         </div>
       </article>
 
@@ -43,7 +49,8 @@ const RecipeCard = ({ recipe: { title, slug, skill, totalTime, image } }) => (
             background: linear-gradient(
               180deg,
               transparent,
-              rgba(0, 0, 0, 0.33)
+              rgba(0, 0, 0, 0.15) 50%,
+              rgba(0, 0, 0, 0.5)
             );
             content: '';
           }
@@ -61,30 +68,6 @@ const RecipeCard = ({ recipe: { title, slug, skill, totalTime, image } }) => (
           transition: color ${animations.medium};
           color: ${colors.white};
           font-weight: ${fonts.weight.bold};
-        }
-
-        figure {
-          position: absolute;
-          top: 0;
-          right: 0;
-          bottom: 0;
-          left: 0;
-        }
-
-        img {
-          width: 100%;
-          height: 100%;
-          transition: transform ${animations.long};
-          will-change: transform;
-          object-fit: cover;
-          backface-visibility: hidden;
-        }
-
-        a:hover,
-        a:focus {
-          & img {
-            transform: scale(1.04);
-          }
         }
       `}</style>
     </a>
