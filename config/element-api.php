@@ -123,7 +123,7 @@ return [
                     ];
                 },
             ];
-        }
+        },
 
         'api/recipes.json' => [
             'elementType' => Entry::class,
