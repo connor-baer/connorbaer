@@ -13,8 +13,8 @@ const Prefooter = ({ text, linkLabel, linkUrl }) => (
     <style jsx>{`
       section {
         background-color: ${colors.gray[0]};
-        padding-top: 2rem;
-        padding-bottom: 2rem;
+        padding-top: 3rem;
+        padding-bottom: 3rem;
         text-align: center;
       }
 

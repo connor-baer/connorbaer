@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import { breakpoints, colors, fonts } from '../styles';
 
-const Header = ({ title, subtitle }) => (
+const Header = ({ title, subtitle, children }) => (
   <section className="l-ctnr">
     <header className="l-w100">
-      {title && <h1>{`${title}  `}</h1>}
+      {title && <h1 className={subtitle ? 'color' : ''}>{`${title}  `}</h1>}
       {subtitle && <h2>{subtitle}</h2>}
+      {children}
     </header>
 
     <style jsx>{`
@@ -18,7 +19,10 @@ const Header = ({ title, subtitle }) => (
       h1 {
         font-size: ${fonts.size.t3};
         font-weight: ${fonts.weight.bold};
-        color: ${colors.primary};
+
+        &.color {
+          color: ${colors.primary};
+        }
       }
 
       h2 {

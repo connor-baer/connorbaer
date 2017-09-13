@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'next/router';
+import classNames from 'classnames';
 import { Link } from 'components/Link';
 import { Svg } from 'components/Svg';
 import { Logo } from 'components/Logo';
@@ -18,12 +19,15 @@ class Navigation extends Component {
       isHome = false,
       links = [
         { url: '/blog', label: 'Blog' },
-        { url: '/recipes', label: 'Food' }
+        { url: '/food', label: 'Food' }
       ],
-      router
+      router,
+      sidebar
     } = this.props;
     return (
-      <header>
+      <header
+        className={classNames('navigation', { 'navigation--sidebar': sidebar })}
+      >
         <div className="l-ctnr l-flex">
           <Logo siteUrl={siteUrl} siteName={siteName} isHome={isHome} />
 
@@ -53,7 +57,7 @@ class Navigation extends Component {
           </nav>
         </div>
         <style jsx>{`
-          header {
+          .navigation {
             position: fixed;
             top: 0;
             right: 0;
@@ -65,8 +69,16 @@ class Navigation extends Component {
               background-color ${animations.short}, padding ${animations.short},
               transform ${animations.medium}, opacity ${animations.medium},
               visibility ${animations.medium};
-            background-color: transparent;
+            background-color: ${colors.white};
             z-index: 999;
+          }
+
+          .navigation--sidebar {
+            width: 100vw;
+
+            @media (min-width: ${breakpoints.large}) {
+              width: calc(100vw - 20rem);
+            }
           }
 
           ul {
@@ -125,6 +137,7 @@ Navigation.propTypes = {
   siteUrl: PropTypes.string,
   siteName: PropTypes.string,
   isHome: PropTypes.bool,
+  sidebar: PropTypes.bool,
   links: PropTypes.array,
   router: PropTypes.object
 };

@@ -4,7 +4,7 @@ import { animations, colors, fonts } from '../styles';
 
 const Logo = ({ siteName, siteUrl, isHome }) => (
   <div>
-    <Link href={`${siteUrl}/${isHome ? '#' : ''}`} prefetch>
+    <Link href={`${siteUrl}${isHome ? '#' : ''}`} prefetch>
       <a title="Home">{siteName}</a>
     </Link>
     <style jsx>{`

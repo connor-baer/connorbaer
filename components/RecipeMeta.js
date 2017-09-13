@@ -3,9 +3,9 @@ import { Svg } from 'components/Svg';
 import { colors, fonts } from '../styles';
 
 const RecipeMeta = ({ totalTime, skill, light = false }) => {
-  const fill = light ? colors.white : colors.gray[7];
+  const fill = light ? colors.white : colors.gray[6];
   return (
-    <div className={light ? 'light' : ''}>
+    <div className={light ? 'light' : 'dark'}>
       {totalTime && (
         <p>
           <Svg sprite="food" name="clock" width="18" height="18" fill={fill} />
@@ -31,7 +31,7 @@ const RecipeMeta = ({ totalTime, skill, light = false }) => {
 
         .dark {
           & span {
-            color: ${colors.gray[7]};
+            color: ${colors.gray[6]};
           }
         }
 

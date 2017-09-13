@@ -1,11 +1,11 @@
 // Food
 // ----
 
-@import "lib/helpers";
-@import "variables/colors";
-@import "variables/typography";
-@import "variables/layout";
-@import "variables/animations";
+@import 'lib/helpers';
+@import 'variables/colors';
+@import 'variables/typography';
+@import 'variables/layout';
+@import 'variables/animations';
 
 $oc-primary: #ee3a51;
 $oc-secondary: #ff512f;
@@ -23,13 +23,12 @@ $oc-secondary: #ff512f;
   #{--oc-primary-9}: scale-color($oc-primary, $lightness: -45%);
 }
 
-
 // Filters
 // -------
 .c-input--search,
 .c-input--time {
-  margin-top: vr(.5);
-  margin-right: vr(.75);
+  margin-top: vr(0.5);
+  margin-right: vr(0.75);
 }
 
 .c-input--search {
@@ -49,22 +48,22 @@ $oc-secondary: #ff512f;
   display: inline-block;
   position: relative;
 
-  margin-top: vr(.5);
-  margin-right: vr(.75);
+  margin-top: vr(0.5);
+  margin-right: vr(0.75);
 
   border: 1px solid var(--oc-gray-4);
   border-radius: 6px;
 
   background-color: var(--oc-white);
 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .06);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
   overflow: hidden;
 }
 
 .c-filter__option {
   display: inline-block;
 
-  padding: vr(.6) vr(1);
+  padding: vr(0.6) vr(1);
 
   transition: background-color $an-short, color $an-short;
 
@@ -80,68 +79,13 @@ $oc-secondary: #ff512f;
     border-right: 0;
   }
 
-  [type=checkbox]:checked ~ &,
+  [type='checkbox']:checked ~ &,
   &:hover,
   &:focus {
     background-color: var(--oc-primary-6);
     color: $oc-white;
   }
 }
-
-
-// Recipe Cards
-// ------------
-
-.c-recipeCard {
-  display: inline-block;
-  position: relative;
-
-  width: 100%;
-  height: vr(12);
-
-  margin-top: vr(1);
-  padding: vr(1);
-
-  border-radius: 6px;
-
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .06);
-  overflow: hidden;
-
-  &::after {
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-
-    border-radius: 8px;
-
-    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, .33));
-
-    content: "";
-  }
-}
-
-.c-recipeCard__content {
-  position: absolute;
-  bottom: vr(1);
-
-  z-index: 99;
-}
-
-.c-recipeCard__title {
-  @include typi("t2");
-
-  margin-bottom: vr(.25);
-
-  transition: color $an-medium;
-
-  color: $oc-white;
-
-  font-weight: $fw-bold;
-}
-
 
 // Recipe Single
 // -------------
@@ -162,9 +106,14 @@ $oc-secondary: #ff512f;
     bottom: 0;
     left: 0;
 
-    background: linear-gradient(180deg, rgba(0, 0, 0, .25), transparent 20%, rgba(0, 0, 0, .25));
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.25),
+      transparent 20%,
+      rgba(0, 0, 0, 0.25)
+    );
 
-    content: "";
+    content: '';
   }
 }
 
@@ -194,57 +143,8 @@ $oc-secondary: #ff512f;
   }
 }
 
-.c-recipe__bottom {
-  position: relative;
-
-  height: 100%;
-
-  z-index: 99;
-
-  > div {
-    align-self: flex-end;
-
-    padding-bottom: vr(1);
-  }
-}
-
-.c-recipe__title {
-  @include typi("t4");
-
-  margin-bottom: vr(.5);
-
-  color: $oc-white;
-
-  font-weight: $fw-bold;
-}
-
-.c-recipe__meta {
-  @include typi("s1");
-
-  display: inline-block;
-
-  margin-right: vr(.75);
-
-  color: $oc-white;
-
-  svg {
-    width: vr(1);
-    height: vr(1);
-
-    margin-right: vr(.25);
-
-    vertical-align: middle;
-
-    fill: $oc-white;
-  }
-
-  span {
-    vertical-align: middle;
-  }
-}
-
 .c-recipe__description {
-  @include typi("t1");
+  @include typi('t1');
 
   margin-top: vr(2);
   margin-bottom: vr(2);
@@ -253,134 +153,8 @@ $oc-secondary: #ff512f;
   line-height: $lh-large;
 }
 
-.c-recipe__directions {
-  margin-top: vr(2);
-  margin-bottom: vr(2);
-  padding-left: vr(2);
-
-  counter-reset: descriptions;
-}
-
-.c-recipe__direction {
-  @include typi("s0");
-
-  position: relative;
-
-  margin-top: vr(1);
-  margin-bottom: vr(1);
-
-  &::before {
-    @include typi("t4");
-
-    position: absolute;
-    top: 0;
-    left: vr(-2);
-
-    font-weight: $fw-bold;
-
-    content: counter(descriptions);
-
-    counter-increment: descriptions;
-  }
-}
-
-
 // Sidebar
 // -------
-
-.c-metabar,
-.c-footer,
-.l-recipe {
-  @include mappy-bp(wide) {
-    .sidebar--open & {
-      width: calc(100vw - 20rem);
-    }
-  }
-
-  width: 100vw;
-}
-
-.c-sidebar {
-  @include mappy-bp(medium) {
-    width: 20rem;
-
-    transform: translateX(100%);
-
-    opacity: 1;
-    visibility: visible;
-
-    .sidebar--open & {
-      transform: translateX(0);
-
-      box-shadow: 0 0 8px rgba(0, 0, 0, .1);
-    }
-  }
-
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-
-  width: 100vw;
-
-  padding: vr(1) vr(1.5);
-
-  transform: translateY(10%);
-
-  transition: transform $an-short, visibility $an-short, opacity $an-short;
-
-  background-color: var(--oc-white);
-
-  opacity: 0;
-  visibility: hidden;
-  z-index: 9999;
-
-  .sidebar--open & {
-    transform: translateY(0);
-
-    opacity: 1;
-    visibility: visible;
-  }
-}
-
-.c-sidebar__button {
-  position: fixed;
-  right: vr(1);
-  bottom: vr(1);
-
-  padding: vr(.75);
-
-  transition: transform $an-medium, box-shadow $an-medium, background-color $an-medium;
-
-  border: 0;
-  border-radius: 100%;
-  outline: none;
-
-  background-color: var(--oc-primary-6);
-  color: $oc-white;
-
-  line-height: 1;
-
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .06);
-  cursor: pointer;
-  z-index: 99999;
-
-  &:hover,
-  &:focus {
-    transform: translateY(.5px);
-
-    background-color: var(--oc-primary-5);
-
-    box-shadow: none;
-  }
-
-  svg {
-    width: vr(1);
-    height: vr(1);
-
-    fill: $oc-white;
-  }
-}
 
 .c-sidebar__content {
   position: absolute;
@@ -393,7 +167,7 @@ $oc-secondary: #ff512f;
 }
 
 .c-sidebar__title {
-  @include typi("t2");
+  @include typi('t2');
 
   font-weight: $fw-bold;
 }
@@ -404,13 +178,14 @@ $oc-secondary: #ff512f;
 }
 
 .c-sidebar__stepper {
-  @include typi("s1");
+  @include typi('s1');
 
   display: inline-block;
 
-  padding: vr(.2) vr(.4);
+  padding: vr(0.2) vr(0.4);
 
-  transition: box-shadow $an-medium, background-color $an-medium, color $an-medium;
+  transition: box-shadow $an-medium, background-color $an-medium,
+    color $an-medium;
 
   border: 2px solid var(--oc-primary-6);
   outline: none;
@@ -421,7 +196,7 @@ $oc-secondary: #ff512f;
   font-weight: $fw-bold;
   line-height: 1;
 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .06);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
   cursor: pointer;
 
   &:nth-of-type(1) {
@@ -443,8 +218,8 @@ $oc-secondary: #ff512f;
 }
 
 .o-ingredient {
-  margin-top: vr(.5);
-  margin-bottom: vr(.5);
+  margin-top: vr(0.5);
+  margin-bottom: vr(0.5);
 }
 
 .o-ingredient__checkbox {
