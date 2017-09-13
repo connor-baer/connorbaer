@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import RecipesContainer from './components/RecipesContainer';
+import RecipesContainer from 'components/RecipesContainer';
 
 // Set some sane defaults
-let defaultState = {
+const defaultState = {
   measure: 'metric',
   people: 2
 };

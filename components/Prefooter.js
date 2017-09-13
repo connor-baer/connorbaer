@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import Link from 'next/link';
+import { Link } from 'components/Link';
 import { colors, fonts } from '../styles';
 
 const Prefooter = ({ text, linkLabel, linkUrl }) => (

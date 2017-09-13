@@ -1,5 +1,15 @@
 {
-  "presets": [
-    "./babel-preset"
+  "presets": ["./babel-preset"],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["./"],
+        "alias": {
+          "components": "./components",
+          "layouts": "./layouts"
+        }
+      }
+    ]
   ]
 }

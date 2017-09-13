@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import SidebarContainer from './components/SidebarContainer';
+import SidebarContainer from 'components/SidebarContainer';
 
 class App extends Component {
   /**

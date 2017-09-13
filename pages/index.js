@@ -1,10 +1,10 @@
 import { Component } from 'react';
 import fetch from 'isomorphic-fetch';
 import Link from 'next/link';
-import { Meta } from '../layouts/Meta';
-import { Navigation } from '../components/Navigation';
-import { Footer } from '../components/Footer';
-import { Prefooter } from '../components/Prefooter';
+import { Meta } from 'layouts/Meta';
+import { Navigation } from 'components/Navigation';
+import { Footer } from 'components/Footer';
+import { Prefooter } from 'components/Prefooter';
 
 export default class Page extends Component {
   static async getInitialProps({ req }) {
