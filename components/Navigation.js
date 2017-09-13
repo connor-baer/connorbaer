@@ -1,9 +1,9 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import Link from 'next/link';
 import { withRouter } from 'next/router';
-import { Svg } from '../components/Svg';
-import { Logo } from '../components/Logo';
+import { Link } from 'components/Link';
+import { Svg } from 'components/Svg';
+import { Logo } from 'components/Logo';
 import { animations, breakpoints, colors, fonts } from '../styles';
 
 class Navigation extends Component {
@@ -18,7 +18,7 @@ class Navigation extends Component {
       isHome = false,
       links = [
         { url: '/blog', label: 'Blog' },
-        { url: '/food', label: 'Food' }
+        { url: '/recipes', label: 'Food' }
       ],
       router
     } = this.props;
@@ -34,7 +34,7 @@ class Navigation extends Component {
                 const isActive = router.pathname === url;
                 return (
                   <li key={i}>
-                    <Link href={url} label={label}>
+                    <Link href={url} prefetch>
                       <a className={isActive ? 'active' : ''}>{label}</a>
                     </Link>
                   </li>

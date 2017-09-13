@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Svg } from './Svg';
+import { Svg } from 'components/Svg';
 import { colors, fonts } from '../styles';
 
 const RecipeMeta = ({ totalTime, skill }) => (
