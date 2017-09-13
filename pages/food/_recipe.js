@@ -17,10 +17,8 @@ export default class Page extends Component {
     //   .then(res => res.json())
     //   .then(data => data[0]);
     const page = await fetch(
-      `https://connorbaer.co/api/food/recipe/${query.slug}.json`
-    )
-      .then(res => res.json())
-      .then(json => json.data[0]);
+      `https://connorbaer.co/api/recipe/${query.slug}.json`
+    ).then(res => res.json());
     const site = {
       name: 'Connor Bär',
       domain: 'https://connorbaer.co/'

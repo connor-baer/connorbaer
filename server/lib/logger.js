@@ -4,6 +4,7 @@ import moment from 'moment';
 const Logger = winston.Logger;
 const File = winston.transports.File;
 const Console = winston.transports.Console;
+const isDev = process.env.NODE_ENV !== 'production';
 
 const defaultOptions = {
   filename: 'node.log',
@@ -13,7 +14,9 @@ const defaultOptions = {
   formatter: formatLogEntry,
   json: false
 };
-const transports = [new File(defaultOptions), new Console(defaultOptions)];
+const transports = isDev
+  ? [new File(defaultOptions), new Console(defaultOptions)]
+  : [new Console(defaultOptions)];
 
 /**
  * @description Parses a meta object into a formatted json string.
