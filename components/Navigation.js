@@ -50,7 +50,7 @@ class Navigation extends Component {
                   title="Toggle darkmode"
                   onClick={() => toggleDarkness()}
                 >
-                  <Svg sprite="site" name="moon" width="24" height="24" />
+                  <Svg sprite="site" name="moon" width={24} height={24} />
                 </button>
               </li>
             </ul>

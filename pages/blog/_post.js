@@ -21,8 +21,8 @@ export default class Page extends Component {
           domain: 'https://connorbaer.co/'
         };
       });
-    const page = await fetch(
-      `https://connorbaer.co/api/single/${query.slug}.json`
+    const post = await fetch(
+      `https://connorbaer.co/api/post/${query.slug}.json`
     )
       .then(res => res.json())
       .catch(err => {
@@ -33,12 +33,12 @@ export default class Page extends Component {
             'I am a web developer with a strong background in design, born in Germany and currently working as a Junior Frontend Engineer at SumUp.'
         };
       });
-    return { site, page };
+    return { site, post };
   }
 
   render() {
-    const { site, page } = this.props;
-    const { title, subtitle } = page;
+    const { site, post } = this.props;
+    const { title, subtitle } = post;
     return (
       <Site title={title} site={site}>
         <Main>
