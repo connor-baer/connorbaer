@@ -13,6 +13,9 @@ const Image = ({
   responsive = null,
   cover = false
 }) => {
+  if (!src) {
+    return null;
+  }
   const index = src.lastIndexOf('.');
   const [filename, format] = [src.slice(0, index), src.slice(index + 1)];
   const srcSet =

@@ -5,7 +5,7 @@ import { RecipeMeta } from 'components/RecipeMeta';
 import { animations, colors, fonts } from '../styles';
 
 const RecipeCard = ({ recipe: { title, slug, skill, totalTime, image } }) => (
-  <Link route="recipe" params={{ slug }}>
+  <Link route="recipes" params={{ slug }}>
     <a className="l-w33" title={title}>
       <article>
         <Image

@@ -8,13 +8,13 @@ const RecipeMeta = ({ totalTime, skill, light = false }) => {
     <div className={light ? 'light' : 'dark'}>
       {totalTime && (
         <p>
-          <Svg sprite="food" name="clock" width="18" height="18" fill={fill} />
+          <Svg sprite="food" name="clock" width={18} height={18} fill={fill} />
           <span>{`${totalTime} mins`}</span>
         </p>
       )}
       {skill && (
         <p>
-          <Svg sprite="food" name="chef" width="18" height="18" fill={fill} />
+          <Svg sprite="food" name="chef" width={18} height={18} fill={fill} />
           <span>{skill}</span>
         </p>
       )}

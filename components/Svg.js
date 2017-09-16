@@ -27,8 +27,8 @@ const Svg = ({ sprite, name, width, height, fill, className }) => (
 Svg.propTypes = {
   name: PropTypes.string,
   sprite: PropTypes.string,
-  width: PropTypes.string,
-  height: PropTypes.string,
+  width: PropTypes.number,
+  height: PropTypes.number,
   fill: PropTypes.string,
   className: PropTypes.string
 };
