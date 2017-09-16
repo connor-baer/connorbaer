@@ -85,15 +85,23 @@ return [
             'transformer' => function (Entry $entry) {
 
                 $categories = [];
+                $tags = [];
 
-                foreach ($entry['categories'] as $category) {
+                foreach ($entry['category'] as $category) {
                     $categories[] = $category['title'];
+                }
+
+                foreach ($entry['tags'] as $tag) {
+                    $tags[] = $tag['title'];
                 }
 
                 return [
                     'title' => $entry['title'],
                     'description' => $entry['description'],
                     'categories' => implode(', ', $categories),
+                    'tags' => implode(', ', $tags),
+                    'featured' => $entry['featured'],
+                    'passphrase' => $entry['passphrase'],
                     'slug' => $entry['slug'],
                 ];
             }
