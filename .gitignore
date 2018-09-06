@@ -39,6 +39,7 @@ package-lock.json
 #####################
 *.sublime-workspace
 *.sublime-project
+*.vscode
 
 # Logs and databases #
 ######################
