@@ -1,20 +1,25 @@
 import express from 'express';
 import next from 'next';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 
+import securityHeaders from './lib/security-headers';
 import logger from './lib/logger';
-import routes from './lib/routes';
 
 const port = parseInt(process.env.PORT, 10) || 8080;
 const dev = process.env.NODE_ENV !== 'production';
-const app = next({ dev });
+const app = next({ dev, dir: './src' });
 const handle = app.getRequestHandler();
-const handler = routes.getRequestHandler(app);
 
 app.prepare().then(() => {
   const server = express();
 
+  // Configuration
+  server.enable('trust proxy');
+  server.disable('x-powered-by');
+
+  // Middlewares
   server.use(
     morgan(':method :url :status :response-time ms', {
       stream: logger.stream,
@@ -23,9 +28,19 @@ app.prepare().then(() => {
   );
   server.use(bodyParser.json());
   server.use(bodyParser.urlencoded({ extended: false }));
+  server.use(cookieParser());
+  server.use(securityHeaders);
 
-  server.use(handler);
+  // Static files
+  // server.get('/robots.txt', robots);
+  // server.get('/sitemap.xml', sitemap());
 
+  // Dynamic pages
+  server.get('/blog/:id', (req, res) =>
+    app.render(req, res, '/blog/post', { id: req.params.id })
+  );
+
+  // Static pages
   server.get('*', (req, res) => handle(req, res));
 
   server.listen(port, err => {
@@ -33,7 +48,7 @@ app.prepare().then(() => {
       logger.error(err);
       throw err;
     }
-    logger.info(`Listening on http://localhost:${port}`);
+    logger.info(`Server started on http://localhost:${port}`);
   });
 });
 

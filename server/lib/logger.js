@@ -1,22 +1,9 @@
 import winston from 'winston';
 import moment from 'moment';
 
-const Logger = winston.Logger;
-const File = winston.transports.File;
-const Console = winston.transports.Console;
+const { Logger } = winston;
+const { File, Console } = winston.transports;
 const isDev = process.env.NODE_ENV !== 'production';
-
-const defaultOptions = {
-  filename: 'node.log',
-  level: 'debug',
-  prettyPrint: true,
-  timestamp: createTimestamp,
-  formatter: formatLogEntry,
-  json: false
-};
-const transports = isDev
-  ? [new File(defaultOptions), new Console(defaultOptions)]
-  : [new Console(defaultOptions)];
 
 /**
  * @description Parses a meta object into a formatted json string.
@@ -51,10 +38,23 @@ function createTimestamp(format = 'HH:mm:ss') {
   return moment().format(format);
 }
 
+const defaultOptions = {
+  filename: 'node.log',
+  level: 'debug',
+  prettyPrint: true,
+  timestamp: createTimestamp,
+  formatter: formatLogEntry,
+  json: false
+};
+
+const transports = isDev
+  ? [new File(defaultOptions), new Console(defaultOptions)]
+  : [new Console(defaultOptions)];
+
 const logger = new Logger({ transports });
 
 logger.stream = {
-  write(message, encoding) {
+  write(message) {
     logger.info(message);
   }
 };
