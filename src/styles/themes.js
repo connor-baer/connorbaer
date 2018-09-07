@@ -2,6 +2,227 @@ import openColor from 'open-color/open-color.json';
 
 import { createMediaQueries } from './style-helpers';
 
+const fonts = [
+  {
+    name: 'Overpass',
+    weight: '300',
+    style: 'normal'
+  },
+  {
+    name: 'Overpass',
+    weight: '400',
+    style: 'normal'
+  },
+  {
+    name: 'Overpass',
+    weight: '700',
+    style: 'normal'
+  },
+  {
+    name: 'Overpass Mono',
+    weight: '400',
+    style: 'normal'
+  }
+];
+
+const fontFamily = {
+  sans: 'Overpass',
+  serif: 'Overpass',
+  mono: 'Overpass Mono'
+};
+
+const fontWeight = {
+  light: '300',
+  regular: '400',
+  bold: '700'
+};
+
+const typography = {
+  headings: {
+    kilo: {
+      fontSize: '17px',
+      lineHeight: '24px'
+    },
+    mega: {
+      fontSize: '19px',
+      lineHeight: '24px'
+    },
+    giga: {
+      fontSize: '22px',
+      lineHeight: '24px'
+    },
+    tera: {
+      fontSize: '24px',
+      lineHeight: '32px'
+    },
+    peta: {
+      fontSize: '28px',
+      lineHeight: '32px'
+    },
+    exa: {
+      fontSize: '36px',
+      lineHeight: '44px'
+    },
+    zetta: {
+      fontSize: '42px',
+      lineHeight: '48px'
+    }
+  },
+  subHeadings: {
+    kilo: {
+      fontSize: '12px',
+      lineHeight: '20px'
+    },
+    mega: {
+      fontSize: '14px',
+      lineHeight: '18px'
+    }
+  },
+  text: {
+    kilo: {
+      fontSize: '13px',
+      lineHeight: '20px'
+    },
+    mega: {
+      fontSize: '15px',
+      lineHeight: '24px'
+    },
+    giga: {
+      fontSize: '18px',
+      lineHeight: '28px'
+    }
+  }
+};
+
+const neutrals = {
+  n100: openColor.gray[0],
+  n300: openColor.gray[2],
+  n500: openColor.gray[5],
+  n700: openColor.gray[7],
+  n900: openColor.gray[9]
+};
+
+const blues = {
+  b100: openColor.blue[1],
+  b300: openColor.blue[3],
+  b500: openColor.blue[5],
+  b700: openColor.blue[7],
+  b900: openColor.blue[9]
+};
+
+const greens = {
+  g100: openColor.green[1],
+  g300: openColor.green[3],
+  g500: openColor.green[5],
+  g700: openColor.green[7],
+  g900: openColor.green[9]
+};
+
+const yellows = {
+  y100: openColor.yellow[1],
+  y300: openColor.yellow[3],
+  y500: openColor.yellow[5],
+  y700: openColor.yellow[7],
+  y900: openColor.yellow[9]
+};
+
+const oranges = {
+  o100: openColor.orange[1],
+  o300: openColor.orange[3],
+  o500: openColor.orange[5],
+  o700: openColor.orange[7],
+  o900: openColor.orange[9]
+};
+
+const reds = {
+  r100: openColor.red[1],
+  r300: openColor.red[3],
+  r500: openColor.red[5],
+  r700: openColor.red[7],
+  r900: openColor.red[9]
+};
+
+const primary = {
+  p300: '#00ccd2',
+  p500: '#1fb7e3'
+};
+
+const misc = {
+  shadow: '#0C0F14',
+  bodyBg: openColor.white,
+  bodyColor: '#111519',
+  danger: reds.r500,
+  success: greens.g700,
+  warning: yellows.y700
+};
+
+const colors = {
+  white: openColor.white,
+  black: openColor.black,
+  ...neutrals,
+  ...blues,
+  ...greens,
+  ...yellows,
+  ...oranges,
+  ...reds,
+  ...primary,
+  ...misc
+};
+
+function createSpacings(base = 4) {
+  return {
+    bit: `${base * 1}px`,
+    byte: `${base * 2}px`,
+    kilo: `${base * 3}px`,
+    mega: `${base * 4}px`,
+    giga: `${base * 6}px`,
+    tera: `${base * 8}px`,
+    peta: `${base * 10}px`,
+    exa: `${base * 12}px`,
+    zetta: `${base * 14}px`
+  };
+}
+
+function createGrid(base = 4) {
+  return {
+    default: {
+      priority: 0,
+      breakpoint: 'default',
+      cols: 12,
+      maxWidth: '880px',
+      gutter: createSpacings(base).mega
+    },
+    untilKilo: {
+      priority: 1,
+      breakpoint: 'untilKilo',
+      cols: 12,
+      maxWidth: '400px',
+      gutter: createSpacings(base).byte
+    },
+    kilo: {
+      priority: 2,
+      breakpoint: 'kilo',
+      cols: 12,
+      maxWidth: '600px',
+      gutter: createSpacings(base).mega
+    },
+    mega: {
+      priority: 3,
+      breakpoint: 'mega',
+      cols: 12,
+      maxWidth: '760px',
+      gutter: createSpacings(base).giga
+    },
+    giga: {
+      priority: 4,
+      breakpoint: 'giga',
+      cols: 12,
+      maxWidth: '880px',
+      gutter: createSpacings(base).giga
+    }
+  };
+}
+
 const breakpoints = {
   untilKilo: '(max-width: 479px)',
   kilo: 480,
@@ -15,74 +236,13 @@ const breakpoints = {
 };
 
 const base = {
-  fonts: [
-    {
-      name: 'Overpass',
-      weight: '300',
-      style: 'normal'
-    },
-    {
-      name: 'Overpass',
-      weight: '400',
-      style: 'normal'
-    },
-    {
-      name: 'Overpass',
-      weight: '700',
-      style: 'normal'
-    },
-    {
-      name: 'Overpass Mono',
-      weight: '400',
-      style: 'normal'
-    }
-  ],
-  fontFamily: {
-    sans: 'Overpass',
-    serif: 'Overpass',
-    mono: 'Overpass Mono'
-  },
-  fontWeight: {
-    light: '300',
-    regular: '400',
-    bold: '700'
-  },
-  colors: {
-    white: openColor.white,
-    black: openColor.black,
-    p300: '#00ccd2',
-    p500: '#1fb7e3',
-    n100: openColor.gray[1],
-    n300: openColor.gray[3],
-    n500: openColor.gray[5],
-    n700: openColor.gray[7],
-    n900: openColor.gray[9],
-    r100: openColor.red[1],
-    r300: openColor.red[3],
-    r500: openColor.red[5],
-    r700: openColor.red[7],
-    r900: openColor.red[9],
-    b100: openColor.blue[1],
-    b300: openColor.blue[3],
-    b500: openColor.blue[5],
-    b700: openColor.blue[7],
-    b900: openColor.blue[9],
-    g100: openColor.green[1],
-    g300: openColor.green[3],
-    g500: openColor.green[5],
-    g700: openColor.green[7],
-    g900: openColor.green[9],
-    y100: openColor.yellow[1],
-    y300: openColor.yellow[3],
-    y500: openColor.yellow[5],
-    y700: openColor.yellow[7],
-    y900: openColor.yellow[9],
-    o100: openColor.orange[1],
-    o300: openColor.orange[3],
-    o500: openColor.orange[5],
-    o700: openColor.orange[7],
-    o900: openColor.orange[9]
-  },
+  fonts,
+  fontFamily,
+  fontWeight,
+  typography,
+  colors,
+  spacings: createSpacings(),
+  grid: createGrid(),
   mq: createMediaQueries(breakpoints)
 };
 
@@ -94,6 +254,8 @@ export const dark = {
     ...base.colors,
     white: openColor.black,
     black: openColor.white,
+    bodyBg: '#111519',
+    bodyColor: openColor.white,
     n100: openColor.gray[9],
     n300: openColor.gray[7],
     n500: openColor.gray[5],
