@@ -1,11 +1,9 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'next/router';
-import classNames from 'classnames';
-import { Link } from 'components/Link';
-import { Svg } from 'components/Svg';
-import { Logo } from 'components/Logo';
-import { animations, breakpoints, colors, fonts } from '../styles';
+
+import Link from '../Link';
+// import { Logo } from '../Logo';
 
 class Navigation extends Component {
   componentDidMount() {
@@ -16,6 +14,7 @@ class Navigation extends Component {
     const {
       siteUrl,
       siteName,
+      toggleTheme,
       isHome = false,
       links = [
         { url: '/blog', label: 'Blog' },
@@ -46,10 +45,7 @@ class Navigation extends Component {
               })}
 
               <li>
-                <button
-                  title="Toggle darkmode"
-                  onClick={() => toggleDarkness()}
-                >
+                <button title="Toggle darkmode" onClick={toggleTheme}>
                   <Svg sprite="site" name="moon" width={24} height={24} />
                 </button>
               </li>
@@ -142,6 +138,4 @@ Navigation.propTypes = {
   router: PropTypes.object
 };
 
-const n = withRouter(Navigation);
-
-export { n as Navigation };
+export default withRouter(Navigation);

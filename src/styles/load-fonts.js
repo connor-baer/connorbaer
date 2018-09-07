@@ -41,5 +41,8 @@ export default function loadFonts(fonts, timeout = 5000) {
       // Optimization for repeat views
       sessionStorage.setItem('prevLoadedFonts', JSON.stringify(fonts));
     })
-    .catch(console.warn);
+    .catch(e => {
+      // eslint-disable-next-line no-console
+      console.warn(`Failed to load font "${e.family}"`);
+    });
 }

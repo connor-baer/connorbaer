@@ -36,13 +36,7 @@
     "storybook": "start-storybook -p 6007",
     "create:component": "foundry run plop component",
     "test:js": "foundry run eslint --quiet **/**/*.js",
-    "prepush": "lint-staged"
-  },
-  "lint-staged": {
-    "*.js": [
-      "yarn test:js",
-      "git add"
-    ]
+    "prepush": "yarn test:js"
   },
   "dependencies": {
     "body-parser": "^1.18.0",
@@ -60,7 +54,6 @@
     "moment": "^2.22.2",
     "morgan": "^1.8.2",
     "next": "^7.0.0-canary.12",
-    "normalize.css": "^6.0.0",
     "nprogress": "^0.2.0",
     "open-color": "^1.4.0",
     "prop-types": "^15.6.2",
@@ -72,16 +65,25 @@
     "winston": "^2.3.1"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^4.0.0-alpha.20",
+    "@storybook/addon-info": "^4.0.0-alpha.20",
     "@storybook/addon-knobs": "^4.0.0-alpha.20",
+    "@storybook/addon-links": "^4.0.0-alpha.20",
+    "@storybook/addon-options": "^4.0.0-alpha.20",
+    "@storybook/addon-storysource": "^4.0.0-alpha.20",
+    "@storybook/addons": "^4.0.0-alpha.20",
     "@storybook/react": "^4.0.0-alpha.20",
     "@sumup/foundry": "^0.0.10",
+    "babel-eslint": "^9.0.0",
+    "babel-plugin-lodash": "^3.3.4",
     "eslint": "^5.5.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^3.0.1",
+    "eslint-plugin-babel": "^5.2.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-react": "^7.11.1",
     "husky": "^0.13.4",
-    "lint-staged": "^3.6.0",
+    "webpack": "^4.0.0",
     "webpack-bundle-analyzer": "^2.13.1"
   }
 }
