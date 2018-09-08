@@ -3,9 +3,13 @@ import styled, { css } from 'react-emotion';
 
 const baseStyles = ({ theme }) => css`
   min-height: 60vh;
-  padding-top: 60px;
+  padding-top: 101px;
   background-color: ${theme.colors.bodyBg};
   color: ${theme.colors.bodyColor};
+
+  ${theme.mq.mega`
+    padding-top: 84px;
+  `};
 `;
 
 const sidebarStyles = ({ theme, hasSidebar }) =>

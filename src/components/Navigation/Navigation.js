@@ -1,141 +1,229 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'next/router';
+import styled, { css } from 'react-emotion';
 
+import isServer from '../../utils/is-server';
 import Link from '../Link';
-// import { Logo } from '../Logo';
+import LogoIcon from '../LogoIcon';
 
-class Navigation extends Component {
-  componentDidMount() {
-    console.log('hello');
+import MoonIcon from './svgs/moon.svg';
+import { textKilo, headingGiga } from '../../styles/style-helpers';
+
+const headerBaseStyles = ({ theme }) => css`
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: ${theme.spacings.kilo};
+  transition: opacity 0.3s ease-in-out;
+  background-color: ${theme.colors.bodyBg};
+  z-index: 999;
+
+  &:hover {
+    opacity: 1;
   }
 
+  ${theme.mq.kilo`
+    position: fixed;
+    flex-wrap: nowrap;
+  `};
+
+  ${theme.mq.mega`
+    padding: ${theme.spacings.giga};
+  `};
+`;
+
+const headerFloatingStyles = ({ theme, isFloating }) =>
+  isFloating &&
+  css`
+    ${theme.mq.kilo`
+      opacity: 0;
+    `};
+  `;
+
+const Header = styled('header')(headerBaseStyles, headerFloatingStyles);
+
+const siteNameStyles = ({ theme }) => css`
+  ${headingGiga({ theme })};
+  display: inline-block;
+  transition: color 0.14s cubic-bezier(0, 0, 0.2, 1);
+  font-weight: ${theme.fontWeight.bold};
+  line-height: 1;
+  color: ${theme.colors.n900};
+  margin-top: 3px;
+  margin-left: ${theme.spacings.kilo};
+  vertical-align: middle;
+  transition: color 0.2s ease-in-out;
+
+  a:hover > &,
+  a:focus > & {
+    color: ${theme.colors.p500};
+  }
+`;
+
+const SiteName = styled('span')(siteNameStyles);
+
+const navStyles = ({ theme }) => css`
+  ${theme.mq.untilKilo`
+    display: flex;
+    justify-content: space-around;
+    order: 3;
+    min-width: 100%;
+    margin-top: ${theme.spacings.kilo};
+  `};
+`;
+
+const Nav = styled('nav')(navStyles);
+
+const navAnchorBaseStyles = ({ theme }) => css`
+  ${textKilo({ theme })};
+  font-weight: ${theme.fontWeight.regular};
+  text-decoration: none;
+  display: inline-block;
+  color: ${theme.colors.n700};
+  border-radius: ${theme.spacings.mega};
+  padding: 6px ${theme.spacings.mega};
+  margin-right: ${theme.spacings.kilo};
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: ${theme.colors.n100};
+    color: ${theme.colors.n900};
+  }
+`;
+
+const navAnchorActiveStyles = ({ theme, isActive }) =>
+  isActive &&
+  css`
+    background-color: ${theme.colors.n100};
+    color: ${theme.colors.n900};
+  `;
+
+const NavAnchor = styled('a')(navAnchorBaseStyles, navAnchorActiveStyles);
+
+const darkmodeButtonStyles = ({ theme }) => css`
+  display: inline-block;
+  padding: 0;
+  transition: fill 0.3s ease-in-out;
+  border: 0;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  vertical-align: middle;
+  z-index: 999;
+  fill: ${theme.colors.n500};
+
+  &:hover {
+    fill: ${theme.colors.p500};
+  }
+
+  ${theme.mq.untilKilo`
+    order: 2;
+  `};
+`;
+
+const DarkmodeButton = styled('button')(darkmodeButtonStyles);
+
+class Navigation extends Component {
+  state = {
+    isFloating: false
+  };
+
+  componentDidMount() {
+    if (isServer) {
+      return;
+    }
+    this.initScrollListener();
+  }
+
+  componentWillUnmount() {
+    if (isServer) {
+      return;
+    }
+    this.removeScrollListener();
+  }
+
+  initScrollListener = () => {
+    this.currentScrollY = 0;
+    window.addEventListener('scroll', this.debouncedHandleScroll);
+    this.listeningForScroll = true;
+  };
+
+  removeScrollListener = () => {
+    if (this.listeningForScroll) {
+      window.removeEventListener('scroll', this.debouncedHandleScroll);
+      this.listeningForScroll = false;
+    }
+  };
+
+  cancelScroll = () => {
+    if (this.timeoutScroll) {
+      window.cancelAnimationFrame(this.timeoutScroll);
+    }
+  };
+
+  debouncedHandleScroll = () => {
+    this.cancelScroll();
+    this.timeoutScroll = window.requestAnimationFrame(this.handleScroll);
+  };
+
+  handleScroll = () => {
+    const latestKnownScrollY = window.scrollY;
+    const scrollDirection = this.currentScrollY < latestKnownScrollY;
+    this.setState({ isFloating: latestKnownScrollY !== 0 && scrollDirection });
+    this.currentScrollY = latestKnownScrollY;
+  };
+
   render() {
-    const {
-      siteUrl,
-      siteName,
-      toggleTheme,
-      isHome = false,
-      links = [
-        { url: '/blog', label: 'Blog' },
-        { url: '/food', label: 'Food' }
-      ],
-      router,
-      sidebar
-    } = this.props;
+    const { siteName, toggleTheme, isHome, links, router } = this.props;
     return (
-      <header
-        className={classNames('navigation', { 'navigation--sidebar': sidebar })}
-      >
-        <div className="l-ctnr l-flex">
-          <Logo siteUrl={siteUrl} siteName={siteName} isHome={isHome} />
+      <Header isFloating={this.state.isFloating}>
+        <Link href={isHome ? '#' : '/'} prefetch={!isHome}>
+          <a>
+            <LogoIcon alt={`Logo of '${siteName}'`} />
+            <SiteName>{siteName}</SiteName>
+          </a>
+        </Link>
 
-          <nav>
-            <ul>
-              {links.map((link, i) => {
-                const { url, label } = link;
-                const isActive = router.pathname === url;
-                return (
-                  <li key={i}>
-                    <Link href={url} prefetch>
-                      <a className={isActive ? 'active' : ''}>{label}</a>
-                    </Link>
-                  </li>
-                );
-              })}
+        <Nav>
+          {links.map(({ url, label }, i) => (
+            <Link key={i} href={url} prefetch>
+              <NavAnchor isActive={router.pathname === url}>{label}</NavAnchor>
+            </Link>
+          ))}
+        </Nav>
 
-              <li>
-                <button title="Toggle darkmode" onClick={toggleTheme}>
-                  <Svg sprite="site" name="moon" width={24} height={24} />
-                </button>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        <style jsx>{`
-          .navigation {
-            position: fixed;
-            top: 0;
-            right: 0;
-            left: 0;
-            align-items: center;
-            max-width: 100vw;
-            padding: 1rem 0;
-            transition: box-shadow ${animations.short},
-              background-color ${animations.short}, padding ${animations.short},
-              transform ${animations.medium}, opacity ${animations.medium},
-              visibility ${animations.medium};
-            background-color: ${colors.white};
-            z-index: 999;
-          }
-
-          .navigation--sidebar {
-            width: 100vw;
-
-            @media (min-width: ${breakpoints.large}) {
-              width: calc(100vw - 20rem);
-            }
-          }
-
-          ul {
-            display: inline-flex;
-            justify-content: space-around;
-            align-items: center;
-            width: 100%;
-          }
-
-          li {
-            display: inline-block;
-            padding: 0 1rem;
-          }
-
-          a {
-            font-size: ${fonts.size.s1};
-            color: ${colors.gray[6]};
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: background-color ${animations.medium},
-              color ${animations.medium};
-
-            &:hover,
-            &:focus {
-              color: ${colors.primary};
-            }
-
-            &.active {
-              color: ${colors.gray[8]};
-            }
-          }
-
-          button {
-            display: inline-block;
-            padding: 0;
-            transition: fill ${animations.medium};
-            border: 0;
-            outline: none;
-            background-color: transparent;
-            cursor: pointer;
-            vertical-align: middle;
-            z-index: 999;
-            fill: ${colors.gray[6]};
-
-            &:hover {
-              fill: ${colors.primary};
-            }
-          }
-        `}</style>
-      </header>
+        {toggleTheme && (
+          <DarkmodeButton title="Toggle darkmode" onClick={toggleTheme}>
+            <MoonIcon width={24} height={24} />
+          </DarkmodeButton>
+        )}
+      </Header>
     );
   }
 }
 
 Navigation.propTypes = {
-  siteUrl: PropTypes.string,
-  siteName: PropTypes.string,
+  siteUrl: PropTypes.string.isRequired,
+  siteName: PropTypes.string.isRequired,
   isHome: PropTypes.bool,
-  sidebar: PropTypes.bool,
   links: PropTypes.array,
-  router: PropTypes.object
+  router: PropTypes.object,
+  toggleTheme: PropTypes.func
 };
 
-export default withRouter(Navigation);
+Navigation.defaultProps = {
+  isHome: false,
+  links: [],
+  router: {}
+};
+
+export default Navigation;

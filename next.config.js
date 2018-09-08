@@ -2,10 +2,12 @@
 const path = require('path');
 const webpack = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const withTM = require('@weco/next-plugin-transpile-modules');
 
 const { ANALYZE } = process.env;
 
-module.exports = {
+module.exports = withTM({
+  transpileModules: ['@sumup/circuit-ui'],
   poweredByHeader: false,
   webpack: (config, { dev }) => {
     const originalEntry = config.entry;
@@ -33,6 +35,7 @@ module.exports = {
     config.plugins.push(
       new webpack.DefinePlugin({
         __DEV__: JSON.stringify(dev),
+        __PRODUCTION__: JSON.stringify(!dev),
         __TEST__: false
       })
     );
@@ -49,4 +52,4 @@ module.exports = {
 
     return config;
   }
-};
+});

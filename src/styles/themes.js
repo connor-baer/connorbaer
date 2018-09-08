@@ -17,18 +17,13 @@ const fonts = [
     name: 'Overpass',
     weight: '700',
     style: 'normal'
-  },
-  {
-    name: 'Overpass Mono',
-    weight: '400',
-    style: 'normal'
   }
 ];
 
 const fontFamily = {
   sans: 'Overpass',
   serif: 'Overpass',
-  mono: 'Overpass Mono'
+  mono: 'Courier New'
 };
 
 const fontWeight = {
@@ -49,7 +44,7 @@ const typography = {
     },
     giga: {
       fontSize: '22px',
-      lineHeight: '24px'
+      lineHeight: '28px'
     },
     tera: {
       fontSize: '24px',
@@ -57,7 +52,7 @@ const typography = {
     },
     peta: {
       fontSize: '28px',
-      lineHeight: '32px'
+      lineHeight: '36px'
     },
     exa: {
       fontSize: '36px',
@@ -65,7 +60,7 @@ const typography = {
     },
     zetta: {
       fontSize: '42px',
-      lineHeight: '48px'
+      lineHeight: '50px'
     }
   },
   subHeadings: {
@@ -80,15 +75,15 @@ const typography = {
   },
   text: {
     kilo: {
-      fontSize: '13px',
-      lineHeight: '20px'
+      fontSize: '14px',
+      lineHeight: '21px'
     },
     mega: {
-      fontSize: '15px',
+      fontSize: '18px',
       lineHeight: '24px'
     },
     giga: {
-      fontSize: '18px',
+      fontSize: '21px',
       lineHeight: '28px'
     }
   }
@@ -100,6 +95,14 @@ const neutrals = {
   n500: openColor.gray[5],
   n700: openColor.gray[7],
   n900: openColor.gray[9]
+};
+
+const violets = {
+  v100: openColor.violet[1],
+  v300: openColor.violet[3],
+  v500: openColor.violet[5],
+  v700: openColor.violet[7],
+  v900: openColor.violet[9]
 };
 
 const blues = {
@@ -160,6 +163,7 @@ const colors = {
   white: openColor.white,
   black: openColor.black,
   ...neutrals,
+  ...violets,
   ...blues,
   ...greens,
   ...yellows,
@@ -189,36 +193,36 @@ function createGrid(base = 4) {
       priority: 0,
       breakpoint: 'default',
       cols: 12,
-      maxWidth: '880px',
-      gutter: createSpacings(base).mega
+      maxWidth: '1080px',
+      gutter: createSpacings(base).tera
     },
     untilKilo: {
       priority: 1,
       breakpoint: 'untilKilo',
       cols: 12,
-      maxWidth: '400px',
-      gutter: createSpacings(base).byte
+      maxWidth: `calc(100vw - ${createSpacings(base).giga})`,
+      gutter: createSpacings(base).giga
     },
     kilo: {
       priority: 2,
       breakpoint: 'kilo',
       cols: 12,
       maxWidth: '600px',
-      gutter: createSpacings(base).mega
+      gutter: createSpacings(base).tera
     },
     mega: {
       priority: 3,
       breakpoint: 'mega',
       cols: 12,
-      maxWidth: '760px',
-      gutter: createSpacings(base).giga
+      maxWidth: '720px',
+      gutter: createSpacings(base).tera
     },
-    giga: {
+    tera: {
       priority: 4,
       breakpoint: 'giga',
       cols: 12,
-      maxWidth: '880px',
-      gutter: createSpacings(base).giga
+      maxWidth: '1080px',
+      gutter: createSpacings(base).tera
     }
   };
 }

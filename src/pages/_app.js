@@ -12,9 +12,11 @@ import globalStyles from '../styles/global-styles';
 import loadFonts from '../styles/load-fonts';
 import * as Themes from '../styles/themes';
 
-import { THEMES } from '../constants';
-import Footer from '../components/Footer/Footer';
-import Main from '../components/Main/Main';
+import { THEMES, SITE_NAME, SITE_TWITTER, BASE_URL } from '../constants';
+import Navigation from '../components/Navigation';
+import Prefooter from '../components/Prefooter';
+import Footer from '../components/Footer';
+import Main from '../components/Main';
 
 // Adds server generated styles to emotion cache.
 if (!isServer) {
@@ -27,7 +29,7 @@ const transitionStyles = ({ isTransitioning }) =>
   css`
     * {
       transition: background-color 0.2s ease-out, color 0.2s ease-out,
-        border-color 0.2s ease-out;
+        border-color 0.2s ease-out !important;
     }
   `;
 
@@ -38,7 +40,7 @@ export default class CustomApp extends App {
     super(props);
     const savedThemeId = get(['pageProps', 'cookies', 'themeId'], props);
     const themeId =
-      savedThemeId && Themes[savedThemeId] ? savedThemeId : THEMES.LIGHT;
+      savedThemeId && Themes[savedThemeId] ? savedThemeId : THEMES.DARK;
     const theme = Themes[themeId];
     globalStyles(theme);
     loadFonts(theme.fonts);
@@ -79,18 +81,33 @@ export default class CustomApp extends App {
     const { Component, pageProps } = this.props;
     const { themeId, isTransitioning } = this.state;
     const theme = Themes[themeId];
+    const siteName = SITE_NAME;
+    const siteTwitter = SITE_TWITTER;
+    const siteUrl = BASE_URL;
+    const links = [
+      { url: '/about', label: 'About' },
+      { url: '/work', label: 'Work' },
+      { url: '/blog', label: 'Blog' }
+    ];
     return (
       <Container>
         <ThemeProvider theme={theme}>
           <ThemeTransition isTransitioning={isTransitioning}>
+            <Navigation
+              siteName={siteName}
+              siteUrl={siteUrl}
+              toggleTheme={this.toggleTheme}
+              links={links}
+            />
             <Main>
-              <Component
-                {...pageProps}
-                setTheme={this.setTheme}
-                toggleTheme={this.toggleTheme}
-              />
+              <Component {...pageProps} setTheme={this.setTheme} />
             </Main>
-            <Footer />
+            <Prefooter
+              text="Let’s be friends."
+              linkLabel="Say hi!"
+              linkUrl="/"
+            />
+            <Footer siteName={siteName} siteTwitter={siteTwitter} />
           </ThemeTransition>
         </ThemeProvider>
       </Container>

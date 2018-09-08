@@ -10,9 +10,9 @@ function createFontFace({ name, weight, style }) {
       font-style: ${style};
       font-weight: ${weight};
       src:
-        local(${name}),
-        url(${basePath}.woff2) format("woff2"),
-        url(${basePath}.woff) format("woff");
+        local("${name}"),
+        url("${basePath}.woff2") format("woff2"),
+        url("${basePath}.woff") format("woff");
     };
   `;
 }
@@ -119,17 +119,13 @@ a {
   color: inherit;
   text-decoration: underline;
   text-decoration-skip: edges;
-  transition: all 0.2s;
+  transition: all 0.2s ease-in-out;
 
   &:hover,
   &:focus {
     color: ${theme.colors.p500};
+    cursor: pointer;
   }
-}
-
-img {
-  display: block;
-  width: 100%;
 }
 
 #nprogress {

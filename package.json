@@ -39,6 +39,7 @@
     "prepush": "yarn test:js"
   },
   "dependencies": {
+    "@sumup/circuit-ui": "^0.0.6-canary",
     "body-parser": "^1.18.0",
     "cookie-parser": "^1.4.3",
     "emotion": "^9.2.8",
@@ -74,7 +75,9 @@
     "@storybook/addons": "^4.0.0-alpha.20",
     "@storybook/react": "^4.0.0-alpha.20",
     "@sumup/foundry": "^0.0.10",
+    "@weco/next-plugin-transpile-modules": "^0.0.2",
     "babel-eslint": "^9.0.0",
+    "babel-plugin-emotion": "^9.2.8",
     "babel-plugin-lodash": "^3.3.4",
     "eslint": "^5.5.0",
     "eslint-config-airbnb-base": "^13.1.0",
