@@ -30,13 +30,19 @@ export default function loadFonts(fonts, timeout = 5000) {
     return;
   }
 
-  const fontPromises = fonts.map(({ name, config }) => {
+  const fontPromises = fonts.map(({ name, ...config }) => {
     const font = new FontFaceObserver(name, config);
     return font.load(null, timeout);
   });
 
   Promise.all(fontPromises)
-    .then(() => {
+    .then(loaded => {
+      // eslint-disable-next-line no-console
+      console.debug(
+        `Loaded fonts "${loaded
+          .map(({ family, style, weight }) => `${family} ${weight} ${style}`)
+          .join(', ')}"`
+      );
       addClass(document.documentElement, 'fonts-loaded');
       // Optimization for repeat views
       sessionStorage.setItem('prevLoadedFonts', JSON.stringify(fonts));

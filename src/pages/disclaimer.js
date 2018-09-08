@@ -4,10 +4,10 @@ import Head from 'next/head';
 
 import { getAllCookies } from '../utils/cookies';
 import { getMetaRobots, getTitle } from '../utils/meta-helpers';
+import Link from '../components/Link';
 
 export default class Page extends Component {
   static propTypes = {
-    toggleTheme: PropTypes.func,
     title: PropTypes.string
   };
 
@@ -17,7 +17,7 @@ export default class Page extends Component {
   }
 
   render() {
-    const { title, toggleTheme } = this.props;
+    const { title } = this.props;
     return (
       <Fragment>
         <Head>
@@ -26,7 +26,9 @@ export default class Page extends Component {
         </Head>
         <Fragment>
           <h1>Hello</h1>
-          <button onClick={toggleTheme}>Switch theme</button>
+          <Link href="/">
+            <a>Home</a>
+          </Link>
         </Fragment>
       </Fragment>
     );
