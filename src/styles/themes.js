@@ -5,25 +5,29 @@ import { createMediaQueries } from './style-helpers';
 const fonts = [
   {
     name: 'Overpass',
+    localName: 'Overpass Light',
     weight: '300',
     style: 'normal'
   },
   {
     name: 'Overpass',
+    localName: 'Overpass Regular',
     weight: '400',
     style: 'normal'
   },
   {
     name: 'Overpass',
+    localName: 'Overpass Bold',
     weight: '700',
     style: 'normal'
   }
 ];
 
-const fontFamily = {
-  sans: 'Overpass',
-  serif: 'Overpass',
-  mono: 'Courier New'
+const fontStack = {
+  default: 'Overpass, Helvetica, Arial, sans-serif',
+  sans: 'Overpass, Helvetica, Arial, sans-serif',
+  serif: 'Overpass, Helvetica, Arial, sans-serif',
+  mono: 'Courier New, mono-space'
 };
 
 const fontWeight = {
@@ -60,7 +64,7 @@ const typography = {
     },
     zetta: {
       fontSize: '42px',
-      lineHeight: '50px'
+      lineHeight: '56px'
     }
   },
   subHeadings: {
@@ -75,24 +79,24 @@ const typography = {
   },
   text: {
     kilo: {
-      fontSize: '14px',
-      lineHeight: '21px'
+      fontSize: '15px',
+      lineHeight: '24px'
     },
     mega: {
       fontSize: '18px',
-      lineHeight: '24px'
+      lineHeight: '32px'
     },
     giga: {
       fontSize: '21px',
-      lineHeight: '28px'
+      lineHeight: '42px'
     }
   }
 };
 
 const neutrals = {
-  n100: openColor.gray[0],
-  n300: openColor.gray[2],
-  n500: openColor.gray[5],
+  n100: openColor.gray[1],
+  n300: openColor.gray[3],
+  n500: openColor.gray[6],
   n700: openColor.gray[7],
   n900: openColor.gray[9]
 };
@@ -173,6 +177,12 @@ const colors = {
   ...misc
 };
 
+export const borderRadius = {
+  kilo: '1px',
+  mega: '4px',
+  giga: '5px'
+};
+
 function createSpacings(base = 4) {
   return {
     bit: `${base * 1}px`,
@@ -194,35 +204,35 @@ function createGrid(base = 4) {
       breakpoint: 'default',
       cols: 12,
       maxWidth: '1080px',
-      gutter: createSpacings(base).tera
+      gutter: createSpacings(base).peta
     },
     untilKilo: {
       priority: 1,
       breakpoint: 'untilKilo',
       cols: 12,
-      maxWidth: `calc(100vw - ${createSpacings(base).giga})`,
-      gutter: createSpacings(base).giga
+      maxWidth: `400px`,
+      gutter: createSpacings(base).peta
     },
     kilo: {
       priority: 2,
       breakpoint: 'kilo',
       cols: 12,
-      maxWidth: '600px',
-      gutter: createSpacings(base).tera
+      maxWidth: '700px',
+      gutter: createSpacings(base).peta
     },
     mega: {
       priority: 3,
       breakpoint: 'mega',
       cols: 12,
-      maxWidth: '720px',
-      gutter: createSpacings(base).tera
+      maxWidth: '1000px',
+      gutter: createSpacings(base).exa
     },
     tera: {
       priority: 4,
-      breakpoint: 'giga',
+      breakpoint: 'tera',
       cols: 12,
-      maxWidth: '1080px',
-      gutter: createSpacings(base).tera
+      maxWidth: '1200px',
+      gutter: createSpacings(base).exa
     }
   };
 }
@@ -241,10 +251,11 @@ const breakpoints = {
 
 const base = {
   fonts,
-  fontFamily,
+  fontStack,
   fontWeight,
   typography,
   colors,
+  borderRadius,
   spacings: createSpacings(),
   grid: createGrid(),
   mq: createMediaQueries(breakpoints)
@@ -258,7 +269,7 @@ export const dark = {
     ...base.colors,
     white: openColor.black,
     black: openColor.white,
-    bodyBg: '#111519',
+    bodyBg: '#1b1f22',
     bodyColor: openColor.white,
     n100: openColor.gray[9],
     n300: openColor.gray[7],
@@ -288,8 +299,8 @@ export const blog = {
       style: 'normal'
     }
   ],
-  fontFamily: {
-    ...base.fontFamily,
-    serif: 'Lora'
+  fontStack: {
+    ...base.fontStack,
+    serif: 'Lora, Georgia, serif'
   }
 };

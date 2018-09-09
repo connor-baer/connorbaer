@@ -4,7 +4,7 @@ import styled, { css } from 'react-emotion';
 
 const baseStyles = ({ theme }) => css`
   display: inline-block;
-  height: ${theme.spacings.tera};
+  height: ${theme.spacings.peta};
   width: auto;
   vertical-align: middle;
   transition: transform 0.2s ease-in-out;

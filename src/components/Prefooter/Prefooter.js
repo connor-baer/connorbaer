@@ -27,11 +27,10 @@ const Content = styled('p')(contentStyles);
 const anchorStyles = ({ theme }) => css`
   font-weight: ${theme.fontWeight.bold};
   color: ${theme.colors.p500};
-  text-decoration: none;
 
   &:hover,
   &:focus {
-    text-decoration: underline;
+    box-shadow: inset 0 -0.08em 0 0 ${theme.colors.p500};
   }
 `;
 

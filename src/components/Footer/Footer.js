@@ -37,6 +37,15 @@ const textStyles = ({ theme }) => css`
   &:last-of-type::after {
     display: none;
   }
+
+  a {
+    box-shadow: inset 0 -0.08em 0 0 ${theme.colors.n500};
+
+    &:hover,
+    &:focus {
+      box-shadow: inset 0 -0.08em 0 0 ${theme.colors.p500};
+    }
+  }
 `;
 
 const StyledText = styled(Text)(textStyles);
@@ -67,8 +76,8 @@ function Footer({ siteName, siteTwitter }) {
             </Span>
           )}
           <Span>
-            <Link href="/disclaimer">
-              <a>Disclaimer</a>
+            <Link href="/legal">
+              <a>Legal</a>
             </Link>
           </Span>
         </Content>

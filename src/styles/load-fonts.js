@@ -1,4 +1,4 @@
-import { includes, differenceWith, isEqual, isEmpty } from 'lodash/fp';
+import { includes, differenceWith, isEqual, isEmpty, pick } from 'lodash/fp';
 import FontFaceObserver from 'fontfaceobserver';
 
 import isServer from '../utils/is-server';
@@ -30,7 +30,8 @@ export default function loadFonts(fonts, timeout = 5000) {
     return;
   }
 
-  const fontPromises = fonts.map(({ name, ...config }) => {
+  const fontPromises = fonts.map(({ name, ...rest }) => {
+    const config = pick(['weight', 'style', 'strech'], rest);
     const font = new FontFaceObserver(name, config);
     return font.load(null, timeout);
   });
