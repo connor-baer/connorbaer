@@ -1,7 +1,6 @@
 # Project #
 ############
-config.js
-data/*
+sitemap.xml
 .next
 .esm-cache
 

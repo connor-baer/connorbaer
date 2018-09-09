@@ -7,6 +7,7 @@ function createFontFace({ name, weight, style, localName }) {
       font-family: '${name}';
       font-style: ${style};
       font-weight: ${weight};
+      font-display: swap;
       src:
         local('${localName || name}'),
         url('${basePath}.woff2') format('woff2'),
