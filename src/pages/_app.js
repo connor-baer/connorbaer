@@ -5,6 +5,7 @@ import { get } from 'lodash/fp';
 import NProgress from 'nprogress';
 import styled, { css, hydrate } from 'react-emotion';
 import { ThemeProvider } from 'emotion-theming';
+import { injectGlobalStyles } from '@sumup/circuit-ui';
 
 import isServer from '../utils/is-server';
 import { setCookie } from '../utils/cookies';
@@ -42,7 +43,8 @@ export default class CustomApp extends App {
     const themeId =
       savedThemeId && Themes[savedThemeId] ? savedThemeId : THEMES.DARK;
     const theme = Themes[themeId];
-    globalStyles(theme);
+    const custom = globalStyles({ theme });
+    injectGlobalStyles({ theme, custom });
     loadFonts(theme.fonts);
 
     this.state = { themeId, isTransitioning: false };
@@ -63,7 +65,7 @@ export default class CustomApp extends App {
       }
       setCookie('themeId', themeId);
       this.setState({ themeId, isTransitioning: true }, () => {
-        // Wait for transition to finish
+        // Wait for transition animation to finish
         setTimeout(() => {
           this.setState({ isTransitioning: false });
           resolve();

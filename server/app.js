@@ -35,11 +35,6 @@ app.prepare().then(() => {
   // server.get('/robots.txt', robots);
   // server.get('/sitemap.xml', sitemap());
 
-  // Dynamic pages
-  server.get('/blog/:id', (req, res) =>
-    app.render(req, res, '/blog/post', { id: req.params.id })
-  );
-
   // Static pages
   server.get('*', (req, res) => handle(req, res));
 
@@ -52,4 +47,4 @@ app.prepare().then(() => {
   });
 });
 
-export { app };
+export default app;

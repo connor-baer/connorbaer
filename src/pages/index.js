@@ -1,11 +1,16 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import Head from 'next/head';
 import { Grid, Row, Col } from '@sumup/circuit-ui';
 
 import { getAllCookies } from '../utils/cookies';
-import { getMetaRobots, getTitle } from '../utils/meta-helpers';
+
+import Meta from '../components/Meta';
 import Header from '../components/Header';
+
+import { meta as soundOfSilence } from './blog/sound-of-silence/index.mdx';
+import { meta as thisIsTheEuropeIAmProudOf } from './blog/this-is-the-europe-i-am-proud-of/index.mdx';
+import { meta as africaIsNotACountry } from './blog/africa-is-not-a-country/index.mdx';
+import PostCard from '../components/PostCard';
 
 export default class Page extends Component {
   static propTypes = {
@@ -18,16 +23,31 @@ export default class Page extends Component {
   }
 
   render() {
-    const { title } = this.props;
+    const title = this.props.title || 'Hello, I’m Connor.';
+    const subtitle =
+      'I am a web developer with a strong background in design and a passion for accessibility, currently working as a frontend engineer at SumUp.';
+    const posts = [
+      soundOfSilence,
+      thisIsTheEuropeIAmProudOf,
+      africaIsNotACountry
+    ];
     return (
       <Fragment>
-        <Head>
-          {getTitle(title)}
-          {getMetaRobots()}
-        </Head>
-        <Fragment>
-          <Header title="Hello, I’m Connor." subtitle="I am a web developer with a strong background in design and a passion for accessibility, currently working as a Frontend Engineer at SumUp." />
-        </Fragment>
+        <Meta title={title} description={subtitle} />
+        <Grid>
+          <Row>
+            <Col span={{ default: 12, tera: 10 }}>
+              <Header title={title} subtitle={subtitle} />
+            </Col>
+          </Row>
+          <Row>
+            {posts.map((post, i) => (
+              <Col key={i} span={{ default: 12, kilo: 6, mega: 4 }}>
+                <PostCard {...post} />
+              </Col>
+            ))}
+          </Row>
+        </Grid>
       </Fragment>
     );
   }

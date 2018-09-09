@@ -6,7 +6,8 @@ import { sharedPropTypes } from '@sumup/circuit-ui';
 import Link from '../Link';
 
 const baseStyles = ({ theme }) => css`
-  color: ${theme.colors.p700};
+  color: ${theme.colors.p500};
+  font-weight: ${theme.fontWeight.bold};
 
   &:visited {
     color: ${theme.colors.v500};
@@ -14,10 +15,12 @@ const baseStyles = ({ theme }) => css`
 
   &:hover,
   &:focus {
+    box-shadow: inset 0 -0.08em 0 0 ${theme.colors.p500};
     color: ${theme.colors.p500};
   }
 
   &:active {
+    box-shadow: inset 0 -0.08em 0 0 ${theme.colors.p500};
     color: ${theme.colors.p300};
   }
 `;

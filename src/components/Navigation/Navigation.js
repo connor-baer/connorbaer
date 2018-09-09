@@ -7,13 +7,9 @@ import Link from '../Link';
 import LogoIcon from '../LogoIcon';
 
 import MoonIcon from './svgs/moon.svg';
-import { textKilo, headingGiga } from '../../styles/style-helpers';
+import { textKilo, headingTera } from '../../styles/style-helpers';
 
 const headerBaseStyles = ({ theme }) => css`
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -29,6 +25,9 @@ const headerBaseStyles = ({ theme }) => css`
 
   ${theme.mq.kilo`
     position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
     flex-wrap: nowrap;
   `};
 
@@ -48,7 +47,7 @@ const headerFloatingStyles = ({ theme, isFloating }) =>
 const Header = styled('header')(headerBaseStyles, headerFloatingStyles);
 
 const siteNameStyles = ({ theme }) => css`
-  ${headingGiga({ theme })};
+  ${headingTera({ theme })};
   display: inline-block;
   transition: color 0.14s cubic-bezier(0, 0, 0.2, 1);
   font-weight: ${theme.fontWeight.bold};
@@ -71,9 +70,9 @@ const navStyles = ({ theme }) => css`
   ${theme.mq.untilKilo`
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
     order: 3;
     min-width: 100%;
-    margin-top: ${theme.spacings.kilo};
   `};
 `;
 
@@ -82,21 +81,24 @@ const Nav = styled('nav')(navStyles);
 const navAnchorBaseStyles = ({ theme }) => css`
   ${textKilo({ theme })};
   font-weight: ${theme.fontWeight.regular};
-  text-decoration: none;
+  letter-spacing: 1px;
   display: inline-block;
   color: ${theme.colors.n700};
   border-radius: ${theme.spacings.mega};
   padding: 6px ${theme.spacings.mega};
-  margin-right: ${theme.spacings.kilo};
+  margin-top: ${theme.spacings.kilo};
 
-  &:last-of-type {
+  ${theme.mq.kilo`
+    margin-right: ${theme.spacings.kilo};
+    margin-top: 0;
+  `} &:last-of-type {
     margin-right: 0;
   }
 
   &:hover,
   &:focus {
     background-color: ${theme.colors.n100};
-    color: ${theme.colors.n900};
+    color: ${theme.colors.p500};
   }
 `;
 
@@ -112,7 +114,8 @@ const NavAnchor = styled('a')(navAnchorBaseStyles, navAnchorActiveStyles);
 const darkmodeButtonStyles = ({ theme }) => css`
   display: inline-block;
   padding: 0;
-  transition: fill 0.3s ease-in-out;
+  transition: fill 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  line-height: 0;
   border: 0;
   outline: none;
   background-color: transparent;
@@ -120,8 +123,12 @@ const darkmodeButtonStyles = ({ theme }) => css`
   vertical-align: middle;
   z-index: 999;
   fill: ${theme.colors.n500};
+  border-radius: 50%;
+  padding: ${theme.spacings.byte};
 
-  &:hover {
+  &:hover,
+  &:focus {
+    background-color: ${theme.colors.n100};
     fill: ${theme.colors.p500};
   }
 

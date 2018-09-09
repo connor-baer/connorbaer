@@ -2,13 +2,14 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'react-emotion';
 
 const baseStyles = ({ theme }) => css`
-  min-height: 60vh;
-  padding-top: 101px;
   background-color: ${theme.colors.bodyBg};
   color: ${theme.colors.bodyColor};
+  overflow: hidden;
+  padding-bottom: ${theme.spacings.zetta};
 
-  ${theme.mq.mega`
-    padding-top: 84px;
+  ${theme.mq.kilo`
+    min-height: calc(100vh - (168px + 57px));
+    padding-top: 88px;
   `};
 `;
 

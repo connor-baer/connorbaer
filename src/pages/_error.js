@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import Head from 'next/head';
+import { Grid, Row, Col } from '@sumup/circuit-ui';
 
 import { getAllCookies } from '../utils/cookies';
-import { getMetaRobots, getTitle } from '../utils/meta-helpers';
+import Meta from '../components/Meta';
 import Header from '../components/Header';
 
 const TITLE_MAP = {
@@ -36,11 +36,17 @@ export default class Error extends Component {
     const subtitle = SUBTITLE_MAP[statusCode];
     return (
       <Fragment>
-        <Head>
-          {getTitle(title)}
-          {getMetaRobots()}
-        </Head>
-        <Header title={title} subtitle={subtitle} />
+        <Meta title={title} description={subtitle} />
+        <Grid>
+          <Row>
+            <Col
+              span={{ default: 12, kilo: 10, mega: 8 }}
+              skip={{ default: 0, kilo: 1, mega: 2 }}
+            >
+              <Header title={title} subtitle={subtitle} />
+            </Col>
+          </Row>
+        </Grid>
       </Fragment>
     );
   }
