@@ -6,17 +6,17 @@ import path from 'path';
 import glob from 'glob';
 import Listr from 'listr';
 import sharp from 'sharp';
-import { promisify } from 'util';
 import makeDir from 'make-dir';
+import { promisify } from 'util';
+import { isEmpty } from 'lodash/fp';
 
 import { PAGES_PATH, IMAGES_PATH, BLOG_PATH } from '../src/constants/paths';
 
 const globAsync = promisify(glob);
 
-const ROOTDIR = path.resolve(__dirname, '../src/');
-const INPUT_DIR = `${ROOTDIR}${PAGES_PATH}${BLOG_PATH}`;
-const GLOB_PATTERN = `${INPUT_DIR}/**/image.@(png|jpg|jpeg)`;
-const OUTPUT_DIR = `${ROOTDIR}${IMAGES_PATH}${BLOG_PATH}`;
+const ROOT_DIR = path.resolve(__dirname, '../src/');
+const SOURCE = `${ROOT_DIR}${PAGES_PATH}${BLOG_PATH}/**/image.@(png|jpg|jpeg)`;
+const DESTINATION = `${ROOT_DIR}${IMAGES_PATH}${BLOG_PATH}`;
 
 const OUTPUT_FORMATS = [
   {
@@ -45,20 +45,20 @@ function createResizedImage(
 ) {
   return sharp(filePath)
     .resize(width, height)
-    .toFile(`${OUTPUT_DIR}/${pageSlug}/${name}.${format}`);
+    .toFile(`${DESTINATION}/${pageSlug}/${name}.${format}`);
 }
 
 const tasks = new Listr([
   {
     title: 'Find source images',
     task: async ctx => {
-      const sourceFiles = await globAsync(GLOB_PATTERN);
+      const sourceFiles = await globAsync(SOURCE);
       ctx.sourceFiles = sourceFiles;
     }
   },
   {
     title: 'Create resized images',
-    skip: ctx => !Array.isArray(ctx.sourceFiles) || !ctx.sourceFiles.length,
+    skip: ctx => isEmpty(ctx.sourceFiles),
     task: ctx =>
       new Listr(
         ctx.sourceFiles.map(filePath => {
@@ -66,7 +66,7 @@ const tasks = new Listr([
           return {
             title: `Creating images for "${pageSlug}"`,
             task: async () => {
-              await makeDir(`${OUTPUT_DIR}/${pageSlug}`);
+              await makeDir(`${DESTINATION}/${pageSlug}`);
               OUTPUT_FORMATS.forEach(format => {
                 createResizedImage(filePath, pageSlug, format);
               });

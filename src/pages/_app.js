@@ -1,5 +1,6 @@
 import React from 'react';
 import App, { Container } from 'next/app';
+import Head from 'next/head';
 import Router from 'next/router';
 import { get } from 'lodash/fp';
 import NProgress from 'nprogress';
@@ -93,6 +94,9 @@ export default class CustomApp extends App {
     ];
     return (
       <Container>
+        <Head>
+          <meta name="theme-color" content={theme.colors.bodyBg} />
+        </Head>
         <ThemeProvider theme={theme}>
           <ThemeTransition isTransitioning={isTransitioning}>
             <Navigation
