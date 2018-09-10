@@ -1,16 +1,17 @@
 # Project #
 ############
 sitemap.xml
-.next
-.esm-cache
+images/
+.next/
+.esm-cache/
 
 # Install by running `npm install` #
-/node_modules/
+node_modules/
 package-lock.json
 
 # Install by running `composer update` #
-/vendor/
-/composer.lock
+vendor/
+composer.lock
 
 # Compiled source #
 ###################

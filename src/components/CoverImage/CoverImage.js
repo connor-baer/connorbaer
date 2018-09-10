@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'react-emotion';
+import Image from '../Image/Image';
 
 const wrapperStyles = ({ theme }) => css`
   display: block;
@@ -48,18 +49,18 @@ const imageStyles = () => css`
   }
 `;
 
-const Image = styled('img')(imageStyles);
+const StyledImage = styled(Image)(imageStyles);
 
 function CoverImage({ ...props }) {
   return (
     <Wrapper>
-      <Image {...props} />
+      <StyledImage {...props} />
     </Wrapper>
   );
 }
 
 CoverImage.propTypes = {
-  src: PropTypes.string.isRequired,
+  file: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
   width: PropTypes.number,
   height: PropTypes.number

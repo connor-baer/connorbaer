@@ -23,14 +23,14 @@ export default class Article extends Component {
     const { children, title, subtitle } = this.props;
     return (
       <Fragment>
-        <Meta title={title} subtitle={subtitle} />
+        <Meta title={title} description={subtitle} />
         <Grid>
           <Row>
             <Col
               span={{ default: 12, mega: 10, tera: 8 }}
               skip={{ default: 0, mega: 1, tera: 2 }}
             >
-              <Header title={title} description={subtitle} />
+              <Header title={title} subtitle={subtitle} />
               <MDXProvider components={components}>{children}</MDXProvider>
             </Col>
           </Row>

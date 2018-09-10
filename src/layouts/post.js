@@ -7,6 +7,7 @@ import { IMAGES_PATH, BLOG_PATH } from '../constants/paths';
 import { getAllCookies } from '../utils/cookies';
 import Meta from '../components/Meta';
 import components from './_components';
+import Image from '../components/Image';
 
 export default class Post extends Component {
   static propTypes = {
@@ -24,12 +25,12 @@ export default class Post extends Component {
   render() {
     const { children, title, description, slug, date } = this.props;
     const postPath = `${BLOG_PATH}/${slug}`;
-    const src = `${IMAGES_PATH}${postPath}/cover.jpg`;
+    const file = `${IMAGES_PATH}${postPath}/cover`;
 
     return (
       <Fragment>
         <Meta title={title} description={description} />
-        <img src={src} style={{ maxWidth: '100vw' }} />
+        <Image file={file} style={{ maxWidth: '100vw', width: '100%' }} />
         <Grid>
           <Row>
             <Col

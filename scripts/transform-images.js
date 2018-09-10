@@ -18,16 +18,20 @@ const ROOT_DIR = path.resolve(__dirname, '../src/');
 const SOURCE = `${ROOT_DIR}${PAGES_PATH}${BLOG_PATH}/**/image.@(png|jpg|jpeg)`;
 const DESTINATION = `${ROOT_DIR}${IMAGES_PATH}${BLOG_PATH}`;
 
-const OUTPUT_FORMATS = [
+const OUTPUT_MATRIX = [
   {
     name: 'thumbnail',
-    width: 700,
-    height: 300
+    formats: ['jpg', 'webp'],
+    width: 350,
+    height: 150,
+    highDPI: true
   },
   {
     name: 'cover',
-    width: 2880,
-    height: 600
+    formats: ['jpg', 'webp'],
+    width: 1440,
+    height: 300,
+    highDPI: true
   }
 ];
 
@@ -38,14 +42,33 @@ function getPageSlug(absolutePath) {
     .pop();
 }
 
-function createResizedImage(
-  filePath,
-  pageSlug,
-  { name, width, height, format = 'jpg' }
-) {
-  return sharp(filePath)
+function resizeImage(source, dest, { width, height, format = 'jpg' }) {
+  const options = ['jpg', 'png'].includes(format)
+    ? { progressive: true }
+    : undefined;
+  return sharp(source)
     .resize(width, height)
-    .toFile(`${DESTINATION}/${pageSlug}/${name}.${format}`);
+    .toFormat(format, options)
+    .toFile(`${dest}.${format}`);
+}
+
+async function createResizedImages(source, pageSlug) {
+  const destDir = `${DESTINATION}/${pageSlug}`;
+  await makeDir(destDir);
+  OUTPUT_MATRIX.forEach(({ name, formats, width, height, highDPI }) => {
+    formats.forEach(format => {
+      const dest = `${destDir}/${name}`;
+      resizeImage(source, dest, { width, height, format });
+      if (highDPI) {
+        const dest2x = `${destDir}/${name}@2x`;
+        resizeImage(source, dest2x, {
+          width: width * 2,
+          height: height * 2,
+          format
+        });
+      }
+    });
+  });
 }
 
 const tasks = new Listr([
@@ -61,16 +84,11 @@ const tasks = new Listr([
     skip: ctx => isEmpty(ctx.sourceFiles),
     task: ctx =>
       new Listr(
-        ctx.sourceFiles.map(filePath => {
-          const pageSlug = getPageSlug(filePath);
+        ctx.sourceFiles.map(source => {
+          const pageSlug = getPageSlug(source);
           return {
             title: `Creating images for "${pageSlug}"`,
-            task: async () => {
-              await makeDir(`${DESTINATION}/${pageSlug}`);
-              OUTPUT_FORMATS.forEach(format => {
-                createResizedImage(filePath, pageSlug, format);
-              });
-            }
+            task: async () => createResizedImages(source, pageSlug)
           };
         }),
         { concurrent: true }

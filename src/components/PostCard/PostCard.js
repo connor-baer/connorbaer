@@ -43,13 +43,13 @@ const Meta = styled(Text)(metaStyles);
 
 function PostCard({ slug, title, date, category }) {
   const postPath = `${BLOG_PATH}/${slug}`;
-  const src = `${IMAGES_PATH}${postPath}/thumbnail.jpg`;
+  const file = `${IMAGES_PATH}${postPath}/thumbnail`;
 
   return (
     <Article>
       <Link href={postPath}>
         <a>
-          <CoverImage src={src} alt={title} />
+          <CoverImage file={file} alt={title} />
           <StyledHeading element="h2" size={Heading.TERA}>
             {title}
           </StyledHeading>
