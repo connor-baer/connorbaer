@@ -93,12 +93,26 @@ const typography = {
   }
 };
 
-const neutrals = {
+const borderRadius = {
+  kilo: '1px',
+  mega: '4px',
+  giga: '5px'
+};
+
+const neutralsLight = {
   n100: openColor.gray[1],
   n300: openColor.gray[3],
   n500: openColor.gray[6],
   n700: openColor.gray[7],
   n900: openColor.gray[9]
+};
+
+const neutralsDark = {
+  n100: openColor.gray[9],
+  n300: openColor.gray[7],
+  n500: openColor.gray[5],
+  n700: openColor.gray[3],
+  n900: openColor.gray[1]
 };
 
 const violets = {
@@ -150,38 +164,48 @@ const reds = {
 };
 
 const primary = {
+  p100: '#00ccd2',
   p300: '#00ccd2',
-  p500: '#1fb7e3'
+  p500: '#1fb7e3',
+  p700: '#1fb7e3',
+  p900: '#1fb7e3'
 };
 
 const misc = {
-  shadow: '#0C0F14',
-  bodyBg: openColor.white,
-  bodyColor: '#111519',
   danger: reds.r500,
   success: greens.g700,
   warning: yellows.y700
 };
 
-const colors = {
-  white: openColor.white,
-  black: openColor.black,
-  ...neutrals,
-  ...violets,
-  ...blues,
-  ...greens,
-  ...yellows,
-  ...oranges,
-  ...reds,
-  ...primary,
-  ...misc
-};
-
-export const borderRadius = {
-  kilo: '1px',
-  mega: '4px',
-  giga: '5px'
-};
+function createColors(darkmode = false) {
+  const shadow = '#0C0F14';
+  const selectionBg = openColor.yellow[3];
+  const selectionColor = openColor.black;
+  const offBlack = '#15191d'; // '#1b1f22';
+  const white = darkmode ? openColor.black : openColor.white;
+  const black = darkmode ? openColor.white : openColor.black;
+  const bodyBg = darkmode ? offBlack : openColor.white;
+  const bodyColor = darkmode ? openColor.white : offBlack;
+  const neutrals = darkmode ? neutralsDark : neutralsLight;
+  return {
+    white,
+    black,
+    bodyBg,
+    bodyColor,
+    selectionBg,
+    selectionColor,
+    shadow,
+    ...neutrals,
+    ...violets,
+    ...blues,
+    ...greens,
+    ...yellows,
+    ...oranges,
+    ...reds,
+    ...primary,
+    ...misc
+  };
+}
 
 function createSpacings(base = 4) {
   return {
@@ -249,58 +273,50 @@ const breakpoints = {
   tera: 1280
 };
 
-const base = {
-  fonts,
-  fontStack,
-  fontWeight,
-  typography,
-  colors,
-  borderRadius,
-  spacings: createSpacings(),
-  grid: createGrid(),
-  mq: createMediaQueries(breakpoints)
-};
+export function standard({ darkmode, baseSpacing, reducedMotion }) {
+  return {
+    darkmode,
+    reducedMotion,
+    fonts,
+    fontStack,
+    fontWeight,
+    typography,
+    borderRadius,
+    colors: createColors(darkmode),
+    spacings: createSpacings(baseSpacing),
+    grid: createGrid(baseSpacing),
+    mq: createMediaQueries(breakpoints)
+  };
+}
 
-export const light = { ...base };
-
-export const dark = {
-  ...base,
-  colors: {
-    ...base.colors,
-    white: openColor.black,
-    black: openColor.white,
-    bodyBg: '#1b1f22',
-    bodyColor: openColor.white,
-    n100: openColor.gray[9],
-    n300: openColor.gray[7],
-    n500: openColor.gray[5],
-    n700: openColor.gray[3],
-    n900: openColor.gray[1]
-  }
-};
-
-export const blog = {
-  ...base,
-  fonts: [
-    ...base.fonts,
-    {
-      name: 'Lora',
-      weight: '400',
-      style: 'normal'
-    },
-    {
-      name: 'Lora',
-      weight: '400',
-      style: 'italic'
-    },
-    {
-      name: 'Lora',
-      weight: '700',
-      style: 'normal'
+export function blog({ darkmode, baseSpacing, reducedMotion }) {
+  const base = standard({ darkmode, baseSpacing, reducedMotion });
+  return {
+    ...base,
+    fonts: [
+      ...base.fonts,
+      {
+        name: 'Lora',
+        localName: 'Lora Regular',
+        weight: '400',
+        style: 'normal'
+      },
+      {
+        name: 'Lora',
+        localName: 'Lora Regular',
+        weight: '400',
+        style: 'italic'
+      },
+      {
+        name: 'Lora',
+        localName: 'Lora Bold',
+        weight: '700',
+        style: 'normal'
+      }
+    ],
+    fontStack: {
+      ...base.fontStack,
+      serif: 'Lora, Georgia, serif'
     }
-  ],
-  fontStack: {
-    ...base.fontStack,
-    serif: 'Lora, Georgia, serif'
-  }
-};
+  };
+}

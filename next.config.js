@@ -1,6 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const webpack = require('webpack');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const emoji = require('remark-emoji');
 const withPlugins = require('next-compose-plugins');
 const withOffline = require('next-offline');
@@ -48,6 +47,8 @@ const nextConfig = {
     );
 
     if (process.env.ANALYZE) {
+      // eslint-disable-next-line global-require
+      const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
       config.plugins.push(
         new BundleAnalyzerPlugin({
           analyzerMode: 'server',

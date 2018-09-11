@@ -8,7 +8,7 @@ export function getAllCookies(ctx) {
 
 export function setCookie(name, value, options) {
   if (isServer) {
-    return;
+    return null;
   }
   // Expiry date is in 5 years by default, so modals and notifications are
   // essentially only displayed once.

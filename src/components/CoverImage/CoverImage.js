@@ -19,7 +19,7 @@ const wrapperStyles = ({ theme }) => css`
     bottom: 0;
     left: 0;
     transition: opacity 0.3s cubic-bezier(0, 0, 0.2, 1);
-    background: radial-gradient(transparent, #000);
+    background: radial-gradient(transparent, ${theme.colors.shadow});
     content: '';
     opacity: 0;
   }

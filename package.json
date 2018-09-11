@@ -46,6 +46,7 @@
     "@sumup/circuit-ui": "^0.0.6-canary",
     "body-parser": "^1.18.0",
     "cookie-parser": "^1.4.3",
+    "date-fns": "^2.0.0-alpha.16",
     "emotion": "^9.2.8",
     "emotion-server": "^9.2.8",
     "emotion-theming": "^9.2.6",
