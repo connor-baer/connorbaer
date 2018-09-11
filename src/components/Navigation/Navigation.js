@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'react-emotion';
+import { startsWith } from 'lodash/fp';
 
+import { textKilo, headingTera } from '../../styles/style-helpers';
 import isServer from '../../utils/is-server';
 import Link from '../Link';
 import LogoIcon from '../LogoIcon';
 
 import MoonIcon from './svgs/moon.svg';
-import { textKilo, headingTera } from '../../styles/style-helpers';
+import ClockIcon from './svgs/clock.svg';
 
 const headerBaseStyles = ({ theme }) => css`
   display: flex;
@@ -15,7 +17,7 @@ const headerBaseStyles = ({ theme }) => css`
   justify-content: space-between;
   flex-wrap: wrap;
   padding: ${theme.spacings.kilo};
-  transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out, padding 0.3s ease-in-out;
   background-color: ${theme.colors.bodyBg};
   z-index: 999;
 
@@ -36,15 +38,27 @@ const headerBaseStyles = ({ theme }) => css`
   `};
 `;
 
-const headerFloatingStyles = ({ theme, isFloating }) =>
-  isFloating &&
+const headerInvisibleStyles = ({ theme, isInvisible }) =>
+  isInvisible &&
   css`
     ${theme.mq.kilo`
       opacity: 0;
     `};
   `;
+const headerFloatingStyles = ({ theme, isFloating }) =>
+  isFloating &&
+  css`
+    ${theme.mq.kilo`
+      padding: ${theme.spacings.kilo} ${theme.spacings.giga};
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    `};
+  `;
 
-const Header = styled('header')(headerBaseStyles, headerFloatingStyles);
+const Header = styled('header')(
+  headerBaseStyles,
+  headerInvisibleStyles,
+  headerFloatingStyles
+);
 
 const siteNameStyles = ({ theme }) => css`
   ${headingTera({ theme })};
@@ -91,7 +105,9 @@ const navAnchorBaseStyles = ({ theme }) => css`
   ${theme.mq.kilo`
     margin-right: ${theme.spacings.kilo};
     margin-top: 0;
-  `} &:last-of-type {
+  `};
+
+  &:last-of-type {
     margin-right: 0;
   }
 
@@ -106,14 +122,13 @@ const navAnchorActiveStyles = ({ theme, isActive }) =>
   isActive &&
   css`
     background-color: ${theme.colors.n100};
-    color: ${theme.colors.n900};
+    font-weight: ${theme.fontWeight.bold};
   `;
 
 const NavAnchor = styled('a')(navAnchorBaseStyles, navAnchorActiveStyles);
 
-const darkmodeButtonStyles = ({ theme }) => css`
+const iconButtonBaseStyles = ({ theme }) => css`
   display: inline-block;
-  padding: 0;
   transition: fill 0.2s ease-in-out, background-color 0.2s ease-in-out;
   line-height: 0;
   border: 0;
@@ -125,23 +140,57 @@ const darkmodeButtonStyles = ({ theme }) => css`
   fill: ${theme.colors.n500};
   border-radius: 50%;
   padding: ${theme.spacings.byte};
+  margin-right: ${theme.spacings.bit};
+
+  ${theme.mq.untilKilo`
+    order: 2;
+  `};
+
+  &:last-of-type {
+    margin-right: 0;
+  }
 
   &:hover,
   &:focus {
     background-color: ${theme.colors.n100};
     fill: ${theme.colors.p500};
   }
-
-  ${theme.mq.untilKilo`
-    order: 2;
-  `};
 `;
 
-const DarkmodeButton = styled('button')(darkmodeButtonStyles);
+const iconButtonActiveStyles = ({ theme, isActive }) =>
+  isActive &&
+  css`
+    background-color: ${theme.colors.n100};
+    fill: ${theme.colors.n700};
+  `;
+
+const IconButton = styled('button')(
+  iconButtonBaseStyles,
+  iconButtonActiveStyles
+);
 
 class Navigation extends Component {
+  static propTypes = {
+    siteUrl: PropTypes.string.isRequired,
+    siteName: PropTypes.string.isRequired,
+    isHome: PropTypes.bool,
+    links: PropTypes.array,
+    toggleDarkmode: PropTypes.func,
+    toggleReducedMotion: PropTypes.func,
+    darkmode: PropTypes.bool,
+    reducedMotion: PropTypes.bool,
+    router: PropTypes.object
+  };
+
+  static defaultProps = {
+    isHome: false,
+    links: [],
+    router: {}
+  };
+
   state = {
-    isFloating: false
+    isFloating: false,
+    isInvisible: false
   };
 
   componentDidMount() {
@@ -184,15 +233,26 @@ class Navigation extends Component {
 
   handleScroll = () => {
     const latestKnownScrollY = window.scrollY;
-    const scrollDirection = this.currentScrollY < latestKnownScrollY;
-    this.setState({ isFloating: latestKnownScrollY !== 0 && scrollDirection });
+    const scrolledDown = this.currentScrollY < latestKnownScrollY;
+    const isFloating = latestKnownScrollY > 44;
+    const isInvisible = isFloating && scrolledDown;
+    this.setState({ isFloating, isInvisible });
     this.currentScrollY = latestKnownScrollY;
   };
 
   render() {
-    const { siteName, toggleTheme, isHome, links, router } = this.props;
+    const {
+      siteName,
+      toggleDarkmode,
+      toggleReducedMotion,
+      darkmode,
+      reducedMotion,
+      isHome,
+      links,
+      router
+    } = this.props;
     return (
-      <Header isFloating={this.state.isFloating}>
+      <Header {...this.state}>
         <Link href={isHome ? '#' : '/'} prefetch={!isHome}>
           <a>
             <LogoIcon alt={`Logo of '${siteName}'`} />
@@ -203,34 +263,36 @@ class Navigation extends Component {
         <Nav>
           {links.map(({ url, label }, i) => (
             <Link key={i} href={url} prefetch>
-              <NavAnchor isActive={router.pathname === url}>{label}</NavAnchor>
+              <NavAnchor isActive={startsWith(url, router.pathname)}>
+                {label}
+              </NavAnchor>
             </Link>
           ))}
         </Nav>
 
-        {toggleTheme && (
-          <DarkmodeButton title="Toggle darkmode" onClick={toggleTheme}>
-            <MoonIcon width={24} height={24} />
-          </DarkmodeButton>
-        )}
+        <div>
+          {toggleDarkmode && (
+            <IconButton
+              isActive={darkmode}
+              title={`Turn ${darkmode ? 'off' : 'on'} darkmode`}
+              onClick={toggleDarkmode}
+            >
+              <MoonIcon width={24} height={24} />
+            </IconButton>
+          )}
+          {toggleReducedMotion && (
+            <IconButton
+              isActive={reducedMotion}
+              title={`Turn ${reducedMotion ? 'off' : 'on'} reduced motion`}
+              onClick={toggleReducedMotion}
+            >
+              <ClockIcon width={24} height={24} />
+            </IconButton>
+          )}
+        </div>
       </Header>
     );
   }
 }
-
-Navigation.propTypes = {
-  siteUrl: PropTypes.string.isRequired,
-  siteName: PropTypes.string.isRequired,
-  isHome: PropTypes.bool,
-  links: PropTypes.array,
-  router: PropTypes.object,
-  toggleTheme: PropTypes.func
-};
-
-Navigation.defaultProps = {
-  isHome: false,
-  links: [],
-  router: {}
-};
 
 export default Navigation;

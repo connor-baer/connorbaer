@@ -7,7 +7,6 @@ export const BASE_URL = 'http://localhost:8080'; // 'https://connorbaer.co';
 export const LANG = 'en';
 
 export const THEMES = {
-  LIGHT: 'light',
-  DARK: 'dark',
+  STANDARD: 'standard',
   BLOG: 'blog'
 };

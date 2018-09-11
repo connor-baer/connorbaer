@@ -41,6 +41,11 @@ textarea {
   }
 }
 
+*::selection {
+  background-color: ${theme.colors.selectionBg};
+  color: ${theme.colors.selectionColor};
+}
+
 h1,
 h2,
 h3,

@@ -24,7 +24,6 @@ const Content = styled('small')(contentStyles);
 
 const textStyles = ({ theme }) => css`
   display: inline-block;
-  font-weight: ${theme.fontWeight.light};
   letter-spacing: 0.5px;
 
   &::after {

@@ -2,7 +2,7 @@ import React from 'react';
 import App, { Container } from 'next/app';
 import Head from 'next/head';
 import Router from 'next/router';
-import { get } from 'lodash/fp';
+import { get, values } from 'lodash/fp';
 import NProgress from 'nprogress';
 import styled, { css, hydrate } from 'react-emotion';
 import { ThemeProvider } from 'emotion-theming';
@@ -37,35 +37,43 @@ const transitionStyles = ({ isTransitioning }) =>
 
 const ThemeTransition = styled('div')(transitionStyles);
 
+const themeIdsMap = {
+  standard: THEMES.STANDARD,
+  blog: THEMES.BLOG
+};
+
 export default class CustomApp extends App {
   constructor(props) {
     super(props);
-    const savedThemeId = get(['pageProps', 'cookies', 'themeId'], props);
-    const themeId =
-      savedThemeId && Themes[savedThemeId] ? savedThemeId : THEMES.DARK;
-    const theme = Themes[themeId];
+
+    const cookies = get(['pageProps', 'cookies'], props) || {};
+    const section = this.props.router.pathname.split('/')[1];
+    const themeId = themeIdsMap[section] || themeIdsMap.standard;
+    const darkmode = cookies.darkmode === 'true' || false;
+    const reducedMotion = cookies.reducedMotion === 'true' || false;
+    const theme = this.getTheme({ themeId, darkmode, reducedMotion });
     const custom = globalStyles({ theme });
     injectGlobalStyles({ theme, custom });
     loadFonts(theme.fonts);
 
-    this.state = { themeId, isTransitioning: false };
+    this.state = {
+      themeId,
+      darkmode,
+      reducedMotion,
+      isTransitioning: false
+    };
   }
 
+  // eslint-disable-next-line class-methods-use-this
   componentDidMount() {
     Router.events.on('routeChangeStart', () => NProgress.start());
     Router.events.on('routeChangeComplete', () => NProgress.done());
     Router.events.on('routeChangeError', () => NProgress.done());
   }
 
-  setTheme = themeId =>
-    new Promise((resolve, reject) => {
-      const theme = Themes[themeId];
-      if (!theme) {
-        reject();
-        return;
-      }
-      setCookie('themeId', themeId);
-      this.setState({ themeId, isTransitioning: true }, () => {
+  animateStateChange = newState =>
+    new Promise(resolve => {
+      this.setState({ ...newState, isTransitioning: true }, () => {
         // Wait for transition animation to finish
         setTimeout(() => {
           this.setState({ isTransitioning: false });
@@ -74,16 +82,39 @@ export default class CustomApp extends App {
       });
     });
 
-  toggleTheme = () => {
-    const themeId =
-      this.state.themeId === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
-    this.setTheme(themeId);
+  getTheme = ({ themeId, darkmode, reducedMotion }) =>
+    Themes[themeId]({ darkmode, reducedMotion });
+
+  setTheme = themeId =>
+    new Promise((resolve, reject) => {
+      if (themeId === this.state.themeId) {
+        resolve();
+        return;
+      }
+      if (!values(THEMES).includes(themeId)) {
+        reject();
+        return;
+      }
+      this.animateStateChange({ themeId }).then(() => resolve());
+    });
+
+  toggleState = key => () => {
+    const value = !this.state[key];
+    setCookie(key, value);
+    return this.animateStateChange({ [key]: value });
   };
+
+  toggleDarkmode = this.toggleState('darkmode');
+
+  toggleReducedMotion = this.toggleState('reducedMotion');
 
   render() {
     const { Component, pageProps } = this.props;
-    const { themeId, isTransitioning } = this.state;
-    const theme = Themes[themeId];
+    const { darkmode, reducedMotion, isTransitioning } = this.state;
+    const theme = {
+      ...this.getTheme(this.state),
+      setTheme: this.setTheme
+    };
     const siteName = SITE_NAME;
     const siteTwitter = SITE_TWITTER;
     const siteUrl = BASE_URL;
@@ -102,7 +133,10 @@ export default class CustomApp extends App {
             <Navigation
               siteName={siteName}
               siteUrl={siteUrl}
-              toggleTheme={this.toggleTheme}
+              toggleDarkmode={this.toggleDarkmode}
+              toggleReducedMotion={this.toggleReducedMotion}
+              darkmode={darkmode}
+              reducedMotion={reducedMotion}
               links={links}
             />
             <Main>
