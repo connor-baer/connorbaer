@@ -1,5 +1,5 @@
 # ---- Base Node ----
-FROM node:carbon AS base
+FROM node:10 AS base
 
 # Create app directory
 WORKDIR /app
@@ -26,7 +26,7 @@ COPY . .
 RUN yarn build
 
 # --- Release with Alpine ----
-FROM mhart/alpine-node:8
+FROM mhart/alpine-node:10
 
 # Create app directory
 WORKDIR /app
