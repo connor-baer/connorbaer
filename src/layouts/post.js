@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'react-emotion';
 import { withTheme } from 'emotion-theming';
@@ -8,20 +8,27 @@ import { Grid, Row, Col, Heading, sharedPropTypes } from '@sumup/circuit-ui';
 
 import { IMAGES_PATH, BLOG_PATH } from '../constants/paths';
 import * as CATEGORIES from '../constants/categories';
-import { THEMES } from '../constants';
+import { BASE_URL, THEMES } from '../constants';
 import { getAllCookies } from '../utils/cookies';
 import Meta from '../components/Meta';
 import components, { Paragraph } from './_components';
-import Image from '../components/Image';
+import Intro from '../components/Intro';
 import PostMeta from '../components/blog/PostMeta';
-import Intro from '../components/Intro/Intro';
+import ParallaxImage from '../components/blog/ParallaxImage';
 
-const StyledParagraph = styled(Paragraph)(
-  ({ theme }) =>
-    css`
-      font-family: ${theme.fontStack.serif};
-    `
-);
+const styledParagraphStyles = ({ theme }) => css`
+  font-family: ${theme.fontStack.serif};
+`;
+
+const StyledParagraph = styled(Paragraph)(styledParagraphStyles);
+
+const postHeaderStyles = ({ theme }) => css`
+  display: block;
+  margin-top: ${theme.spacings.zetta};
+  margin-bottom: ${theme.spacings.exa};
+`;
+
+const PostHeader = styled('header')(postHeaderStyles);
 
 class Post extends Component {
   static propTypes = {
@@ -36,8 +43,7 @@ class Post extends Component {
 
   static getInitialProps(ctx) {
     const cookies = getAllCookies(ctx);
-    const themeId = THEMES.BLOG;
-    return { cookies, themeId };
+    return { cookies };
   }
 
   constructor(props) {
@@ -49,25 +55,25 @@ class Post extends Component {
     const { children, title, description, slug, date, category } = this.props;
     const postPath = `${BLOG_PATH}/${slug}`;
     const file = `${IMAGES_PATH}${postPath}/cover`;
+    const image = `${BASE_URL}${IMAGES_PATH}${postPath}/social.jpg`;
+    const url = `${BASE_URL}${postPath}`;
 
     return (
-      <Fragment>
-        <Meta title={title} description={description} />
-        <Image
-          file={file}
-          alt="REPLACE ME"
-          style={{ maxWidth: '100vw', width: '100%' }}
-        />
+      <article>
+        <Meta title={title} description={description} url={url} image={image} />
+        <ParallaxImage file={file} alt="REPLACE ME" />
         <Grid>
           <Row>
             <Col
               span={{ default: 12, mega: 10, tera: 8 }}
               skip={{ default: 0, mega: 1, tera: 2 }}
             >
-              <Heading element="h1" size={Heading.ZETTA} noMargin>
-                {title}
-              </Heading>
-              <PostMeta date={date} category={category} />
+              <PostHeader>
+                <Heading element="h1" size={Heading.ZETTA} noMargin>
+                  {title}
+                </Heading>
+                <PostMeta date={date} category={category} />
+              </PostHeader>
               <Intro>{description}</Intro>
               <MDXProvider components={{ ...components, p: StyledParagraph }}>
                 {children}
@@ -75,7 +81,7 @@ class Post extends Component {
             </Col>
           </Row>
         </Grid>
-      </Fragment>
+      </article>
     );
   }
 }

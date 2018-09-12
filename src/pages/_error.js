@@ -8,12 +8,12 @@ import Header from '../components/Header';
 
 const TITLE_MAP = {
   404: 'Page not found. 🕵',
-  503: 'Bear with me please. 🐻'
+  503: 'Bear with me please. 🚧'
 };
 
 const SUBTITLE_MAP = {
   404: 'What’s worse, a hilarious 404 page can’t be found either.',
-  503: ''
+  503: 'I’m currently carrying out some maintenance on my website. It will only take a minute.'
 };
 
 export default class Error extends Component {

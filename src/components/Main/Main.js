@@ -7,7 +7,7 @@ const baseStyles = ({ theme }) => css`
   overflow: hidden;
   padding-bottom: ${theme.spacings.zetta};
 
-  ${theme.mq.kilo`
+  ${theme.mq.mega`
     min-height: calc(100vh - (168px + 57px));
     padding-top: 88px;
   `};

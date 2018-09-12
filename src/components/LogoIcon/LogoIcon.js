@@ -7,15 +7,20 @@ const baseStyles = ({ theme }) => css`
   height: ${theme.spacings.peta};
   width: auto;
   vertical-align: middle;
-  transition: transform 0.2s ease-in-out;
-
-  a:hover > &,
-  a:focus > & {
-    transform: scale(1.1);
-  }
 `;
 
-const LogoImage = styled('img')(baseStyles);
+const motionStyles = ({ theme }) =>
+  !theme.reducedMotion &&
+  css`
+    transition: transform ${theme.animations.motion};
+
+    a:hover > &,
+    a:focus > & {
+      transform: scale(1.1);
+    }
+  `;
+
+const LogoImage = styled('img')(baseStyles, motionStyles);
 
 function LogoIcon(props) {
   return (

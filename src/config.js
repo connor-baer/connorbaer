@@ -1,7 +1,5 @@
-import { get } from 'lodash';
+import getConfig from 'next/config';
 
-import isServer from './utils/is-server';
+const { publicRuntimeConfig } = getConfig();
 
-export default (isServer
-  ? global.publicConfig
-  : get(window, ['__NEXT_DATA__', 'publicConfig'], {}));
+export default publicRuntimeConfig;
