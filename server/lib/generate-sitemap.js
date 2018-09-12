@@ -1,27 +1,20 @@
 #! /usr/bin/env node
 
+/* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
 import fs from 'fs';
 import path from 'path';
 import glob from 'glob';
-import Listr from 'listr';
-import makeDir from 'make-dir';
 import { promisify } from 'util';
-import { isEmpty } from 'lodash/fp';
-
-import { BASE_URL } from '../src/constants';
-import { PAGES_PATH, STATIC_PATH } from '../src/constants/paths';
 
 const globAsync = promisify(glob);
 const statAsync = promisify(fs.stat);
-const writeFileAsync = promisify(fs.writeFile);
 
 const EXTENSIONS = ['js', 'jsx', 'mdx', 'md'];
 const EXTENSIONS_REGEXP = new RegExp(`.(${EXTENSIONS.join('|')})$`);
-const ROOT_DIR = path.resolve(__dirname, '../src');
-const PAGES_DIR = `${ROOT_DIR}${PAGES_PATH}`;
+const ROOT_DIR = path.resolve(__dirname, '../../src');
+const PAGES_DIR = `${ROOT_DIR}/pages`;
 const SOURCE = `${PAGES_DIR}/**/!(_*).@(${EXTENSIONS.join('|')})`;
-const DESTINATION = `${ROOT_DIR}${STATIC_PATH}`;
 
 async function buildLastMod(page) {
   const stats = await statAsync(page);
@@ -32,17 +25,17 @@ async function buildLastMod(page) {
   return `${modYear}-${modMonth}-${modDay}`;
 }
 
-function buildLoc(page) {
+function buildLoc(page, baseUrl) {
   const locPath = page
     .replace(PAGES_DIR, '')
     .replace(EXTENSIONS_REGEXP, '')
     .replace(/(.*)index$/, '$1');
-  return `${BASE_URL}${locPath}`;
+  return `${baseUrl}${locPath}`;
 }
 
-async function buildPageXml(page) {
+async function buildPageXml(page, baseUrl) {
   const lastMod = await buildLastMod(page);
-  const loc = buildLoc(page);
+  const loc = buildLoc(page, baseUrl);
 
   let pageXml = '';
   pageXml += '<url>';
@@ -55,12 +48,12 @@ async function buildPageXml(page) {
   return pageXml;
 }
 
-async function buildSitemap(pages) {
+async function buildSitemap(pages, baseUrl) {
   let xml = '';
   xml += '<?xml version="1.0" encoding="UTF-8"?>';
   xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
-  const pagePromises = pages.map(buildPageXml);
+  const pagePromises = pages.map(page => buildPageXml(page, baseUrl));
   const pagesXml = await Promise.all(pagePromises);
 
   xml += pagesXml.join('');
@@ -69,30 +62,8 @@ async function buildSitemap(pages) {
   return xml;
 }
 
-const tasks = new Listr([
-  {
-    title: 'Find pages',
-    task: async ctx => {
-      const pages = await globAsync(SOURCE);
-      ctx.pages = pages;
-    }
-  },
-  {
-    title: 'Generate sitemap',
-    skip: ctx => isEmpty(ctx.pages),
-    task: async ctx => {
-      const sitemap = await buildSitemap(ctx.pages);
-      ctx.sitemap = sitemap;
-    }
-  },
-  {
-    title: 'Write sitemap to disk',
-    skip: ctx => isEmpty(ctx.pages),
-    task: async ctx => {
-      await makeDir(DESTINATION);
-      writeFileAsync(`${DESTINATION}/sitemap.xml`, ctx.sitemap);
-    }
-  }
-]);
-
-tasks.run();
+export default async function generateSitemap(baseUrl) {
+  const pages = await globAsync(SOURCE);
+  const sitemap = await buildSitemap(pages, baseUrl);
+  return sitemap;
+}

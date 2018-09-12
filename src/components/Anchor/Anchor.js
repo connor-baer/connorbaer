@@ -29,9 +29,9 @@ const A = styled('a')`
   ${baseStyles};
 `;
 
-const Anchor = ({ children, title, className, id, ...otherProps }) => (
+const Anchor = ({ children, title, className, id, target, rel, ...otherProps }) => (
   <Link {...otherProps}>
-    <A {...{ title, className, id }}>{children}</A>
+    <A {...{ title, className, id, target, rel }}>{children}</A>
   </Link>
 );
 

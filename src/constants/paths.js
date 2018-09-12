@@ -1,8 +1,12 @@
+import CONFIG from '../config';
+
+// Base URLs
+export const { BASE_URL, STATIC_URL } = CONFIG;
+
 // Files
-export const STATIC_PATH = `/static`;
-export const FAVICONS_PATH = `${STATIC_PATH}/favicons`;
-export const FONTS_PATH = `${STATIC_PATH}/fonts`;
-export const IMAGES_PATH = `${STATIC_PATH}/images`;
+export const FAVICONS_PATH = `${STATIC_URL}/favicons`;
+export const FONTS_PATH = `${STATIC_URL}/fonts`;
+export const IMAGES_PATH = `${STATIC_URL}/images`;
 
 // Sections
 export const PAGES_PATH = `/pages`;

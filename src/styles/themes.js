@@ -79,11 +79,11 @@ const typography = {
   },
   text: {
     kilo: {
-      fontSize: '15px',
+      fontSize: '14px',
       lineHeight: '24px'
     },
     mega: {
-      fontSize: '18px',
+      fontSize: '16px',
       lineHeight: '32px'
     },
     giga: {
@@ -207,6 +207,14 @@ function createColors(darkmode = false) {
   };
 }
 
+function createAnimations(reducedMotion = false) {
+  return {
+    micro: '160ms cubic-bezier(0, 0, 0.2, 1)',
+    standard: '320ms cubic-bezier(0, 0, 0.2, 1)',
+    motion: reducedMotion ? '0s' : '320ms cubic-bezier(0, 0, 0.2, 1)'
+  };
+}
+
 function createSpacings(base = 4) {
   return {
     bit: `${base * 1}px`,
@@ -283,6 +291,7 @@ export function standard({ darkmode, baseSpacing, reducedMotion }) {
     typography,
     borderRadius,
     colors: createColors(darkmode),
+    animations: createAnimations(reducedMotion),
     spacings: createSpacings(baseSpacing),
     grid: createGrid(baseSpacing),
     mq: createMediaQueries(breakpoints)
@@ -303,7 +312,7 @@ export function blog({ darkmode, baseSpacing, reducedMotion }) {
       },
       {
         name: 'Lora',
-        localName: 'Lora Regular',
+        localName: 'Lora Italic',
         weight: '400',
         style: 'italic'
       },

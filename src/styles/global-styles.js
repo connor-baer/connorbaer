@@ -61,7 +61,7 @@ h5 {
 a {
   text-decoration: none;
   color: inherit;
-  transition: all 0.2s ease-in-out;
+  transition: all ${theme.animations.micro};
 
   &:hover,
   &:focus {

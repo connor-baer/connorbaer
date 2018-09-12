@@ -3,7 +3,7 @@ import Document, { Head, Main, NextScript } from 'next/document';
 import { extractCritical } from 'emotion-server';
 
 import { LANG } from '../constants';
-import { FAVICONS_PATH } from '../constants/paths';
+import { FAVICONS_PATH, STATIC_URL } from '../constants/paths';
 
 export default class CustomDocument extends Document {
   static async getInitialProps(ctx) {
@@ -30,7 +30,7 @@ export default class CustomDocument extends Document {
         <Head>
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link rel="dns-prefetch" href="//images.contentful.com" />
+          <link rel="dns-prefetch" href={STATIC_URL} />
           <link
             rel="shortcut icon"
             href={`${FAVICONS_PATH}/favicon.ico`}

@@ -14,7 +14,8 @@ import globalStyles from '../styles/global-styles';
 import loadFonts from '../styles/load-fonts';
 import * as Themes from '../styles/themes';
 
-import { THEMES, SITE_NAME, SITE_TWITTER, BASE_URL } from '../constants';
+import { THEMES, SITE_NAME, SITE_TWITTER } from '../constants';
+import { BASE_URL } from '../constants/paths';
 import Navigation from '../components/Navigation';
 import Prefooter from '../components/Prefooter';
 import Footer from '../components/Footer';
@@ -26,12 +27,13 @@ if (!isServer) {
   hydrate(window.__NEXT_DATA__.emotionIds);
 }
 
-const transitionStyles = ({ isTransitioning }) =>
+const transitionStyles = ({ theme, isTransitioning }) =>
   isTransitioning &&
   css`
     * {
-      transition: background-color 0.2s ease-out, color 0.2s ease-out,
-        border-color 0.2s ease-out !important;
+      transition: background-color ${theme.animations.micro},
+        color ${theme.animations.micro}, fill ${theme.animations.micro},
+        border-color ${theme.animations.micro} !important;
     }
   `;
 
@@ -49,8 +51,8 @@ export default class CustomApp extends App {
     const cookies = get(['pageProps', 'cookies'], props) || {};
     const section = this.props.router.pathname.split('/')[1];
     const themeId = themeIdsMap[section] || themeIdsMap.standard;
-    const darkmode = cookies.darkmode === 'true' || false;
-    const reducedMotion = cookies.reducedMotion === 'true' || false;
+    const darkmode = cookies.darkmode === 'true';
+    const reducedMotion = cookies.reducedMotion === 'true';
     const theme = this.getTheme({ themeId, darkmode, reducedMotion });
     const custom = globalStyles({ theme });
     injectGlobalStyles({ theme, custom });
@@ -64,23 +66,35 @@ export default class CustomApp extends App {
     };
   }
 
-  // eslint-disable-next-line class-methods-use-this
   componentDidMount() {
     Router.events.on('routeChangeStart', () => NProgress.start());
-    Router.events.on('routeChangeComplete', () => NProgress.done());
+    Router.events.on('routeChangeComplete', () => {
+      NProgress.done();
+      objectFitPolyfill();
+    });
     Router.events.on('routeChangeError', () => NProgress.done());
+
+    if (isServer) {
+      return;
+    }
+
+    objectFitPolyfill();
+
+    this.motionQuery = window.matchMedia('(prefers-reduced-motion)');
+    this.motionQuery.addListener(this.handleReducedMotionChanged);
+
+    if (this.motionQuery.matches) {
+      this.setState({ reducedMotion: true });
+    }
   }
 
-  animateStateChange = newState =>
-    new Promise(resolve => {
-      this.setState({ ...newState, isTransitioning: true }, () => {
-        // Wait for transition animation to finish
-        setTimeout(() => {
-          this.setState({ isTransitioning: false });
-          resolve();
-        }, 200);
-      });
-    });
+  componentWillUnmount() {
+    this.motionQuery.removeListener(this.handleReducedMotionChanged);
+  }
+
+  handleReducedMotionChanged = () => {
+    this.setState({ reducedMotion: this.motionQuery.matches });
+  };
 
   getTheme = ({ themeId, darkmode, reducedMotion }) =>
     Themes[themeId]({ darkmode, reducedMotion });
@@ -96,6 +110,17 @@ export default class CustomApp extends App {
         return;
       }
       this.animateStateChange({ themeId }).then(() => resolve());
+    });
+
+  animateStateChange = newState =>
+    new Promise(resolve => {
+      this.setState({ ...newState, isTransitioning: true }, () => {
+        // Wait for transition animation to finish
+        setTimeout(() => {
+          this.setState({ isTransitioning: false });
+          resolve();
+        }, 200);
+      });
     });
 
   toggleState = key => () => {

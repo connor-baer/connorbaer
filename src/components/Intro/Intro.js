@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import styled, { css } from 'react-emotion';
-import { Text } from '@sumup/circuit-ui';
 
 const baseStyles = ({ theme }) => css`
   font-weight: ${theme.fontWeight.light};
-  font-size: 24px;
-  line-height: 42px;
+  font-size: 20px;
+  line-height: 35px;
+  margin-bottom: ${theme.spacings.tera};
 
   ${theme.mq.kilo`
     font-size: 25px;
@@ -13,7 +13,7 @@ const baseStyles = ({ theme }) => css`
   `};
 `;
 
-const Intro = styled(Text)(baseStyles);
+const Intro = styled('h3')(baseStyles);
 
 Intro.propTypes = {
   children: PropTypes.string.isRequired

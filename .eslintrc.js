@@ -7,6 +7,12 @@ const config = {
     ecmaFeatures: {
       jsx: true
     }
+  },
+  globals: {
+    __DEV__: true,
+    __PRODUCTION__: true,
+    __TEST__: true,
+    objectFitPolyfill: true
   }
 };
 

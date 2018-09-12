@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'react-emotion';
 import { startsWith } from 'lodash/fp';
 
-import { textKilo, headingTera } from '../../styles/style-helpers';
+import { textMega, headingTera } from '../../styles/style-helpers';
 import isServer from '../../utils/is-server';
 import Link from '../Link';
 import LogoIcon from '../LogoIcon';
 
-import MoonIcon from './svgs/moon.svg';
-import ClockIcon from './svgs/clock.svg';
+import Moon from './svgs/moon.svg';
+import MoonFull from './svgs/moon-full.svg';
+import Motion from './svgs/motion.svg';
+import MotionFull from './svgs/motion-full.svg';
 
 const headerBaseStyles = ({ theme }) => css`
   display: flex;
@@ -17,7 +19,8 @@ const headerBaseStyles = ({ theme }) => css`
   justify-content: space-between;
   flex-wrap: wrap;
   padding: ${theme.spacings.kilo};
-  transition: opacity 0.3s ease-in-out, padding 0.3s ease-in-out;
+  transition: opacity ${theme.animations.standard},
+    padding ${theme.animations.standard};
   background-color: ${theme.colors.bodyBg};
   z-index: 999;
 
@@ -25,15 +28,12 @@ const headerBaseStyles = ({ theme }) => css`
     opacity: 1;
   }
 
-  ${theme.mq.kilo`
+  ${theme.mq.mega`
     position: fixed;
     top: 0;
     right: 0;
     left: 0;
     flex-wrap: nowrap;
-  `};
-
-  ${theme.mq.mega`
     padding: ${theme.spacings.giga};
   `};
 `;
@@ -41,14 +41,14 @@ const headerBaseStyles = ({ theme }) => css`
 const headerInvisibleStyles = ({ theme, isInvisible }) =>
   isInvisible &&
   css`
-    ${theme.mq.kilo`
+    ${theme.mq.mega`
       opacity: 0;
     `};
   `;
 const headerFloatingStyles = ({ theme, isFloating }) =>
   isFloating &&
   css`
-    ${theme.mq.kilo`
+    ${theme.mq.mega`
       padding: ${theme.spacings.kilo} ${theme.spacings.giga};
       box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
     `};
@@ -63,14 +63,13 @@ const Header = styled('header')(
 const siteNameStyles = ({ theme }) => css`
   ${headingTera({ theme })};
   display: inline-block;
-  transition: color 0.14s cubic-bezier(0, 0, 0.2, 1);
+  transition: color ${theme.animations.micro};
   font-weight: ${theme.fontWeight.bold};
   line-height: 1;
   color: ${theme.colors.n900};
   margin-top: 3px;
   margin-left: ${theme.spacings.kilo};
   vertical-align: middle;
-  transition: color 0.2s ease-in-out;
 
   a:hover > &,
   a:focus > & {
@@ -81,7 +80,7 @@ const siteNameStyles = ({ theme }) => css`
 const SiteName = styled('span')(siteNameStyles);
 
 const navStyles = ({ theme }) => css`
-  ${theme.mq.untilKilo`
+  ${theme.mq.untilMega`
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
@@ -93,16 +92,17 @@ const navStyles = ({ theme }) => css`
 const Nav = styled('nav')(navStyles);
 
 const navAnchorBaseStyles = ({ theme }) => css`
-  ${textKilo({ theme })};
+  ${textMega({ theme })};
   font-weight: ${theme.fontWeight.regular};
+  line-height: 1;
   letter-spacing: 1px;
   display: inline-block;
   color: ${theme.colors.n700};
-  border-radius: ${theme.spacings.mega};
-  padding: 6px ${theme.spacings.mega};
+  border-radius: 20px;
+  padding: ${theme.spacings.kilo} ${theme.spacings.mega};
   margin-top: ${theme.spacings.kilo};
 
-  ${theme.mq.kilo`
+  ${theme.mq.mega`
     margin-right: ${theme.spacings.kilo};
     margin-top: 0;
   `};
@@ -129,7 +129,8 @@ const NavAnchor = styled('a')(navAnchorBaseStyles, navAnchorActiveStyles);
 
 const iconButtonBaseStyles = ({ theme }) => css`
   display: inline-block;
-  transition: fill 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  transition: fill ${theme.animations.micro},
+    background-color ${theme.animations.micro};
   line-height: 0;
   border: 0;
   outline: none;
@@ -142,7 +143,7 @@ const iconButtonBaseStyles = ({ theme }) => css`
   padding: ${theme.spacings.byte};
   margin-right: ${theme.spacings.bit};
 
-  ${theme.mq.untilKilo`
+  ${theme.mq.untilMega`
     order: 2;
   `};
 
@@ -251,6 +252,9 @@ class Navigation extends Component {
       links,
       router
     } = this.props;
+
+    const DarkmodeIcon = darkmode ? MoonFull : Moon;
+    const MotionIcon = reducedMotion ? MotionFull : Motion;
     return (
       <Header {...this.state}>
         <Link href={isHome ? '#' : '/'} prefetch={!isHome}>
@@ -275,18 +279,22 @@ class Navigation extends Component {
             <IconButton
               isActive={darkmode}
               title={`Turn ${darkmode ? 'off' : 'on'} darkmode`}
+              aria-label="Darkmode"
+              aria-pressed={darkmode}
               onClick={toggleDarkmode}
             >
-              <MoonIcon width={24} height={24} />
+              <DarkmodeIcon width={24} height={24} />
             </IconButton>
           )}
           {toggleReducedMotion && (
             <IconButton
               isActive={reducedMotion}
               title={`Turn ${reducedMotion ? 'off' : 'on'} reduced motion`}
+              aria-label="Reduced motion"
+              aria-pressed={reducedMotion}
               onClick={toggleReducedMotion}
             >
-              <ClockIcon width={24} height={24} />
+              <MotionIcon width={24} height={24} />
             </IconButton>
           )}
         </div>

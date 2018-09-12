@@ -7,11 +7,11 @@ import morgan from 'morgan';
 
 import securityHeaders from './lib/security-headers';
 import logger from './lib/logger';
+import generateSitemap from './lib/generate-sitemap';
 
 const SOURCE_DIR = './src';
 const ABS_SOURCE_DIR = path.join(__dirname, '..', SOURCE_DIR);
 const NEXT_DIR = './.next';
-const STATIC_DIR = './static';
 
 const port = parseInt(process.env.PORT, 10) || 8080;
 const dev = process.env.NODE_ENV !== 'production';
@@ -45,10 +45,12 @@ app.prepare().then(() => {
   });
 
   // Sitemap
-  server.get('/sitemap.xml', (req, res) => {
-    const filePath = path.join(ABS_SOURCE_DIR, STATIC_DIR, '/sitemap.xml');
+  server.get('/sitemap.xml', async (req, res) => {
+    res.set('Content-Type', 'application/xml');
     res.setHeader('Cache-Control', 'no-cache');
-    app.serveStatic(req, res, filePath);
+    const baseUrl = `${req.protocol}://${req.get('host')}`;
+    const sitemap = await generateSitemap(baseUrl);
+    res.send(sitemap);
   });
 
   // Robots

@@ -2,6 +2,7 @@ import React from 'react';
 import { Heading, Text, Hr } from '@sumup/circuit-ui';
 
 import Anchor from '../components/Anchor';
+import Blockquote from '../components/blog/Blockquote';
 
 export const HeadingOne = ({ children, ...rest }) => (
   <Heading element="h2" size={Heading.EXA} {...rest}>
@@ -39,6 +40,12 @@ export const Paragraph = ({ children, ...rest }) => (
   </Text>
 );
 
+export const Quote = ({ children, ...rest }) => (
+  <Text size={Text.GIGA} element="q" italic {...rest}>
+    {children}
+  </Text>
+);
+
 const components = {
   h1: HeadingOne,
   h2: HeadingTwo,
@@ -48,6 +55,8 @@ const components = {
   h6: HeadingFive,
   p: Paragraph,
   a: Anchor,
+  q: Quote,
+  blockquote: Blockquote,
   hr: Hr
 };
 

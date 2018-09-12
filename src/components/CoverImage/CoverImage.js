@@ -10,7 +10,6 @@ const wrapperStyles = ({ theme }) => css`
   overflow: hidden;
   height: auto;
   width: 100%;
-  transition: filter 0.2s ease-in-out;
 
   &::after {
     position: absolute;
@@ -18,7 +17,7 @@ const wrapperStyles = ({ theme }) => css`
     right: 0;
     bottom: 0;
     left: 0;
-    transition: opacity 0.3s cubic-bezier(0, 0, 0.2, 1);
+    transition: opacity ${theme.animations.standard};
     background: radial-gradient(transparent, ${theme.colors.shadow});
     content: '';
     opacity: 0;
@@ -34,22 +33,28 @@ const wrapperStyles = ({ theme }) => css`
 
 const Wrapper = styled('div')(wrapperStyles);
 
-const imageStyles = () => css`
+const imageBaseStyles = ({ theme }) => css`
   display: block;
   height: auto;
   max-height: 100%;
   width: 100%;
-  transition: transform 0.3s cubic-bezier(0, 0, 0.2, 1);
-  will-change: transform;
-  backface-visibility: hidden;
-
-  a:hover &,
-  a:focus & {
-    transform: scale(1.04);
-  }
+  border-radius: ${theme.borderRadius.giga};
 `;
 
-const StyledImage = styled(Image)(imageStyles);
+const imageMotionStyles = ({ theme }) =>
+  !theme.reducedMotion &&
+  css`
+    transition: transform ${theme.animations.motion};
+    will-change: transform;
+    backface-visibility: hidden;
+
+    a:hover &,
+    a:focus & {
+      transform: scale(1.04);
+    }
+  `;
+
+const StyledImage = styled(Image)(imageBaseStyles, imageMotionStyles);
 
 function CoverImage({ ...props }) {
   return (
@@ -65,8 +70,6 @@ CoverImage.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number
 };
-
-CoverImage.defaultProps = {};
 
 /**
  * @component
