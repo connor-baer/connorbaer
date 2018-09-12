@@ -3,6 +3,7 @@ import { Heading, Text, Hr } from '@sumup/circuit-ui';
 
 import Anchor from '../components/Anchor';
 import Blockquote from '../components/blog/Blockquote';
+import Image from '../components/Image';
 
 export const HeadingOne = ({ children, ...rest }) => (
   <Heading element="h2" size={Heading.EXA} {...rest}>
@@ -40,6 +41,18 @@ export const Paragraph = ({ children, ...rest }) => (
   </Text>
 );
 
+export const Em = ({ children, ...rest }) => (
+  <Text size={Text.GIGA} italic {...rest}>
+    {children}
+  </Text>
+);
+
+export const Strong = ({ children, ...rest }) => (
+  <Text size={Text.GIGA} bold {...rest}>
+    {children}
+  </Text>
+);
+
 export const Quote = ({ children, ...rest }) => (
   <Text size={Text.GIGA} element="q" italic {...rest}>
     {children}
@@ -55,8 +68,11 @@ const components = {
   h6: HeadingFive,
   p: Paragraph,
   a: Anchor,
+  em: Em,
+  strong: Strong,
   q: Quote,
   blockquote: Blockquote,
+  img: Image,
   hr: Hr
 };
 

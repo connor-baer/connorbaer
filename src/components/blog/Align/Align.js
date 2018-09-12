@@ -52,20 +52,25 @@ const leftStyles = ({ theme, align }) =>
 const fullStyles = ({ theme, align }) =>
   align === ALIGNMENTS.FULL &&
   css`
+    text-align: center;
+
     ${theme.mq.mega`
-      margin-left: -8.33%;
-      margin-right: -8.33%;
+      margin: ${theme.spacings.peta} -8.33%;
       width: calc(100% + 8.33% * 2);
     `};
 
     ${theme.mq.tera`
-      margin-left: -16.66%;
-      margin-right: -16.66%;
+      margin: ${theme.spacings.exa} -16.66%;
       width: calc(100% + 16.66% * 2);
     `};
   `;
 
 const Align = styled('div')(baseStyles, rightStyles, leftStyles, fullStyles);
+
+Align.RIGHT = ALIGNMENTS.RIGHT;
+Align.LEFT = ALIGNMENTS.LEFT;
+Align.CENTER = ALIGNMENTS.CENTER;
+Align.FULL = ALIGNMENTS.FULL;
 
 Align.propTypes = {
   align: PropTypes.oneOf(values(ALIGNMENTS))

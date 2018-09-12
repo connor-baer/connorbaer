@@ -5,9 +5,10 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 
-import securityHeaders from './lib/security-headers';
 import logger from './lib/logger';
+import securityHeaders from './lib/security-headers';
 import generateSitemap from './lib/generate-sitemap';
+import asyncMiddleware from './lib/async-middleware';
 
 const SOURCE_DIR = './src';
 const ABS_SOURCE_DIR = path.join(__dirname, '..', SOURCE_DIR);
@@ -41,22 +42,37 @@ app.prepare().then(() => {
   server.get('/service-worker.js', (req, res) => {
     const filePath = path.join(ABS_SOURCE_DIR, NEXT_DIR, '/service-worker.js');
     res.setHeader('Cache-Control', 'no-cache');
-    app.serveStatic(req, res, filePath);
+    return app.serveStatic(req, res, filePath);
   });
 
   // Sitemap
-  server.get('/sitemap.xml', async (req, res) => {
-    res.set('Content-Type', 'application/xml');
-    res.setHeader('Cache-Control', 'no-cache');
-    const baseUrl = `${req.protocol}://${req.get('host')}`;
-    const sitemap = await generateSitemap(baseUrl);
-    res.send(sitemap);
-  });
+  server.get(
+    '/sitemap.xml',
+    asyncMiddleware(async (req, res) => {
+      const baseUrl = `${req.protocol}://${req.get('host')}`;
+      const sitemap = await generateSitemap(baseUrl);
+      res.setHeader('Cache-Control', 'no-cache');
+      res.set('Content-Type', 'application/xml');
+      return res.send(sitemap);
+    })
+  );
 
   // Robots
   server.get('/robots.txt', (req, res) => {
     res.set('Content-Type', 'text/plain');
     return res.send('User-agent: * \nDisallow:');
+  });
+
+  // Global error handler
+  // eslint-disable-next-line no-unused-vars
+  server.use(async (err, req, res, _) => {
+    logger.error(err.stack);
+    res.status(500);
+    res.setHeader('Cache-Control', 'no-cache');
+    return app.renderError(err, req, res, '/_error', {
+      ...req.query,
+      ...req.params
+    });
   });
 
   // Static pages

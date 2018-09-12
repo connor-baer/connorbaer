@@ -8,11 +8,13 @@ import Header from '../components/Header';
 
 const TITLE_MAP = {
   404: 'Page not found. 🕵',
+  500: 'An error occured. 💩',
   503: 'Bear with me please. 🚧'
 };
 
 const SUBTITLE_MAP = {
   404: 'What’s worse, a hilarious 404 page can’t be found either.',
+  500: 'Something has gone wrong. Try to refresh the page or go back to the homepage.',
   503: 'I’m currently carrying out some maintenance on my website. It will only take a minute.'
 };
 
