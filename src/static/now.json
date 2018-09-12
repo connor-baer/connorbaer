@@ -1,0 +1,29 @@
+{
+  "name": "connor-static",
+  "alias": "static.connor.li",
+  "scale": {
+    "all": {
+      "min": 1,
+      "max": "auto"
+    }
+  },
+  "static": {
+    "directoryListing": false,
+    "headers": [
+      {
+        "source" : "**/*.webp",
+        "headers" : [{
+          "key" : "Cache-Control",
+          "value" : "max-age=86400"
+        }]
+      },
+      {
+        "source" : "**/*.@(woff|woff2)",
+        "headers" : [{
+          "key" : "Cache-Control",
+          "value" : "max-age=604800"
+        }]
+      }
+    ]
+  }
+}

@@ -1,37 +1,60 @@
 #!/usr/bin/env node
 
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
+/* eslint-disable import/no-extraneous-dependencies */
 import path from 'path';
 import glob from 'glob';
 import Listr from 'listr';
 import sharp from 'sharp';
 import makeDir from 'make-dir';
-import { promisify } from 'util';
 import { isEmpty } from 'lodash/fp';
 
-import { PAGES_PATH, IMAGES_PATH, BLOG_PATH } from '../src/constants/paths';
-
-const globAsync = promisify(glob);
-
+const IMAGES_PATH = '/images';
+const PAGES_PATH = `/pages`;
+const BLOG_PATH = `/blog`;
 const ROOT_DIR = path.resolve(__dirname, '../src/');
-const SOURCE = `${ROOT_DIR}${PAGES_PATH}${BLOG_PATH}/**/image.@(png|jpg|jpeg)`;
-const DESTINATION = `${ROOT_DIR}${IMAGES_PATH}${BLOG_PATH}`;
 
-const OUTPUT_MATRIX = [
+const transformations = [
   {
-    name: 'thumbnail',
-    formats: ['jpg', 'webp'],
-    width: 350,
-    height: 150,
-    highDPI: true
+    name: 'main',
+    src: `${ROOT_DIR}${PAGES_PATH}${BLOG_PATH}/**/image.@(png|jpg|jpeg)`,
+    dest: `${ROOT_DIR}${IMAGES_PATH}${BLOG_PATH}`,
+    matrix: [
+      {
+        name: 'cover',
+        formats: ['jpg', 'webp'],
+        width: 1440,
+        height: 480,
+        highDPI: true
+      },
+      {
+        name: 'thumbnail',
+        formats: ['jpg', 'webp'],
+        width: 350,
+        height: 150,
+        highDPI: true
+      },
+      {
+        name: 'social',
+        formats: ['jpg'],
+        width: 1200,
+        height: 800
+      }
+    ]
   },
   {
-    name: 'cover',
-    formats: ['jpg', 'webp'],
-    width: 1440,
-    height: 300,
-    highDPI: true
+    name: 'post',
+    src: `${ROOT_DIR}${PAGES_PATH}${BLOG_PATH}/**/!(image*).@(png|jpg|jpeg)`,
+    dest: `${ROOT_DIR}${IMAGES_PATH}${BLOG_PATH}`,
+    matrix: [
+      {
+        formats: ['jpg', 'webp'],
+        method: 'max',
+        width: 1000,
+        height: 1000,
+        highDPI: true
+      }
+    ]
   }
 ];
 
@@ -42,58 +65,94 @@ function getPageSlug(absolutePath) {
     .pop();
 }
 
-function resizeImage(source, dest, { width, height, format = 'jpg' }) {
+function resizeImage(
+  source,
+  dest,
+  { format = 'jpg', method = 'crop', width, height }
+) {
   const options = ['jpg', 'png'].includes(format)
     ? { progressive: true }
     : undefined;
   return sharp(source)
     .resize(width, height)
+    [method]()
     .toFormat(format, options)
     .toFile(`${dest}.${format}`);
 }
 
-async function createResizedImages(source, pageSlug) {
-  const destDir = `${DESTINATION}/${pageSlug}`;
-  await makeDir(destDir);
-  OUTPUT_MATRIX.forEach(({ name, formats, width, height, highDPI }) => {
-    formats.forEach(format => {
-      const dest = `${destDir}/${name}`;
-      resizeImage(source, dest, { width, height, format });
-      if (highDPI) {
-        const dest2x = `${destDir}/${name}@2x`;
-        resizeImage(source, dest2x, {
-          width: width * 2,
-          height: height * 2,
-          format
-        });
-      }
+const formatTasks = (type, file, destDir) => {
+  const taskList = [];
+
+  const { name, width, height, method, highDPI } = type;
+
+  makeDir.sync(destDir);
+
+  type.formats.forEach(format => {
+    const dest = `${destDir}/${name}`;
+
+    taskList.push({
+      title: `${format}`,
+      task: () => resizeImage(file, dest, { format, method, width, height })
     });
-  });
-}
 
-const tasks = new Listr([
-  {
-    title: 'Find source images',
-    task: async ctx => {
-      const sourceFiles = await globAsync(SOURCE);
-      ctx.sourceFiles = sourceFiles;
+    if (highDPI) {
+      const dest2x = `${destDir}/${name}@2x`;
+
+      taskList.push({
+        title: `${format}@2x`,
+        task: () =>
+          resizeImage(file, dest2x, {
+            format,
+            method,
+            width: width ? width * 2 : null,
+            height: height ? height * 2 : null
+          })
+      });
     }
-  },
-  {
-    title: 'Create resized images',
-    skip: ctx => isEmpty(ctx.sourceFiles),
-    task: ctx =>
-      new Listr(
-        ctx.sourceFiles.map(source => {
-          const pageSlug = getPageSlug(source);
-          return {
-            title: `Creating images for "${pageSlug}"`,
-            task: async () => createResizedImages(source, pageSlug)
-          };
-        }),
-        { concurrent: true }
-      )
-  }
-]);
+  });
 
-tasks.run();
+  return new Listr(taskList, { concurrent: true });
+};
+
+const matrixTasks = (transformation, file, slug) => {
+  const destDir = `${transformation.dest}/${slug}`;
+  return new Listr(
+    transformation.matrix.map(type => {
+      const name = type.name || path.basename(file, path.extname(file));
+      return {
+        title: name,
+        skip: () => isEmpty(type.formats),
+        task: () => formatTasks({ ...type, name }, file, destDir)
+      };
+    }),
+    { concurrent: true }
+  );
+};
+
+const fileTasks = (transformation, files) =>
+  new Listr(
+    files.map(file => {
+      const slug = getPageSlug(file);
+      return {
+        title: slug,
+        skip: () => isEmpty(transformation.matrix),
+        task: () => matrixTasks(transformation, file, slug)
+      };
+    })
+  );
+
+const tasks = new Listr(
+  transformations.map(transformation => {
+    const { src, name } = transformation;
+    const files = glob.sync(src);
+    return {
+      title: `Transforming "${name}" images`,
+      skip: () => isEmpty(files),
+      task: () => fileTasks(transformation, files)
+    };
+  })
+);
+
+tasks.run().catch(err => {
+  console.error(err);
+});
