@@ -27,13 +27,13 @@ const StyledHeading = styled(Heading)(headingStyles);
 
 function PostCard({ slug, title, date, category }) {
   const postPath = `${BLOG_PATH}/${slug}`;
-  const file = `${IMAGES_PATH}${postPath}/thumbnail`;
+  const src = `${IMAGES_PATH}${postPath}/thumbnail.jpg`;
 
   return (
     <Article>
       <Link href={postPath} prefetch>
         <a>
-          <CoverImage file={file} alt={title} />
+          <CoverImage src={src} alt={title} aspectRatio={150/350} />
           <StyledHeading element="h2" size={Heading.TERA}>
             {title}
           </StyledHeading>

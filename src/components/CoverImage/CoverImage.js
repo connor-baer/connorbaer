@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'react-emotion';
 import Image from '../Image/Image';
 
-const wrapperStyles = ({ theme }) => css`
+const wrapperBaseStyles = ({ theme }) => css`
   display: block;
   position: relative;
   border-radius: ${theme.borderRadius.giga};
@@ -31,7 +31,14 @@ const wrapperStyles = ({ theme }) => css`
   }
 `;
 
-const Wrapper = styled('div')(wrapperStyles);
+const wrapperAspectRatioStyles = ({ theme, aspectRatio }) => aspectRatio && css`
+  overflow: hidden;
+  height: 0;
+  width: 100%;
+  padding-top: ${aspectRatio * 100}%;
+`;
+
+const Wrapper = styled('div')(wrapperBaseStyles, wrapperAspectRatioStyles);
 
 const imageBaseStyles = ({ theme }) => css`
   display: block;
@@ -39,6 +46,17 @@ const imageBaseStyles = ({ theme }) => css`
   max-height: 100%;
   width: 100%;
   border-radius: ${theme.borderRadius.giga};
+`;
+
+const imageAspectRatioStyles = ({ theme, aspectRatio }) => aspectRatio && css`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 
 const imageMotionStyles = ({ theme }) =>
@@ -54,12 +72,12 @@ const imageMotionStyles = ({ theme }) =>
     }
   `;
 
-const StyledImage = styled(Image)(imageBaseStyles, imageMotionStyles);
+const StyledImage = styled(Image)(imageBaseStyles, imageAspectRatioStyles, imageMotionStyles);
 
-function CoverImage({ ...props }) {
+function CoverImage({ aspectRatio, className, ...props }) {
   return (
-    <Wrapper>
-      <StyledImage {...props} />
+    <Wrapper aspectRatio={aspectRatio} className={className}>
+      <StyledImage aspectRatio={aspectRatio} {...props} />
     </Wrapper>
   );
 }

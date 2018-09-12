@@ -56,6 +56,11 @@ function Blockquote({ children, cite, align, ...rest }) {
   );
 }
 
+Blockquote.RIGHT = ALIGNMENTS.RIGHT;
+Blockquote.LEFT = ALIGNMENTS.LEFT;
+Blockquote.CENTER = ALIGNMENTS.CENTER;
+Blockquote.FULL = ALIGNMENTS.FULL;
+
 Blockquote.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   cite: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
@@ -63,7 +68,7 @@ Blockquote.propTypes = {
 };
 
 Blockquote.defaultProps = {
-  align: ALIGNMENTS.LEFT
+  align: ALIGNMENTS.CENTER
 };
 
 /**

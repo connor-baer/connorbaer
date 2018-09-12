@@ -17,11 +17,11 @@ const containerStyles = ({ theme }) => css`
   `};
 
   ${theme.mq.mega`
-    height: 280px;
+    height: 300px;
   `};
 
   ${theme.mq.tera`
-    height: 320px;
+    height: 360px;
   `};
 `;
 

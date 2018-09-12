@@ -6,9 +6,10 @@ import { values } from 'lodash/fp';
 import { MDXProvider } from '@mdx-js/tag';
 import { Grid, Row, Col, Heading, sharedPropTypes } from '@sumup/circuit-ui';
 
+import CONFIG from '../config';
 import { IMAGES_PATH, BLOG_PATH } from '../constants/paths';
 import * as CATEGORIES from '../constants/categories';
-import { BASE_URL, THEMES } from '../constants';
+import { THEMES } from '../constants';
 import { getAllCookies } from '../utils/cookies';
 import Meta from '../components/Meta';
 import components, { Paragraph } from './_components';
@@ -54,14 +55,14 @@ class Post extends Component {
   render() {
     const { children, title, description, slug, date, category } = this.props;
     const postPath = `${BLOG_PATH}/${slug}`;
-    const file = `${IMAGES_PATH}${postPath}/cover`;
-    const image = `${BASE_URL}${IMAGES_PATH}${postPath}/social.jpg`;
-    const url = `${BASE_URL}${postPath}`;
+    const src = `${IMAGES_PATH}${postPath}/cover.jpg`;
+    const image = `${CONFIG.BASE_URL}${IMAGES_PATH}${postPath}/social.jpg`;
+    const url = `${CONFIG.BASE_URL}${postPath}`;
 
     return (
       <article>
         <Meta title={title} description={description} url={url} image={image} />
-        <ParallaxImage file={file} alt="REPLACE ME" />
+        <ParallaxImage src={src} alt="REPLACE ME" />
         <Grid>
           <Row>
             <Col

@@ -29,6 +29,11 @@ function Figure({ children, caption, align, ...rest }) {
   );
 }
 
+Figure.RIGHT = ALIGNMENTS.RIGHT;
+Figure.LEFT = ALIGNMENTS.LEFT;
+Figure.CENTER = ALIGNMENTS.CENTER;
+Figure.FULL = ALIGNMENTS.FULL;
+
 Figure.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   caption: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
