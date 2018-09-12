@@ -1,0 +1,12 @@
+{
+  "type": "docker",
+  "public": false,
+  "alias": "connor.li",
+  "features": {
+    "cloud": "v2",
+    "timeout": 15
+  },
+  "env": {
+    "STATIC_URL": "https://static.connor.li"
+  }
+}

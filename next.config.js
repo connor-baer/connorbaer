@@ -1,19 +1,33 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const webpack = require('webpack');
+const slug = require('rehype-slug');
 const emoji = require('remark-emoji');
+const externalLinks = require('remark-external-links');
 const withPlugins = require('next-compose-plugins');
 const withOffline = require('next-offline');
 const withTM = require('@weco/next-plugin-transpile-modules');
 const withMDX = require('@zeit/next-mdx')({
   extension: /.mdx?$/,
   options: {
-    mdPlugins: [emoji]
+    mdPlugins: [emoji, externalLinks],
+    hastPlugins: [slug]
   }
 });
+const nowConfig = require('./now.json');
+
+const PORT = process.env.STATIC_URL || 8080;
+const BASE_URL =
+  process.env.NODE_ENV === 'production'
+    ? `https://${nowConfig.alias}`
+    : `http://localhost:${PORT}`;
+const STATIC_URL =
+  (process.env.NODE_ENV === 'production' && process.env.STATIC_URL) ||
+  `http://localhost:${PORT}/static`;
 
 const nextConfig = {
   pageExtensions: ['js', 'jsx', 'mdx', 'md'],
   poweredByHeader: false,
+  publicRuntimeConfig: { BASE_URL, STATIC_URL },
   webpack: (config, { dev }) => {
     const originalEntry = config.entry;
     // eslint-disable-next-line no-param-reassign
