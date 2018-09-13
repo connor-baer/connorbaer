@@ -35,7 +35,7 @@ const tasks = new Listr([
               ])
               .then(() => {
                 // eslint-disable-next-line no-param-reassign
-                task.title = `Static files: ${staticConfig.alias}`;
+                task.title = `Static files: https://${staticConfig.alias}`;
               })
         }
       ])
@@ -48,7 +48,12 @@ const tasks = new Listr([
           title: 'Deploying to now',
           task: () =>
             execa
-              .stdout('now', ['-e', `STATIC_URL=${staticConfig.alias}`])
+              .stdout('now', [
+                '-e',
+                `STATIC_URL=https://${staticConfig.alias}`,
+                '-e',
+                `BASE_URL=https://${nowConfig.alias}`
+              ])
               .then(result => {
                 // eslint-disable-next-line no-param-reassign
                 task.title = `Application: ${result}`;

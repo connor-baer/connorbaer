@@ -16,7 +16,7 @@ const ROOT_DIR = path.resolve(__dirname, '../src/');
 
 const transformations = [
   {
-    name: 'main',
+    name: 'main post',
     src: `${ROOT_DIR}${PAGES_PATH}${BLOG_PATH}/**/image.@(png|jpg|jpeg)`,
     dest: `${ROOT_DIR}${IMAGES_PATH}${BLOG_PATH}`,
     matrix: [
@@ -43,7 +43,7 @@ const transformations = [
     ]
   },
   {
-    name: 'post',
+    name: 'post content',
     src: `${ROOT_DIR}${PAGES_PATH}${BLOG_PATH}/**/!(image*).@(png|jpg|jpeg)`,
     dest: `${ROOT_DIR}${IMAGES_PATH}${BLOG_PATH}`,
     matrix: [
@@ -56,6 +56,20 @@ const transformations = [
       }
     ]
   }
+  // {
+  //   name: 'page',
+  //   src: `${ROOT_DIR}${PAGES_PATH}/**/!(image*).@(png|jpg|jpeg)`,
+  //   dest: `${ROOT_DIR}${IMAGES_PATH}`,
+  //   matrix: [
+  //     {
+  //       formats: ['jpg', 'webp'],
+  //       method: 'max',
+  //       width: 1000,
+  //       height: 1000,
+  //       highDPI: true
+  //     }
+  //   ]
+  // }
 ];
 
 function getPageSlug(absolutePath) {
