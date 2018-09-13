@@ -13,16 +13,11 @@ const withMDX = require('@zeit/next-mdx')({
     hastPlugins: [slug]
   }
 });
-const nowConfig = require('./now.json');
 
 const PORT = process.env.STATIC_URL || 8080;
-const BASE_URL =
-  process.env.NODE_ENV === 'production'
-    ? `https://${nowConfig.alias}`
-    : `http://localhost:${PORT}`;
-const STATIC_URL =
-  (process.env.NODE_ENV === 'production' && process.env.STATIC_URL) ||
-  `http://localhost:${PORT}/static`;
+const LOCALHOST = `http://localhost:${PORT}`;
+const BASE_URL = process.env.BASEURL || LOCALHOST;
+const STATIC_URL = process.env.STATIC_URL || `${LOCALHOST}/static`;
 
 const nextConfig = {
   pageExtensions: ['js', 'jsx', 'mdx', 'md'],

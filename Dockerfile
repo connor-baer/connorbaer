@@ -50,7 +50,6 @@ COPY --from=build ./app/server ./server/
 COPY --from=build ./app/src/.next ./src/.next/
 COPY --from=build ./app/src/static ./src/static/
 COPY --from=build ./app/src/scripts ./src/scripts/
-COPY --from=build ./app/now.json ./now.json
 COPY --from=build ./app/next.config.js ./next.config.js
 
 EXPOSE 3000

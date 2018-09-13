@@ -39,7 +39,7 @@ export default function loadFonts(fonts, timeout = 5000) {
   Promise.all(fontPromises)
     .then(loaded => {
       // eslint-disable-next-line no-console
-      console.debug(
+      console.info(
         `Loaded fonts "${loaded
           .map(({ family, style, weight }) => `${family} ${weight} ${style}`)
           .join(', ')}"`
