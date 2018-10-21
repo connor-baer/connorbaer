@@ -46,7 +46,7 @@ WORKDIR /app
 # Install app dependencies
 COPY --from=dependencies ./app/node_modules ./node_modules/
 COPY --from=dependencies ./app/package.json ./package.json
-COPY --from=build ./app/server ./server/
+COPY --from=build ./app/dist ./dist/
 COPY --from=build ./app/src/.next ./src/.next/
 COPY --from=build ./app/src/static ./src/static/
 COPY --from=build ./app/src/scripts ./src/scripts/
@@ -60,4 +60,4 @@ ENV STATIC_URL=${STATIC_URL}
 ENV NODE_ENV=production
 
 # Start the app
-CMD ["node", "server/index.js"]
+CMD ["node", "dist/app.js"]
