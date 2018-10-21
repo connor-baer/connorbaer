@@ -1,7 +1,3 @@
-#! /usr/bin/env node
-
-/* eslint-disable no-console */
-/* eslint-disable import/no-extraneous-dependencies */
 import fs from 'fs';
 import path from 'path';
 import glob from 'glob';
