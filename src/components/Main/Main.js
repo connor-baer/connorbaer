@@ -8,7 +8,9 @@ const baseStyles = ({ theme }) => css`
   padding-bottom: ${theme.spacings.zetta};
 
   ${theme.mq.mega`
-    min-height: calc(100vh - (168px + 57px));
+    ${'' /* Height of the footer */}
+    min-height: calc(100vh - (168px + 65px));
+    ${'' /* Height of the top navigation */}
     padding-top: 88px;
   `};
 `;

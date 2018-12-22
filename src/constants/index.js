@@ -1,6 +1,6 @@
 export const SITE_NAME = 'Connor Bär';
 export const SITE_EMAIL = 'hello@connorbaer.co';
-export const SITE_TWITTER = 'connor-baer';
+export const SITE_TWITTER = 'connor_baer';
 
 export const LANG = 'en';
 

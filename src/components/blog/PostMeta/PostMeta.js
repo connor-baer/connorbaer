@@ -5,23 +5,24 @@ import { format } from 'date-fns';
 import styled, { css } from 'react-emotion';
 import { Text } from '@sumup/circuit-ui';
 
+import { BASE_URL, CATEGORY_PATH } from '../../../constants/paths';
 import * as CATEGORIES from '../../../constants/categories';
 
 const wrapperStyles = ({ theme }) => css`
   color: ${theme.colors.n700};
-`;
 
-const Wrapper = styled(Text)(wrapperStyles);
-
-const timeStyles = ({ theme }) => css`
-  &::after {
+  *::after {
     content: '·';
     display: inline-block;
     padding: 0 ${theme.spacings.byte};
   }
+
+  *:last-child::after {
+    content: '';
+  }
 `;
 
-const Time = styled('time')(timeStyles);
+const Wrapper = styled(Text)(wrapperStyles);
 
 function PostMeta({ date, category, className }) {
   if (!date && !category) {
@@ -33,15 +34,22 @@ function PostMeta({ date, category, className }) {
 
   return (
     <Wrapper className={className} element="small" size={Text.KILO} noMargin>
-      {date && <Time dateTime={datetime}>{formattedDate}</Time>}
-      {category && <span>{category}</span>}
+      {date && <time dateTime={datetime}>{formattedDate}</time>}
+      {category && (
+        <a href={`${BASE_URL}${CATEGORY_PATH}/${category.fields.slug}`}>
+          {category.fields.title}
+        </a>
+      )}
     </Wrapper>
   );
 }
 
 PostMeta.propTypes = {
   date: PropTypes.string,
-  category: PropTypes.oneOf(values(CATEGORIES)),
+  category: PropTypes.shape({
+    name: PropTypes.oneOf(values(CATEGORIES)),
+    slug: PropTypes.string
+  }),
   className: PropTypes.string
 };
 

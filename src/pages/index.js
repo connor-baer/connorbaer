@@ -6,11 +6,11 @@ import { getAllCookies } from '../utils/cookies';
 
 import Meta from '../components/Meta';
 import Header from '../components/Header';
+import PostCard from '../components/blog/PostCard';
 
 import { meta as soundOfSilence } from './blog/sound-of-silence/index.mdx';
 import { meta as thisIsTheEuropeIAmProudOf } from './blog/this-is-the-europe-i-am-proud-of/index.mdx';
 import { meta as africaIsNotACountry } from './blog/africa-is-not-a-country/index.mdx';
-import PostCard from '../components/blog/PostCard';
 
 export default class Page extends Component {
   static propTypes = {

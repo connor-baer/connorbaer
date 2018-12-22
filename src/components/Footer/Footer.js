@@ -67,7 +67,7 @@ function Footer({ siteName, siteTwitter }) {
           {siteTwitter && (
             <Span>
               <a
-                href={`https://twitter.com${siteTwitter}`}
+                href={`https://twitter.com/${siteTwitter}`}
                 title={`Visit @${siteTwitter} profile on Twitter`}
               >
                 @{siteTwitter}

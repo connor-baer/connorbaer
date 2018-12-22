@@ -5,6 +5,7 @@ images/
 dist/
 .next/
 .esm-cache/
+.env.*
 
 # Install by running `npm install` #
 node_modules/

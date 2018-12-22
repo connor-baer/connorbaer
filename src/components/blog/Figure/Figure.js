@@ -16,10 +16,10 @@ const captionStyles = ({ theme }) => css`
 
 const Caption = styled(Text)(captionStyles);
 
-function Figure({ children, caption, align, ...rest }) {
+function Figure({ caption, align, image }) {
   return (
     <Align align={align}>
-      <Image {...rest} />
+      <Image {...image.fields} />
       {caption && (
         <Caption element="figcaption" size={Text.KILO} noMargin>
           {caption}

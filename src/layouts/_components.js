@@ -42,13 +42,13 @@ export const Paragraph = ({ children, ...rest }) => (
 );
 
 export const Em = ({ children, ...rest }) => (
-  <Text size={Text.GIGA} italic {...rest}>
+  <Text size={Text.GIGA} element="em" italic {...rest}>
     {children}
   </Text>
 );
 
 export const Strong = ({ children, ...rest }) => (
-  <Text size={Text.GIGA} bold {...rest}>
+  <Text size={Text.GIGA} element="strong" bold {...rest}>
     {children}
   </Text>
 );

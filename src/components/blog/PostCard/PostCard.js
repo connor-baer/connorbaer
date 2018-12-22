@@ -4,7 +4,7 @@ import styled, { css } from 'react-emotion';
 import { values } from 'lodash/fp';
 import { Heading } from '@sumup/circuit-ui';
 
-import { IMAGES_PATH, BLOG_PATH } from '../../../constants/paths';
+import { BLOG_PATH } from '../../../constants/paths';
 import * as CATEGORIES from '../../../constants/categories';
 
 import Link from '../../Link';
@@ -25,19 +25,20 @@ const headingStyles = ({ theme }) => css`
 
 const StyledHeading = styled(Heading)(headingStyles);
 
-function PostCard({ slug, title, date, category }) {
-  const postPath = `${BLOG_PATH}/${slug}`;
-  const src = `${IMAGES_PATH}${postPath}/thumbnail.jpg`;
-
+function PostCard({ slug, heroImage, title, publishDate, category }) {
   return (
     <Article>
-      <Link href={postPath} prefetch>
+      <Link href={{ pathname: BLOG_PATH, query: { slug } }} prefetch>
         <a>
-          <CoverImage src={src} alt={title} aspectRatio={150/350} />
+          <CoverImage
+            src={heroImage.fields.file.url}
+            alt={heroImage.fields.description}
+            aspectRatio={150 / 350}
+          />
           <StyledHeading element="h2" size={Heading.TERA}>
             {title}
           </StyledHeading>
-          <PostMeta date={date} category={category} />
+          <PostMeta date={publishDate} category={category} />
         </a>
       </Link>
     </Article>
@@ -47,8 +48,11 @@ function PostCard({ slug, title, date, category }) {
 PostCard.propTypes = {
   slug: PropTypes.string,
   title: PropTypes.string,
-  date: PropTypes.string,
-  category: PropTypes.oneOf(values(CATEGORIES))
+  publishDate: PropTypes.string,
+  category: PropTypes.shape({
+    name: PropTypes.oneOf(values(CATEGORIES)),
+    slug: PropTypes.string
+  })
 };
 
 PostCard.defaultProps = {};

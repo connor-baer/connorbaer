@@ -75,6 +75,10 @@ app.prepare().then(() => {
     });
   });
 
+  // Dynamic pages
+  server.get('/blog/category/:slug', (req, res) => app.render(req, res, '/blog/_category', { slug: req.params.slug }))
+  server.get('/blog/:slug', (req, res) => app.render(req, res, '/blog/_post', { slug: req.params.slug }))
+
   // Static pages
   server.get('*', (req, res) => handle(req, res));
 

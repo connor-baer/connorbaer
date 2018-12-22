@@ -7,7 +7,7 @@ export const meta = {
   description: 'I am in tears. Finally (!) Austria and Germany show some compassion and welcome refugees. The outpouring of support for refugees is humbling.',
   slug: 'this-is-the-europe-i-am-proud-of',
   date: '2015/9/5',
-  category: OPINION
+  category: { name: OPINION, slug: 'opinion' }
 }
 
 export default ({ children }) => <Post {...meta}>{children}</Post>

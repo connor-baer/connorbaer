@@ -11,7 +11,8 @@ import components from './_components';
 export default class Article extends Component {
   static propTypes = {
     title: PropTypes.string,
-    subtitle: PropTypes.string
+    subtitle: PropTypes.string,
+    children: PropTypes.element
   };
 
   static getInitialProps(ctx) {

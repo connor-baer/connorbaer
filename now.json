@@ -1,11 +1,12 @@
 {
-  "type": "docker",
-  "public": false,
   "alias": "connor.li",
-  "features": {
-    "cloud": "v2",
-    "timeout": 15
-  },
+  "version": 2,
+  "builds": [
+    {
+      "src": "next.config.js",
+      "use": "@now/next"
+    }
+  ],
   "env": {
     "STATIC_URL": "https://static.connor.li"
   }

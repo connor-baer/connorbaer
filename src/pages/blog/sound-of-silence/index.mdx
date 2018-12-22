@@ -7,7 +7,7 @@ export const meta = {
   description: 'Dear friends, it’s been ages. I’ve meant to write to you for a while now but never had the courage. I am deeply sorry. This post is both an explanation to you and a plan of action for me.',
   slug: 'sound-of-silence',
   date: '2017/4/6',
-  category: JOURNAL
+  category: { name: JOURNAL, slug: 'journal' }
 }
 
 export default ({ children }) => <Post {...meta}>{children}</Post>

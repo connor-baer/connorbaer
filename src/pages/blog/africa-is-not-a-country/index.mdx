@@ -8,7 +8,7 @@ export const meta = {
   description: 'Guess what, it’s a continent. It consists of 55 individual countries, yet western journalists insist on referring to it as one place.',
   slug: 'africa-is-not-a-country',
   date: '2015/3/27',
-  category: OPINION
+  category: { name: OPINION, slug: 'opinion' }
 }
 
 export default ({ children }) => <Post {...meta}>{children}</Post>

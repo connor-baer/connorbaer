@@ -9,7 +9,7 @@ import sharp from 'sharp';
 import makeDir from 'make-dir';
 import { isEmpty } from 'lodash/fp';
 
-const IMAGES_PATH = '/images';
+const IMAGES_PATH = '/static/images';
 const PAGES_PATH = `/pages`;
 const BLOG_PATH = `/blog`;
 const ROOT_DIR = path.resolve(__dirname, '../src/');
@@ -89,7 +89,7 @@ function resizeImage(
     : undefined;
   return sharp(source)
     .resize(width, height)
-    [method]()
+  [method]()
     .toFormat(format, options)
     .toFile(`${dest}.${format}`);
 }

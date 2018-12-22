@@ -14,15 +14,29 @@ const withMDX = require('@zeit/next-mdx')({
   }
 });
 
-const PORT = process.env.STATIC_URL || 8080;
+const {
+  CONTENTFUL_SPACE,
+  CONTENTFUL_ACCESS_TOKEN,
+  CONTENTFUL_HOST,
+  CONTENTFUL_ENVIRONMENT
+} = process.env;
+
+const PORT = process.env.PORT || 8080;
 const LOCALHOST = `http://localhost:${PORT}`;
-const BASE_URL = process.env.BASEURL || LOCALHOST;
+const BASE_URL = process.env.BASE_URL || LOCALHOST;
 const STATIC_URL = process.env.STATIC_URL || `${LOCALHOST}/static`;
 
 const nextConfig = {
   pageExtensions: ['js', 'jsx', 'mdx', 'md'],
   poweredByHeader: false,
-  publicRuntimeConfig: { BASE_URL, STATIC_URL },
+  publicRuntimeConfig: {
+    BASE_URL,
+    STATIC_URL,
+    CONTENTFUL_SPACE,
+    CONTENTFUL_ACCESS_TOKEN,
+    CONTENTFUL_HOST,
+    CONTENTFUL_ENVIRONMENT
+  },
   webpack: (config, { dev }) => {
     const originalEntry = config.entry;
     // eslint-disable-next-line no-param-reassign

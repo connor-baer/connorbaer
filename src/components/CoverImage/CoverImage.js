@@ -31,7 +31,7 @@ const wrapperBaseStyles = ({ theme }) => css`
   }
 `;
 
-const wrapperAspectRatioStyles = ({ theme, aspectRatio }) => aspectRatio && css`
+const wrapperAspectRatioStyles = ({ aspectRatio }) => aspectRatio && css`
   overflow: hidden;
   height: 0;
   width: 100%;
@@ -48,7 +48,7 @@ const imageBaseStyles = ({ theme }) => css`
   border-radius: ${theme.borderRadius.giga};
 `;
 
-const imageAspectRatioStyles = ({ theme, aspectRatio }) => aspectRatio && css`
+const imageAspectRatioStyles = ({ aspectRatio }) => aspectRatio && css`
   position: absolute;
   top: 0;
   right: 0;
@@ -83,7 +83,6 @@ function CoverImage({ aspectRatio, className, ...props }) {
 }
 
 CoverImage.propTypes = {
-  file: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
   width: PropTypes.number,
   height: PropTypes.number
