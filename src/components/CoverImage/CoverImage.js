@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled, { css } from 'react-emotion';
-import Image from '../Image/Image';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled, { css } from 'react-emotion'
+import Image from '../Image/Image'
 
 const wrapperBaseStyles = ({ theme }) => css`
   display: block;
@@ -29,16 +29,18 @@ const wrapperBaseStyles = ({ theme }) => css`
       opacity: 0.1;
     }
   }
-`;
+`
 
-const wrapperAspectRatioStyles = ({ theme, aspectRatio }) => aspectRatio && css`
-  overflow: hidden;
-  height: 0;
-  width: 100%;
-  padding-top: ${aspectRatio * 100}%;
-`;
+const wrapperAspectRatioStyles = ({ aspectRatio }) =>
+  aspectRatio &&
+  css`
+    overflow: hidden;
+    height: 0;
+    width: 100%;
+    padding-top: ${aspectRatio * 100}%;
+  `
 
-const Wrapper = styled('div')(wrapperBaseStyles, wrapperAspectRatioStyles);
+const Wrapper = styled('div')(wrapperBaseStyles, wrapperAspectRatioStyles)
 
 const imageBaseStyles = ({ theme }) => css`
   display: block;
@@ -46,18 +48,20 @@ const imageBaseStyles = ({ theme }) => css`
   max-height: 100%;
   width: 100%;
   border-radius: ${theme.borderRadius.giga};
-`;
+`
 
-const imageAspectRatioStyles = ({ theme, aspectRatio }) => aspectRatio && css`
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
+const imageAspectRatioStyles = ({ aspectRatio }) =>
+  aspectRatio &&
+  css`
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  `
 
 const imageMotionStyles = ({ theme }) =>
   !theme.reducedMotion &&
@@ -70,26 +74,31 @@ const imageMotionStyles = ({ theme }) =>
     a:focus & {
       transform: scale(1.04);
     }
-  `;
+  `
 
-const StyledImage = styled(Image)(imageBaseStyles, imageAspectRatioStyles, imageMotionStyles);
+const StyledImage = styled(Image)(
+  imageBaseStyles,
+  imageAspectRatioStyles,
+  imageMotionStyles
+)
 
 function CoverImage({ aspectRatio, className, ...props }) {
   return (
     <Wrapper aspectRatio={aspectRatio} className={className}>
       <StyledImage aspectRatio={aspectRatio} {...props} />
     </Wrapper>
-  );
+  )
 }
 
 CoverImage.propTypes = {
-  file: PropTypes.string.isRequired,
+  src: PropTypes.string.isRequired,
+  srcSet: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
   width: PropTypes.number,
   height: PropTypes.number
-};
+}
 
 /**
  * @component
  */
-export default CoverImage;
+export default CoverImage

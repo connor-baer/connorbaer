@@ -1,6 +1,6 @@
 import 'objectFitPolyfill/dist/objectFitPolyfill.basic.min';
 
-import isServer from '../utils/is-server';
+import isServer from './is-server';
 
 const Polyfills = (() => {
   if (!isServer) {

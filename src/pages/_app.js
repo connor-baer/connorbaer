@@ -9,9 +9,9 @@ import { ThemeProvider } from 'emotion-theming';
 import { injectGlobalStyles } from '@sumup/circuit-ui';
 
 import isServer from '../utils/is-server';
-import { setCookie } from '../utils/cookies';
+import { setCookie } from '../services/cookies';
 import globalStyles from '../styles/global-styles';
-import loadFonts from '../styles/load-fonts';
+import loadFonts, { preloadFonts } from '../styles/load-fonts';
 import * as Themes from '../styles/themes';
 
 import { THEMES, SITE_NAME, SITE_TWITTER } from '../constants';
@@ -78,13 +78,18 @@ export default class CustomApp extends App {
       return;
     }
 
-    objectFitPolyfill();
-
     this.motionQuery = window.matchMedia('(prefers-reduced-motion)');
     this.motionQuery.addListener(this.handleReducedMotionChanged);
 
     if (this.motionQuery.matches) {
       this.setState({ reducedMotion: true });
+    }
+
+    this.colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    this.colorSchemeQuery.addListener(this.handleColorSchemeChanged);
+
+    if (this.colorSchemeQuery.matches) {
+      this.setState({ darkmode: true });
     }
   }
 
@@ -94,6 +99,10 @@ export default class CustomApp extends App {
 
   handleReducedMotionChanged = () => {
     this.setState({ reducedMotion: this.motionQuery.matches });
+  };
+
+  handleColorSchemeChanged = () => {
+    this.setState({ darkmode: this.colorSchemeQuery.matches });
   };
 
   getTheme = ({ themeId, darkmode, reducedMotion }) =>
@@ -152,6 +161,7 @@ export default class CustomApp extends App {
       <Container>
         <Head>
           <meta name="theme-color" content={theme.colors.bodyBg} />
+          {preloadFonts(theme.fonts)}
         </Head>
         <ThemeProvider theme={theme}>
           <ThemeTransition isTransitioning={isTransitioning}>

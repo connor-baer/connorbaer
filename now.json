@@ -1,12 +1,11 @@
 {
-  "type": "docker",
-  "public": false,
+  "name": "connor",
   "alias": "connor.li",
-  "features": {
-    "cloud": "v2",
-    "timeout": 15
-  },
-  "env": {
-    "STATIC_URL": "https://static.connor.li"
+  "version": 1,
+  "scale": {
+    "bru": {
+      "min": 1,
+      "max": "auto"
+    }
   }
 }

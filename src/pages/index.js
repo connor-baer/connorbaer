@@ -1,15 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { flow, slice } from 'lodash/fp';
 import { Grid, Row, Col } from '@sumup/circuit-ui';
 
-import { getAllCookies } from '../utils/cookies';
+import * as Posts from '../services/posts';
+import { getAllCookies } from '../services/cookies';
 
 import Meta from '../components/Meta';
 import Header from '../components/Header';
-
-import { meta as soundOfSilence } from './blog/sound-of-silence/index.mdx';
-import { meta as thisIsTheEuropeIAmProudOf } from './blog/this-is-the-europe-i-am-proud-of/index.mdx';
-import { meta as africaIsNotACountry } from './blog/africa-is-not-a-country/index.mdx';
 import PostCard from '../components/blog/PostCard';
 
 export default class Page extends Component {
@@ -24,13 +22,13 @@ export default class Page extends Component {
 
   render() {
     const title = this.props.title || 'Hello, I’m Connor.';
+    // eslint-disable-next-line max-len
     const subtitle =
-      'I am a web developer with a strong background in design and a passion for accessibility, currently working as a frontend engineer at SumUp.';
-    const posts = [
-      soundOfSilence,
-      thisIsTheEuropeIAmProudOf,
-      africaIsNotACountry
-    ];
+      'I am a web developer with a strong background in design and a passion for accessibility, currently working as a frontend engineer at SumUp.'; // eslint-disable-line max-len
+    const posts = flow(
+      Posts.sortByDate,
+      slice(0, 3)
+    )(Posts.load());
     return (
       <Fragment>
         <Meta title={title} description={subtitle} />

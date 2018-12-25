@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import styled, { css } from 'react-emotion';
+import PropTypes from 'prop-types'
+import styled, { css } from 'react-emotion'
 
 const baseStyles = ({ theme }) => css`
   background-color: ${theme.colors.bodyBg};
@@ -8,10 +8,12 @@ const baseStyles = ({ theme }) => css`
   padding-bottom: ${theme.spacings.zetta};
 
   ${theme.mq.mega`
-    min-height: calc(100vh - (168px + 57px));
+    ${'' /* Height of the footer */}
+    min-height: calc(100vh - (168px + 65px));
+    ${'' /* Height of the top navigation */}
     padding-top: 88px;
   `};
-`;
+`
 
 const sidebarStyles = ({ theme, hasSidebar }) =>
   hasSidebar &&
@@ -21,16 +23,16 @@ const sidebarStyles = ({ theme, hasSidebar }) =>
     ${theme.mq.mega`
       width: calc(100vw - 320px);
     `};
-  `;
+  `
 
-const Main = styled('main')(baseStyles, sidebarStyles);
+const Main = styled('main')(baseStyles, sidebarStyles)
 
 Main.propTypes = {
   hasSidebar: PropTypes.bool
-};
+}
 
 Main.defaultProps = {
   hasSidebar: false
-};
+}
 
-export default Main;
+export default Main

@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Row, Col } from '@sumup/circuit-ui';
 
-import { getAllCookies } from '../utils/cookies';
+import { getAllCookies } from '../services/cookies';
 import Meta from '../components/Meta';
 import Header from '../components/Header';
 
@@ -12,11 +12,13 @@ const TITLE_MAP = {
   503: 'Bear with me please. 🚧'
 };
 
+/* eslint-disable max-len */
 const SUBTITLE_MAP = {
   404: 'What’s worse, a hilarious 404 page can’t be found either.',
   500: 'Something has gone wrong. Try to refresh the page or go back to the homepage.',
   503: 'I’m currently carrying out some maintenance on my website. It will only take a minute.'
 };
+/* eslint-enable max-len */
 
 export default class Error extends Component {
   static propTypes = {

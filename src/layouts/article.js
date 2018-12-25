@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { MDXProvider } from '@mdx-js/tag';
 import { Grid, Row, Col } from '@sumup/circuit-ui';
 
-import { getAllCookies } from '../utils/cookies';
+import { getAllCookies } from '../services/cookies';
 import Meta from '../components/Meta';
 import Header from '../components/Header';
 import components from './_components';
@@ -11,7 +11,8 @@ import components from './_components';
 export default class Article extends Component {
   static propTypes = {
     title: PropTypes.string,
-    subtitle: PropTypes.string
+    subtitle: PropTypes.string,
+    children: PropTypes.element
   };
 
   static getInitialProps(ctx) {

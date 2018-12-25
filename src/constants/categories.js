@@ -1,2 +1,8 @@
-export const JOURNAL = 'Journal';
-export const OPINION = 'Opinion';
+export const JOURNAL = {
+  name: 'Journal',
+  slug: 'journal'
+};
+export const OPINION = {
+  name: 'Opinion',
+  slug: 'opinion'
+};

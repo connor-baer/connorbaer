@@ -7,10 +7,10 @@ import { MDXProvider } from '@mdx-js/tag';
 import { Grid, Row, Col, Heading, sharedPropTypes } from '@sumup/circuit-ui';
 
 import CONFIG from '../config';
-import { IMAGES_PATH, BLOG_PATH } from '../constants/paths';
+import { BLOG_PATH } from '../constants/paths';
 import * as CATEGORIES from '../constants/categories';
 import { THEMES } from '../constants';
-import { getAllCookies } from '../utils/cookies';
+import { getAllCookies } from '../services/cookies';
 import Meta from '../components/Meta';
 import components, { Paragraph } from './_components';
 import Intro from '../components/Intro';
@@ -53,16 +53,22 @@ class Post extends Component {
   }
 
   render() {
-    const { children, title, description, slug, date, category } = this.props;
+    const {
+      children,
+      title,
+      description,
+      image,
+      slug,
+      date,
+      category
+    } = this.props;
     const postPath = `${BLOG_PATH}/${slug}`;
-    const src = `${IMAGES_PATH}${postPath}/cover.jpg`;
-    const image = `${CONFIG.BASE_URL}${IMAGES_PATH}${postPath}/social.jpg`;
     const url = `${CONFIG.BASE_URL}${postPath}`;
 
     return (
       <article>
         <Meta title={title} description={description} url={url} image={image} />
-        <ParallaxImage src={src} alt="REPLACE ME" />
+        <ParallaxImage {...image} />
         <Grid>
           <Row>
             <Col

@@ -2,17 +2,17 @@
 
 /* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
-import path from 'path';
-import glob from 'glob';
-import Listr from 'listr';
-import sharp from 'sharp';
-import makeDir from 'make-dir';
-import { isEmpty } from 'lodash/fp';
+import path from 'path'
+import glob from 'glob'
+import Listr from 'listr'
+import sharp from 'sharp'
+import makeDir from 'make-dir'
+import { isEmpty } from 'lodash/fp'
 
-const IMAGES_PATH = '/images';
-const PAGES_PATH = `/pages`;
-const BLOG_PATH = `/blog`;
-const ROOT_DIR = path.resolve(__dirname, '../src/');
+const IMAGES_PATH = '/static/images'
+const PAGES_PATH = `/pages`
+const BLOG_PATH = `/blog`
+const ROOT_DIR = path.resolve(__dirname, '../src/')
 
 const transformations = [
   {
@@ -70,13 +70,13 @@ const transformations = [
   //     }
   //   ]
   // }
-];
+]
 
 function getPageSlug(absolutePath) {
   return path
     .dirname(absolutePath)
     .split('/')
-    .pop();
+    .pop()
 }
 
 function resizeImage(
@@ -86,31 +86,31 @@ function resizeImage(
 ) {
   const options = ['jpg', 'png'].includes(format)
     ? { progressive: true }
-    : undefined;
+    : undefined
   return sharp(source)
     .resize(width, height)
     [method]()
     .toFormat(format, options)
-    .toFile(`${dest}.${format}`);
+    .toFile(`${dest}.${format}`)
 }
 
 const formatTasks = (type, file, destDir) => {
-  const taskList = [];
+  const taskList = []
 
-  const { name, width, height, method, highDPI } = type;
+  const { name, width, height, method, highDPI } = type
 
-  makeDir.sync(destDir);
+  makeDir.sync(destDir)
 
   type.formats.forEach(format => {
-    const dest = `${destDir}/${name}`;
+    const dest = `${destDir}/${name}`
 
     taskList.push({
       title: `${format}`,
       task: () => resizeImage(file, dest, { format, method, width, height })
-    });
+    })
 
     if (highDPI) {
-      const dest2x = `${destDir}/${name}@2x`;
+      const dest2x = `${destDir}/${name}@2x`
 
       taskList.push({
         title: `${format}@2x`,
@@ -121,52 +121,52 @@ const formatTasks = (type, file, destDir) => {
             width: width ? width * 2 : null,
             height: height ? height * 2 : null
           })
-      });
+      })
     }
-  });
+  })
 
-  return new Listr(taskList, { concurrent: true });
-};
+  return new Listr(taskList, { concurrent: true })
+}
 
 const matrixTasks = (transformation, file, slug) => {
-  const destDir = `${transformation.dest}/${slug}`;
+  const destDir = `${transformation.dest}/${slug}`
   return new Listr(
     transformation.matrix.map(type => {
-      const name = type.name || path.basename(file, path.extname(file));
+      const name = type.name || path.basename(file, path.extname(file))
       return {
         title: name,
         skip: () => isEmpty(type.formats),
         task: () => formatTasks({ ...type, name }, file, destDir)
-      };
+      }
     }),
     { concurrent: true }
-  );
-};
+  )
+}
 
 const fileTasks = (transformation, files) =>
   new Listr(
     files.map(file => {
-      const slug = getPageSlug(file);
+      const slug = getPageSlug(file)
       return {
         title: slug,
         skip: () => isEmpty(transformation.matrix),
         task: () => matrixTasks(transformation, file, slug)
-      };
+      }
     })
-  );
+  )
 
 const tasks = new Listr(
   transformations.map(transformation => {
-    const { src, name } = transformation;
-    const files = glob.sync(src);
+    const { src, name } = transformation
+    const files = glob.sync(src)
     return {
       title: `Transforming "${name}" images`,
       skip: () => isEmpty(files),
       task: () => fileTasks(transformation, files)
-    };
+    }
   })
-);
+)
 
 tasks.run().catch(err => {
-  console.error(err);
-});
+  console.error(err)
+})

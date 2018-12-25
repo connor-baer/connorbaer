@@ -1,6 +1,6 @@
 import { set, get as getCookie, getAll } from 'es-cookie';
 
-import isServer from './is-server';
+import isServer from '../utils/is-server';
 
 export function getAllCookies(ctx) {
   return isServer ? ctx.req.cookies : getAll();
