@@ -1,13 +1,21 @@
-import Article from '../layouts/article'
+import Article from '../../layouts/article'
+import Figure from '../../components/blog/Figure'
 
 export const meta = {
   title: 'I am Connor.',
-  subtitle: 'Nice to meet you.'
+  subtitle: 'Nice to meet you. 👋'
 }
 
 export default ({ children }) => <Article {...meta}>{children}</Article>
 
-![Connor](https://connorbaer.co/volumes/img/pages/_large/profile.jpg)
+<Figure
+  image={{
+    ...require(`./connor.jpg?resize&sizes[]=400&sizes[]=800&sizes[]=1600&sizes[]=2400`),
+    colors: require(`./connor.jpg?lqip-colors`),
+    alt: 'Connor flashes a big smile at the camera.'
+  }}
+  align={Figure.FULL}
+/>
 
 When I was growing up, all I wanted to be was a wizard. I eventually realised that wasn’t an option, but coding comes close. Developers are like wizards: we transform and delight the world purely through words.
 
