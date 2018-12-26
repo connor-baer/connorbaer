@@ -4,18 +4,7 @@ import styled, { css } from 'react-emotion';
 import { sharedPropTypes } from '@sumup/circuit-ui';
 
 import { headingZetta } from '../../styles/style-helpers';
-
-const wrapperStyles = ({ theme }) => css`
-  margin-top: ${theme.spacings.exa};
-  margin-bottom: ${theme.spacings.exa};
-
-  ${theme.mq.kilo`
-    margin-top: 96px;
-    margin-bottom: 96px;
-  `};
-`;
-
-const Wrapper = styled('header')(wrapperStyles);
+import Wrapper from './components/Wrapper';
 
 /* eslint-disable no-irregular-whitespace */
 const titleStyles = ({ theme }) => css`
@@ -70,6 +59,8 @@ Header.propTypes = {
   subtitle: PropTypes.string,
   children: sharedPropTypes.childrenPropType
 };
+
+Header.Wrapper = Wrapper;
 
 /**
  * @component

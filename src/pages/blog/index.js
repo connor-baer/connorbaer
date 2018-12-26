@@ -8,19 +8,8 @@ import { getAllCookies } from '../../services/cookies';
 import { headingZetta } from '../../styles/style-helpers';
 
 import Meta from '../../components/Meta';
+import Header from '../../components/Header';
 import PreviewLarge from '../../components/blog/PreviewLarge';
-
-const wrapperStyles = ({ theme }) => css`
-  margin-top: ${theme.spacings.peta};
-  margin-bottom: ${theme.spacings.peta};
-
-  ${theme.mq.kilo`
-    margin-top: ${theme.spacings.zetta};
-    margin-bottom: ${theme.spacings.zetta};
-  `};
-`;
-
-const Wrapper = styled('header')(wrapperStyles);
 
 const titleStyles = ({ theme }) => css`
   ${headingZetta({ theme })};
@@ -51,9 +40,9 @@ export default class Page extends Component {
         <Grid>
           <Row>
             <Col span={{ default: 12 }}>
-              <Wrapper>
+              <Header.Wrapper>
                 <Title>{title}</Title>
-              </Wrapper>
+              </Header.Wrapper>
             </Col>
           </Row>
           <Row>

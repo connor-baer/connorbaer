@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import styled, { css } from 'react-emotion'
-import Image from '../Image/Image'
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled, { css } from 'react-emotion';
+import Image from '../Image/Image';
 
 const wrapperBaseStyles = ({ theme }) => css`
   display: block;
@@ -29,7 +29,7 @@ const wrapperBaseStyles = ({ theme }) => css`
       opacity: 0.1;
     }
   }
-`
+`;
 
 const wrapperAspectRatioStyles = ({ aspectRatio }) =>
   aspectRatio &&
@@ -38,9 +38,9 @@ const wrapperAspectRatioStyles = ({ aspectRatio }) =>
     height: 0;
     width: 100%;
     padding-top: ${aspectRatio * 100}%;
-  `
+  `;
 
-const Wrapper = styled('div')(wrapperBaseStyles, wrapperAspectRatioStyles)
+const Wrapper = styled('div')(wrapperBaseStyles, wrapperAspectRatioStyles);
 
 const imageBaseStyles = ({ theme }) => css`
   display: block;
@@ -48,7 +48,7 @@ const imageBaseStyles = ({ theme }) => css`
   max-height: 100%;
   width: 100%;
   border-radius: ${theme.borderRadius.giga};
-`
+`;
 
 const imageAspectRatioStyles = ({ aspectRatio }) =>
   aspectRatio &&
@@ -61,7 +61,7 @@ const imageAspectRatioStyles = ({ aspectRatio }) =>
     width: 100%;
     height: 100%;
     object-fit: cover;
-  `
+  `;
 
 const imageMotionStyles = ({ theme }) =>
   !theme.reducedMotion &&
@@ -74,20 +74,20 @@ const imageMotionStyles = ({ theme }) =>
     a:focus & {
       transform: scale(1.04);
     }
-  `
+  `;
 
 const StyledImage = styled(Image)(
   imageBaseStyles,
   imageAspectRatioStyles,
   imageMotionStyles
-)
+);
 
 function CoverImage({ aspectRatio, className, ...props }) {
   return (
     <Wrapper aspectRatio={aspectRatio} className={className}>
       <StyledImage aspectRatio={aspectRatio} {...props} />
     </Wrapper>
-  )
+  );
 }
 
 CoverImage.propTypes = {
@@ -96,9 +96,9 @@ CoverImage.propTypes = {
   alt: PropTypes.string.isRequired,
   width: PropTypes.number,
   height: PropTypes.number
-}
+};
 
 /**
  * @component
  */
-export default CoverImage
+export default CoverImage;

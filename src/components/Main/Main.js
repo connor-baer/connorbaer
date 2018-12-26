@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types'
-import styled, { css } from 'react-emotion'
+import PropTypes from 'prop-types';
+import styled, { css } from 'react-emotion';
 
 const baseStyles = ({ theme }) => css`
   background-color: ${theme.colors.bodyBg};
@@ -13,7 +13,7 @@ const baseStyles = ({ theme }) => css`
     ${'' /* Height of the top navigation */}
     padding-top: 88px;
   `};
-`
+`;
 
 const sidebarStyles = ({ theme, hasSidebar }) =>
   hasSidebar &&
@@ -23,16 +23,16 @@ const sidebarStyles = ({ theme, hasSidebar }) =>
     ${theme.mq.mega`
       width: calc(100vw - 320px);
     `};
-  `
+  `;
 
-const Main = styled('main')(baseStyles, sidebarStyles)
+const Main = styled('main')(baseStyles, sidebarStyles);
 
 Main.propTypes = {
   hasSidebar: PropTypes.bool
-}
+};
 
 Main.defaultProps = {
   hasSidebar: false
-}
+};
 
-export default Main
+export default Main;

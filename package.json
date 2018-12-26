@@ -30,7 +30,9 @@
     "deploy": "node -r esm scripts/deploy.js",
     "now-build": "yarn build",
     "clean": "rm -rf ./dist",
-    "lint": "foundry run eslint --fix **/**/*.js",
+    "lint": "run-p lint:client lint:server",
+    "lint:client": "foundry run eslint --fix src/**/*.js",
+    "lint:server": "foundry run eslint --fix server/**/*.js",
     "analyze": "BUNDLE_ANALYZE=both yarn build:client",
     "create:component": "foundry run plop component"
   },
