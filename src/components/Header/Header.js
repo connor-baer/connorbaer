@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'react-emotion';
+import { sharedPropTypes } from '@sumup/circuit-ui';
 
 import { headingZetta } from '../../styles/style-helpers';
 
@@ -66,7 +67,8 @@ function Header({ title, subtitle, children }) {
 
 Header.propTypes = {
   title: PropTypes.string,
-  subtitle: PropTypes.string
+  subtitle: PropTypes.string,
+  children: sharedPropTypes.childrenPropType
 };
 
 /**

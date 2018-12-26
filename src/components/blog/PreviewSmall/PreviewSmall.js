@@ -1,32 +1,32 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import styled, { css } from 'react-emotion'
-import { values } from 'lodash/fp'
-import { Heading } from '@sumup/circuit-ui'
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled, { css } from 'react-emotion';
+import { values } from 'lodash/fp';
+import { Heading } from '@sumup/circuit-ui';
 
-import { BLOG_PATH } from '../../../constants/paths'
-import * as CATEGORIES from '../../../constants/categories'
+import { BLOG_PATH } from '../../../constants/paths';
+import * as CATEGORIES from '../../../constants/categories';
 
-import Link from '../../Link'
-import CoverImage from '../../CoverImage'
-import PostMeta from '../PostMeta'
+import Link from '../../Link';
+import CoverImage from '../../CoverImage';
+import PostMeta from '../PostMeta';
 
 const articleStyles = ({ theme }) => css`
   margin-top: ${theme.spacings.tera};
   margin-bottom: ${theme.spacings.kilo};
-`
+`;
 
-const Article = styled('article')(articleStyles)
+const Article = styled('article')(articleStyles);
 
 const headingStyles = ({ theme }) => css`
   margin-top: ${theme.spacings.giga};
   margin-bottom: ${theme.spacings.bit};
-`
+`;
 
-const StyledHeading = styled(Heading)(headingStyles)
+const StyledHeading = styled(Heading)(headingStyles);
 
-function PostCard({ slug, image, title, date, category }) {
-  const { src, srcSet, alt } = image
+function PreviewSmall({ slug, image, title, date, category }) {
+  const { src, srcSet, alt } = image;
   /* eslint-disable jsx-a11y/anchor-is-valid */
   return (
     <Article>
@@ -47,11 +47,11 @@ function PostCard({ slug, image, title, date, category }) {
       </Link>
       <PostMeta date={date} category={category} />
     </Article>
-  )
+  );
   /* eslint-enable jsx-a11y/anchor-is-valid */
 }
 
-PostCard.propTypes = {
+PreviewSmall.propTypes = {
   slug: PropTypes.string,
   title: PropTypes.string,
   date: PropTypes.string,
@@ -61,13 +61,13 @@ PostCard.propTypes = {
     srcSet: PropTypes.string,
     alt: PropTypes.string
   })
-}
+};
 
-PostCard.defaultProps = {
+PreviewSmall.defaultProps = {
   image: {}
-}
+};
 
 /**
  * @component
  */
-export default PostCard
+export default PreviewSmall;

@@ -1,9 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Head from 'next/head'
-import { sharedPropTypes } from '@sumup/circuit-ui'
+import React from 'react';
+import PropTypes from 'prop-types';
+import Head from 'next/head';
+import { sharedPropTypes } from '@sumup/circuit-ui';
 
-import { SITE_NAME, SITE_TWITTER } from '../../constants'
+import { SITE_NAME, SITE_TWITTER } from '../../constants';
 
 function Meta({
   title,
@@ -17,16 +17,16 @@ function Meta({
   siteTwitter,
   children
 }) {
-  const titleParts = []
+  const titleParts = [];
   if (title) {
-    titleParts.push(title)
+    titleParts.push(title);
   }
   if (siteName) {
-    titleParts.push(siteName)
+    titleParts.push(siteName);
   }
-  const titleString = titleParts.join(' · ')
-  const indexString = index ? 'index' : 'noindex'
-  const followString = follow ? 'follow' : 'nofollow'
+  const titleString = titleParts.join(' · ');
+  const indexString = index ? 'index' : 'noindex';
+  const followString = follow ? 'follow' : 'nofollow';
   return (
     <Head>
       <title>{titleString}</title>
@@ -47,7 +47,7 @@ function Meta({
       />
       {children}
     </Head>
-  )
+  );
 }
 
 Meta.propTypes = {
@@ -63,16 +63,16 @@ Meta.propTypes = {
   siteName: PropTypes.string,
   siteTwitter: PropTypes.string,
   children: sharedPropTypes.childrenPropType
-}
+};
 
 Meta.defaultProps = {
   siteName: SITE_NAME,
   siteTwitter: SITE_TWITTER,
   index: true,
   follow: true
-}
+};
 
 /**
  * @component
  */
-export default Meta
+export default Meta;

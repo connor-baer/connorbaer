@@ -4,7 +4,7 @@ import { Site } from 'layouts/Site';
 import { Main } from 'components/Main';
 import { Header } from 'components/Header';
 import { Link } from 'components/Link';
-import { PostCard } from 'components/PostCard';
+import { PreviewSmall } from 'components/PreviewSmall';
 import { Prefooter } from 'components/Prefooter';
 
 export default class Page extends Component {
@@ -54,7 +54,7 @@ export default class Page extends Component {
         <Main>
           <Header title={title} subtitle={subtitle} />
           <div className="l-ctnr cf">
-            {posts.map((post, i) => <PostCard post={post} key={i} />)}
+            {posts.map((post, i) => <PreviewSmall post={post} key={i} />)}
           </div>
           <Prefooter
             text="Let’s be friends!"

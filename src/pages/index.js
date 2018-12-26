@@ -8,7 +8,7 @@ import { getAllCookies } from '../services/cookies';
 
 import Meta from '../components/Meta';
 import Header from '../components/Header';
-import PostCard from '../components/blog/PostCard';
+import PreviewSmall from '../components/blog/PreviewSmall';
 
 export default class Page extends Component {
   static propTypes = {
@@ -41,7 +41,7 @@ export default class Page extends Component {
           <Row>
             {posts.map((post, i) => (
               <Col key={i} span={{ default: 12, kilo: 6, mega: 4 }}>
-                <PostCard {...post} />
+                <PreviewSmall {...post} />
               </Col>
             ))}
           </Row>
