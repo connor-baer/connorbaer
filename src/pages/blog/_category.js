@@ -8,7 +8,7 @@ import { getAllCookies } from '../../services/cookies';
 
 import Meta from '../../components/Meta';
 import Header from '../../components/Header';
-import PreviewSmall from '../../components/blog/PreviewSmall';
+import PreviewLarge from '../../components/blog/PreviewLarge';
 
 import * as CATEGORIES from '../../constants/categories';
 
@@ -37,16 +37,22 @@ export default class Page extends Component {
         <Meta title={name} description={description} url={url} />
         <Grid>
           <Row>
-            <Col span={{ default: 12, tera: 10 }}>
+            <Col
+              span={{ default: 12, kilo: 10, mega: 8 }}
+              skip={{ default: 0, kilo: 1, mega: 2 }}
+            >
               <Header title={name} subtitle={description} />
             </Col>
           </Row>
           <Row>
-            {posts.map((post, i) => (
-              <Col key={i} span={{ default: 12, kilo: 6, mega: 4 }}>
-                <PreviewSmall {...post} />
-              </Col>
-            ))}
+            <Col
+              span={{ default: 12, kilo: 10, mega: 8 }}
+              skip={{ default: 0, kilo: 1, mega: 2 }}
+            >
+              {posts.map(post => (
+                <PreviewLarge key={post.slug} {...post} />
+              ))}
+            </Col>
           </Row>
         </Grid>
       </article>
