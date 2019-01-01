@@ -29,12 +29,12 @@ const Container = styled('div')(containerStyles);
 
 const imageStyles = () => css`
   position: absolute;
-  top: -10%;
+  top: -100%;
   left: 0;
-  bottom: -10%;
+  bottom: -100%;
   right: 0;
   width: 100%;
-  height: 120%;
+  height: 300%;
   object-fit: cover;
 `;
 

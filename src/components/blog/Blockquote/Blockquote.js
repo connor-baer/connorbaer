@@ -5,7 +5,7 @@ import { values } from 'lodash/fp';
 import { Text } from '@sumup/circuit-ui';
 
 import { ALIGNMENTS } from '../../../constants';
-import Align from '../Align';
+import Align from '../../layout/Align';
 
 const sharedStyles = ({ theme }) => css`
   font-family: ${theme.fontStack.serif};

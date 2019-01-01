@@ -96,7 +96,7 @@ const typography = {
 const borderRadius = {
   kilo: '1px',
   mega: '4px',
-  giga: '5px'
+  giga: '6px'
 };
 
 const neutralsLight = {

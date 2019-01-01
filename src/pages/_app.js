@@ -9,17 +9,13 @@ import { ThemeProvider } from 'emotion-theming';
 import { injectGlobalStyles } from '@sumup/circuit-ui';
 
 import isServer from '../utils/is-server';
-import { setCookie } from '../services/cookies';
+import { getAllCookies, setCookie } from '../services/cookies';
 import globalStyles from '../styles/global-styles';
 import loadFonts, { preloadFonts } from '../styles/load-fonts';
 import * as Themes from '../styles/themes';
 
-import { THEMES, SITE_NAME, SITE_TWITTER } from '../constants';
-import { BASE_URL } from '../constants/paths';
-import Navigation from '../components/Navigation';
-import Prefooter from '../components/Prefooter';
-import Footer from '../components/Footer';
-import Main from '../components/Main';
+import { THEMES } from '../constants';
+import isSaveData from '../utils/is-save-data';
 
 // Adds server generated styles to emotion cache.
 if (!isServer) {
@@ -45,6 +41,15 @@ const themeIdsMap = {
 };
 
 export default class CustomApp extends App {
+  static async getInitialProps({ Component, ctx }) {
+    const cookies = getAllCookies(ctx);
+    const pageProps = Component.getInitialProps
+      ? await Component.getInitialProps(ctx)
+      : {};
+
+    return { Component, pageProps, cookies };
+  }
+
   constructor(props) {
     super(props);
 
@@ -56,7 +61,10 @@ export default class CustomApp extends App {
     const theme = this.getTheme({ themeId, darkmode, reducedMotion });
     const custom = globalStyles({ theme });
     injectGlobalStyles({ theme, custom });
-    loadFonts(theme.fonts);
+
+    if (!isSaveData) {
+      loadFonts(theme.fonts);
+    }
 
     this.state = {
       themeId,
@@ -143,20 +151,16 @@ export default class CustomApp extends App {
   toggleReducedMotion = this.toggleState('reducedMotion');
 
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, cookies } = this.props;
     const { darkmode, reducedMotion, isTransitioning } = this.state;
     const theme = {
       ...this.getTheme(this.state),
-      setTheme: this.setTheme
+      setTheme: this.setTheme,
+      toggleDarkmode: this.toggleDarkmode,
+      toggleReducedMotion: this.toggleReducedMotion,
+      darkmode,
+      reducedMotion
     };
-    const siteName = SITE_NAME;
-    const siteTwitter = SITE_TWITTER;
-    const siteUrl = BASE_URL;
-    const links = [
-      { url: '/about', label: 'About' },
-      { url: '/work', label: 'Work' },
-      { url: '/blog', label: 'Blog' }
-    ];
     return (
       <Container>
         <Head>
@@ -165,24 +169,11 @@ export default class CustomApp extends App {
         </Head>
         <ThemeProvider theme={theme}>
           <ThemeTransition isTransitioning={isTransitioning}>
-            <Navigation
-              siteName={siteName}
-              siteUrl={siteUrl}
-              toggleDarkmode={this.toggleDarkmode}
-              toggleReducedMotion={this.toggleReducedMotion}
-              darkmode={darkmode}
-              reducedMotion={reducedMotion}
-              links={links}
+            <Component
+              {...pageProps}
+              cookies={cookies}
+              setTheme={this.setTheme}
             />
-            <Main>
-              <Component {...pageProps} setTheme={this.setTheme} />
-            </Main>
-            <Prefooter
-              text="Let’s be friends."
-              linkLabel="Say hi!"
-              linkUrl="/"
-            />
-            <Footer siteName={siteName} siteTwitter={siteTwitter} />
           </ThemeTransition>
         </ThemeProvider>
       </Container>

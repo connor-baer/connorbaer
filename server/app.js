@@ -9,6 +9,7 @@ import logger from './lib/logger';
 import securityHeaders from './lib/security-headers';
 import generateSitemap from './lib/generate-sitemap';
 import asyncMiddleware from './lib/async-middleware';
+// import posts from './posts';
 
 const SOURCE_DIR = './src';
 const ABS_SOURCE_DIR = path.join(__dirname, '..', SOURCE_DIR);
@@ -62,6 +63,9 @@ server.get('/robots.txt', (req, res) => {
   return res.send('User-agent: * \nDisallow:');
 });
 
+// API
+// server.get('/api/v1/posts', (req, res) => res.json({ data: posts }));
+
 // Global error handler
 // eslint-disable-next-line no-unused-vars
 server.use(async (err, req, res, _) => {
@@ -76,7 +80,7 @@ server.use(async (err, req, res, _) => {
 
 // Dynamic pages
 server.get('/blog/category/:slug', (req, res) =>
-  app.render(req, res, '/blog/_category', { slug: req.params.slug })
+  app.render(req, res, '/blog', { category: req.params.slug })
 );
 
 // Static pages

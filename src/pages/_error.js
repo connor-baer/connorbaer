@@ -1,10 +1,13 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Row, Col } from '@sumup/circuit-ui';
 
-import { getAllCookies } from '../services/cookies';
 import Meta from '../components/Meta';
+import Navigation from '../components/Navigation';
+import Main from '../components/Main';
 import Header from '../components/Header';
+import Prefooter from '../components/Prefooter';
+import Footer from '../components/Footer';
 
 const TITLE_MAP = {
   404: 'Page not found. 🕵',
@@ -20,27 +23,14 @@ const SUBTITLE_MAP = {
 };
 /* eslint-enable max-len */
 
-export default class Error extends Component {
-  static propTypes = {
-    title: PropTypes.string,
-    statusCode: PropTypes.number
-  };
-
-  static getInitialProps(ctx) {
-    const cookies = getAllCookies(ctx);
-    const { res, err } = ctx;
-    const statusCode =
-      (res && res.statusCode) || (err && err.statusCode) || 500;
-    return { cookies, statusCode };
-  }
-
-  render() {
-    const { statusCode } = this.props;
-    const title = TITLE_MAP[statusCode];
-    const subtitle = SUBTITLE_MAP[statusCode];
-    return (
-      <Fragment>
-        <Meta title={title} description={subtitle} />
+function Error({ statusCode }) {
+  const title = TITLE_MAP[statusCode];
+  const subtitle = SUBTITLE_MAP[statusCode];
+  return (
+    <>
+      <Meta title={title} description={subtitle} />
+      <Navigation />
+      <Main>
         <Grid>
           <Row>
             <Col
@@ -51,7 +41,26 @@ export default class Error extends Component {
             </Col>
           </Row>
         </Grid>
-      </Fragment>
-    );
-  }
+      </Main>
+      <Prefooter />
+      <Footer />
+    </>
+  );
 }
+
+Error.getInitialProps = ctx => {
+  const { res, err } = ctx;
+  const statusCode = (res && res.statusCode) || (err && err.statusCode);
+  return { statusCode };
+};
+
+Error.propTypes = {
+  title: PropTypes.string,
+  statusCode: PropTypes.number
+};
+
+Error.defaultProps = {
+  statusCode: 500
+};
+
+export default Error;

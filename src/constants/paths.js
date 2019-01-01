@@ -11,3 +11,4 @@ export const FONTS_PATH = `${STATIC_URL}/fonts`;
 export const PAGES_PATH = `/pages`;
 export const BLOG_PATH = `/blog`;
 export const CATEGORY_PATH = `${BLOG_PATH}/category`;
+export const PROJECTS_PATH = `/projects`;

@@ -1,52 +1,70 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { find, flow } from 'lodash/fp';
 import { Grid, Row, Col } from '@sumup/circuit-ui';
 
 import * as Posts from '../../services/posts';
-import { getAllCookies } from '../../services/cookies';
 
 import Meta from '../../components/Meta';
+import Navigation from '../../components/Navigation';
+import Main from '../../components/Main';
 import Header from '../../components/Header';
+import Prefooter from '../../components/Prefooter';
+import Footer from '../../components/Footer';
 import PreviewLarge from '../../components/blog/PreviewLarge';
 
-export default class Page extends Component {
-  static propTypes = {
-    title: PropTypes.string
-  };
+import * as CATEGORIES from '../../constants/categories';
 
-  static getInitialProps(ctx) {
-    const cookies = getAllCookies(ctx);
-    return { cookies };
-  }
+const grid = {
+  span: { default: 12, kilo: 10, mega: 8 },
+  skip: { default: 0, kilo: 1, mega: 2 }
+};
 
-  render() {
-    const posts = Posts.load();
-    const sortedPosts = Posts.sortByDate(posts);
-    const { title = 'Blog' } = this.props;
-    return (
-      <Fragment>
-        <Meta title={title} />
+function Blog({ category: categorySlug }) {
+  const category = categorySlug && find({ slug: categorySlug }, CATEGORIES);
+
+  const title = category ? category.name : 'Blog';
+  const description = category ? category.description : '';
+  // FIXME: Construct URL
+  const url = '';
+
+  const posts = flow(
+    Posts.filterByCategory(category),
+    Posts.sortByDate
+  )(Posts.load());
+  return (
+    <>
+      <Meta title={title} description={description} url={url} />
+      <Navigation />
+      <Main>
         <Grid>
           <Row>
-            <Col
-              span={{ default: 12, kilo: 10, mega: 8 }}
-              skip={{ default: 0, kilo: 1, mega: 2 }}
-            >
+            <Col {...grid}>
               <Header title={title} />
             </Col>
           </Row>
           <Row>
-            <Col
-              span={{ default: 12, kilo: 10, mega: 8 }}
-              skip={{ default: 0, kilo: 1, mega: 2 }}
-            >
-              {sortedPosts.map(post => (
+            <Col {...grid}>
+              {posts.map(post => (
                 <PreviewLarge key={post.slug} {...post} />
               ))}
             </Col>
           </Row>
         </Grid>
-      </Fragment>
-    );
-  }
+      </Main>
+      <Prefooter />
+      <Footer />
+    </>
+  );
 }
+
+Blog.propTypes = {
+  category: PropTypes.string
+};
+
+Blog.getInitialProps = ctx => {
+  const { category } = ctx.query;
+  return { category };
+};
+
+export default Blog;

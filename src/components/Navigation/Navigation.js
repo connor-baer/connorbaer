@@ -12,6 +12,8 @@ import Moon from './svgs/moon.svg';
 import MoonFull from './svgs/moon-full.svg';
 import Motion from './svgs/motion.svg';
 import MotionFull from './svgs/motion-full.svg';
+import { SITE_NAME, NAV_LINKS } from '../../constants';
+import { BASE_URL } from '../../constants/paths';
 
 const headerBaseStyles = ({ theme }) => css`
   display: flex;
@@ -103,7 +105,7 @@ const navAnchorBaseStyles = ({ theme }) => css`
   margin-top: ${theme.spacings.kilo};
 
   ${theme.mq.mega`
-    margin-right: ${theme.spacings.kilo};
+    margin-right: ${theme.spacings.giga};
     margin-top: 0;
   `};
 
@@ -176,17 +178,22 @@ class Navigation extends Component {
     siteName: PropTypes.string.isRequired,
     isHome: PropTypes.bool,
     links: PropTypes.array,
-    toggleDarkmode: PropTypes.func,
-    toggleReducedMotion: PropTypes.func,
-    darkmode: PropTypes.bool,
-    reducedMotion: PropTypes.bool,
-    router: PropTypes.object
+    router: PropTypes.object,
+    theme: PropTypes.shape({
+      toggleDarkmode: PropTypes.func,
+      toggleReducedMotion: PropTypes.func,
+      darkmode: PropTypes.bool,
+      reducedMotion: PropTypes.bool
+    })
   };
 
   static defaultProps = {
+    siteName: SITE_NAME,
+    siteUrl: BASE_URL,
     isHome: false,
-    links: [],
-    router: {}
+    links: NAV_LINKS,
+    router: {},
+    theme: {}
   };
 
   state = {
@@ -242,19 +249,17 @@ class Navigation extends Component {
   };
 
   render() {
+    const { siteName, isHome, links, router, theme } = this.props;
     const {
-      siteName,
       toggleDarkmode,
       toggleReducedMotion,
       darkmode,
-      reducedMotion,
-      isHome,
-      links,
-      router
-    } = this.props;
+      reducedMotion
+    } = theme;
 
     const DarkmodeIcon = darkmode ? MoonFull : Moon;
     const MotionIcon = reducedMotion ? MotionFull : Motion;
+    /* eslint-disable jsx-a11y/anchor-is-valid */
     return (
       <Header {...this.state}>
         <Link href={isHome ? '#' : '/'} prefetch={!isHome}>
@@ -300,6 +305,7 @@ class Navigation extends Component {
         </div>
       </Header>
     );
+    /* eslint-enable jsx-a11y/anchor-is-valid */
   }
 }
 

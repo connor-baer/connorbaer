@@ -5,6 +5,7 @@ import { Grid } from '@sumup/circuit-ui';
 
 import { headingZetta } from '../../styles/style-helpers';
 import Link from '../Link';
+import { SITE_TWITTER } from '../../constants';
 
 const wrapperStyles = ({ theme }) => css`
   background-color: ${theme.colors.n100};
@@ -58,6 +59,12 @@ Prefooter.propTypes = {
   text: PropTypes.string,
   linkLabel: PropTypes.string,
   linkUrl: PropTypes.string
+};
+
+Prefooter.defaultProps = {
+  text: 'Let’s be friends.',
+  linkLabel: 'Say hi!',
+  linkUrl: `https://twitter.com/${SITE_TWITTER}`
 };
 
 /**

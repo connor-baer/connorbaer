@@ -6,16 +6,20 @@ import { values } from 'lodash/fp';
 import { MDXProvider } from '@mdx-js/tag';
 import { Grid, Row, Col, Heading, sharedPropTypes } from '@sumup/circuit-ui';
 
+import components, { Paragraph } from './_components';
+import Meta from '../components/Meta';
+import Navigation from '../components/Navigation';
+import Main from '../components/Main';
+import Prefooter from '../components/Prefooter';
+import Footer from '../components/Footer';
+import Intro from '../components/Intro';
+import PostMeta from '../components/blog/PostMeta';
+import ParallaxImage from '../components/blog/ParallaxImage';
+
 import CONFIG from '../config';
 import { BLOG_PATH } from '../constants/paths';
 import * as CATEGORIES from '../constants/categories';
 import { THEMES } from '../constants';
-import { getAllCookies } from '../services/cookies';
-import Meta from '../components/Meta';
-import components, { Paragraph } from './_components';
-import Intro from '../components/Intro';
-import PostMeta from '../components/blog/PostMeta';
-import ParallaxImage from '../components/blog/ParallaxImage';
 
 const styledParagraphStyles = ({ theme }) => css`
   font-family: ${theme.fontStack.serif};
@@ -42,11 +46,6 @@ class Post extends Component {
     theme: sharedPropTypes.themePropType
   };
 
-  static getInitialProps(ctx) {
-    const cookies = getAllCookies(ctx);
-    return { cookies };
-  }
-
   constructor(props) {
     super(props);
     props.theme.setTheme(THEMES.BLOG);
@@ -66,29 +65,38 @@ class Post extends Component {
     const url = `${CONFIG.BASE_URL}${postPath}`;
 
     return (
-      <article>
+      <>
         <Meta title={title} description={description} url={url} image={image} />
-        <ParallaxImage {...image} />
-        <Grid>
-          <Row>
-            <Col
-              span={{ default: 12, mega: 10, tera: 8 }}
-              skip={{ default: 0, mega: 1, tera: 2 }}
-            >
-              <PostHeader>
-                <Heading element="h1" size={Heading.ZETTA} noMargin>
-                  {title}
-                </Heading>
-                <PostMeta date={date} category={category} />
-              </PostHeader>
-              <Intro>{description}</Intro>
-              <MDXProvider components={{ ...components, p: StyledParagraph }}>
-                {children}
-              </MDXProvider>
-            </Col>
-          </Row>
-        </Grid>
-      </article>
+        <Navigation />
+        <Main>
+          <article>
+            <ParallaxImage {...image} />
+            <Grid>
+              <Row>
+                <Col
+                  span={{ default: 12, mega: 10, tera: 8 }}
+                  skip={{ default: 0, mega: 1, tera: 2 }}
+                >
+                  <PostHeader>
+                    <Heading element="h1" size={Heading.ZETTA} noMargin>
+                      {title}
+                    </Heading>
+                    <PostMeta date={date} category={category} />
+                  </PostHeader>
+                  <Intro>{description}</Intro>
+                  <MDXProvider
+                    components={{ ...components, p: StyledParagraph }}
+                  >
+                    {children}
+                  </MDXProvider>
+                </Col>
+              </Row>
+            </Grid>
+          </article>
+        </Main>
+        <Prefooter />
+        <Footer />
+      </>
     );
   }
 }

@@ -1,15 +1,10 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'react-emotion';
-import Image from '../Image/Image';
+import RatioImage from '../RatioImage';
 
-const wrapperBaseStyles = ({ theme }) => css`
-  display: block;
-  position: relative;
+const wrapperStyles = ({ theme }) => css`
   border-radius: ${theme.borderRadius.giga};
-  overflow: hidden;
-  height: auto;
-  width: 100%;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
 
   &::after {
     position: absolute;
@@ -31,71 +26,29 @@ const wrapperBaseStyles = ({ theme }) => css`
   }
 `;
 
-const wrapperAspectRatioStyles = ({ aspectRatio }) =>
-  aspectRatio &&
-  css`
-    overflow: hidden;
-    height: 0;
-    width: 100%;
-    padding-top: ${aspectRatio * 100}%;
-  `;
-
-const Wrapper = styled('div')(wrapperBaseStyles, wrapperAspectRatioStyles);
-
-const imageBaseStyles = ({ theme }) => css`
-  display: block;
-  height: auto;
-  max-height: 100%;
-  width: 100%;
-  border-radius: ${theme.borderRadius.giga};
-`;
-
-const imageAspectRatioStyles = ({ aspectRatio }) =>
-  aspectRatio &&
-  css`
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  `;
-
-const imageMotionStyles = ({ theme }) =>
+const imageStyles = ({ theme }) =>
   !theme.reducedMotion &&
   css`
-    transition: transform ${theme.animations.motion};
-    will-change: transform;
-    backface-visibility: hidden;
+    img {
+      transition: transform ${theme.animations.motion};
+      will-change: transform;
+      backface-visibility: hidden;
 
-    a:hover &,
-    a:focus & {
-      transform: scale(1.04);
+      a:hover &,
+      a:focus & {
+        transform: scale(1.04);
+      }
     }
   `;
 
-const StyledImage = styled(Image)(
-  imageBaseStyles,
-  imageAspectRatioStyles,
-  imageMotionStyles
-);
-
-function CoverImage({ aspectRatio, className, ...props }) {
-  return (
-    <Wrapper aspectRatio={aspectRatio} className={className}>
-      <StyledImage aspectRatio={aspectRatio} {...props} />
-    </Wrapper>
-  );
-}
+const CoverImage = styled(RatioImage)(wrapperStyles, imageStyles);
 
 CoverImage.propTypes = {
   src: PropTypes.string.isRequired,
   srcSet: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
-  width: PropTypes.number,
-  height: PropTypes.number
+  aspectRatio: PropTypes.number,
+  className: PropTypes.string
 };
 
 /**

@@ -1,0 +1,35 @@
+import Project from '../../../layouts/project'
+import Figure from '../../../components/blog/Figure'
+import { OPINION } from '../../../constants/categories'
+
+export const meta = {
+  title: 'Jekyll Themes',
+  subtitle: 'A collection of customisable, easy-to-use Jekyll themes.',
+  brief:
+    'Jekyll is a simple static site generator. I designed and built these Jekyll themes when I still hosted my personal websites on GitHub Pages. They are optimised for speed and ease of use.',
+  slug: 'jekyll-themes',
+  image: {
+    ...require('./jekyll-themes.jpg?resize&sizes[]=400&sizes[]=800&sizes[]=1600&sizes[]=2400'),
+    colors: require('./jekyll-themes.jpg?lqip-colors'),
+    alt: 'A zebra stands on dry grass and looks straight into the camera.'
+  },
+  date: '2015/3/27',
+  category: OPINION
+}
+
+export default ({ children }) => <Project {...meta}>{children}</Project>
+
+# Change
+
+Change is a minimalistic, duo-chromatic Jekyll theme that pairs a prominent headline with two column content.
+
+Demo · Fork on GitHub
+
+<Figure
+  image={{
+    ...require(`./change.jpg?resize&sizes[]=400&sizes[]=800&sizes[]=1600&sizes[]=2400`),
+    colors: require(`./change.jpg?lqip-colors`),
+    alt: 'A young black child looks up from the painting she is drawing.'
+  }}
+  align={Figure.FULL}
+/>

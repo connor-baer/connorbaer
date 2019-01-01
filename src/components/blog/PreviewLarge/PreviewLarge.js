@@ -14,16 +14,20 @@ import PostMeta from '../PostMeta';
 const articleStyles = ({ theme }) => css`
   margin-top: ${theme.spacings.tera};
   margin-bottom: ${theme.spacings.zetta};
+
+  ${theme.mq.kilo`
+    margin-bottom: 72px;
+  `};
 `;
 
 const Article = styled('article')(articleStyles);
 
-const headingStyles = ({ theme }) => css`
+const titleStyles = ({ theme }) => css`
   margin-top: ${theme.spacings.tera};
   margin-bottom: ${theme.spacings.kilo};
 `;
 
-const Title = styled(Heading)(headingStyles);
+const Title = styled(Heading)(titleStyles);
 
 const descriptionStyles = ({ theme }) => css`
   margin-top: ${theme.spacings.kilo};
@@ -53,10 +57,10 @@ function PreviewLarge({
               src={src}
               srcSet={srcSet}
               alt={alt}
-              aspectRatio={150 / 350}
+              aspectRatio={350 / 150}
             />
           )}
-          <Title element="h2" size={Heading.TERA}>
+          <Title element="h2" size={Heading.PETA}>
             {title}
           </Title>
           {description && (

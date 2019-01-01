@@ -13,9 +13,12 @@ export function load() {
   return [africaNotCountry, europeProud, soundOfSilence, nobodyBuildingAirport];
 }
 
-export const filterByCategory = curry((category, posts) =>
-  posts.filter(post => get('category.name', post) === category.name)
-);
+export const filterByCategory = curry((category, posts) => {
+  if (!category) {
+    return posts;
+  }
+  return posts.filter(post => get('category.name', post) === category.name);
+});
 
 export const sortByDate = curry(posts =>
   posts.sort((postA, postB) => sortByDateUtil(postA.date, postB.date))

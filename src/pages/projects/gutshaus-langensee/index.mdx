@@ -1,0 +1,23 @@
+import Project from '../../../layouts/project'
+import Figure from '../../../components/blog/Figure'
+import { OPINION } from '../../../constants/categories'
+
+export const meta = {
+  title: 'Gutshaus Langensee',
+  subtitle:
+    'This family-run estate invites families to spend relaxing holidays in north-east Germany.',
+  brief:
+    'Within three weeks I restructured the website, rebuilt it on top of Squarespace and implemented a new booking flow.',
+  slug: 'gutshaus-langensee',
+  image: {
+    ...require('./gutshaus-langensee.jpg?resize&sizes[]=400&sizes[]=800&sizes[]=1600&sizes[]=2400'),
+    colors: require('./gutshaus-langensee.jpg?lqip-colors'),
+    alt: 'A zebra stands on dry grass and looks straight into the camera.'
+  },
+  date: '2015/3/27',
+  category: OPINION
+}
+
+export default ({ children }) => <Project {...meta}>{children}</Project>
+
+_In writing..._

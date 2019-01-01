@@ -4,6 +4,7 @@ import styled, { css } from 'react-emotion';
 import { Grid, Text } from '@sumup/circuit-ui';
 
 import Link from '../Link';
+import { SITE_NAME, SITE_TWITTER } from '../../constants';
 
 const wrapperStyles = ({ theme }) => css`
   border-top: 1px solid ${theme.colors.n300};
@@ -89,6 +90,11 @@ function Footer({ siteName, siteTwitter }) {
 Footer.propTypes = {
   siteName: PropTypes.string.isRequired,
   siteTwitter: PropTypes.string.isRequired
+};
+
+Footer.defaultProps = {
+  siteName: SITE_NAME,
+  siteTwitter: SITE_TWITTER
 };
 
 export default Footer;

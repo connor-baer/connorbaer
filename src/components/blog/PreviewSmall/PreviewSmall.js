@@ -37,10 +37,10 @@ function PreviewSmall({ slug, image, title, date, category }) {
               src={src}
               srcSet={srcSet}
               alt={alt}
-              aspectRatio={150 / 350}
+              aspectRatio={350 / 150}
             />
           )}
-          <StyledHeading element="h2" size={Heading.TERA}>
+          <StyledHeading element="h3" size={Heading.TERA}>
             {title}
           </StyledHeading>
         </a>
