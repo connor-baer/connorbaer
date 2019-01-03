@@ -1,6 +1,5 @@
 import Project from '../../../layouts/project'
-import Figure from '../../../components/blog/Figure'
-import { OPINION } from '../../../constants/categories'
+import Figure from '../../../components/images/Figure'
 
 export const meta = {
   title: 'Jekyll Themes',
@@ -13,17 +12,11 @@ export const meta = {
     colors: require('./jekyll-themes.jpg?lqip-colors'),
     alt: 'A zebra stands on dry grass and looks straight into the camera.'
   },
-  date: '2015/3/27',
-  category: OPINION
+  client: 'Side Project',
+  skills: ['Design', 'Development']
 }
 
 export default ({ children }) => <Project {...meta}>{children}</Project>
-
-# Change
-
-Change is a minimalistic, duo-chromatic Jekyll theme that pairs a prominent headline with two column content.
-
-Demo · Fork on GitHub
 
 <Figure
   image={{
@@ -31,5 +24,57 @@ Demo · Fork on GitHub
     colors: require(`./change.jpg?lqip-colors`),
     alt: 'A young black child looks up from the painting she is drawing.'
   }}
+  caption=""
   align={Figure.FULL}
 />
+
+# Change
+
+Change is a minimalistic, duo-chromatic Jekyll theme that pairs a prominent headline with two column content.
+
+[Demo](https://madebyconnor.github.io/change/) · [Fork on GitHub](https://github.com/madebyconnor/change)
+
+<Figure
+  image={{
+    ...require(`./spring.jpg?resize&sizes[]=400&sizes[]=800&sizes[]=1600&sizes[]=2400`),
+    colors: require(`./spring.jpg?lqip-colors`),
+    alt: 'A young black child looks up from the painting she is drawing.'
+  }}
+  align={Figure.FULL}
+/>
+
+# Spring
+
+Spring is a one-page, two-column Jekyll theme.
+
+[Demo](https://madebyconnor.github.io/spring/) · [Fork on GitHub](https://github.com/madebyconnor/spring)
+
+<Figure
+  image={{
+    ...require(`./summer.jpg?resize&sizes[]=400&sizes[]=800&sizes[]=1600&sizes[]=2400`),
+    colors: require(`./summer.jpg?lqip-colors`),
+    alt: 'A young black child looks up from the painting she is drawing.'
+  }}
+  align={Figure.FULL}
+/>
+
+# Summer
+
+Summer is a simple Jekyll theme with a photo sidebar.
+
+[Demo](https://madebyconnor.github.io/summer/) · [Fork on GitHub](https://github.com/madebyconnor/summer)
+
+<Figure
+  image={{
+    ...require(`./docs.jpg?resize&sizes[]=400&sizes[]=800&sizes[]=1600&sizes[]=2400`),
+    colors: require(`./docs.jpg?lqip-colors`),
+    alt: 'A young black child looks up from the painting she is drawing.'
+  }}
+  align={Figure.FULL}
+/>
+
+# Docs
+
+Docs is a minimalist Jekyll theme built for documentation websites.
+
+[Demo](https://madebyconnor.github.io/docs/) · [Fork on GitHub](https://github.com/madebyconnor/docs)

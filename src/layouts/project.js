@@ -15,15 +15,23 @@ import Prefooter from '../components/Prefooter';
 import Footer from '../components/Footer';
 import components from './_components';
 import IntroSection from '../components/projects/IntroSection';
-import RatioImage from '../components/RatioImage';
 
-function Project({ children, title, subtitle, image, slug }) {
+function Project({
+  children,
+  title,
+  subtitle,
+  brief,
+  image,
+  slug,
+  skills,
+  client
+}) {
   const postPath = `${PROJECTS_PATH}/${slug}`;
   const url = `${CONFIG.BASE_URL}${postPath}`;
 
   return (
     <>
-      <Meta title={title} description={subtitle} url={url} image={image} />
+      <Meta title={title} description={brief} url={url} image={image} />
       <Navigation />
       <Main>
         <article>
@@ -35,17 +43,20 @@ function Project({ children, title, subtitle, image, slug }) {
             </Row>
             <Row>
               <Col span={{ default: 12, tera: 6 }}>
-                <IntroSection title="Brief" body={subtitle} />
+                <IntroSection title="Overview">{brief}</IntroSection>
               </Col>
               <Col span={{ default: 12, mega: 6, tera: 3 }}>
-                <IntroSection title="Involvement" body={subtitle} />
+                <IntroSection title="Involvement">
+                  {skills.map(skill => (
+                    <p key={skill}>{skill}</p>
+                  ))}
+                </IntroSection>
               </Col>
               <Col span={{ default: 12, mega: 6, tera: 3 }}>
-                <IntroSection title="Take Aways" body={subtitle} />
+                <IntroSection title="Client">{client}</IntroSection>
               </Col>
             </Row>
           </Grid>
-          <RatioImage {...image} aspectRatio={21 / 9} />
           <Grid>
             <Row>
               <Col

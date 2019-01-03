@@ -2,28 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { values } from 'lodash/fp';
 import { format } from 'date-fns';
-import styled, { css } from 'react-emotion';
-import { Text } from '@sumup/circuit-ui';
 
 import { BASE_URL, CATEGORY_PATH } from '../../../constants/paths';
 import * as CATEGORIES from '../../../constants/categories';
 import Link from '../../Link';
-
-const wrapperStyles = ({ theme }) => css`
-  color: ${theme.colors.n700};
-
-  *::after {
-    content: '·';
-    display: inline-block;
-    padding: 0 ${theme.spacings.byte};
-  }
-
-  *:last-child::after {
-    content: '';
-  }
-`;
-
-const Wrapper = styled(Text)(wrapperStyles);
+import Small from '../../Small';
 
 function PostMeta({ date, category, className }) {
   if (!date && !category) {
@@ -35,7 +18,7 @@ function PostMeta({ date, category, className }) {
 
   /* eslint-disable jsx-a11y/anchor-is-valid */
   return (
-    <Wrapper className={className} element="small" size={Text.KILO} noMargin>
+    <Small className={className}>
       {date && <time dateTime={datetime}>{formattedDate}</time>}
       {category && (
         <Link
@@ -45,7 +28,7 @@ function PostMeta({ date, category, className }) {
           <a>{category.name}</a>
         </Link>
       )}
-    </Wrapper>
+    </Small>
   );
   /* eslint-enable jsx-a11y/anchor-is-valid */
 }

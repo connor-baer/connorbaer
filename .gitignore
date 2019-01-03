@@ -1,7 +1,6 @@
 # Project #
 ############
 sitemap.xml
-images/
 dist/
 .next/
 .esm-cache/

@@ -1,6 +1,5 @@
 import Project from '../../../layouts/project'
-import Figure from '../../../components/blog/Figure'
-import { OPINION } from '../../../constants/categories'
+import Figure from '../../../components/images/Figure'
 
 export const meta = {
   title: 'Gutshaus Langensee',
@@ -14,8 +13,9 @@ export const meta = {
     colors: require('./gutshaus-langensee.jpg?lqip-colors'),
     alt: 'A zebra stands on dry grass and looks straight into the camera.'
   },
-  date: '2015/3/27',
-  category: OPINION
+  link: 'https://gutshaus-langensee.de',
+  client: 'Gutshaus Langensee',
+  skills: ['Concept', 'Design']
 }
 
 export default ({ children }) => <Project {...meta}>{children}</Project>

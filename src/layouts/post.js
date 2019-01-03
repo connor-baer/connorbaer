@@ -14,7 +14,7 @@ import Prefooter from '../components/Prefooter';
 import Footer from '../components/Footer';
 import Intro from '../components/Intro';
 import PostMeta from '../components/blog/PostMeta';
-import ParallaxImage from '../components/blog/ParallaxImage';
+import ParallaxImage from '../components/images/ParallaxImage';
 
 import CONFIG from '../config';
 import { BLOG_PATH } from '../constants/paths';

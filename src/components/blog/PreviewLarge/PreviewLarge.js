@@ -8,7 +8,7 @@ import { BLOG_PATH } from '../../../constants/paths';
 import * as CATEGORIES from '../../../constants/categories';
 
 import Link from '../../Link';
-import CoverImage from '../../CoverImage';
+import CoverImage from '../../images/CoverImage';
 import PostMeta from '../PostMeta';
 
 const articleStyles = ({ theme }) => css`

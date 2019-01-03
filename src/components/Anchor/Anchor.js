@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'react-emotion';
+import { isEmpty } from 'lodash/fp';
 import { sharedPropTypes } from '@sumup/circuit-ui';
 
 import Link from '../Link';
@@ -25,9 +26,7 @@ const baseStyles = ({ theme }) => css`
   }
 `;
 
-const A = styled('a')`
-  ${baseStyles};
-`;
+const A = styled('a')(baseStyles);
 
 const Anchor = ({
   children,
@@ -37,11 +36,17 @@ const Anchor = ({
   target,
   rel,
   ...otherProps
-}) => (
-  <Link {...otherProps}>
-    <A {...{ title, className, id, target, rel }}>{children}</A>
-  </Link>
-);
+}) => {
+  if (isEmpty(otherProps.href)) {
+    return <span {...{ title, className, id }}>{children}</span>;
+  }
+
+  return (
+    <Link {...otherProps}>
+      <A {...{ title, className, id, target, rel }}>{children}</A>
+    </Link>
+  );
+};
 
 Anchor.propTypes = {
   children: sharedPropTypes.childrenPropType.isRequired,

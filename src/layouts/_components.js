@@ -1,9 +1,9 @@
 import React from 'react';
-import { Heading, Text, Hr } from '@sumup/circuit-ui';
+import { Heading, Text, Hr, List } from '@sumup/circuit-ui';
 
 import Anchor from '../components/Anchor';
 import Blockquote from '../components/blog/Blockquote';
-import Image from '../components/Image';
+import Image from '../components/images/Image';
 
 export const HeadingOne = ({ children, ...rest }) => (
   <Heading element="h2" size={Heading.EXA} {...rest}>
@@ -59,6 +59,18 @@ export const Quote = ({ children, ...rest }) => (
   </Text>
 );
 
+export const Ul = ({ children, ...rest }) => (
+  <List size={List.GIGA} {...rest}>
+    {children}
+  </List>
+);
+
+export const Ol = ({ children, ...rest }) => (
+  <List size={List.GIGA} ordered {...rest}>
+    {children}
+  </List>
+);
+
 const components = {
   h1: HeadingOne,
   h2: HeadingTwo,
@@ -67,6 +79,8 @@ const components = {
   h5: HeadingFive,
   h6: HeadingFive,
   p: Paragraph,
+  ul: Ul,
+  ol: Ol,
   a: Anchor,
   em: Em,
   strong: Strong,

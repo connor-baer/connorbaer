@@ -1,15 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'react-emotion';
-import { values } from 'lodash/fp';
 import { Heading } from '@sumup/circuit-ui';
 
 import { PROJECTS_PATH } from '../../../constants/paths';
-import * as CATEGORIES from '../../../constants/categories';
 
 import Link from '../../Link';
-import CoverImage from '../../CoverImage';
-import PostMeta from '../../blog/PostMeta';
+import CoverImage from '../../images/CoverImage';
+import ProjectMeta from '../ProjectMeta';
 
 const articleStyles = ({ theme }) => css`
   margin-top: ${theme.spacings.giga};
@@ -27,7 +25,7 @@ const titleStyles = ({ theme }) => css`
 
 const Title = styled(Heading)(titleStyles);
 
-function PreviewLarge({ slug, image, title, date, category }) {
+function PreviewLarge({ slug, image, title, skills }) {
   const { src, srcSet, alt } = image;
   /* eslint-disable jsx-a11y/anchor-is-valid */
   return (
@@ -47,7 +45,7 @@ function PreviewLarge({ slug, image, title, date, category }) {
           </Title>
         </a>
       </Link>
-      <PostMeta date={date} category={category} />
+      <ProjectMeta skills={skills} />
     </Article>
   );
   /* eslint-enable jsx-a11y/anchor-is-valid */
@@ -57,9 +55,8 @@ PreviewLarge.propTypes = {
   slug: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
-  date: PropTypes.string,
   featured: PropTypes.bool,
-  category: PropTypes.oneOf(values(CATEGORIES)),
+  skills: PropTypes.arrayOf(PropTypes.string),
   image: PropTypes.shape({
     src: PropTypes.string,
     srcSet: PropTypes.string,

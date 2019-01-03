@@ -1,6 +1,6 @@
 import Project from '../../../layouts/project'
-import Figure from '../../../components/blog/Figure'
-import { OPINION } from '../../../constants/categories'
+import Figure from '../../../components/images/Figure'
+import Gallery from '../../../components/images/Gallery'
 
 export const meta = {
   title: 'UWC Deutschland',
@@ -13,11 +13,22 @@ export const meta = {
     colors: require('./uwc-deutschland.jpg?lqip-colors'),
     alt: 'A zebra stands on dry grass and looks straight into the camera.'
   },
-  date: '2015/3/27',
-  category: OPINION
+  link: 'https://uwc.de',
+  client: 'Deutsche Stiftung UWC',
+  skills: ['Design', 'Development']
 }
 
 export default ({ children }) => <Project {...meta}>{children}</Project>
+
+<Figure
+  image={{
+    ...require(`./desktop-mobile.jpg?resize&sizes[]=400&sizes[]=800&sizes[]=1600&sizes[]=2400`),
+    colors: require(`./desktop-mobile.jpg?lqip-colors`),
+    alt: 'A young black child looks up from the painting she is drawing.'
+  }}
+  caption=""
+  align={Figure.FULL}
+/>
 
 UWC Deutschland's previous website dated back to 2007, the year the original iPhone was introduced and three years before responsive web design became a core concept of web development. Over the years, the website's navigation structure had become a convoluted mess and the content was often outdated. So when I approached UWC Deutschland about a new website, they were excited to get started.
 
@@ -39,6 +50,23 @@ Before the meeting my girlfriend had written the title of every page that curren
 
 The result was remarkable: we reduced the number of pages from 232 to 37, intuitively sorted into 6 sections.
 
+<Gallery
+  images={[
+    {
+      ...require(`./feature-list.jpg?resize&sizes[]=400&sizes[]=800&sizes[]=1600&sizes[]=2400`),
+      colors: require(`./feature-list.jpg?lqip-colors`),
+      alt: 'A young black child looks up from the painting she is drawing.'
+    },
+    {
+      ...require(`./page-structure.jpg?resize&sizes[]=400&sizes[]=800&sizes[]=1600&sizes[]=2400`),
+      colors: require(`./page-structure.jpg?lqip-colors`),
+      alt: 'A young black child looks up from the painting she is drawing.'
+    }
+  ]}
+  caption="Visualised navigation structure on the left, feature list on the right."
+  align={Gallery.CENTER}
+/>
+
 ## Features
 
 I had preselected a list of possible features to give the team a sense of what's possible. I also encouraged them to add further suggestions. The team then ranked the features by urgency and importance.
@@ -52,5 +80,32 @@ In the end the team decided to move forward with WordPress as it is open source,
 # May — Designing and Discussing
 
 I spent the whole of May in Sketch drafting the design for the website. I shared my progress with the Berlin team through InVision where they were able to comment and discuss the mockups. They further shared the designs with members of the target groups. Their feedback in particular was extremely valuable and helped me to optimise the design further.
+
+<Gallery
+  images={[
+    {
+      ...require(`./homepage-1.png?resize&sizes[]=400&sizes[]=800&sizes[]=1600&sizes[]=2400`),
+      colors: require(`./homepage-1.png?lqip-colors`),
+      alt: 'A young black child looks up from the painting she is drawing.'
+    },
+    {
+      ...require(`./homepage-2.png?resize&sizes[]=400&sizes[]=800&sizes[]=1600&sizes[]=2400`),
+      colors: require(`./homepage-2.png?lqip-colors`),
+      alt: 'A young black child looks up from the painting she is drawing.'
+    },
+    {
+      ...require(`./homepage-3.png?resize&sizes[]=400&sizes[]=800&sizes[]=1600&sizes[]=2400`),
+      colors: require(`./homepage-3.png?lqip-colors`),
+      alt: 'A young black child looks up from the painting she is drawing.'
+    },
+    {
+      ...require(`./homepage-4.jpg?resize&sizes[]=400&sizes[]=800&sizes[]=1600&sizes[]=2400`),
+      colors: require(`./homepage-4.jpg?lqip-colors`),
+      alt: 'A young black child looks up from the painting she is drawing.'
+    }
+  ]}
+  caption="Evolution of the homepage design."
+  align={Gallery.LEFT}
+/>
 
 _In writing..._

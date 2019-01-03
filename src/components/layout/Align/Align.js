@@ -21,11 +21,11 @@ const rightStyles = ({ theme, align }) =>
     `};
 
     ${theme.mq.mega`
-      margin-right: -8.33%;
+      margin-right: -10.5%;
     `};
 
     ${theme.mq.tera`
-      margin-right: -16.66%;
+      margin-right: -26.66%;
     `};
   `;
 
@@ -41,11 +41,11 @@ const leftStyles = ({ theme, align }) =>
     `};
 
     ${theme.mq.mega`
-      margin-left: -8.33%;
+      margin-left: -10.5%;
     `};
 
     ${theme.mq.tera`
-      margin-left: -16.66%;
+      margin-left: -26.66%;
     `};
   `;
 
@@ -55,13 +55,13 @@ const fullStyles = ({ theme, align }) =>
     text-align: center;
 
     ${theme.mq.mega`
-      margin: ${theme.spacings.peta} -8.33%;
-      width: calc(100% + 8.33% * 2);
+      margin: ${theme.spacings.peta} -10.5%;
+      width: calc(100% + 10.5% * 2);
     `};
 
     ${theme.mq.tera`
-      margin: ${theme.spacings.exa} -16.66%;
-      width: calc(100% + 16.66% * 2);
+      margin: ${theme.spacings.exa} -26.66%;
+      width: calc(100% + 26.66% * 2);
     `};
   `;
 
