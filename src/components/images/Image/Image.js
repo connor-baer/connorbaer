@@ -5,11 +5,11 @@ function isTransparent(src) {
   return src.includes('.png');
 }
 
-const baseStyles = ({ theme }) => css`
+const baseStyles = () => css`
   width: 100%;
   height: auto;
   vertical-align: middle;
-  color: ${theme.colors.n300};
+  color: transparent;
 `;
 
 const backgroundStyles = ({ theme, src }) =>

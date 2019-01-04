@@ -9,6 +9,14 @@ import Link from '../../Link';
 import CoverImage from '../../images/CoverImage';
 import ProjectMeta from '../ProjectMeta';
 
+function getSizes(theme) {
+  const gigaSize = `(min-width: ${theme.breakpoints.giga}px) 555px`;
+  const megaSize = `(min-width: ${theme.breakpoints.mega}px) 455px`;
+  const mobileSize = '100vw';
+
+  return [gigaSize, megaSize, mobileSize].join(', ');
+}
+
 const articleStyles = ({ theme }) => css`
   margin-top: ${theme.spacings.giga};
 
@@ -25,8 +33,9 @@ const titleStyles = ({ theme }) => css`
 
 const Title = styled(Heading)(titleStyles);
 
-function PreviewLarge({ slug, image, title, skills }) {
+function PreviewLarge({ slug, image, title, skills, theme }) {
   const { src, srcSet, alt } = image;
+  const sizes = getSizes(theme);
   /* eslint-disable jsx-a11y/anchor-is-valid */
   return (
     <Article>
@@ -36,6 +45,7 @@ function PreviewLarge({ slug, image, title, skills }) {
             <CoverImage
               src={src}
               srcSet={srcSet}
+              sizes={sizes}
               alt={alt}
               aspectRatio={500 / 500}
             />
@@ -61,7 +71,8 @@ PreviewLarge.propTypes = {
     src: PropTypes.string,
     srcSet: PropTypes.string,
     alt: PropTypes.string
-  })
+  }),
+  theme: PropTypes.object
 };
 
 PreviewLarge.defaultProps = {

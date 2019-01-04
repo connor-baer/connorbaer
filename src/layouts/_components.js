@@ -1,38 +1,45 @@
 import React from 'react';
+import styled, { css } from 'react-emotion';
 import { Heading, Text, Hr, List } from '@sumup/circuit-ui';
 
 import Anchor from '../components/Anchor';
 import Blockquote from '../components/blog/Blockquote';
 import Image from '../components/images/Image';
 
+const headingStyles = ({ theme }) => css`
+  margin-top: ${theme.spacings.exa};
+`;
+
+const StyledHeading = styled(Heading)(headingStyles);
+
 export const HeadingOne = ({ children, ...rest }) => (
-  <Heading element="h2" size={Heading.EXA} {...rest}>
+  <StyledHeading element="h2" size={Heading.EXA} {...rest}>
     {children}
-  </Heading>
+  </StyledHeading>
 );
 
 export const HeadingTwo = ({ children, ...rest }) => (
-  <Heading element="h3" size={Heading.PETA} {...rest}>
+  <StyledHeading element="h3" size={Heading.PETA} {...rest}>
     {children}
-  </Heading>
+  </StyledHeading>
 );
 
 export const HeadingThree = ({ children, ...rest }) => (
-  <Heading element="h4" size={Heading.TERA} {...rest}>
+  <StyledHeading element="h4" size={Heading.TERA} {...rest}>
     {children}
-  </Heading>
+  </StyledHeading>
 );
 
 export const HeadingFour = ({ children, ...rest }) => (
-  <Heading element="h5" size={Heading.GIGA} {...rest}>
+  <StyledHeading element="h5" size={Heading.GIGA} {...rest}>
     {children}
-  </Heading>
+  </StyledHeading>
 );
 
 export const HeadingFive = ({ children, ...rest }) => (
-  <Heading element="h6" size={Heading.GIGA} {...rest}>
+  <StyledHeading element="h6" size={Heading.GIGA} {...rest}>
     {children}
-  </Heading>
+  </StyledHeading>
 );
 
 export const Paragraph = ({ children, ...rest }) => (

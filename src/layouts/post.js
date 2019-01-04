@@ -18,8 +18,8 @@ import ParallaxImage from '../components/images/ParallaxImage';
 
 import CONFIG from '../config';
 import { BLOG_PATH } from '../constants/paths';
-import * as CATEGORIES from '../constants/categories';
 import { THEMES } from '../constants';
+import * as CATEGORIES from '../constants/categories';
 
 const styledParagraphStyles = ({ theme }) => css`
   font-family: ${theme.fontStack.serif};

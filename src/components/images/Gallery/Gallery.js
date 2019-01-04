@@ -8,6 +8,28 @@ import Align from '../../layout/Align';
 import RatioImage from '../RatioImage';
 import Caption from '../Caption';
 
+function getSizes(theme, align) {
+  const gigaMap = {
+    [ALIGNMENTS.RIGHT]: '360px',
+    [ALIGNMENTS.LEFT]: '360px',
+    [ALIGNMENTS.CENTER]: '755px',
+    [ALIGNMENTS.FULL]: '1155px'
+  };
+  const gigaSize = `(min-width: ${theme.breakpoints.giga}px) ${gigaMap[align]}`;
+
+  const megaMap = {
+    [ALIGNMENTS.RIGHT]: '380px',
+    [ALIGNMENTS.LEFT]: '380px',
+    [ALIGNMENTS.CENTER]: '790px',
+    [ALIGNMENTS.FULL]: '950px'
+  };
+  const megaSize = `(min-width: ${theme.breakpoints.mega}px) ${megaMap[align]}`;
+
+  const mobileSize = '100vw';
+
+  return [gigaSize, megaSize, mobileSize].join(', ');
+}
+
 const containerStyles = () => css`
   display: flex;
   flex-wrap: wrap;
@@ -44,10 +66,12 @@ const multipleStyles = ({ theme, numberOfImages, align }) => {
 
 const ImageWrapper = styled('div')(singleStyles, multipleStyles);
 
-function Gallery({ caption, align, images }) {
+function Gallery({ caption, align, images, theme }) {
   if (isEmpty(images)) {
     return null;
   }
+
+  const sizes = getSizes(theme, align);
 
   return (
     <Align align={align}>
@@ -57,6 +81,7 @@ function Gallery({ caption, align, images }) {
             <RatioImage
               src={src}
               srcSet={srcSet}
+              sizes={sizes}
               alt={alt}
               aspectRatio={1 / 1}
             />
@@ -83,7 +108,8 @@ Gallery.propTypes = {
       srcSet: PropTypes.string,
       alt: PropTypes.string
     })
-  )
+  ),
+  theme: PropTypes.object
 };
 
 Gallery.defaultProps = {

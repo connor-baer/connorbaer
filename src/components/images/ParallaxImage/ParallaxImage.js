@@ -169,6 +169,7 @@ export default class ParallaxImage extends Component {
         <StyledImage
           src={src}
           srcSet={srcSet}
+          sizes="100vw"
           alt={alt}
           style={{ transform: `translate3d(0, ${translateY}%, 0)` }}
         />

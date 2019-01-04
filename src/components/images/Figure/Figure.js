@@ -7,16 +7,40 @@ import Align from '../../layout/Align';
 import Image from '../Image';
 import Caption from '../Caption';
 
-function Figure({ caption, align, image }) {
+function getSizes(theme, align) {
+  const gigaMap = {
+    [ALIGNMENTS.RIGHT]: '360px',
+    [ALIGNMENTS.LEFT]: '360px',
+    [ALIGNMENTS.CENTER]: '755px',
+    [ALIGNMENTS.FULL]: '1155px'
+  };
+  const gigaSize = `(min-width: ${theme.breakpoints.giga}px) ${gigaMap[align]}`;
+
+  const megaMap = {
+    [ALIGNMENTS.RIGHT]: '380px',
+    [ALIGNMENTS.LEFT]: '380px',
+    [ALIGNMENTS.CENTER]: '790px',
+    [ALIGNMENTS.FULL]: '950px'
+  };
+  const megaSize = `(min-width: ${theme.breakpoints.mega}px) ${megaMap[align]}`;
+
+  const mobileSize = '100vw';
+
+  return [gigaSize, megaSize, mobileSize].join(', ');
+}
+
+function Figure({ caption, align, image, theme }) {
   const { src, srcSet, alt } = image;
 
   if (!src) {
     return null;
   }
 
+  const sizes = getSizes(theme, align);
+
   return (
     <Align align={align}>
-      <Image src={src} srcSet={srcSet} alt={alt} />
+      <Image src={src} srcSet={srcSet} sizes={sizes} alt={alt} />
       {caption && <Caption>{caption}</Caption>}
     </Align>
   );
@@ -34,7 +58,8 @@ Figure.propTypes = {
     src: PropTypes.string,
     srcSet: PropTypes.string,
     alt: PropTypes.string
-  })
+  }),
+  theme: PropTypes.object
 };
 
 Figure.defaultProps = {

@@ -11,6 +11,14 @@ import Link from '../../Link';
 import CoverImage from '../../images/CoverImage';
 import PostMeta from '../PostMeta';
 
+function getSizes(theme) {
+  const gigaSize = `(min-width: ${theme.breakpoints.giga}px) 755px`;
+  const megaSize = `(min-width: ${theme.breakpoints.mega}px) 620px`;
+  const mobileSize = '100vw';
+
+  return [gigaSize, megaSize, mobileSize].join(', ');
+}
+
 const articleStyles = ({ theme }) => css`
   margin-top: ${theme.spacings.tera};
   margin-bottom: ${theme.spacings.zetta};
@@ -44,9 +52,11 @@ function PreviewLarge({
   description,
   date,
   category,
-  featured
+  featured,
+  theme
 }) {
   const { src, srcSet, alt } = image;
+  const sizes = getSizes(theme);
   /* eslint-disable jsx-a11y/anchor-is-valid */
   return (
     <Article>
@@ -56,6 +66,7 @@ function PreviewLarge({
             <CoverImage
               src={src}
               srcSet={srcSet}
+              sizes={sizes}
               alt={alt}
               aspectRatio={350 / 150}
             />
@@ -87,7 +98,8 @@ PreviewLarge.propTypes = {
     src: PropTypes.string,
     srcSet: PropTypes.string,
     alt: PropTypes.string
-  })
+  }),
+  theme: PropTypes.object
 };
 
 PreviewLarge.defaultProps = {

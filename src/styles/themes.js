@@ -290,6 +290,7 @@ export function standard({ darkmode, baseSpacing, reducedMotion }) {
     fontWeight,
     typography,
     borderRadius,
+    breakpoints,
     colors: createColors(darkmode),
     animations: createAnimations(reducedMotion),
     spacings: createSpacings(baseSpacing),
