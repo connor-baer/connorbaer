@@ -8,7 +8,7 @@ const statAsync = promisify(fs.stat);
 
 const EXTENSIONS = ['js', 'jsx', 'mdx', 'md'];
 const EXTENSIONS_REGEXP = new RegExp(`.(${EXTENSIONS.join('|')})$`);
-const ROOT_DIR = path.resolve(__dirname, '../../src');
+const ROOT_DIR = path.resolve(__dirname, '../src');
 const PAGES_DIR = `${ROOT_DIR}/pages`;
 const SOURCE = `${PAGES_DIR}/**/!(_*).@(${EXTENSIONS.join('|')})`;
 
