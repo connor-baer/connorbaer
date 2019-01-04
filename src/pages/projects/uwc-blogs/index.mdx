@@ -11,7 +11,7 @@ export const meta = {
   image: {
     ...require('./uwc-blogs.jpg?resize&sizes[]=400&sizes[]=800&sizes[]=1200&sizes[]=2400'),
     colors: require('./uwc-blogs.jpg?lqip-colors'),
-    alt: 'A zebra stands on dry grass and looks straight into the camera.'
+    alt: 'Screenshot of uwcblogs.com'
   },
   client: 'Side Project',
   skills: ['Design', 'Development']
@@ -23,9 +23,8 @@ export default ({ children }) => <Project {...meta}>{children}</Project>
   image={{
     ...require(`./desktop-mobile.jpg?resize&sizes[]=400&sizes[]=800&sizes[]=1200&sizes[]=2400`),
     colors: require(`./desktop-mobile.jpg?lqip-colors`),
-    alt: 'A young black child looks up from the painting she is drawing.'
+    alt: 'Mockups of the mobile and desktop version of uwcblogs.com'
   }}
-  caption=""
   align={Figure.FULL}
 />
 
