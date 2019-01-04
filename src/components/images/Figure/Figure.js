@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { values } from 'lodash/fp';
+import { values, omit } from 'lodash/fp';
 
+import { imagePropType, captionPropType } from '../../../utils/prop-types';
 import { ALIGNMENTS } from '../../../constants';
 import Align from '../../layout/Align';
 import Image from '../Image';
@@ -30,9 +31,7 @@ function getSizes(theme, align) {
 }
 
 function Figure({ caption, align, image, theme }) {
-  const { src, srcSet, alt } = image;
-
-  if (!src) {
+  if (!image.src) {
     return null;
   }
 
@@ -40,7 +39,7 @@ function Figure({ caption, align, image, theme }) {
 
   return (
     <Align align={align}>
-      <Image src={src} srcSet={srcSet} sizes={sizes} alt={alt} />
+      <Image {...omit('toString', image)} sizes={sizes} />
       {caption && <Caption>{caption}</Caption>}
     </Align>
   );
@@ -52,13 +51,9 @@ Figure.CENTER = ALIGNMENTS.CENTER;
 Figure.FULL = ALIGNMENTS.FULL;
 
 Figure.propTypes = {
-  caption: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  caption: captionPropType,
   align: PropTypes.oneOf(values(ALIGNMENTS)),
-  image: PropTypes.shape({
-    src: PropTypes.string,
-    srcSet: PropTypes.string,
-    alt: PropTypes.string
-  }),
+  image: PropTypes.shape(imagePropType),
   theme: PropTypes.object
 };
 

@@ -1,8 +1,10 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'react-emotion';
-
+import { omit } from 'lodash/fp';
 import { sharedPropTypes } from '@sumup/circuit-ui';
+
+import { imagePropType } from '../../../utils/prop-types';
 import isServer from '../../../utils/is-server';
 import Image from '../Image';
 
@@ -42,12 +44,10 @@ const StyledImage = styled(Image)(imageStyles);
 
 export default class ParallaxImage extends Component {
   static propTypes = {
+    image: PropTypes.shape(imagePropType),
     speed: PropTypes.number,
     theme: sharedPropTypes.themePropType,
-    className: PropTypes.string,
-    src: PropTypes.string,
-    srcSet: PropTypes.string,
-    alt: PropTypes.string
+    className: PropTypes.string
   };
 
   static defaultProps = {
@@ -157,20 +157,18 @@ export default class ParallaxImage extends Component {
   };
 
   render() {
-    const { className, src, srcSet, alt } = this.props;
+    const { className, image } = this.props;
     const { translateY } = this.state;
 
-    if (!src) {
+    if (!image.src) {
       return null;
     }
 
     return (
       <Container innerRef={this.containerRef} className={className}>
         <StyledImage
-          src={src}
-          srcSet={srcSet}
+          {...omit('toString', image)}
           sizes="100vw"
-          alt={alt}
           style={{ transform: `translate3d(0, ${translateY}%, 0)` }}
         />
       </Container>

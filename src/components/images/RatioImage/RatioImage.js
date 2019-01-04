@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'react-emotion';
+
+import { imagePropType } from '../../../utils/prop-types';
 import Image from '../Image';
 
 const wrapperBaseStyles = () => css`
@@ -52,9 +54,7 @@ function RatioImage({ aspectRatio, className, ...props }) {
 }
 
 RatioImage.propTypes = {
-  src: PropTypes.string.isRequired,
-  srcSet: PropTypes.string.isRequired,
-  alt: PropTypes.string.isRequired,
+  ...imagePropType,
   aspectRatio: PropTypes.number,
   className: PropTypes.string
 };

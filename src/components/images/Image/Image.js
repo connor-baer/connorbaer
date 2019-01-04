@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import styled, { css } from 'react-emotion';
 
+import { imagePropType } from '../../../utils/prop-types';
+
 function isTransparent(src) {
   return src.includes('.png');
 }
@@ -12,30 +14,18 @@ const baseStyles = () => css`
   color: transparent;
 `;
 
-const backgroundStyles = ({ theme, src }) =>
+const placeholderStyles = ({ theme, colors, src }) =>
   !isTransparent(src) &&
   css`
-    background-color: ${theme.colors.n300};
+    background: ${colors ? colors[0] : theme.colors.n300};
   `;
 
-const placeholderStyles = ({ colors, src }) =>
-  !isTransparent(src) &&
-  colors &&
-  css`
-    color: ${colors[0]};
-    background-color: ${colors[0]};
-  `;
-
-const Image = styled('img')(baseStyles, backgroundStyles, placeholderStyles);
+const Image = styled('img')(baseStyles, placeholderStyles);
 
 Image.propTypes = {
-  src: PropTypes.string.isRequired,
-  srcSet: PropTypes.string,
-  colors: PropTypes.arrayOf(PropTypes.string),
-  alt: PropTypes.string.isRequired
+  ...imagePropType,
+  sizes: PropTypes.string
 };
-
-Image.defaultProps = {};
 
 /**
  * @component

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'react-emotion';
-import { values } from 'lodash/fp';
+import { values, omit } from 'lodash/fp';
 import { Heading, Text } from '@sumup/circuit-ui';
 
 import { BLOG_PATH } from '../../../constants/paths';
@@ -55,19 +55,16 @@ function PreviewLarge({
   featured,
   theme
 }) {
-  const { src, srcSet, alt } = image;
   const sizes = getSizes(theme);
   /* eslint-disable jsx-a11y/anchor-is-valid */
   return (
     <Article>
       <Link href={`${BLOG_PATH}/${slug}`} prefetch>
         <a>
-          {featured && src && (
+          {featured && image.src && (
             <CoverImage
-              src={src}
-              srcSet={srcSet}
+              {...omit('toString', image)}
               sizes={sizes}
-              alt={alt}
               aspectRatio={350 / 150}
             />
           )}
@@ -97,6 +94,7 @@ PreviewLarge.propTypes = {
   image: PropTypes.shape({
     src: PropTypes.string,
     srcSet: PropTypes.string,
+    colors: PropTypes.array,
     alt: PropTypes.string
   }),
   theme: PropTypes.object

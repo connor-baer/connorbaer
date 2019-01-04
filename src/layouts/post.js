@@ -20,6 +20,7 @@ import CONFIG from '../config';
 import { BLOG_PATH } from '../constants/paths';
 import { THEMES } from '../constants';
 import * as CATEGORIES from '../constants/categories';
+import { imagePropType } from '../utils/prop-types';
 
 const styledParagraphStyles = ({ theme }) => css`
   font-family: ${theme.fontStack.serif};
@@ -41,6 +42,7 @@ class Post extends Component {
     description: PropTypes.string,
     slug: PropTypes.string,
     date: PropTypes.string,
+    image: PropTypes.shape(imagePropType),
     category: PropTypes.oneOf(values(CATEGORIES)),
     children: sharedPropTypes.childrenPropType,
     theme: sharedPropTypes.themePropType
@@ -70,7 +72,7 @@ class Post extends Component {
         <Navigation />
         <Main>
           <article>
-            <ParallaxImage {...image} />
+            <ParallaxImage image={image} />
             <Grid>
               <Row>
                 <Col

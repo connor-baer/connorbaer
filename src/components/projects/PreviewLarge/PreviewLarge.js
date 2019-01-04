@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'react-emotion';
+import { omit } from 'lodash/fp';
 import { Heading } from '@sumup/circuit-ui';
 
 import { PROJECTS_PATH } from '../../../constants/paths';
@@ -34,19 +35,16 @@ const titleStyles = ({ theme }) => css`
 const Title = styled(Heading)(titleStyles);
 
 function PreviewLarge({ slug, image, title, skills, theme }) {
-  const { src, srcSet, alt } = image;
   const sizes = getSizes(theme);
   /* eslint-disable jsx-a11y/anchor-is-valid */
   return (
     <Article>
       <Link href={`${PROJECTS_PATH}/${slug}`} prefetch>
         <a>
-          {src && (
+          {image.src && (
             <CoverImage
-              src={src}
-              srcSet={srcSet}
+              {...omit('toString', image)}
               sizes={sizes}
-              alt={alt}
               aspectRatio={500 / 500}
             />
           )}
@@ -70,6 +68,7 @@ PreviewLarge.propTypes = {
   image: PropTypes.shape({
     src: PropTypes.string,
     srcSet: PropTypes.string,
+    colors: PropTypes.array,
     alt: PropTypes.string
   }),
   theme: PropTypes.object

@@ -7,6 +7,7 @@ import { Grid, Row, Col, sharedPropTypes } from '@sumup/circuit-ui';
 import CONFIG from '../config';
 import { PROJECTS_PATH } from '../constants/paths';
 import * as CATEGORIES from '../constants/categories';
+import { imagePropType } from '../utils/prop-types';
 import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
 import Main from '../components/Main';
@@ -80,6 +81,7 @@ Project.propTypes = {
   subtitle: PropTypes.string,
   slug: PropTypes.string,
   date: PropTypes.string,
+  image: PropTypes.shape(imagePropType),
   category: PropTypes.oneOf(values(CATEGORIES)),
   children: sharedPropTypes.childrenPropType,
   theme: sharedPropTypes.themePropType

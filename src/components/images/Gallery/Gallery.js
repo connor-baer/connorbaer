@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'react-emotion';
-import { values, isEmpty } from 'lodash/fp';
+import { values, isEmpty, omit } from 'lodash/fp';
 
+import { imagePropType, captionPropType } from '../../../utils/prop-types';
 import { ALIGNMENTS } from '../../../constants';
 import Align from '../../layout/Align';
 import RatioImage from '../RatioImage';
@@ -76,13 +77,11 @@ function Gallery({ caption, align, images, theme }) {
   return (
     <Align align={align}>
       <ImagesContainer>
-        {images.map(({ src, srcSet, alt }, i) => (
+        {images.map((image, i) => (
           <ImageWrapper key={i} align={align} numberOfImages={images.length}>
             <RatioImage
-              src={src}
-              srcSet={srcSet}
+              {...omit('toString', image)}
               sizes={sizes}
-              alt={alt}
               aspectRatio={1 / 1}
             />
           </ImageWrapper>
@@ -99,16 +98,9 @@ Gallery.CENTER = ALIGNMENTS.CENTER;
 Gallery.FULL = ALIGNMENTS.FULL;
 
 Gallery.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  caption: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  caption: captionPropType,
   align: PropTypes.oneOf(values(ALIGNMENTS)),
-  images: PropTypes.arrayOf(
-    PropTypes.shape({
-      src: PropTypes.string,
-      srcSet: PropTypes.string,
-      alt: PropTypes.string
-    })
-  ),
+  images: PropTypes.arrayOf(PropTypes.shape(imagePropType)),
   theme: PropTypes.object
 };
 
