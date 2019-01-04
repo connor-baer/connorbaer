@@ -2,7 +2,7 @@ import React from 'react';
 import App, { Container } from 'next/app';
 import Head from 'next/head';
 import Router from 'next/router';
-import { get, values } from 'lodash/fp';
+import { values } from 'lodash/fp';
 import NProgress from 'nprogress';
 import styled, { css, hydrate } from 'react-emotion';
 import { ThemeProvider } from 'emotion-theming';
@@ -53,7 +53,7 @@ export default class CustomApp extends App {
   constructor(props) {
     super(props);
 
-    const cookies = get(['pageProps', 'cookies'], props) || {};
+    const { cookies = {} } = props;
     const section = this.props.router.pathname.split('/')[1];
     const themeId = themeIdsMap[section] || themeIdsMap.standard;
     const darkmode = cookies.darkmode === 'true';
@@ -87,30 +87,37 @@ export default class CustomApp extends App {
     }
 
     this.motionQuery = window.matchMedia('(prefers-reduced-motion)');
-    this.motionQuery.addListener(this.handleReducedMotionChanged);
+    this.motionQuery.addListener(this.handleReducedMotionChange);
 
     if (this.motionQuery.matches) {
+      setCookie('reducedMotion', true);
       this.setState({ reducedMotion: true });
     }
 
     this.colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    this.colorSchemeQuery.addListener(this.handleColorSchemeChanged);
+    this.colorSchemeQuery.addListener(this.handleColorSchemeChange);
 
     if (this.colorSchemeQuery.matches) {
+      setCookie('darkmode', true);
       this.setState({ darkmode: true });
     }
   }
 
   componentWillUnmount() {
-    this.motionQuery.removeListener(this.handleReducedMotionChanged);
+    this.motionQuery.removeListener(this.handleReducedMotionChange);
+    this.colorSchemeQuery.removeListener(this.handleColorSchemeChange);
   }
 
-  handleReducedMotionChanged = () => {
-    this.setState({ reducedMotion: this.motionQuery.matches });
+  handleReducedMotionChange = () => {
+    const reducedMotion = this.motionQuery.matches;
+    setCookie('reducedMotion', reducedMotion);
+    this.animateStateChange({ reducedMotion });
   };
 
-  handleColorSchemeChanged = () => {
-    this.setState({ darkmode: this.colorSchemeQuery.matches });
+  handleColorSchemeChange = () => {
+    const darkmode = this.colorSchemeQuery.matches;
+    setCookie('darkmode', darkmode);
+    this.animateStateChange({ darkmode });
   };
 
   getTheme = ({ themeId, darkmode, reducedMotion }) =>
