@@ -12,7 +12,7 @@ import Prefooter from '../components/Prefooter';
 import Footer from '../components/Footer';
 import PreviewSmall from '../components/blog/PreviewSmall';
 
-function Page() {
+export default function Page() {
   const title = 'Hello, I’m Connor.';
   // eslint-disable-next-line max-len
   const subtitle =
@@ -46,5 +46,3 @@ function Page() {
     </>
   );
 }
-
-export default Page;
