@@ -1,0 +1,15 @@
+{
+  "name": "connor",
+  "alias": "connorbaer.co",
+  "version": 1,
+  "scale": {
+    "bru": {
+      "min": 1,
+      "max": "auto"
+    },
+    "sfo1": {
+      "min": 1,
+      "max": "auto"
+    }
+  }
+}

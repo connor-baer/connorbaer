@@ -1,7 +1,0 @@
-# Don't allow web crawlers to index Craft CMS
-User-agent: *
-Disallow: /craft/
-Disallow: /home
-Disallow: /offline
-Disallow: /404
-Disallow: /503

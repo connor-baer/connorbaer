@@ -1,0 +1,28 @@
+import Article from '../../layouts/article'
+import Figure from '../../components/images/Figure'
+
+export const meta = {
+  title: 'I am Connor.',
+  subtitle: 'Nice to meet you. 👋'
+}
+
+export default ({ children }) => <Article {...meta}>{children}</Article>
+
+<Figure
+  image={{
+    ...require(`./connor.jpg?resize&sizes[]=400&sizes[]=800&sizes[]=1200&sizes[]=2400`),
+    colors: require(`./connor.jpg?lqip-colors`),
+    alt: 'Connor flashes a big smile at the camera.'
+  }}
+  align={Figure.FULL}
+/>
+
+When I was growing up, all I wanted to be was a wizard. I eventually realised that wasn’t an option, but coding comes close. Developers are like wizards: we transform and delight the world purely through words.
+
+Hi, my name is Connor. I am web developer with a strong background in design, born in Germany and currently living in Berlin.
+
+My roots lie in the field of design, however I ultimately found my passion in programming. I was tired of having ideas and not being able to execute them myself. I had that creative itch that I couldn’t quite scratch. So after school I taught myself coding.
+
+And it captivated me. I built a solid foundation in front-end development and eventually turned coding into my profession. After a year of freelancing in 2016, I am now part of the amazing frontend team at [SumUp](https://sumup.com). The approach I take to my work is fun, fearless, and always forward-looking.
+
+My goal is to make technology more human. Technology should serve and delight its users without getting in the way. I always optimise for accessibility, usability, and performance to craft intuitive digital experiences for everyone.

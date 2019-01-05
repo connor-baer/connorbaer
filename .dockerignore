@@ -1,0 +1,10 @@
+*
+!server
+!src
+!scripts
+!next.config.js
+!package.json
+!yarn.lock
+src/.next
+src/static/sitemap.xml
+src/static/images

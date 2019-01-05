@@ -1,0 +1,33 @@
+import Project from '../../../layouts/project'
+import Figure from '../../../components/images/Figure'
+
+export const meta = {
+  title: 'UWC Blogs',
+  subtitle:
+    'A collection of 400+ blogs written by UWC students in 28 languages from 77 countries at the 17 United World Colleges.',
+  brief:
+    'I use UWC Blogs as a playground to experiment with new technologies. The latest iteration is built with VueJS and loads in 0.6 seconds or less.',
+  slug: 'uwc-blogs',
+  image: {
+    ...require('./uwc-blogs.jpg?resize&sizes[]=400&sizes[]=800&sizes[]=1200&sizes[]=2400'),
+    colors: require('./uwc-blogs.jpg?lqip-colors'),
+    alt: 'Screenshot of uwcblogs.com'
+  },
+  client: 'Side Project',
+  skills: ['Design', 'Development']
+}
+
+export default ({ children }) => <Project {...meta}>{children}</Project>
+
+<Figure
+  image={{
+    ...require(`./desktop-mobile.jpg?resize&sizes[]=400&sizes[]=800&sizes[]=1200&sizes[]=2400`),
+    colors: require(`./desktop-mobile.jpg?lqip-colors`),
+    alt: 'Mockups of the mobile and desktop version of uwcblogs.com'
+  }}
+  align={Figure.FULL}
+/>
+
+When I started [UWC Blogs](https://uwcblogs.com/) in 2013, my intention was to give UWC applicants a glimpse into life at UWC. At the time I was waiting impatiently to start my own UWC experience at [UWC Waterford Kamhlaba](https://uwcblogs.com/#waterford-kamhlaba-uwc). I had soaked up every bit of UWC promotional material, but I still couldn’t quite imagine what UWC would be like. So I read through every blog about UWC I could find and eventually created UWC Blogs to share the blogs with other UWC hopefuls.
+
+Now UWC Blogs has grown to include over 400 blogs. That’s a lot of content!

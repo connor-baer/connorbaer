@@ -1,0 +1,4 @@
+node_modules/*
+graveyard/*
+**/.next/*
+**/out/*

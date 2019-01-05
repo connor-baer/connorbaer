@@ -1,0 +1,38 @@
+{
+  "name": "connor-static",
+  "alias": "static.connorbaer.co",
+  "version": 1,
+  "scale": {
+    "bru": {
+      "min": 1,
+      "max": "auto"
+    },
+    "sfo": {
+      "min": 1,
+      "max": "auto"
+    }
+  },
+  "static": {
+    "directoryListing": false,
+    "headers": [
+      {
+        "source": "**/*.@(webp|jpg|jpeg|png|gif)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=31557600"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(woff|woff2)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=31557600"
+          }
+        ]
+      }
+    ]
+  }
+}

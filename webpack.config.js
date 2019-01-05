@@ -1,51 +1,81 @@
-/**
- * WEBPACK CONFIGURATION
- */
+const path = require('path');
+const webpack = require('webpack');
+const nodeExternals = require('webpack-node-externals');
+const NodemonPlugin = require('nodemon-webpack-plugin');
 
-
- const pkg = require( './package.json' ), // Allows access to the project metadata from the package.json file.
-  webpack = require( 'webpack' ),
-  path = require( 'path' ),
-  src = pkg.config.src, // The raw material of the theme: custom scripts, SCSS source files, images, etc.; do not delete this folder!
-  root = pkg.config.root, // The webroot directory that will be accessible on your server.
-  dev = pkg.config.dev, // A folder for your assets in development.
-  dist = pkg.config.dist, // A folder for your assets in production.
-  tmplts = pkg.config.tmplts, // The CraftCMS template folder.
-  modules = pkg.config.modules // NPM packages.
-;
-
-
-module.exports = {
-
-  devtool: 'inline-source-map',
-  entry: {
-    single: src + 'js/single.js',
-    collection: src + 'js/collection.js'
+const config = {
+  target: 'node',
+  optimization: {
+    nodeEnv: false
   },
+  node: {
+    __dirname: false,
+    __filename: false
+  },
+  entry: './server/app.js',
   output: {
-    path: path.resolve( dev + 'js/' ),
-    filename: '[name].min.js',
-    publicPath: '/dist/js/'
+    path: path.join(__dirname, 'dist'),
+    filename: 'app.js'
   },
-  plugins: [
-    new webpack.DefinePlugin({ // <-- key to reducing React's size
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin(), // Minify everything
-    new webpack.optimize.AggressiveMergingPlugin() // Merge chunks
-  ],
+  externals: [nodeExternals()],
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        query: {
-          presets: [ 'react', 'es2015' ]
+        test: /\.js?$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [['latest-node', { target: '10', modules: false }]]
+          }
         }
       }
     ]
+  },
+  plugins: [
+    new webpack.BannerPlugin({
+      banner: 'require("source-map-support").install();',
+      raw: true,
+      entryOnly: false
+    })
+  ],
+  devtool: 'sourcemap'
+};
+
+module.exports = env => {
+  config.plugins.push(
+    new webpack.DefinePlugin({
+      __DEV__: JSON.stringify(env !== 'production'),
+      __PRODUCTION__: JSON.stringify(env === 'production'),
+      __TEST__: false
+    })
+  );
+
+  if (env === 'develop') {
+    config.mode = 'development';
+    config.watch = true;
+    config.plugins.push(
+      new NodemonPlugin({
+        nodeArgs: ['--inspect']
+      })
+    );
   }
+
+  if (env === 'production') {
+    config.mode = 'production';
+    config.watch = false;
+  }
+
+  if (process.env.ANALYZE) {
+    // eslint-disable-next-line global-require
+    const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+    config.plugins.push(
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'server',
+        analyzerPort: 8889,
+        openAnalyzer: true
+      })
+    );
+  }
+
+  return config;
 };

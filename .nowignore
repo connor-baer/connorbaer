@@ -1,0 +1,9 @@
+README.md
+prettier.config.js
+lint-staged.config.js
+plopfile.js
+.huskyrc.js
+.eslintrc.js
+jest.*
+src/.next
+src/static
