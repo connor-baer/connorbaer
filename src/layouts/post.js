@@ -28,6 +28,24 @@ const styledParagraphStyles = ({ theme }) => css`
 
 const StyledParagraph = styled(Paragraph)(styledParagraphStyles);
 
+const styledParallaxImageStyles = ({ theme }) => css`
+  height: 180px;
+
+  ${theme.mq.kilo`
+    height: 240px;
+  `};
+
+  ${theme.mq.mega`
+    height: 300px;
+  `};
+
+  ${theme.mq.tera`
+    height: 360px;
+  `};
+`;
+
+const StyledParallaxImage = styled(ParallaxImage)(styledParallaxImageStyles);
+
 const postHeaderStyles = ({ theme }) => css`
   display: block;
   margin-top: ${theme.spacings.zetta};
@@ -72,7 +90,7 @@ class Post extends Component {
         <Navigation />
         <Main>
           <article>
-            <ParallaxImage image={image} />
+            <StyledParallaxImage image={image} />
             <Grid>
               <Row>
                 <Col
