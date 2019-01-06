@@ -8,23 +8,11 @@ import { imagePropType } from '../../../utils/prop-types';
 import isServer from '../../../utils/is-server';
 import Image from '../Image';
 
-const containerStyles = ({ theme }) => css`
+const containerStyles = () => css`
   position: relative;
-  width: 100vw;
-  height: 180px;
   overflow: hidden;
-
-  ${theme.mq.kilo`
-    height: 240px;
-  `};
-
-  ${theme.mq.mega`
-    height: 300px;
-  `};
-
-  ${theme.mq.tera`
-    height: 360px;
-  `};
+  width: 100%;
+  height: 25vh;
 `;
 
 const Container = styled('div')(containerStyles);
