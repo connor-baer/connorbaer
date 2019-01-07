@@ -2,7 +2,7 @@ import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 import { extractCritical } from 'emotion-server';
 
-import { LANG } from '../constants';
+import { LANG, GA_TOKEN } from '../constants';
 import { FAVICONS_PATH, STATIC_URL } from '../constants/paths';
 
 export default class CustomDocument extends Document {
@@ -25,6 +25,7 @@ export default class CustomDocument extends Document {
   }
 
   render() {
+    /* eslint-disable max-len */
     return (
       <html lang={LANG}>
         <Head>
@@ -86,6 +87,15 @@ export default class CustomDocument extends Document {
             href={`${FAVICONS_PATH}/apple-touch-icon-180x180.png`}
           />
           <style dangerouslySetInnerHTML={{ __html: this.props.css }} />
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_TOKEN}`}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', '${GA_TOKEN}');`
+            }}
+          />
         </Head>
         <body>
           <Main />
@@ -93,5 +103,6 @@ export default class CustomDocument extends Document {
         </body>
       </html>
     );
+    /* eslint-enable max-len */
   }
 }
