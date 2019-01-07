@@ -63,8 +63,11 @@ server.get('/robots.txt', (req, res) => {
   return res.send('User-agent: * \nDisallow:');
 });
 
-// API
-// server.get('/api/v1/posts', (req, res) => res.json({ data: posts }));
+// Redirects
+server.get('/work', (req, res) => res.redirect(301, '/projects'));
+server.get('/work/:slug', (req, res) =>
+  res.redirect(301, `/projects/${req.params.slug}`)
+);
 
 // Global error handler
 // eslint-disable-next-line no-unused-vars
