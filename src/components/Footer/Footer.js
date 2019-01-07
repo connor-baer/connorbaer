@@ -76,8 +76,8 @@ function Footer({ siteName, siteTwitter }) {
             </Span>
           )}
           <Span>
-            <Link href="/legal">
-              <a>Legal</a>
+            <Link href="/disclaimer">
+              <a>Disclaimer</a>
             </Link>
           </Span>
         </Content>
