@@ -3,6 +3,7 @@ export const SITE_EMAIL = 'hello@connorbaer.co';
 export const SITE_TWITTER = 'connor_baer';
 
 export const LANG = 'en';
+export const GA_TOKEN = 'UA-37412525-7';
 
 export const NAV_LINKS = [
   { url: '/about', label: 'About' },
