@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Row, Col } from '@sumup/circuit-ui';
 import {
+  Anchor,
   Meta,
   Navigation,
   Main,
@@ -56,7 +57,9 @@ function Error({ statusCode }) {
         linkLabel={'Say hi!'}
         linkUrl={`https://twitter.com/${SITE_TWITTER}`}
       />
-      <Footer siteName={SITE_NAME} siteTwitter={SITE_TWITTER} />
+      <Footer siteName={SITE_NAME} siteTwitter={SITE_TWITTER}>
+        <Anchor href="/disclaimer">Disclaimer</Anchor>
+      </Footer>
     </>
   );
 }

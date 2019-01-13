@@ -8,7 +8,8 @@ import {
   Main,
   Header,
   Prefooter,
-  Footer
+  Footer,
+  Anchor
 } from '@madebyconnor/bamboo-ui';
 
 import components from './_components';
@@ -47,7 +48,9 @@ function Article({ children, title, subtitle, slug }) {
         linkLabel={'Say hi!'}
         linkUrl={`https://twitter.com/${SITE_TWITTER}`}
       />
-      <Footer siteName={SITE_NAME} siteTwitter={SITE_TWITTER} />
+      <Footer siteName={SITE_NAME} siteTwitter={SITE_TWITTER}>
+        <Anchor href="/disclaimer">Disclaimer</Anchor>
+      </Footer>
     </>
   );
 }

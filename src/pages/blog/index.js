@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { find, flow } from 'lodash/fp';
 import { Grid, Row, Col } from '@sumup/circuit-ui';
 import {
+  Anchor,
   Meta,
   Navigation,
   Main,
@@ -66,7 +67,9 @@ function Blog({ category: categorySlug }) {
         linkLabel={'Say hi!'}
         linkUrl={`https://twitter.com/${SITE_TWITTER}`}
       />
-      <Footer siteName={SITE_NAME} siteTwitter={SITE_TWITTER} />
+      <Footer siteName={SITE_NAME} siteTwitter={SITE_TWITTER}>
+        <Anchor href="/disclaimer">Disclaimer</Anchor>
+      </Footer>
     </>
   );
 }
