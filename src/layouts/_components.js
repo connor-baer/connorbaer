@@ -1,10 +1,9 @@
 import React from 'react';
 import styled, { css } from 'react-emotion';
 import { Heading, Text, Hr, List } from '@sumup/circuit-ui';
+import { Anchor, Image } from '@madebyconnor/bamboo-ui';
 
-import Anchor from '../components/Anchor';
 import Blockquote from '../components/blog/Blockquote';
-import Image from '../components/images/Image';
 
 const headingStyles = ({ theme }) => css`
   margin-top: ${theme.spacings.exa};

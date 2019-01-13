@@ -1,13 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Row, Col } from '@sumup/circuit-ui';
+import {
+  Meta,
+  Navigation,
+  Main,
+  Header,
+  Prefooter,
+  Footer
+} from '@madebyconnor/bamboo-ui';
 
-import Meta from '../components/Meta';
-import Navigation from '../components/Navigation';
-import Main from '../components/Main';
-import Header from '../components/Header';
-import Prefooter from '../components/Prefooter';
-import Footer from '../components/Footer';
+import { SITE_NAME, SITE_TWITTER, NAV_LINKS } from '../constants';
+import { BASE_URL } from '../constants/paths';
 
 const TITLE_MAP = {
   404: 'Page not found. 🕵',
@@ -28,8 +32,13 @@ function Error({ statusCode }) {
   const subtitle = SUBTITLE_MAP[statusCode];
   return (
     <>
-      <Meta title={title} description={subtitle} />
-      <Navigation />
+      <Meta
+        title={title}
+        description={subtitle}
+        siteName={SITE_NAME}
+        siteTwitter={SITE_TWITTER}
+      />
+      <Navigation siteName={SITE_NAME} siteUrl={BASE_URL} links={NAV_LINKS} />
       <Main>
         <Grid>
           <Row>
@@ -42,8 +51,12 @@ function Error({ statusCode }) {
           </Row>
         </Grid>
       </Main>
-      <Prefooter />
-      <Footer />
+      <Prefooter
+        text={'Let’s be friends.'}
+        linkLabel={'Say hi!'}
+        linkUrl={`https://twitter.com/${SITE_TWITTER}`}
+      />
+      <Footer siteName={SITE_NAME} siteTwitter={SITE_TWITTER} />
     </>
   );
 }

@@ -3,17 +3,19 @@ import PropTypes from 'prop-types';
 import { values } from 'lodash/fp';
 import { MDXProvider } from '@mdx-js/tag';
 import { Grid, Row, Col, sharedPropTypes } from '@sumup/circuit-ui';
+import {
+  Meta,
+  Navigation,
+  Main,
+  Header,
+  Prefooter,
+  Footer,
+  sharedPropTypes as bambooPropTypes
+} from '@madebyconnor/bamboo-ui';
 
-import CONFIG from '../config';
-import { PROJECTS_PATH } from '../constants/paths';
+import { PROJECTS_PATH, BASE_URL } from '../constants/paths';
+import { SITE_NAME, SITE_TWITTER, NAV_LINKS } from '../constants';
 import * as CATEGORIES from '../constants/categories';
-import { imagePropType } from '../utils/prop-types';
-import Meta from '../components/Meta';
-import Navigation from '../components/Navigation';
-import Main from '../components/Main';
-import Header from '../components/Header';
-import Prefooter from '../components/Prefooter';
-import Footer from '../components/Footer';
 import components from './_components';
 import IntroSection from '../components/projects/IntroSection';
 
@@ -27,33 +29,39 @@ function Project({
   skills,
   client
 }) {
-  const postPath = `${PROJECTS_PATH}/${slug}`;
-  const url = `${CONFIG.BASE_URL}${postPath}`;
+  const url = `${BASE_URL}/${PROJECTS_PATH}/${slug}`;
 
   return (
     <>
-      <Meta title={title} description={brief} url={url} image={image} />
-      <Navigation />
+      <Meta
+        title={title}
+        description={brief}
+        url={url}
+        image={image}
+        siteName={SITE_NAME}
+        siteTwitter={SITE_TWITTER}
+      />
+      <Navigation siteName={SITE_NAME} siteUrl={BASE_URL} links={NAV_LINKS} />
       <Main>
         <article>
           <Grid>
             <Row>
-              <Col span={{ default: 12, mega: 10, tera: 9 }}>
+              <Col span={{ default: 12, mega: 10, afterTera: 9 }}>
                 <Header title={title} subtitle={subtitle} />
               </Col>
             </Row>
             <Row>
-              <Col span={{ default: 12, tera: 6 }}>
+              <Col span={{ default: 12, afterTera: 6 }}>
                 <IntroSection title="Overview">{brief}</IntroSection>
               </Col>
-              <Col span={{ default: 12, mega: 6, tera: 3 }}>
+              <Col span={{ default: 12, mega: 6, afterTera: 3 }}>
                 <IntroSection title="Involvement">
                   {skills.map(skill => (
                     <p key={skill}>{skill}</p>
                   ))}
                 </IntroSection>
               </Col>
-              <Col span={{ default: 12, mega: 6, tera: 3 }}>
+              <Col span={{ default: 12, mega: 6, afterTera: 3 }}>
                 <IntroSection title="Client">{client}</IntroSection>
               </Col>
             </Row>
@@ -61,8 +69,8 @@ function Project({
           <Grid>
             <Row>
               <Col
-                span={{ default: 12, mega: 10, tera: 8 }}
-                skip={{ default: 0, mega: 1, tera: 2 }}
+                span={{ default: 12, mega: 10, afterTera: 8 }}
+                skip={{ default: 0, mega: 1, afterTera: 2 }}
               >
                 <MDXProvider components={components}>{children}</MDXProvider>
               </Col>
@@ -70,8 +78,12 @@ function Project({
           </Grid>
         </article>
       </Main>
-      <Prefooter />
-      <Footer />
+      <Prefooter
+        text={'Let’s be friends.'}
+        linkLabel={'Say hi!'}
+        linkUrl={`https://twitter.com/${SITE_TWITTER}`}
+      />
+      <Footer siteName={SITE_NAME} siteTwitter={SITE_TWITTER} />
     </>
   );
 }
@@ -81,7 +93,7 @@ Project.propTypes = {
   subtitle: PropTypes.string,
   slug: PropTypes.string,
   date: PropTypes.string,
-  image: PropTypes.shape(imagePropType),
+  image: PropTypes.shape(bambooPropTypes.imagePropType),
   category: PropTypes.oneOf(values(CATEGORIES)),
   children: sharedPropTypes.childrenPropType,
   theme: sharedPropTypes.themePropType

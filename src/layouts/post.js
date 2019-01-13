@@ -5,22 +5,23 @@ import { withTheme } from 'emotion-theming';
 import { values } from 'lodash/fp';
 import { MDXProvider } from '@mdx-js/tag';
 import { Grid, Row, Col, Heading, sharedPropTypes } from '@sumup/circuit-ui';
+import {
+  Meta,
+  Navigation,
+  Main,
+  Prefooter,
+  Footer,
+  Intro,
+  ParallaxImage,
+  sharedPropTypes as bambooPropTypes
+} from '@madebyconnor/bamboo-ui';
 
 import components, { Paragraph } from './_components';
-import Meta from '../components/Meta';
-import Navigation from '../components/Navigation';
-import Main from '../components/Main';
-import Prefooter from '../components/Prefooter';
-import Footer from '../components/Footer';
-import Intro from '../components/Intro';
 import PostMeta from '../components/blog/PostMeta';
-import ParallaxImage from '../components/images/ParallaxImage';
 
-import CONFIG from '../config';
-import { BLOG_PATH } from '../constants/paths';
-import { THEMES } from '../constants';
 import * as CATEGORIES from '../constants/categories';
-import { imagePropType } from '../utils/prop-types';
+import { SITE_NAME, SITE_TWITTER, NAV_LINKS } from '../constants';
+import { BLOG_PATH, BASE_URL } from '../constants/paths';
 
 const styledParagraphStyles = ({ theme }) => css`
   font-family: ${theme.fontStack.serif};
@@ -60,15 +61,15 @@ class Post extends Component {
     description: PropTypes.string,
     slug: PropTypes.string,
     date: PropTypes.string,
-    image: PropTypes.shape(imagePropType),
+    image: PropTypes.shape(bambooPropTypes.imagePropType),
     category: PropTypes.oneOf(values(CATEGORIES)),
     children: sharedPropTypes.childrenPropType,
-    theme: sharedPropTypes.themePropType
+    setTheme: PropTypes.func
   };
 
   constructor(props) {
     super(props);
-    props.theme.setTheme(THEMES.BLOG);
+    props.theme.setTheme('blog');
   }
 
   render() {
@@ -81,21 +82,27 @@ class Post extends Component {
       date,
       category
     } = this.props;
-    const postPath = `${BLOG_PATH}/${slug}`;
-    const url = `${CONFIG.BASE_URL}${postPath}`;
+    const url = `${BASE_URL}${BLOG_PATH}/${slug}`;
 
     return (
       <>
-        <Meta title={title} description={description} url={url} image={image} />
-        <Navigation />
+        <Meta
+          title={title}
+          description={description}
+          url={url}
+          image={image}
+          siteName={SITE_NAME}
+          siteTwitter={SITE_TWITTER}
+        />
+        <Navigation siteName={SITE_NAME} siteUrl={BASE_URL} links={NAV_LINKS} />
         <Main>
           <article>
-            <StyledParallaxImage image={image} />
+            <StyledParallaxImage {...image} />
             <Grid>
               <Row>
                 <Col
-                  span={{ default: 12, mega: 10, tera: 8 }}
-                  skip={{ default: 0, mega: 1, tera: 2 }}
+                  span={{ default: 12, mega: 10, afterTera: 8 }}
+                  skip={{ default: 0, mega: 1, afterTera: 2 }}
                 >
                   <PostHeader>
                     <Heading element="h1" size={Heading.ZETTA} noMargin>
@@ -114,8 +121,12 @@ class Post extends Component {
             </Grid>
           </article>
         </Main>
-        <Prefooter />
-        <Footer />
+        <Prefooter
+          text={'Let’s be friends.'}
+          linkLabel={'Say hi!'}
+          linkUrl={`https://twitter.com/${SITE_TWITTER}`}
+        />
+        <Footer siteName={SITE_NAME} siteTwitter={SITE_TWITTER} />
       </>
     );
   }

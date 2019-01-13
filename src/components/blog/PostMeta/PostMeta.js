@@ -2,11 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { values } from 'lodash/fp';
 import { format } from 'date-fns';
+import { Link, Small } from '@madebyconnor/bamboo-ui';
 
 import { BASE_URL, CATEGORY_PATH } from '../../../constants/paths';
 import * as CATEGORIES from '../../../constants/categories';
-import Link from '../../Link';
-import Small from '../../Small';
 
 function PostMeta({ date, category, className }) {
   if (!date && !category) {
@@ -18,17 +17,23 @@ function PostMeta({ date, category, className }) {
 
   /* eslint-disable jsx-a11y/anchor-is-valid */
   return (
-    <Small className={className}>
-      {date && <time dateTime={datetime}>{formattedDate}</time>}
-      {category && (
-        <Link
-          as={`${BASE_URL}${CATEGORY_PATH}/${category.slug}`}
-          href={{ pathname: CATEGORY_PATH, query: { slug: category.slug } }}
-        >
-          <a>{category.name}</a>
-        </Link>
+    <div className={className}>
+      {date && (
+        <Small element="time" dateTime={datetime}>
+          {formattedDate}
+        </Small>
       )}
-    </Small>
+      {category && (
+        <Small>
+          <Link
+            as={`${BASE_URL}${CATEGORY_PATH}/${category.slug}`}
+            href={{ pathname: CATEGORY_PATH, query: { slug: category.slug } }}
+          >
+            <a>{category.name}</a>
+          </Link>
+        </Small>
+      )}
+    </div>
   );
   /* eslint-enable jsx-a11y/anchor-is-valid */
 }

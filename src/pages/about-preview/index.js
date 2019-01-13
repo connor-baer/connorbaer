@@ -1,15 +1,16 @@
 import React from 'react';
 import { Grid, Row, Col, Text, Hr, Heading } from '@sumup/circuit-ui';
-
-import Meta from '../../components/Meta';
-import Navigation from '../../components/Navigation';
-import Main from '../../components/Main';
-import Header from '../../components/Header';
-import Prefooter from '../../components/Prefooter';
-import Footer from '../../components/Footer';
-import Intro from '../../components/Intro';
-import Columns from '../../components/layout/Columns/Columns';
-import Collage from '../../components/images/Collage';
+import {
+  Meta,
+  Navigation,
+  Main,
+  Header,
+  Prefooter,
+  Footer,
+  Intro,
+  Columns,
+  Collage
+} from '@madebyconnor/bamboo-ui';
 
 export default function About() {
   const title = 'I am Connor.';
@@ -22,7 +23,7 @@ export default function About() {
       <Main>
         <Grid>
           <Row>
-            <Col span={{ default: 12, tera: 10 }}>
+            <Col span={{ default: 12, afterTera: 10 }}>
               <Header title={title} subtitle={subtitle} />
             </Col>
           </Row>
@@ -71,10 +72,10 @@ export default function About() {
           </Row>
           <Hr />
           <Row>
-            <Col span={{ default: 12, tera: 4 }}>
+            <Col span={{ default: 12, afterTera: 4 }}>
               <Heading element="h3">Experience</Heading>
             </Col>
-            <Col span={{ default: 12, tera: 8 }}>
+            <Col span={{ default: 12, afterTera: 8 }}>
               <Heading element="h4" size={Heading.GIGA}>
                 Frontend Engineer — SumUp Services
               </Heading>
@@ -96,10 +97,10 @@ export default function About() {
             </Col>
           </Row>
           <Row>
-            <Col span={{ default: 12, tera: 4 }}>
+            <Col span={{ default: 12, afterTera: 4 }}>
               <Heading element="h3">Currently learning</Heading>
             </Col>
-            <Col span={{ default: 12, tera: 8 }}>
+            <Col span={{ default: 12, afterTera: 8 }}>
               <Heading element="h4" size={Heading.GIGA}>
                 Reading
               </Heading>

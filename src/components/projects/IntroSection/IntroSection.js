@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'react-emotion';
 import { SubHeading, sharedPropTypes } from '@sumup/circuit-ui';
-
-import Intro from '../../Intro';
+import { Intro } from '@madebyconnor/bamboo-ui';
 
 const subHeadingStyles = ({ theme }) => css`
   letter-spacing: 1px;
