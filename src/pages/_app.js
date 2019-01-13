@@ -46,7 +46,7 @@ export default class CustomApp extends App {
           cookies={cookies}
           themes={themes}
           initialThemeId={section}
-          fontBasePath={FONTS_PATH}
+          assetPrefix={FONTS_PATH}
         >
           <Component {...pageProps} cookies={cookies} />
         </Theme>
