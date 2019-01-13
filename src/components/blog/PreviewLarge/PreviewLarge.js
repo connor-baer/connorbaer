@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'react-emotion';
 import { values, omit } from 'lodash/fp';
 import { Heading, Text } from '@sumup/circuit-ui';
+import { Link, CoverImage } from '@madebyconnor/bamboo-ui';
 
 import { BLOG_PATH } from '../../../constants/paths';
 import * as CATEGORIES from '../../../constants/categories';
 
-import Link from '../../Link';
-import CoverImage from '../../images/CoverImage';
 import PostMeta from '../PostMeta';
 
 function getSizes(theme) {

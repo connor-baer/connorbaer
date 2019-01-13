@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash/fp';
-
-import Small from '../../Small';
+import { Small } from '@madebyconnor/bamboo-ui';
 
 function stringifySkills(skills) {
   const firstSkills = skills.slice(0);

@@ -37,9 +37,10 @@
     "create:component": "foundry run plop component"
   },
   "dependencies": {
+    "@madebyconnor/bamboo-ui": "^0.2.2",
     "@mdx-js/mdx": "^0.15.2",
     "@mdx-js/tag": "^0.15.0",
-    "@sumup/circuit-ui": "^0.0.9-canary",
+    "@sumup/circuit-ui": "^0.0.16-canary",
     "@weco/next-plugin-transpile-modules": "^0.0.2",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "@zeit/next-mdx": "^1.1.0",

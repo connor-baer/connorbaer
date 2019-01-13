@@ -1,17 +1,20 @@
 import React from 'react';
 import styled, { css } from 'react-emotion';
 import { Grid, Row, Col } from '@sumup/circuit-ui';
+import {
+  Meta,
+  Navigation,
+  Main,
+  Header,
+  Prefooter,
+  Footer,
+  Columns
+} from '@madebyconnor/bamboo-ui';
 
 import * as Projects from '../../services/projects';
-
-import Meta from '../../components/Meta';
-import Navigation from '../../components/Navigation';
-import Main from '../../components/Main';
-import Header from '../../components/Header';
-import Prefooter from '../../components/Prefooter';
-import Footer from '../../components/Footer';
 import PreviewLarge from '../../components/projects/PreviewLarge';
-import Columns from '../../components/layout/Columns/Columns';
+import { SITE_NAME, SITE_TWITTER, NAV_LINKS } from '../../constants';
+import { BASE_URL, PROJECTS_PATH } from '../../constants/paths';
 
 const spacingStyles = ({ theme }) => css`
   margin-top: ${theme.spacings.giga};
@@ -31,10 +34,17 @@ function ProjectsHome() {
   const sortedProjects = Projects.sortByDate(posts);
   const title = 'Selected Work';
   const subtitle = 'Beautifully functional';
+  const url = `${BASE_URL}/${PROJECTS_PATH}`;
   return (
     <>
-      <Meta title={title} description={subtitle} />
-      <Navigation />
+      <Meta
+        title={title}
+        description={subtitle}
+        url={url}
+        siteName={SITE_NAME}
+        siteTwitter={SITE_TWITTER}
+      />
+      <Navigation siteName={SITE_NAME} siteUrl={BASE_URL} links={NAV_LINKS} />
       <Main>
         <Grid>
           <Row>
@@ -49,8 +59,12 @@ function ProjectsHome() {
           </Row>
         </Grid>
       </Main>
-      <Prefooter />
-      <Footer />
+      <Prefooter
+        text={'Let’s be friends.'}
+        linkLabel={'Say hi!'}
+        linkUrl={`https://twitter.com/${SITE_TWITTER}`}
+      />
+      <Footer siteName={SITE_NAME} siteTwitter={SITE_TWITTER} />
     </>
   );
 }

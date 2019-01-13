@@ -95,7 +95,7 @@ const optimizedImagesConfig = {
 };
 
 const transpileModulesConfig = {
-  transpileModules: ['@sumup/circuit-ui']
+  transpileModules: ['@sumup/circuit-ui', '@madebyconnor/bamboo-ui']
 };
 
 const bundleAnalyzerConfig = {

@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'react-emotion';
-import { values } from 'lodash/fp';
 import { Text } from '@sumup/circuit-ui';
-
-import { ALIGNMENTS } from '../../../constants';
-import Align from '../../layout/Align';
+import { Align } from '@madebyconnor/bamboo-ui';
 
 const sharedStyles = ({ theme }) => css`
   font-family: ${theme.fontStack.serif};
@@ -56,19 +53,24 @@ function Blockquote({ children, cite, align, ...rest }) {
   );
 }
 
-Blockquote.RIGHT = ALIGNMENTS.RIGHT;
-Blockquote.LEFT = ALIGNMENTS.LEFT;
-Blockquote.CENTER = ALIGNMENTS.CENTER;
-Blockquote.FULL = ALIGNMENTS.FULL;
+Blockquote.RIGHT = Align.RIGHT;
+Blockquote.LEFT = Align.LEFT;
+Blockquote.CENTER = Align.CENTER;
+Blockquote.FULL = Align.FULL;
 
 Blockquote.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   cite: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  align: PropTypes.oneOf(values(ALIGNMENTS))
+  align: PropTypes.oneOf([
+    Blockquote.RIGHT,
+    Blockquote.LEFT,
+    Blockquote.CENTER,
+    Blockquote.FULL
+  ])
 };
 
 Blockquote.defaultProps = {
-  align: ALIGNMENTS.CENTER
+  align: Align.CENTER
 };
 
 /**

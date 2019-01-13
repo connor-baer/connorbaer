@@ -249,18 +249,25 @@ function createGrid(base = 4) {
       priority: 2,
       breakpoint: 'kilo',
       cols: 12,
-      maxWidth: '700px',
+      maxWidth: '600px',
       gutter: createSpacings(base).peta
     },
     mega: {
       priority: 3,
       breakpoint: 'mega',
       cols: 12,
+      maxWidth: '800px',
+      gutter: createSpacings(base).exa
+    },
+    giga: {
+      priority: 4,
+      breakpoint: 'giga',
+      cols: 12,
       maxWidth: '1000px',
       gutter: createSpacings(base).exa
     },
-    tera: {
-      priority: 4,
+    afterTera: {
+      priority: 5,
       breakpoint: 'tera',
       cols: 12,
       maxWidth: '1200px',
@@ -278,7 +285,8 @@ const breakpoints = {
   megaToGiga: '(min-width: 768px) and (max-width: 959px)',
   giga: 960,
   gigaToTera: '(min-width: 960px) and (max-width: 1279px)',
-  tera: 1280
+  tera: 1280,
+  afterTera: '(min-width: 1280px)'
 };
 
 export function standard({ darkmode, baseSpacing, reducedMotion }) {

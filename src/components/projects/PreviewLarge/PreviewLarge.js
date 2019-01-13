@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'react-emotion';
 import { omit } from 'lodash/fp';
 import { Heading } from '@sumup/circuit-ui';
+import { Link, CoverImage } from '@madebyconnor/bamboo-ui';
 
 import { PROJECTS_PATH } from '../../../constants/paths';
 
-import Link from '../../Link';
-import CoverImage from '../../images/CoverImage';
 import ProjectMeta from '../ProjectMeta';
 
 function getSizes(theme) {

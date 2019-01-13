@@ -1,16 +1,19 @@
 import React from 'react';
 import { flow, slice } from 'lodash/fp';
 import { Grid, Row, Col } from '@sumup/circuit-ui';
+import {
+  Meta,
+  Navigation,
+  Main,
+  Header,
+  Prefooter,
+  Footer
+} from '@madebyconnor/bamboo-ui';
 
 import * as Posts from '../services/posts';
-
-import Meta from '../components/Meta';
-import Navigation from '../components/Navigation';
-import Main from '../components/Main';
-import Header from '../components/Header';
-import Prefooter from '../components/Prefooter';
-import Footer from '../components/Footer';
 import PreviewSmall from '../components/blog/PreviewSmall';
+import { SITE_NAME, SITE_TWITTER, NAV_LINKS } from '../constants';
+import { BASE_URL } from '../constants/paths';
 
 export default function Page() {
   const title = 'Hello, I’m Connor.';
@@ -23,12 +26,18 @@ export default function Page() {
   )(Posts.load());
   return (
     <>
-      <Meta title={title} description={subtitle} />
-      <Navigation />
+      <Meta
+        title={title}
+        description={subtitle}
+        url={BASE_URL}
+        siteName={SITE_NAME}
+        siteTwitter={SITE_TWITTER}
+      />
+      <Navigation siteName={SITE_NAME} siteUrl={BASE_URL} links={NAV_LINKS} />
       <Main>
         <Grid>
           <Row>
-            <Col span={{ default: 12, tera: 10 }}>
+            <Col span={{ default: 12, afterTera: 10 }}>
               <Header title={title} subtitle={subtitle} />
             </Col>
           </Row>
@@ -41,8 +50,12 @@ export default function Page() {
           </Row>
         </Grid>
       </Main>
-      <Prefooter />
-      <Footer />
+      <Prefooter
+        text={'Let’s be friends.'}
+        linkLabel={'Say hi!'}
+        linkUrl={`https://twitter.com/${SITE_TWITTER}`}
+      />
+      <Footer siteName={SITE_NAME} siteTwitter={SITE_TWITTER} />
     </>
   );
 }
