@@ -3,9 +3,8 @@ import App, { Container } from 'next/app';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import { hydrate } from 'react-emotion';
-import { Theme } from '@madebyconnor/bamboo-ui';
+import { Theme, isServer } from '@madebyconnor/bamboo-ui';
 
-import isServer from '../utils/is-server';
 import { getAllCookies } from '../services/cookies';
 import * as themes from '../styles/themes';
 

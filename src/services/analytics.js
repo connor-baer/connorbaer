@@ -1,4 +1,4 @@
-import isServer from '../utils/is-server';
+import { isServer } from '@madebyconnor/bamboo-ui';
 
 export function getDataLayer() {
   window.dataLayer = window.dataLayer || [];
