@@ -6,6 +6,7 @@ import { values } from 'lodash/fp';
 import { MDXProvider } from '@mdx-js/tag';
 import { Grid, Row, Col, Heading, sharedPropTypes } from '@sumup/circuit-ui';
 import {
+  Anchor,
   Meta,
   Navigation,
   Main,
@@ -126,7 +127,9 @@ class Post extends Component {
           linkLabel={'Say hi!'}
           linkUrl={`https://twitter.com/${SITE_TWITTER}`}
         />
-        <Footer siteName={SITE_NAME} siteTwitter={SITE_TWITTER} />
+        <Footer siteName={SITE_NAME} siteTwitter={SITE_TWITTER}>
+          <Anchor href="/disclaimer">Disclaimer</Anchor>
+        </Footer>
       </>
     );
   }

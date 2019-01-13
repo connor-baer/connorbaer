@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'react-emotion';
 import { Grid, Row, Col } from '@sumup/circuit-ui';
 import {
+  Anchor,
   Meta,
   Navigation,
   Main,
@@ -64,7 +65,9 @@ function ProjectsHome() {
         linkLabel={'Say hi!'}
         linkUrl={`https://twitter.com/${SITE_TWITTER}`}
       />
-      <Footer siteName={SITE_NAME} siteTwitter={SITE_TWITTER} />
+      <Footer siteName={SITE_NAME} siteTwitter={SITE_TWITTER}>
+        <Anchor href="/disclaimer">Disclaimer</Anchor>
+      </Footer>
     </>
   );
 }

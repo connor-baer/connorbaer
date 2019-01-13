@@ -4,6 +4,7 @@ import { values } from 'lodash/fp';
 import { MDXProvider } from '@mdx-js/tag';
 import { Grid, Row, Col, sharedPropTypes } from '@sumup/circuit-ui';
 import {
+  Anchor,
   Meta,
   Navigation,
   Main,
@@ -83,7 +84,9 @@ function Project({
         linkLabel={'Say hi!'}
         linkUrl={`https://twitter.com/${SITE_TWITTER}`}
       />
-      <Footer siteName={SITE_NAME} siteTwitter={SITE_TWITTER} />
+      <Footer siteName={SITE_NAME} siteTwitter={SITE_TWITTER}>
+        <Anchor href="/disclaimer">Disclaimer</Anchor>
+      </Footer>
     </>
   );
 }
