@@ -1,6 +1,6 @@
 import 'objectFitPolyfill/dist/objectFitPolyfill.basic.min';
 
-import isServer from './is-server';
+import { isServer } from '@madebyconnor/bamboo-ui';
 
 const Polyfills = (() => {
   if (!isServer) {

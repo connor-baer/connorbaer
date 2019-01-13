@@ -1,6 +1,5 @@
 import { set, get as getCookie, getAll } from 'es-cookie';
-
-import isServer from '../utils/is-server';
+import { isServer } from '@madebyconnor/bamboo-ui';
 
 export function getAllCookies(ctx) {
   return isServer ? ctx.req.cookies : getAll();
