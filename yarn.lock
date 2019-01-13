@@ -1036,10 +1036,10 @@
   dependencies:
     core-js "^2.5.7"
 
-"@madebyconnor/bamboo-ui@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@madebyconnor/bamboo-ui/-/bamboo-ui-0.2.2.tgz#3d13b37c138c3db81321ea68d5c71ec0be4523d9"
-  integrity sha512-aujGiGkKBRbTRa69xINr6L7l5ZpQWLwnKz2FhLVg1akhtdRKthj2jfOjvTthIinmFFrh3jcL4+3DXuvWrV8ZVA==
+"@madebyconnor/bamboo-ui@^0.2.3":
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/@madebyconnor/bamboo-ui/-/bamboo-ui-0.2.3.tgz#a796974cc94ba1e75dbb025edc5ca09c04ac3e01"
+  integrity sha512-V8BFOKrFIGrvy+yo6o7UtL8/MJHSIMAcN4ks92mENWXta/Q7fUqxoMswfKxThdPJ4Eo4taI6/n2yEdppdupvxQ==
   dependencies:
     babel-plugin-emotion "^9.2.6"
     babel-plugin-lodash "^3.3.2"
