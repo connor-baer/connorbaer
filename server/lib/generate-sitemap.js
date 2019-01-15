@@ -25,7 +25,8 @@ function buildLoc(page, baseUrl) {
   const locPath = page
     .replace(PAGES_DIR, '')
     .replace(EXTENSIONS_REGEXP, '')
-    .replace(/(.*)index$/, '$1');
+    .replace(/(.*)index$/, '$1')
+    .replace(/\/$/, '');
   return `${baseUrl}${locPath}`;
 }
 
