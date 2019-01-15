@@ -4,15 +4,15 @@ import { Grid, Row, Col } from '@sumup/circuit-ui';
 import {
   Anchor,
   Meta,
-  Navigation,
   Main,
   Header,
   Prefooter,
   Footer
 } from '@madebyconnor/bamboo-ui';
 
-import { SITE_NAME, SITE_TWITTER, NAV_LINKS } from '../constants';
-import { BASE_URL } from '../constants/paths';
+import Navigation from '../components/Navigation';
+
+import { SITE_NAME, SITE_TWITTER } from '../constants';
 
 const TITLE_MAP = {
   404: 'Page not found. 🕵',
@@ -39,7 +39,7 @@ function Error({ statusCode }) {
         siteName={SITE_NAME}
         siteTwitter={SITE_TWITTER}
       />
-      <Navigation siteName={SITE_NAME} siteUrl={BASE_URL} links={NAV_LINKS} />
+      <Navigation />
       <Main>
         <Grid>
           <Row>

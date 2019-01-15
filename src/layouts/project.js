@@ -6,7 +6,6 @@ import { Grid, Row, Col, sharedPropTypes } from '@sumup/circuit-ui';
 import {
   Anchor,
   Meta,
-  Navigation,
   Main,
   Header,
   Prefooter,
@@ -14,11 +13,13 @@ import {
   sharedPropTypes as bambooPropTypes
 } from '@madebyconnor/bamboo-ui';
 
-import { PROJECTS_PATH, BASE_URL } from '../constants/paths';
-import { SITE_NAME, SITE_TWITTER, NAV_LINKS } from '../constants';
-import * as CATEGORIES from '../constants/categories';
 import components from './_components';
+import Navigation from '../components/Navigation';
 import IntroSection from '../components/projects/IntroSection';
+
+import { PROJECTS_PATH, BASE_URL } from '../constants/paths';
+import { SITE_NAME, SITE_TWITTER } from '../constants';
+import * as CATEGORIES from '../constants/categories';
 
 function Project({
   children,
@@ -42,7 +43,7 @@ function Project({
         siteName={SITE_NAME}
         siteTwitter={SITE_TWITTER}
       />
-      <Navigation siteName={SITE_NAME} siteUrl={BASE_URL} links={NAV_LINKS} />
+      <Navigation />
       <Main>
         <article>
           <Grid>

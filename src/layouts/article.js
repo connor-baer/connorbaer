@@ -4,7 +4,6 @@ import { MDXProvider } from '@mdx-js/tag';
 import { Grid, Row, Col } from '@sumup/circuit-ui';
 import {
   Meta,
-  Navigation,
   Main,
   Header,
   Prefooter,
@@ -13,7 +12,9 @@ import {
 } from '@madebyconnor/bamboo-ui';
 
 import components from './_components';
-import { SITE_NAME, SITE_TWITTER, NAV_LINKS } from '../constants';
+import Navigation from '../components/Navigation';
+
+import { SITE_NAME, SITE_TWITTER } from '../constants';
 import { BASE_URL } from '../constants/paths';
 
 function Article({ children, title, subtitle, slug }) {
@@ -27,7 +28,7 @@ function Article({ children, title, subtitle, slug }) {
         siteName={SITE_NAME}
         siteTwitter={SITE_TWITTER}
       />
-      <Navigation siteName={SITE_NAME} siteUrl={BASE_URL} links={NAV_LINKS} />
+      <Navigation />
       <Main>
         <article>
           <Grid>

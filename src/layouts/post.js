@@ -8,7 +8,6 @@ import { Grid, Row, Col, Heading, sharedPropTypes } from '@sumup/circuit-ui';
 import {
   Anchor,
   Meta,
-  Navigation,
   Main,
   Prefooter,
   Footer,
@@ -18,10 +17,11 @@ import {
 } from '@madebyconnor/bamboo-ui';
 
 import components, { Paragraph } from './_components';
+import Navigation from '../components/Navigation';
 import PostMeta from '../components/blog/PostMeta';
 
 import * as CATEGORIES from '../constants/categories';
-import { SITE_NAME, SITE_TWITTER, NAV_LINKS } from '../constants';
+import { SITE_NAME, SITE_TWITTER } from '../constants';
 import { BLOG_PATH, BASE_URL } from '../constants/paths';
 
 const styledParagraphStyles = ({ theme }) => css`
@@ -95,7 +95,7 @@ class Post extends Component {
           siteName={SITE_NAME}
           siteTwitter={SITE_TWITTER}
         />
-        <Navigation siteName={SITE_NAME} siteUrl={BASE_URL} links={NAV_LINKS} />
+        <Navigation />
         <Main>
           <article>
             <StyledParallaxImage {...image} />
