@@ -4,7 +4,6 @@ import { Grid, Row, Col } from '@sumup/circuit-ui';
 import {
   Anchor,
   Meta,
-  Navigation,
   Main,
   Header,
   Prefooter,
@@ -13,8 +12,9 @@ import {
 } from '@madebyconnor/bamboo-ui';
 
 import * as Projects from '../../services/projects';
+import Navigation from '../../components/Navigation';
 import PreviewLarge from '../../components/projects/PreviewLarge';
-import { SITE_NAME, SITE_TWITTER, NAV_LINKS } from '../../constants';
+import { SITE_NAME, SITE_TWITTER } from '../../constants';
 import { BASE_URL, PROJECTS_PATH } from '../../constants/paths';
 
 const spacingStyles = ({ theme }) => css`
@@ -45,7 +45,7 @@ function ProjectsHome() {
         siteName={SITE_NAME}
         siteTwitter={SITE_TWITTER}
       />
-      <Navigation siteName={SITE_NAME} siteUrl={BASE_URL} links={NAV_LINKS} />
+      <Navigation />
       <Main>
         <Grid>
           <Row>

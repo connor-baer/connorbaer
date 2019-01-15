@@ -4,7 +4,6 @@ import { Grid, Row, Col } from '@sumup/circuit-ui';
 import {
   Anchor,
   Meta,
-  Navigation,
   Main,
   Header,
   Prefooter,
@@ -12,8 +11,10 @@ import {
 } from '@madebyconnor/bamboo-ui';
 
 import * as Posts from '../services/posts';
+import Navigation from '../components/Navigation';
 import PreviewSmall from '../components/blog/PreviewSmall';
-import { SITE_NAME, SITE_TWITTER, NAV_LINKS } from '../constants';
+
+import { SITE_NAME, SITE_TWITTER } from '../constants';
 import { BASE_URL } from '../constants/paths';
 
 export default function Page() {
@@ -34,7 +35,7 @@ export default function Page() {
         siteName={SITE_NAME}
         siteTwitter={SITE_TWITTER}
       />
-      <Navigation siteName={SITE_NAME} siteUrl={BASE_URL} links={NAV_LINKS} />
+      <Navigation />
       <Main>
         <Grid>
           <Row>
