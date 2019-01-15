@@ -9,6 +9,7 @@ import logger from './lib/logger';
 import securityHeaders from './lib/security-headers';
 import generateSitemap from './lib/generate-sitemap';
 import asyncMiddleware from './lib/async-middleware';
+import forceCanonicalUrl from './lib/force-canonical-url';
 // import posts from './posts';
 
 const SOURCE_DIR = './src';
@@ -37,6 +38,7 @@ server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: false }));
 server.use(cookieParser());
 server.use(securityHeaders);
+server.use(forceCanonicalUrl);
 
 // Service worker
 server.get('/service-worker.js', (req, res) => {
