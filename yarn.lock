@@ -1036,10 +1036,10 @@
   dependencies:
     core-js "^2.5.7"
 
-"@madebyconnor/bamboo-ui@^0.4.2":
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/@madebyconnor/bamboo-ui/-/bamboo-ui-0.4.2.tgz#9d0b161439525b9846212c32e3890b653dc76210"
-  integrity sha512-qnOJBfJygh72xqkrFsTJc60hvBcKYJKLHNzhEv+iV7AgmcUqbWCYrgl2ygiaBzTJ6DLdKvTP1EXUHqfERM2BFg==
+"@madebyconnor/bamboo-ui@^0.4.4":
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/@madebyconnor/bamboo-ui/-/bamboo-ui-0.4.4.tgz#a769fb7612b7bebe881d791e3dfabdbb5c4c82c3"
+  integrity sha512-gjW6AZdbAuygQncqpH3pW9M76P68X+gZaOROvy4nnJsR4MTFKM7ekBuKfugQAMTLkSBh/OxqI9ErzAVYNYyDcw==
   dependencies:
     babel-plugin-emotion "^9.2.6"
     babel-plugin-lodash "^3.3.2"
@@ -1054,6 +1054,7 @@
     hoist-non-react-statics "^2.3.1"
     keycode "^2.2.0"
     lodash "^4.17.4"
+    nprogress "^0.2.0"
     open-color "^1.6.3"
     polished "^1.9.0"
     prop-types "^15.6.0"
