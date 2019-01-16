@@ -9535,6 +9535,11 @@ normalize-url@^1.4.0:
     query-string "^4.1.0"
     sort-keys "^1.0.0"
 
+now@^13.0.6:
+  version "13.0.6"
+  resolved "https://registry.yarnpkg.com/now/-/now-13.0.6.tgz#35d91939117988dbf80ede365bf3fc8a2d2140ec"
+  integrity sha512-j75zIVBNdNjHOEWaKn66mmvGyNC6gwoAt8qHNxUYULz2XwpCyhxftLNxcnE2Ok4392FxySEeWo5fy+42tqsiTw==
+
 npm-bundled@^1.0.1:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/npm-bundled/-/npm-bundled-1.0.5.tgz#3c1732b7ba936b3a10325aef616467c0ccbcc979"
