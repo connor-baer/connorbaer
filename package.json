@@ -38,7 +38,7 @@
     "create:component": "foundry run plop component"
   },
   "dependencies": {
-    "@madebyconnor/bamboo-ui": "^0.4.2",
+    "@madebyconnor/bamboo-ui": "^0.4.4",
     "@mdx-js/mdx": "^0.15.2",
     "@mdx-js/tag": "^0.15.0",
     "@sumup/circuit-ui": "^0.0.16-canary",

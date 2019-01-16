@@ -15,7 +15,7 @@ const CustomNavigation = ({ siteName, siteLogo, links }) => (
 
 CustomNavigation.propTypes = {
   siteName: PropTypes.string,
-  siteLogo: sharedPropTypes.chidrenPropType,
+  siteLogo: sharedPropTypes.childrenPropType,
   links: PropTypes.arrayOf(
     PropTypes.shape({
       label: sharedPropTypes.childrenPropType,

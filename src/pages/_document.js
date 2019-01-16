@@ -29,8 +29,6 @@ export default class CustomDocument extends Document {
     return (
       <html lang={LANG}>
         <Head>
-          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="dns-prefetch" href={STATIC_URL} />
           <link
             rel="shortcut icon"

@@ -1,9 +1,8 @@
 import React from 'react';
 import App, { Container } from 'next/app';
 import Router from 'next/router';
-import NProgress from 'nprogress';
 import { hydrate } from 'react-emotion';
-import { Theme, isServer } from '@madebyconnor/bamboo-ui';
+import { Theme, NProgress, isServer } from '@madebyconnor/bamboo-ui';
 
 import { getAllCookies } from '../services/cookies';
 import * as themes from '../styles/themes';
@@ -28,12 +27,9 @@ export default class CustomApp extends App {
 
   // eslint-disable-next-line class-methods-use-this
   componentDidMount() {
-    Router.events.on('routeChangeStart', () => NProgress.start());
     Router.events.on('routeChangeComplete', () => {
-      NProgress.done();
       objectFitPolyfill();
     });
-    Router.events.on('routeChangeError', () => NProgress.done());
   }
 
   render() {
@@ -47,6 +43,7 @@ export default class CustomApp extends App {
           initialThemeId={section}
           assetPrefix={FONTS_PATH}
         >
+          <NProgress />
           <Component {...pageProps} cookies={cookies} />
         </Theme>
       </Container>
