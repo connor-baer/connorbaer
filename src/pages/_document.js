@@ -1,31 +1,20 @@
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
-import { extractCritical } from 'emotion-server';
 
 import { LANG, GA_TOKEN } from '../constants';
 import { FAVICONS_PATH, STATIC_URL } from '../constants/paths';
 
 export default class CustomDocument extends Document {
-  static async getInitialProps(ctx) {
-    const initialProps = await Document.getInitialProps(ctx);
-    const { html } = initialProps;
-    const emotionStyles = extractCritical(html);
-    return { ...initialProps, ...emotionStyles };
-  }
-
   constructor(props) {
     super(props);
-    const { __NEXT_DATA__, ids } = props;
-    if (ids) {
-      __NEXT_DATA__.emotionIds = ids;
-    }
+    const { __NEXT_DATA__ } = props;
     if (global.publicConfig) {
       __NEXT_DATA__.publicConfig = global.publicConfig;
     }
   }
 
+  // eslint-disable-next-line class-methods-use-this
   render() {
-    /* eslint-disable max-len */
     return (
       <html lang={LANG}>
         <Head>
@@ -84,13 +73,13 @@ export default class CustomDocument extends Document {
             sizes="180x180"
             href={`${FAVICONS_PATH}/apple-touch-icon-180x180.png`}
           />
-          <style dangerouslySetInnerHTML={{ __html: this.props.css }} />
           <script
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${GA_TOKEN}`}
           />
           <script
             dangerouslySetInnerHTML={{
+              // eslint-disable-next-line max-len
               __html: `window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', '${GA_TOKEN}');`
             }}
           />
@@ -101,6 +90,5 @@ export default class CustomDocument extends Document {
         </body>
       </html>
     );
-    /* eslint-enable max-len */
   }
 }

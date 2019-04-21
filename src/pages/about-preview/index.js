@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable global-require */
 import React from 'react';
 import { Grid, Row, Col, Text, Hr, Heading } from '@sumup/circuit-ui';
 import {

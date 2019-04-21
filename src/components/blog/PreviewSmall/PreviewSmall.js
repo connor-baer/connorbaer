@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'react-emotion';
+import styled from '@emotion/styled';
+import { css } from '@emotion/core';
 import { values, omit } from 'lodash/fp';
 import { Heading } from '@sumup/circuit-ui';
 import { Link, CoverImage } from '@madebyconnor/bamboo-ui';

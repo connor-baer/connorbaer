@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'react-emotion';
+import styled from '@emotion/styled';
+import { css } from '@emotion/core';
 import { values, omit } from 'lodash/fp';
 import { Heading, Text } from '@sumup/circuit-ui';
 import { Link, CoverImage } from '@madebyconnor/bamboo-ui';
@@ -22,9 +23,9 @@ const articleStyles = ({ theme }) => css`
   margin-top: ${theme.spacings.tera};
   margin-bottom: ${theme.spacings.zetta};
 
-  ${theme.mq.kilo`
+  ${theme.mq.kilo} {
     margin-bottom: 72px;
-  `};
+  }
 `;
 
 const Article = styled('article')(articleStyles);

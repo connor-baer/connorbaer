@@ -1,5 +1,7 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import styled, { css } from 'react-emotion';
+import styled from '@emotion/styled';
+import { css } from '@emotion/core';
 import { Heading, Text, Hr, List } from '@sumup/circuit-ui';
 import { Anchor, Image } from '@madebyconnor/bamboo-ui';
 

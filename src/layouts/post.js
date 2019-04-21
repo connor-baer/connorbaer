@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'react-emotion';
+import styled from '@emotion/styled';
+import { css } from '@emotion/core';
 import { withTheme } from 'emotion-theming';
 import { values } from 'lodash/fp';
 import { MDXProvider } from '@mdx-js/tag';
@@ -33,17 +34,17 @@ const StyledParagraph = styled(Paragraph)(styledParagraphStyles);
 const styledParallaxImageStyles = ({ theme }) => css`
   height: 180px;
 
-  ${theme.mq.kilo`
+  ${theme.mq.kilo} {
     height: 240px;
-  `};
+  }
 
-  ${theme.mq.mega`
+  ${theme.mq.mega} {
     height: 300px;
-  `};
+  }
 
-  ${theme.mq.tera`
+  ${theme.mq.tera} {
     height: 360px;
-  `};
+  }
 `;
 
 const StyledParallaxImage = styled(ParallaxImage)(styledParallaxImageStyles);
@@ -65,7 +66,7 @@ class Post extends Component {
     image: PropTypes.shape(bambooPropTypes.imagePropType),
     category: PropTypes.oneOf(values(CATEGORIES)),
     children: sharedPropTypes.childrenPropType,
-    setTheme: PropTypes.func
+    theme: sharedPropTypes.themePropType
   };
 
   constructor(props) {

@@ -1,7 +1,9 @@
-const baseConfig = require('@sumup/foundry/eslint').react;
+const {
+  react: baseConfig,
+  overwritePresets
+} = require('@sumup/foundry/eslint');
 
-const config = {
-  ...baseConfig,
+const customConfig = {
   parser: 'babel-eslint',
   parserOptions: {
     ecmaFeatures: {
@@ -13,7 +15,18 @@ const config = {
     __PRODUCTION__: true,
     __TEST__: true,
     objectFitPolyfill: true
+  },
+  settings: {
+    'import/resolver': {
+      webpack: {
+        config: {
+          resolve: {
+            extensions: ['.js', '.jsx']
+          }
+        }
+      }
+    }
   }
 };
 
-module.exports = config;
+module.exports = overwritePresets(baseConfig, customConfig);

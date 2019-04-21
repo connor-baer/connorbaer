@@ -6,7 +6,7 @@ const externalLinks = require('remark-external-links');
 const withPlugins = require('next-compose-plugins');
 const withOffline = require('next-offline');
 const withOptimizedImages = require('next-optimized-images');
-const withTranspileModules = require('@weco/next-plugin-transpile-modules');
+const withTranspileModules = require('next-transpile-modules');
 const withBundleAnalyzer = require('@zeit/next-bundle-analyzer');
 const withMDX = require('@zeit/next-mdx');
 
@@ -19,7 +19,7 @@ const nextConfig = {
   pageExtensions: ['js', 'jsx', 'mdx', 'md'],
   poweredByHeader: false,
   publicRuntimeConfig: { BASE_URL, STATIC_URL },
-  webpack: (config, { dev }) => {
+  webpack: (config, { dev, defaultLoaders }) => {
     const originalEntry = config.entry;
     // eslint-disable-next-line no-param-reassign
     config.entry = async () => {
@@ -31,6 +31,15 @@ const nextConfig = {
     };
 
     // eslint-disable-next-line no-param-reassign
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@sumup/circuit-ui': require.resolve('@sumup/circuit-ui/lib/es'),
+      '@madebyconnor/bamboo-ui': require.resolve(
+        '@madebyconnor/bamboo-ui/lib/es'
+      )
+    };
+
+    // eslint-disable-next-line no-param-reassign
     config.node = {
       __filename: true,
       __dirname: true
@@ -39,7 +48,7 @@ const nextConfig = {
     config.module.rules.push({
       test: /\.svg$/,
       use: [
-        { loader: 'babel-loader' },
+        defaultLoaders.babel,
         {
           loader: 'react-svg-loader',
           options: {
