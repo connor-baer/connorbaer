@@ -100,7 +100,10 @@ Project.propTypes = {
   image: PropTypes.shape(bambooPropTypes.imagePropType),
   category: PropTypes.oneOf(values(CATEGORIES)),
   children: sharedPropTypes.childrenPropType,
-  theme: sharedPropTypes.themePropType
+  theme: sharedPropTypes.themePropType,
+  brief: PropTypes.string,
+  skills: PropTypes.arrayOf(PropTypes.string),
+  client: PropTypes.string
 };
 
 export default Project;

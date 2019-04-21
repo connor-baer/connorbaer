@@ -1,5 +1,6 @@
 import React from 'react';
-import styled, { css } from 'react-emotion';
+import styled from '@emotion/styled';
+import { css } from '@emotion/core';
 import { Grid, Row, Col } from '@sumup/circuit-ui';
 import {
   Anchor,
@@ -21,10 +22,10 @@ const spacingStyles = ({ theme }) => css`
   margin-top: ${theme.spacings.giga};
   margin-bottom: ${theme.spacings.giga};
 
-  ${theme.mq.kilo`
+  ${theme.mq.kilo} {
     margin-top: ${theme.spacings.exa};
     margin-bottom: ${theme.spacings.exa};
-  `};
+  }
 `;
 
 const StyledColumns = styled(Columns)(spacingStyles);

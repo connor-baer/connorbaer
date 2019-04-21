@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'react-emotion';
+import styled from '@emotion/styled';
+import { css } from '@emotion/core';
 import { omit } from 'lodash/fp';
 import { Heading } from '@sumup/circuit-ui';
 import { Link, CoverImage } from '@madebyconnor/bamboo-ui';
@@ -20,9 +21,9 @@ function getSizes(theme) {
 const articleStyles = ({ theme }) => css`
   margin-top: ${theme.spacings.giga};
 
-  ${theme.mq.kilo`
+  ${theme.mq.kilo} {
     margin-top: ${theme.spacings.exa};
-  `};
+  }
 `;
 
 const Article = styled('article')(articleStyles);

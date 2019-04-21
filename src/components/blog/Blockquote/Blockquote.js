@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'react-emotion';
+import styled from '@emotion/styled';
+import { css } from '@emotion/core';
 import { Text } from '@sumup/circuit-ui';
 import { Align } from '@madebyconnor/bamboo-ui';
 
@@ -10,10 +11,10 @@ const sharedStyles = ({ theme }) => css`
   font-size: 24px;
   line-height: 32px;
 
-  ${theme.mq.kilo`
+  ${theme.mq.kilo} {
     font-size: 32px;
     line-height: 42px;
-  `};
+  }
 `;
 
 const quoteStyles = ({ theme }) => css`
