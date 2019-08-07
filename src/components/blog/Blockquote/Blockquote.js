@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { Text } from '@sumup/circuit-ui';
 import { Align } from '@madebyconnor/bamboo-ui';
 
 const sharedStyles = ({ theme }) => css`
@@ -39,17 +38,13 @@ const citeStyles = ({ theme }) => css`
   }
 `;
 
-const Cite = styled(Text)(citeStyles);
+const Cite = styled('cite')(citeStyles);
 
 function Blockquote({ children, cite, align, ...rest }) {
   return (
     <Align align={align}>
       <Quote {...rest}>{children}</Quote>
-      {cite && (
-        <Cite element="cite" size={Text.KILO} noMargin>
-          {cite}
-        </Cite>
-      )}
+      {cite && <Cite>{cite}</Cite>}
     </Align>
   );
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { sharedPropTypes } from '@sumup/circuit-ui';
+import { sharedPropTypes } from '@madebyconnor/bamboo-ui';
 
 import Portal from '../components/Portal/Portal';
 

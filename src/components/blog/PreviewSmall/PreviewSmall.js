@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { values, omit } from 'lodash/fp';
-import { Heading } from '@sumup/circuit-ui';
-import { Link, CoverImage } from '@madebyconnor/bamboo-ui';
+import { CoverImage, useTheme } from '@madebyconnor/bamboo-ui';
 
 import { BLOG_PATH } from '../../../constants/paths';
 import * as CATEGORIES from '../../../constants/categories';
 
+import Link from '../../Link';
 import PostMeta from '../PostMeta';
 
 function getSizes(theme) {
@@ -27,14 +27,18 @@ const articleStyles = ({ theme }) => css`
 
 const Article = styled('article')(articleStyles);
 
-const headingStyles = ({ theme }) => css`
+const titleStyles = ({ theme }) => css`
+  font-size: ${theme.fontSizes.giga};
+  font-weight: ${theme.fontWeight.bold};
+  line-height: ${theme.lineHeights.kilo};
   margin-top: ${theme.spacings.giga};
   margin-bottom: ${theme.spacings.bit};
 `;
 
-const StyledHeading = styled(Heading)(headingStyles);
+const Title = styled('h2')(titleStyles);
 
-function PreviewSmall({ slug, image, title, date, category, theme }) {
+function PreviewSmall({ slug, image, title, date, category }) {
+  const theme = useTheme();
   const sizes = getSizes(theme);
   /* eslint-disable jsx-a11y/anchor-is-valid */
   return (
@@ -48,9 +52,7 @@ function PreviewSmall({ slug, image, title, date, category, theme }) {
               aspectRatio={350 / 150}
             />
           )}
-          <StyledHeading element="h3" size={Heading.TERA}>
-            {title}
-          </StyledHeading>
+          <Title>{title}</Title>
         </a>
       </Link>
       <PostMeta date={date} category={category} />
@@ -69,8 +71,7 @@ PreviewSmall.propTypes = {
     srcSet: PropTypes.string,
     colors: PropTypes.array,
     alt: PropTypes.string
-  }),
-  theme: PropTypes.object
+  })
 };
 
 PreviewSmall.defaultProps = {

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { values } from 'lodash/fp';
 import { MDXProvider } from '@mdx-js/tag';
-import { Grid, Row, Col, sharedPropTypes } from '@sumup/circuit-ui';
+import { Grid, Row, Col } from '@sumup/circuit-ui';
 import {
   Anchor,
   Meta,
@@ -10,7 +10,7 @@ import {
   Header,
   Prefooter,
   Footer,
-  sharedPropTypes as bambooPropTypes
+  sharedPropTypes
 } from '@madebyconnor/bamboo-ui';
 
 import components from './_components';
@@ -97,7 +97,7 @@ Project.propTypes = {
   subtitle: PropTypes.string,
   slug: PropTypes.string,
   date: PropTypes.string,
-  image: PropTypes.shape(bambooPropTypes.imagePropType),
+  image: PropTypes.shape(sharedPropTypes.imagePropType),
   category: PropTypes.oneOf(values(CATEGORIES)),
   children: sharedPropTypes.childrenPropType,
   theme: sharedPropTypes.themePropType,

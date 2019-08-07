@@ -5,7 +5,7 @@ import { css } from '@emotion/core';
 import { withTheme } from 'emotion-theming';
 import { values } from 'lodash/fp';
 import { MDXProvider } from '@mdx-js/tag';
-import { Grid, Row, Col, Heading, sharedPropTypes } from '@sumup/circuit-ui';
+import { Grid, Row, Col } from '@sumup/circuit-ui';
 import {
   Anchor,
   Meta,
@@ -14,7 +14,7 @@ import {
   Footer,
   Intro,
   ParallaxImage,
-  sharedPropTypes as bambooPropTypes
+  sharedPropTypes
 } from '@madebyconnor/bamboo-ui';
 
 import components, { Paragraph } from './_components';
@@ -57,13 +57,21 @@ const postHeaderStyles = ({ theme }) => css`
 
 const PostHeader = styled('header')(postHeaderStyles);
 
+const headingStyles = ({ theme }) => css`
+  font-size: ${theme.fontSizes.peta};
+  font-weight: ${theme.fontWeight.bold};
+  line-height: ${theme.lineHeights.kilo};
+`;
+
+const Heading = styled('h1')(headingStyles);
+
 class Post extends Component {
   static propTypes = {
     title: PropTypes.string,
     description: PropTypes.string,
     slug: PropTypes.string,
     date: PropTypes.string,
-    image: PropTypes.shape(bambooPropTypes.imagePropType),
+    image: PropTypes.shape(sharedPropTypes.imagePropType),
     category: PropTypes.oneOf(values(CATEGORIES)),
     children: sharedPropTypes.childrenPropType,
     theme: sharedPropTypes.themePropType
@@ -107,9 +115,7 @@ class Post extends Component {
                   skip={{ default: 0, mega: 1, afterTera: 2 }}
                 >
                   <PostHeader>
-                    <Heading element="h1" size={Heading.ZETTA} noMargin>
-                      {title}
-                    </Heading>
+                    <Heading>{title}</Heading>
                     <PostMeta date={date} category={category} />
                   </PostHeader>
                   <Intro>{description}</Intro>

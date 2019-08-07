@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { values, omit } from 'lodash/fp';
-import { Heading, Text } from '@sumup/circuit-ui';
-import { Link, CoverImage } from '@madebyconnor/bamboo-ui';
+import { CoverImage, useTheme } from '@madebyconnor/bamboo-ui';
 
 import { BLOG_PATH } from '../../../constants/paths';
 import * as CATEGORIES from '../../../constants/categories';
 
+import Link from '../../Link';
 import PostMeta from '../PostMeta';
 
 function getSizes(theme) {
@@ -31,19 +31,24 @@ const articleStyles = ({ theme }) => css`
 const Article = styled('article')(articleStyles);
 
 const titleStyles = ({ theme }) => css`
+  font-size: ${theme.fontSizes.giga};
+  font-weight: ${theme.fontWeight.bold};
+  line-height: ${theme.lineHeights.kilo};
   margin-top: ${theme.spacings.tera};
   margin-bottom: ${theme.spacings.kilo};
 `;
 
-const Title = styled(Heading)(titleStyles);
+const Title = styled('h2')(titleStyles);
 
 const descriptionStyles = ({ theme }) => css`
+  font-size: ${theme.fontSizes.mega};
+  line-height: ${theme.lineHeights.mega};
   margin-top: ${theme.spacings.kilo};
   margin-bottom: ${theme.spacings.kilo};
   color: ${theme.colors.bodyColor};
 `;
 
-const Description = styled(Text)(descriptionStyles);
+const Description = styled('p')(descriptionStyles);
 
 function PreviewLarge({
   slug,
@@ -52,9 +57,9 @@ function PreviewLarge({
   description,
   date,
   category,
-  featured,
-  theme
+  featured
 }) {
+  const theme = useTheme();
   const sizes = getSizes(theme);
   /* eslint-disable jsx-a11y/anchor-is-valid */
   return (
@@ -68,14 +73,8 @@ function PreviewLarge({
               aspectRatio={350 / 150}
             />
           )}
-          <Title element="h2" size={Heading.PETA}>
-            {title}
-          </Title>
-          {description && (
-            <Description noMargin size={Text.GIGA}>
-              {description}
-            </Description>
-          )}
+          <Title>{title}</Title>
+          {description && <Description>{description}</Description>}
         </a>
       </Link>
       <PostMeta date={date} category={category} />
@@ -96,8 +95,7 @@ PreviewLarge.propTypes = {
     srcSet: PropTypes.string,
     colors: PropTypes.array,
     alt: PropTypes.string
-  }),
-  theme: PropTypes.object
+  })
 };
 
 PreviewLarge.defaultProps = {

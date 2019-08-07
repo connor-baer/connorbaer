@@ -1,7 +1,7 @@
 import { Component } from 'react';
-import ReactDOM from 'react-dom';
+import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
-import { sharedPropTypes } from '@sumup/circuit-ui';
+import { sharedPropTypes } from '@madebyconnor/bamboo-ui';
 
 class Portal extends Component {
   componentDidMount() {
@@ -14,7 +14,7 @@ class Portal extends Component {
       return null;
     }
 
-    return ReactDOM.createPortal(this.props.children, this.element);
+    return createPortal(this.props.children, this.element);
   }
 }
 

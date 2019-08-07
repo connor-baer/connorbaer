@@ -22,7 +22,7 @@
   },
   "scripts": {
     "dev": "webpack --env=develop --display-error-details",
-    "build": "run-p build:client build:server && deploy static",
+    "build": "run-p build:client build:server",
     "build:client": "next build src",
     "build:server": "webpack --env=production",
     "start": "NODE_ENV=production node dist/app.js",
@@ -40,10 +40,10 @@
   "dependencies": {
     "@emotion/core": "^10.0.10",
     "@emotion/styled": "^10.0.10",
-    "@madebyconnor/bamboo-ui": "^1.0.0-beta.5",
+    "@madebyconnor/bamboo-ui": "^1.0.0",
     "@mdx-js/mdx": "^0.15.2",
     "@mdx-js/tag": "^0.15.0",
-    "@sumup/circuit-ui": "1.0.0-beta.2",
+    "@sumup/circuit-ui": "^1.0.0",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "@zeit/next-mdx": "^1.1.0",
     "body-parser": "^1.18.0",

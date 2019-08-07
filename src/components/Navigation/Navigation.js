@@ -1,17 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { sharedPropTypes } from '@sumup/circuit-ui';
-import { Navigation, PandaIcon } from '@madebyconnor/bamboo-ui';
+import { startsWith } from 'lodash/fp';
+import { useRouter } from 'next/router';
+import {
+  Navigation,
+  PandaIcon,
+  sharedPropTypes
+} from '@madebyconnor/bamboo-ui';
 
 import { SITE_NAME } from '../../constants';
 
-const CustomNavigation = ({ siteName, siteLogo, links }) => (
-  <Navigation>
-    <Navigation.Brand siteName={siteName} siteLogo={siteLogo} />
-    <Navigation.Links links={links} />
-    <Navigation.Menu />
-  </Navigation>
-);
+function CustomNavigation({ siteName, siteLogo, links = [] }) {
+  const router = useRouter();
+  const isHomepage = router.asPath === '/';
+  const enhancedLinks = links.map(link => {
+    const isActive = startsWith(link.url, router.asPath);
+    return { ...link, isActive };
+  });
+  return (
+    <Navigation>
+      <Navigation.Brand
+        siteName={siteName}
+        siteLogo={siteLogo}
+        isHomepage={isHomepage}
+      />
+      <Navigation.Links links={enhancedLinks} />
+      <Navigation.Menu />
+    </Navigation>
+  );
+}
 
 CustomNavigation.propTypes = {
   siteName: PropTypes.string,
