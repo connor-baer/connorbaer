@@ -1,7 +1,6 @@
-/* eslint-disable max-len */
-/* eslint-disable global-require */
+/* eslint-disable max-len, global-require */
 import React from 'react';
-import { Grid, Row, Col, Text, Hr, Heading } from '@sumup/circuit-ui';
+import { Grid, Row, Col, Text, Heading } from '@sumup/circuit-ui';
 import {
   Meta,
   Navigation,
@@ -11,7 +10,8 @@ import {
   Footer,
   Intro,
   Columns,
-  Collage
+  Collage,
+  Hr
 } from '@madebyconnor/bamboo-ui';
 
 export default function About() {

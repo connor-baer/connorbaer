@@ -10,6 +10,9 @@ const customConfig = {
       jsx: true
     }
   },
+  rules: {
+    'notice/notice': 'off'
+  },
   globals: {
     __DEV__: true,
     __PRODUCTION__: true,

@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { omit } from 'lodash/fp';
-import { Heading } from '@sumup/circuit-ui';
-import { Link, CoverImage } from '@madebyconnor/bamboo-ui';
+import { CoverImage, useTheme } from '@madebyconnor/bamboo-ui';
 
 import { PROJECTS_PATH } from '../../../constants/paths';
 
+import Link from '../../Link';
 import ProjectMeta from '../ProjectMeta';
 
 function getSizes(theme) {
@@ -29,12 +29,16 @@ const articleStyles = ({ theme }) => css`
 const Article = styled('article')(articleStyles);
 
 const titleStyles = ({ theme }) => css`
+  font-size: ${theme.fontSizes.giga};
+  font-weight: ${theme.fontWeight.bold};
+  line-height: ${theme.lineHeights.kilo};
   margin-top: ${theme.spacings.giga};
 `;
 
-const Title = styled(Heading)(titleStyles);
+const Title = styled('h2')(titleStyles);
 
-function PreviewLarge({ slug, image, title, skills, theme }) {
+function PreviewLarge({ slug, image, title, skills }) {
+  const theme = useTheme();
   const sizes = getSizes(theme);
   /* eslint-disable jsx-a11y/anchor-is-valid */
   return (
@@ -48,9 +52,7 @@ function PreviewLarge({ slug, image, title, skills, theme }) {
               aspectRatio={500 / 500}
             />
           )}
-          <Title noMargin element="h2" size={Heading.TERA}>
-            {title}
-          </Title>
+          <Title>{title}</Title>
         </a>
       </Link>
       <ProjectMeta skills={skills} />
@@ -70,8 +72,7 @@ PreviewLarge.propTypes = {
     srcSet: PropTypes.string,
     colors: PropTypes.array,
     alt: PropTypes.string
-  }),
-  theme: PropTypes.object
+  })
 };
 
 PreviewLarge.defaultProps = {

@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { values } from 'lodash/fp';
 import { format } from 'date-fns';
-import { Link, Small } from '@madebyconnor/bamboo-ui';
+import { Small } from '@madebyconnor/bamboo-ui';
 
 import { BASE_URL, CATEGORY_PATH } from '../../../constants/paths';
 import * as CATEGORIES from '../../../constants/categories';
+import Link from '../../Link';
 
 function PostMeta({ date, category, className }) {
   if (!date && !category) {

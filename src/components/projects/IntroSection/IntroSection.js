@@ -2,19 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { SubHeading, sharedPropTypes } from '@sumup/circuit-ui';
-import { Intro } from '@madebyconnor/bamboo-ui';
+import { Intro, sharedPropTypes } from '@madebyconnor/bamboo-ui';
 
-const subHeadingStyles = ({ theme }) => css`
+const headingStyles = ({ theme }) => css`
+  font-size: ${theme.fontSizes.byte};
+  font-weight: ${theme.fontWeight.bold};
+  text-transform: uppercase;
   letter-spacing: 1px;
   color: ${theme.colors.n500};
 `;
 
-const StyledSubHeading = styled(SubHeading)(subHeadingStyles);
+const Heading = styled('h3')(headingStyles);
 
 const IntroSection = ({ title, children }) => (
   <>
-    <StyledSubHeading size={SubHeading.MEGA}>{title}</StyledSubHeading>
+    <Heading>{title}</Heading>
     <Intro size={Intro.GIGA} element="h4">
       {children}
     </Intro>

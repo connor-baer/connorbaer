@@ -1,91 +1,92 @@
-/* eslint-disable react/prop-types */
-import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { Heading, Text, Hr, List } from '@sumup/circuit-ui';
-import { Anchor, Image } from '@madebyconnor/bamboo-ui';
+import { Anchor, Image, Hr } from '@madebyconnor/bamboo-ui';
 
 import Blockquote from '../components/blog/Blockquote';
 
-const headingStyles = ({ theme }) => css`
+const headingOneStyles = ({ theme }) => css`
+  font-size: ${theme.fontSizes.exa};
+  font-weight: ${theme.fontWeight.bold};
+  line-height: ${theme.lineHeights.kilo};
   margin-top: ${theme.spacings.exa};
 `;
 
-const StyledHeading = styled(Heading)(headingStyles);
+export const HeadingOne = styled('h2')(headingOneStyles);
 
-export const HeadingOne = ({ children, ...rest }) => (
-  <StyledHeading element="h2" size={Heading.EXA} {...rest}>
-    {children}
-  </StyledHeading>
-);
+const headingTwoStyles = ({ theme }) => css`
+  font-size: ${theme.fontSizes.peta};
+  font-weight: ${theme.fontWeight.bold};
+  line-height: ${theme.lineHeights.kilo};
+  margin-top: ${theme.spacings.exa};
+`;
 
-export const HeadingTwo = ({ children, ...rest }) => (
-  <StyledHeading element="h3" size={Heading.PETA} {...rest}>
-    {children}
-  </StyledHeading>
-);
+export const HeadingTwo = styled('h3')(headingTwoStyles);
 
-export const HeadingThree = ({ children, ...rest }) => (
-  <StyledHeading element="h4" size={Heading.TERA} {...rest}>
-    {children}
-  </StyledHeading>
-);
+const headingThreeStyles = ({ theme }) => css`
+  font-size: ${theme.fontSizes.tera};
+  font-weight: ${theme.fontWeight.bold};
+  line-height: ${theme.lineHeights.kilo};
+  margin-top: ${theme.spacings.exa};
+`;
 
-export const HeadingFour = ({ children, ...rest }) => (
-  <StyledHeading element="h5" size={Heading.GIGA} {...rest}>
-    {children}
-  </StyledHeading>
-);
+export const HeadingThree = styled('h4')(headingThreeStyles);
 
-export const HeadingFive = ({ children, ...rest }) => (
-  <StyledHeading element="h6" size={Heading.GIGA} {...rest}>
-    {children}
-  </StyledHeading>
-);
+const headingFourStyles = ({ theme }) => css`
+  font-size: ${theme.fontSizes.giga};
+  font-weight: ${theme.fontWeight.bold};
+  line-height: ${theme.lineHeights.kilo};
+  margin-top: ${theme.spacings.exa};
+`;
 
-export const Paragraph = ({ children, ...rest }) => (
-  <Text size={Text.GIGA} {...rest}>
-    {children}
-  </Text>
-);
+export const HeadingFour = styled('h5')(headingFourStyles);
 
-export const Em = ({ children, ...rest }) => (
-  <Text size={Text.GIGA} element="em" italic {...rest}>
-    {children}
-  </Text>
-);
+const textStyles = ({ theme }) => css`
+  font-size: ${theme.fontSizes.mega};
+  line-height: ${theme.lineHeights.mega};
+  margin-top: ${theme.spacings.kilo};
+`;
 
-export const Strong = ({ children, ...rest }) => (
-  <Text size={Text.GIGA} element="strong" bold {...rest}>
-    {children}
-  </Text>
-);
+export const Paragraph = styled('p')(textStyles);
 
-export const Quote = ({ children, ...rest }) => (
-  <Text size={Text.GIGA} element="q" italic {...rest}>
-    {children}
-  </Text>
-);
+const italicStyles = () => css`
+  font-style: italic;
+`;
 
-export const Ul = ({ children, ...rest }) => (
-  <List size={List.GIGA} {...rest}>
-    {children}
-  </List>
-);
+export const Em = styled('em')(textStyles, italicStyles);
 
-export const Ol = ({ children, ...rest }) => (
-  <List size={List.GIGA} ordered {...rest}>
-    {children}
-  </List>
-);
+const boldStyles = ({ theme }) => css`
+  font-weight: ${theme.fontWeight.bold};
+`;
+
+export const Strong = styled('strong')(textStyles, boldStyles);
+
+export const Quote = Em.withComponent('q');
+
+const listStyles = ({ theme }) => css`
+  margin-bottom: ${theme.spacings.mega};
+  margin-left: ${theme.spacings.kilo};
+  padding-left: ${theme.spacings.mega};
+
+  li {
+    margin-bottom: ${theme.spacings.kilo};
+    margin-left: ${theme.spacings.kilo};
+  }
+
+  ul,
+  ol {
+    margin-left: ${theme.spacings.kilo};
+  }
+`;
+
+export const Ul = styled('ul')(textStyles, listStyles);
+
+export const Ol = Ul.withComponent('ol');
 
 const components = {
   h1: HeadingOne,
   h2: HeadingTwo,
   h3: HeadingThree,
   h4: HeadingFour,
-  h5: HeadingFive,
-  h6: HeadingFive,
   p: Paragraph,
   ul: Ul,
   ol: Ol,
