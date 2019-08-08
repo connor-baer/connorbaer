@@ -29,7 +29,7 @@ const articleStyles = ({ theme }) => css`
 const Article = styled('article')(articleStyles);
 
 const titleStyles = ({ theme }) => css`
-  font-size: ${theme.fontSizes.giga};
+  font-size: ${theme.fontSizes.tera};
   font-weight: ${theme.fontWeight.bold};
   line-height: ${theme.lineHeights.kilo};
   margin-top: ${theme.spacings.giga};
