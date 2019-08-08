@@ -5,7 +5,7 @@ import { Anchor, Image, Hr } from '@madebyconnor/bamboo-ui';
 import Blockquote from '../components/blog/Blockquote';
 
 const headingOneStyles = ({ theme }) => css`
-  font-size: ${theme.fontSizes.exa};
+  font-size: ${theme.fontSizes.peta};
   font-weight: ${theme.fontWeight.bold};
   line-height: ${theme.lineHeights.kilo};
   margin-top: ${theme.spacings.exa};
@@ -14,7 +14,7 @@ const headingOneStyles = ({ theme }) => css`
 export const HeadingOne = styled('h2')(headingOneStyles);
 
 const headingTwoStyles = ({ theme }) => css`
-  font-size: ${theme.fontSizes.peta};
+  font-size: ${theme.fontSizes.tera};
   font-weight: ${theme.fontWeight.bold};
   line-height: ${theme.lineHeights.kilo};
   margin-top: ${theme.spacings.exa};
@@ -23,7 +23,7 @@ const headingTwoStyles = ({ theme }) => css`
 export const HeadingTwo = styled('h3')(headingTwoStyles);
 
 const headingThreeStyles = ({ theme }) => css`
-  font-size: ${theme.fontSizes.tera};
+  font-size: ${theme.fontSizes.giga};
   font-weight: ${theme.fontWeight.bold};
   line-height: ${theme.lineHeights.kilo};
   margin-top: ${theme.spacings.exa};
@@ -32,7 +32,7 @@ const headingThreeStyles = ({ theme }) => css`
 export const HeadingThree = styled('h4')(headingThreeStyles);
 
 const headingFourStyles = ({ theme }) => css`
-  font-size: ${theme.fontSizes.giga};
+  font-size: ${theme.fontSizes.mega};
   font-weight: ${theme.fontWeight.bold};
   line-height: ${theme.lineHeights.kilo};
   margin-top: ${theme.spacings.exa};
@@ -42,7 +42,7 @@ export const HeadingFour = styled('h5')(headingFourStyles);
 
 const textStyles = ({ theme }) => css`
   font-size: ${theme.fontSizes.mega};
-  line-height: ${theme.lineHeights.mega};
+  line-height: ${theme.lineHeights.giga};
   margin-top: ${theme.spacings.kilo};
 `;
 

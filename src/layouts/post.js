@@ -58,9 +58,9 @@ const postHeaderStyles = ({ theme }) => css`
 const PostHeader = styled('header')(postHeaderStyles);
 
 const headingStyles = ({ theme }) => css`
-  font-size: ${theme.fontSizes.peta};
+  font-size: ${theme.fontSizes.exa};
   font-weight: ${theme.fontWeight.bold};
-  line-height: ${theme.lineHeights.kilo};
+  line-height: ${theme.lineHeights.byte};
 `;
 
 const Heading = styled('h1')(headingStyles);
