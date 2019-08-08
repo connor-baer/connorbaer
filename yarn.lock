@@ -1598,9 +1598,9 @@
     core-js "^2.5.7"
 
 "@madebyconnor/bamboo-ui@^1.0.0":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@madebyconnor/bamboo-ui/-/bamboo-ui-1.1.1.tgz#88a53415feb6fc32066811d3d32108f25efc92af"
-  integrity sha512-8Lo9/REalpSGm0bLoZnOh+8wN6H2bfu40Vfbc/A5I4T4sdMDYAP4KZKeR7HnE5aqf4XkzXKYy6XisfmI4SWWvg==
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@madebyconnor/bamboo-ui/-/bamboo-ui-1.1.2.tgz#f1b627faf278151b06c40c7a8ed6de084eb9681b"
+  integrity sha512-94oLM3borKY/zKqn2DjeJIetleqpAAnUhT/BBt+dWODA6V32DNnVQIyHnE+niK3thDZBIl8VNHTsAHIpblOeWQ==
   dependencies:
     "@emotion/core" "^10.0.10"
     "@emotion/styled" "^10.0.10"

@@ -2,7 +2,12 @@ import React from 'react';
 import App, { Container } from 'next/app';
 import Head from 'next/head';
 import Router from 'next/router';
-import { ComponentsContext, Theme, LoadingBar } from '@madebyconnor/bamboo-ui';
+import {
+  ComponentsContext,
+  Theme,
+  LoadingBar,
+  GlobalStyles
+} from '@madebyconnor/bamboo-ui';
 
 import { getAllCookies } from '../services/cookies';
 import * as themes from '../styles/themes';
@@ -50,6 +55,7 @@ export default class CustomApp extends App {
             initialThemeId={section}
             assetPrefix={FONTS_PATH}
           >
+            <GlobalStyles />
             <LoadingBar isLoading={isLoading} />
             <Component {...pageProps} cookies={cookies} />
           </Theme>
