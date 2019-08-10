@@ -1,4 +1,4 @@
-import CONFIG from '../config';
+import CONFIG from '../utils/config';
 
 // Base URLs
 export const { BASE_URL, STATIC_URL } = CONFIG || {};
