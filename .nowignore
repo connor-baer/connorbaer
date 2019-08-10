@@ -5,5 +5,5 @@ plopfile.js
 .huskyrc.js
 .eslintrc.js
 jest.*
-src/.next
-src/static
+.next
+.mdx-data

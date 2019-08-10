@@ -1,15 +1,63 @@
 {
+  "version": 2,
   "name": "connor",
   "alias": "connorbaer.co",
-  "version": 1,
-  "scale": {
-    "bru": {
-      "min": 1,
-      "max": "auto"
+  "regions": ["lhr", "bru"],
+  "routes": [
+    {
+      "src": "/static/images/(.*)",
+      "dest": "/server/api/image.js",
+      "headers": {
+        "X-Download-Options": "noopen",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Referrer-Policy": "no-referrer-when-downgrade",
+        "X-Xss-Protection": "1",
+        "X-Content-Type-Options": "nosniff",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "Feature-Policy": "geolocation 'self'; microphone 'none'; camera 'none'; payment: 'none'"
+      }
     },
-    "sfo1": {
-      "min": 1,
-      "max": "auto"
+    {
+      "src": "/api/(.+)",
+      "dest": "/server/api/$1.js",
+      "headers": {
+        "X-Download-Options": "noopen",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Referrer-Policy": "no-referrer-when-downgrade",
+        "X-Xss-Protection": "1",
+        "X-Content-Type-Options": "nosniff",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "Feature-Policy": "geolocation 'self'; microphone 'none'; camera 'none'; payment: 'none'"
+      }
+    },
+    {
+      "src": "/service-worker.js",
+      "dest": "/_next/static/service-worker.js",
+      "headers": {
+        "cache-control": "public, max-age=43200, immutable",
+        "Service-Worker-Allowed": "/"
+      }
+    },
+    {
+      "src": "/(.*)",
+      "headers": {
+        "X-Download-Options": "noopen",
+        "X-Frame-Options": "SAMEORIGIN",
+        "Referrer-Policy": "no-referrer-when-downgrade",
+        "X-Xss-Protection": "1",
+        "X-Content-Type-Options": "nosniff",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "Feature-Policy": "geolocation 'self'; microphone 'none'; camera 'none'; payment: 'none'"
+      }
     }
-  }
+  ],
+  "builds": [
+    {
+      "src": "server/api/**.js",
+      "use": "@now/node@canary",
+      "config": { "maxLambdaSize": "10mb" }
+    },
+    { "src": "images/**", "use": "@now/static" },
+    { "src": "package.json", "use": "@now/next" }
+  ]
 }
