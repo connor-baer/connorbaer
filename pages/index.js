@@ -25,7 +25,7 @@ const subtitle =
 
 export default function Page() {
   const sortedPosts = flow(
-    sortByDate,
+    sortByDate(),
     slice(0, 3)
   )(posts);
   return (

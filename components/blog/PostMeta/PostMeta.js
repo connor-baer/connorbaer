@@ -4,7 +4,6 @@ import { toLower } from 'lodash/fp';
 import { format } from 'date-fns';
 import { Small } from '@madebyconnor/bamboo-ui';
 
-import { CATEGORY_PATH } from '../../../constants/paths';
 import Link from '../../Link';
 
 export default function PostMeta({ date, category, className }) {
@@ -27,8 +26,8 @@ export default function PostMeta({ date, category, className }) {
       {category && (
         <Small>
           <Link
-            as={`${CATEGORY_PATH}/${categorySlug}`}
-            href={{ pathname: CATEGORY_PATH, query: { category } }}
+            href="/blog/category/[category]"
+            as={`/blog/category/${categorySlug}`}
           >
             <a>{category}</a>
           </Link>

@@ -32,7 +32,7 @@ export default function Blog({ category }) {
 
   const sortedPosts = flow(
     filterByCategory(category),
-    sortByDate
+    sortByDate()
   )(posts);
   return (
     <>
@@ -77,9 +77,4 @@ export default function Blog({ category }) {
 
 Blog.propTypes = {
   category: PropTypes.string
-};
-
-Blog.getInitialProps = ctx => {
-  const { category } = ctx.query;
-  return { category };
 };
