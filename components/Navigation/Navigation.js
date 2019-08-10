@@ -44,7 +44,7 @@ CustomNavigation.propTypes = {
 
 CustomNavigation.defaultProps = {
   siteName: SITE_NAME,
-  siteLogo: <PandaIcon />,
+  siteLogo: <PandaIcon alt="Panda" />,
   links: [
     { url: '/about', label: 'About' },
     { url: '/projects', label: 'Projects' },

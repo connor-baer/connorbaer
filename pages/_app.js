@@ -6,6 +6,7 @@ import {
   ComponentsContext,
   Theme,
   LoadingBar,
+  Image,
   GlobalStyles
 } from '@madebyconnor/bamboo-ui';
 
@@ -47,7 +48,7 @@ export default class CustomApp extends App {
     const section = router.pathname.split('/')[1];
     return (
       <Container>
-        <ComponentsContext.Provider value={{ Head, Link }}>
+        <ComponentsContext.Provider value={{ Head, Image, Link }}>
           <Theme
             cookies={cookies}
             themes={themes}

@@ -24,13 +24,13 @@ const customConfig = {
   },
   overrides: [
     {
-      files: ['src/services/*.js', 'src/components/**/*Service.js'],
+      files: ['services/*.js', 'components/**/*Service.js'],
       rules: {
         'import/prefer-default-export': 'off'
       }
     },
     {
-      files: ['src/layouts/*.js'],
+      files: ['layouts/*.js'],
       rules: {
         'react/prop-types': 'off'
       }

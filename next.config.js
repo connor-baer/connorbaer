@@ -4,12 +4,11 @@ const emoji = require('remark-emoji');
 const externalLinks = require('remark-external-links');
 const withPlugins = require('next-compose-plugins');
 const withOffline = require('next-offline');
-const withOptimizedImages = require('next-optimized-images');
 const withTranspileModules = require('next-transpile-modules');
 const withBundleAnalyzer = require('@next/bundle-analyzer');
 const withMdxEnhanced = require('next-mdx-enhanced');
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 const LOCALHOST = `http://localhost:${PORT}`;
 const BASE_URL = process.env.BASE_URL || LOCALHOST;
 const STATIC_URL = process.env.STATIC_URL || `${LOCALHOST}/static`;
@@ -61,13 +60,33 @@ const nextConfig = {
   }
 };
 
-const mdxConfig = {
-  remarkPlugins: [emoji, externalLinks],
-  rehypePlugins: [slug]
-};
-
-const optimizedImagesConfig = {
-  handleImages: ['jpeg', 'png', 'webp', 'gif']
+const offlineConfig = {
+  // Add the homepage to the cache
+  transformManifest: manifest => ['/'].concat(manifest),
+  // Trying to set NODE_ENV=production when running yarn dev causes a
+  // build-time error so we turn on the SW in dev mode so that we can
+  // actually test it
+  generateInDevMode: true,
+  workboxOpts: {
+    swDest: 'static/service-worker.js',
+    runtimeCaching: [
+      {
+        urlPattern: /^https?.*/,
+        handler: 'NetworkFirst',
+        options: {
+          cacheName: 'https-calls',
+          networkTimeoutSeconds: 15,
+          expiration: {
+            maxEntries: 150,
+            maxAgeSeconds: 30 * 24 * 60 * 60 // 1 month
+          },
+          cacheableResponse: {
+            statuses: [0, 200]
+          }
+        }
+      }
+    ]
+  }
 };
 
 const transpileModulesConfig = {
@@ -78,10 +97,14 @@ const bundleAnalyzerConfig = {
   enabled: process.env.ANALYZE === 'true'
 };
 
+const mdxConfig = {
+  remarkPlugins: [emoji, externalLinks],
+  rehypePlugins: [slug]
+};
+
 module.exports = withPlugins(
   [
-    withOffline,
-    [withOptimizedImages, optimizedImagesConfig],
+    [withOffline, offlineConfig],
     [withTranspileModules, transpileModulesConfig],
     [withBundleAnalyzer, bundleAnalyzerConfig],
     withMdxEnhanced(mdxConfig)
