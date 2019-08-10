@@ -14,21 +14,18 @@ const headingStyles = ({ theme }) => css`
 
 const Heading = styled('h3')(headingStyles);
 
-const IntroSection = ({ title, children }) => (
-  <>
-    <Heading>{title}</Heading>
-    <Intro size={Intro.GIGA} element="h4">
-      {children}
-    </Intro>
-  </>
-);
+export default function IntroSection({ title, children }) {
+  return (
+    <>
+      <Heading>{title}</Heading>
+      <Intro size={Intro.GIGA} element="h4">
+        {children}
+      </Intro>
+    </>
+  );
+}
 
 IntroSection.propTypes = {
   title: PropTypes.string.isRequired,
   children: sharedPropTypes.childrenPropType.isRequired
 };
-
-/**
- * @component
- */
-export default IntroSection;

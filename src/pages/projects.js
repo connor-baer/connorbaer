@@ -12,11 +12,12 @@ import {
   Columns
 } from '@madebyconnor/bamboo-ui';
 
-import * as Projects from '../../services/projects';
-import Navigation from '../../components/Navigation';
-import PreviewLarge from '../../components/projects/PreviewLarge';
-import { SITE_NAME, SITE_TWITTER } from '../../constants';
-import { BASE_URL, PROJECTS_PATH } from '../../constants/paths';
+// eslint-disable-next-line import/no-unresolved
+import { frontMatter as projects } from './projects/**/index.mdx';
+import * as Url from '../services/url';
+import Navigation from '../components/Navigation';
+import PreviewLarge from '../components/projects/PreviewLarge';
+import { SITE_NAME, SITE_TWITTER } from '../constants';
 
 const spacingStyles = ({ theme }) => css`
   margin-top: ${theme.spacings.giga};
@@ -31,12 +32,10 @@ const spacingStyles = ({ theme }) => css`
 const StyledColumns = styled(Columns)(spacingStyles);
 const StyledHeader = styled(Header)(spacingStyles);
 
-function ProjectsHome() {
-  const posts = Projects.load();
-  const sortedProjects = Projects.sortByDate(posts);
+export default function ProjectsHome() {
   const title = 'Selected Work';
   const subtitle = 'Beautifully functional';
-  const url = `${BASE_URL}/${PROJECTS_PATH}`;
+  const url = Url.formatPath('projects');
   return (
     <>
       <Meta
@@ -53,8 +52,12 @@ function ProjectsHome() {
             <Col span="12">
               <StyledColumns>
                 <StyledHeader title={title} subtitle={subtitle} />
-                {sortedProjects.map(post => (
-                  <PreviewLarge key={post.slug} {...post} />
+                {projects.map(project => (
+                  <PreviewLarge
+                    key={project.__resourcePath}
+                    url={Url.formatPath(project.__resourcePath)}
+                    {...project}
+                  />
                 ))}
               </StyledColumns>
             </Col>
@@ -72,5 +75,3 @@ function ProjectsHome() {
     </>
   );
 }
-
-export default ProjectsHome;

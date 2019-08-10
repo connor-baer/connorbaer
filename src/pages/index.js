@@ -10,22 +10,25 @@ import {
   Footer
 } from '@madebyconnor/bamboo-ui';
 
-import * as Posts from '../services/posts';
+// eslint-disable-next-line import/no-unresolved
+import { frontMatter as posts } from './blog/**/index.mdx';
+import sortByDate from '../utils/sort-by-date';
 import Navigation from '../components/Navigation';
 import PreviewSmall from '../components/blog/PreviewSmall';
 
 import { SITE_NAME, SITE_TWITTER } from '../constants';
 import { BASE_URL } from '../constants/paths';
+import * as Url from '../services/url';
 
 export default function Page() {
   const title = 'Hello, I’m Connor.';
   // eslint-disable-next-line max-len
   const subtitle =
     'I am a web developer with a strong background in design and a passion for accessibility, currently working as a frontend engineer at SumUp.'; // eslint-disable-line max-len
-  const posts = flow(
-    Posts.sortByDate,
+  const sortedPosts = flow(
+    sortByDate,
     slice(0, 3)
-  )(Posts.load());
+  )(posts);
   return (
     <>
       <Meta
@@ -44,9 +47,12 @@ export default function Page() {
             </Col>
           </Row>
           <Row>
-            {posts.map((post, i) => (
+            {sortedPosts.map((post, i) => (
               <Col key={i} span={{ default: 12, kilo: 6, mega: 4 }}>
-                <PreviewSmall {...post} />
+                <PreviewSmall
+                  url={Url.formatPath(post.__resourcePath)}
+                  {...post}
+                />
               </Col>
             ))}
           </Row>

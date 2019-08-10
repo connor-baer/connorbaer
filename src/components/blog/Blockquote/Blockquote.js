@@ -40,7 +40,7 @@ const citeStyles = ({ theme }) => css`
 
 const Cite = styled('cite')(citeStyles);
 
-function Blockquote({ children, cite, align, ...rest }) {
+export default function Blockquote({ children, cite, align, ...rest }) {
   return (
     <Align align={align}>
       <Quote {...rest}>{children}</Quote>
@@ -68,8 +68,3 @@ Blockquote.propTypes = {
 Blockquote.defaultProps = {
   align: Align.CENTER
 };
-
-/**
- * @component
- */
-export default Blockquote;

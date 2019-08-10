@@ -1,22 +1,11 @@
-import Post from '../../../layouts/post'
+---
+title: 'The Sound of Silence'
+description: 'Dear friends, it’s been ages. I’ve meant to write to you for a while now but never had the courage. I am deeply sorry. This post is both an explanation to you and a plan of action for me.'
+date: '2017/4/6'
+category: 'Journal'
+---
+
 import Blockquote from '../../../components/blog/Blockquote'
-import { JOURNAL } from '../../../constants/categories'
-
-export const meta = {
-  title: 'The Sound of Silence',
-  description:
-    'Dear friends, it’s been ages. I’ve meant to write to you for a while now but never had the courage. I am deeply sorry. This post is both an explanation to you and a plan of action for me.',
-  slug: 'sound-of-silence',
-  image: {
-    ...require('./waves.jpg?resize&sizes[]=400&sizes[]=800&sizes[]=1600&sizes[]=2400'),
-    colors: require('./waves.jpg?lqip-colors'),
-    alt: 'Waves disturb a dark body of water.'
-  },
-  date: '2017/4/6',
-  category: JOURNAL
-}
-
-export default ({ children }) => <Post {...meta}>{children}</Post>
 
 # What happened?
 

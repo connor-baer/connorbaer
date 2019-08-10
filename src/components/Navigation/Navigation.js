@@ -10,7 +10,7 @@ import {
 
 import { SITE_NAME } from '../../constants';
 
-function CustomNavigation({ siteName, siteLogo, links = [] }) {
+export default function CustomNavigation({ siteName, siteLogo, links = [] }) {
   const router = useRouter();
   const isHomepage = router.asPath === '/';
   const enhancedLinks = links.map(link => {
@@ -51,8 +51,3 @@ CustomNavigation.defaultProps = {
     { url: '/blog', label: 'Blog' }
   ]
 };
-
-/**
- * @component
- */
-export default CustomNavigation;
