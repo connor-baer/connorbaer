@@ -69,13 +69,13 @@ export default ({
   category,
   __resourcePath
 }) =>
-  function Post({ children, baseUrl }) {
+  function Post({ children }) {
     const theme = useTheme();
     useEffect(() => {
       theme.setTheme('blog');
     });
 
-    const url = Url.format(baseUrl, __resourcePath);
+    const url = Url.format(__resourcePath, true);
 
     return (
       <>

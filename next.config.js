@@ -63,7 +63,7 @@ const offlineConfig = {
     runtimeCaching: [
       {
         urlPattern: /^https?.*/,
-        handler: 'NetworkFirst',
+        handler: 'networkFirst',
         options: {
           cacheName: 'https-calls',
           networkTimeoutSeconds: 15,

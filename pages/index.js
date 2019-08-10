@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { flow, slice } from 'lodash/fp';
 import { Grid, Row, Col } from '@sumup/circuit-ui';
 import {
@@ -24,7 +23,7 @@ const title = 'Hello, I’m Connor.';
 const subtitle =
   'I am a web developer with a strong background in design and a passion for accessibility, currently working as a frontend engineer at SumUp.'; // eslint-disable-line max-len
 
-export default function Page({ baseUrl }) {
+export default function Page() {
   const sortedPosts = flow(
     sortByDate,
     slice(0, 3)
@@ -34,7 +33,7 @@ export default function Page({ baseUrl }) {
       <Meta
         title={title}
         description={subtitle}
-        url={baseUrl}
+        url={Url.format('', true)}
         siteName={SITE_NAME}
         siteTwitter={SITE_TWITTER}
       />
@@ -49,10 +48,7 @@ export default function Page({ baseUrl }) {
           <Row>
             {sortedPosts.map((post, i) => (
               <Col key={i} span={{ default: 12, kilo: 6, mega: 4 }}>
-                <PreviewSmall
-                  url={Url.format(baseUrl, post.__resourcePath)}
-                  {...post}
-                />
+                <PreviewSmall url={Url.format(post.__resourcePath)} {...post} />
               </Col>
             ))}
           </Row>
@@ -69,7 +65,3 @@ export default function Page({ baseUrl }) {
     </>
   );
 }
-
-Page.propTypes = {
-  baseUrl: PropTypes.string
-};

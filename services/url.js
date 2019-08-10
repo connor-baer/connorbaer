@@ -1,4 +1,7 @@
-export function format(baseUrl, path) {
+import { BASE_URL } from '../constants/paths';
+
+export function format(path, includeBaseUrl = false) {
   const pathname = path.replace(/(?:\/index)?\.mdx$/, '');
-  return `${baseUrl}/${pathname}`;
+
+  return includeBaseUrl ? `${BASE_URL}/${pathname}` : `/${pathname}`;
 }
