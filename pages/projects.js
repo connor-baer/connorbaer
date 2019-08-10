@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { Grid, Row, Col } from '@sumup/circuit-ui';
@@ -32,10 +33,10 @@ const spacingStyles = ({ theme }) => css`
 const StyledColumns = styled(Columns)(spacingStyles);
 const StyledHeader = styled(Header)(spacingStyles);
 
-export default function ProjectsHome() {
+export default function ProjectsHome({ baseUrl }) {
   const title = 'Selected Work';
   const subtitle = 'Beautifully functional';
-  const url = Url.formatPath('projects');
+  const url = Url.format(baseUrl, 'projects');
   return (
     <>
       <Meta
@@ -55,7 +56,7 @@ export default function ProjectsHome() {
                 {projects.map(project => (
                   <PreviewLarge
                     key={project.__resourcePath}
-                    url={Url.formatPath(project.__resourcePath)}
+                    url={Url.format(baseUrl, project.__resourcePath)}
                     {...project}
                   />
                 ))}
@@ -75,3 +76,7 @@ export default function ProjectsHome() {
     </>
   );
 }
+
+ProjectsHome.propTypes = {
+  baseUrl: PropTypes.string
+};

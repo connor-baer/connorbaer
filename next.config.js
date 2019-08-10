@@ -8,17 +8,8 @@ const withTranspileModules = require('next-transpile-modules');
 const withBundleAnalyzer = require('@next/bundle-analyzer');
 const withMdxEnhanced = require('next-mdx-enhanced');
 
-const PORT = process.env.PORT || 3000;
-const LOCALHOST = `http://localhost:${PORT}`;
-const BASE_URL = process.env.BASE_URL || LOCALHOST;
-const STATIC_URL = process.env.STATIC_URL || `${LOCALHOST}/static`;
-
 const nextConfig = {
   poweredByHeader: false,
-  publicRuntimeConfig: {
-    BASE_URL,
-    STATIC_URL
-  },
   webpack: (config, { dev, defaultLoaders }) => {
     // eslint-disable-next-line no-param-reassign
     config.resolve.alias = {

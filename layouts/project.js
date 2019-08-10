@@ -26,8 +26,8 @@ export default ({
   client,
   __resourcePath
 }) =>
-  function Project({ children }) {
-    const url = Url.formatPath(__resourcePath);
+  function Project({ children, baseUrl }) {
+    const url = Url.format(baseUrl, __resourcePath);
 
     return (
       <>

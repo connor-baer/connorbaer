@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { flow, slice } from 'lodash/fp';
 import { Grid, Row, Col } from '@sumup/circuit-ui';
 import {
@@ -17,14 +18,13 @@ import Navigation from '../components/Navigation';
 import PreviewSmall from '../components/blog/PreviewSmall';
 
 import { SITE_NAME, SITE_TWITTER } from '../constants';
-import { BASE_URL } from '../constants/paths';
 import * as Url from '../services/url';
 
-export default function Page() {
-  const title = 'Hello, I’m Connor.';
-  // eslint-disable-next-line max-len
-  const subtitle =
-    'I am a web developer with a strong background in design and a passion for accessibility, currently working as a frontend engineer at SumUp.'; // eslint-disable-line max-len
+const title = 'Hello, I’m Connor.';
+const subtitle =
+  'I am a web developer with a strong background in design and a passion for accessibility, currently working as a frontend engineer at SumUp.'; // eslint-disable-line max-len
+
+export default function Page({ baseUrl }) {
   const sortedPosts = flow(
     sortByDate,
     slice(0, 3)
@@ -34,7 +34,7 @@ export default function Page() {
       <Meta
         title={title}
         description={subtitle}
-        url={BASE_URL}
+        url={baseUrl}
         siteName={SITE_NAME}
         siteTwitter={SITE_TWITTER}
       />
@@ -50,7 +50,7 @@ export default function Page() {
             {sortedPosts.map((post, i) => (
               <Col key={i} span={{ default: 12, kilo: 6, mega: 4 }}>
                 <PreviewSmall
-                  url={Url.formatPath(post.__resourcePath)}
+                  url={Url.format(baseUrl, post.__resourcePath)}
                   {...post}
                 />
               </Col>
@@ -69,3 +69,7 @@ export default function Page() {
     </>
   );
 }
+
+Page.propTypes = {
+  baseUrl: PropTypes.string
+};

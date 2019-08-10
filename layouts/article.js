@@ -17,8 +17,8 @@ import { SITE_NAME, SITE_TWITTER } from '../constants';
 import * as Url from '../services/url';
 
 export default ({ title, subtitle, __resourcePath }) =>
-  function Article({ children }) {
-    const url = Url.formatPath(__resourcePath);
+  function Article({ baseUrl, children }) {
+    const url = Url.format(baseUrl, __resourcePath);
     return (
       <>
         <Meta
