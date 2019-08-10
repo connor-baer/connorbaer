@@ -2,7 +2,7 @@ import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 
 import { LANG, GA_TOKEN } from '../constants';
-import { FAVICONS_PATH, STATIC_URL } from '../constants/paths';
+import { FAVICONS_PATH } from '../constants/paths';
 
 export default class CustomDocument extends Document {
   constructor(props) {
@@ -18,7 +18,6 @@ export default class CustomDocument extends Document {
     return (
       <html lang={LANG}>
         <Head>
-          <link rel="dns-prefetch" href={STATIC_URL} />
           <link
             rel="shortcut icon"
             href={`${FAVICONS_PATH}/favicon.ico`}
