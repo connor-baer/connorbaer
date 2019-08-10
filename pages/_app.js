@@ -6,7 +6,6 @@ import {
   ComponentsContext,
   Theme,
   LoadingBar,
-  Image,
   GlobalStyles
 } from '@madebyconnor/bamboo-ui';
 
@@ -14,6 +13,7 @@ import { getAllCookies } from '../services/cookies';
 import getBaseUrl from '../utils/get-base-url';
 import * as themes from '../styles/themes';
 import Link from '../components/Link';
+import Image from '../components/Image';
 
 import { FONTS_PATH } from '../constants/paths';
 

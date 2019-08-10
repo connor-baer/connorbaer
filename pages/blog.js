@@ -12,7 +12,7 @@ import {
 } from '@madebyconnor/bamboo-ui';
 
 // eslint-disable-next-line import/no-unresolved
-import { frontMatter as posts } from './blog/**/index.mdx';
+import { frontMatter as posts } from './blog/*.mdx';
 import sortByDate from '../utils/sort-by-date';
 import filterByCategory from '../utils/filter-by-category';
 import * as Url from '../services/url';
