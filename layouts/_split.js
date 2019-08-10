@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { sharedPropTypes } from '@madebyconnor/bamboo-ui';
 
-import Portal from '../components/Portal/Portal';
+import Portal from '../components/Portal';
 
 const SIDEBAR_ID = 'portal-sidebar';
 

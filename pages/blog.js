@@ -25,10 +25,10 @@ const grid = {
   skip: { default: 0, kilo: 1, mega: 2 }
 };
 
-export default function Blog({ baseUrl, category }) {
+export default function Blog({ category }) {
   const title = category || 'Blog';
   const path = category ? 'blog' : `blog/${toLower(category)}`;
-  const url = Url.format(baseUrl, path);
+  const url = Url.format(path, true);
 
   const sortedPosts = flow(
     filterByCategory(category),
@@ -56,7 +56,7 @@ export default function Blog({ baseUrl, category }) {
                 <PreviewLarge
                   {...post}
                   key={post.__resourcePath}
-                  url={Url.format(baseUrl, post.__resourcePath)}
+                  url={Url.format(post.__resourcePath)}
                 />
               ))}
             </Col>
@@ -76,7 +76,6 @@ export default function Blog({ baseUrl, category }) {
 }
 
 Blog.propTypes = {
-  baseUrl: PropTypes.string,
   category: PropTypes.string
 };
 
