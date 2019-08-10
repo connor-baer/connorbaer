@@ -9,7 +9,7 @@ function stringifySkills(skills) {
   return `${firstSkills.join(', ')} & ${lastSkill}`;
 }
 
-function ProjectMeta({ skills, ...props }) {
+export default function ProjectMeta({ skills, ...props }) {
   if (isEmpty(skills)) {
     return null;
   }
@@ -20,8 +20,3 @@ function ProjectMeta({ skills, ...props }) {
 ProjectMeta.propTypes = {
   skills: PropTypes.arrayOf(PropTypes.string)
 };
-
-/**
- * @component
- */
-export default ProjectMeta;

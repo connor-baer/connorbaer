@@ -11,14 +11,31 @@ const customConfig = {
     }
   },
   rules: {
-    'notice/notice': 'off'
+    'notice/notice': 'off',
+    'no-underscore-dangle': [
+      'error',
+      { allow: ['__resourcePath', '__DEV__', '__PRODUCTION__', '__TEST__'] }
+    ]
   },
   globals: {
     __DEV__: true,
     __PRODUCTION__: true,
-    __TEST__: true,
-    objectFitPolyfill: true
+    __TEST__: true
   },
+  overrides: [
+    {
+      files: ['src/services/*.js', 'src/components/**/*Service.js'],
+      rules: {
+        'import/prefer-default-export': 'off'
+      }
+    },
+    {
+      files: ['src/layouts/*.js'],
+      rules: {
+        'react/prop-types': 'off'
+      }
+    }
+  ],
   settings: {
     'import/resolver': {
       webpack: {

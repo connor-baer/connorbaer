@@ -1,9 +1,5 @@
-export default function sortByDate(a, b, descending = true) {
-  const dateA = new Date(a).getTime();
-  const dateB = new Date(b).getTime();
+import { sortBy } from 'lodash/fp';
 
-  if (descending) {
-    return dateB - dateA;
-  }
-  return dateA - dateB;
+export default function sortByDate(items) {
+  return sortBy(item => new Date(item.date).getTime(), items);
 }

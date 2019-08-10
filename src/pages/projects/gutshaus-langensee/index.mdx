@@ -1,22 +1,11 @@
-import Project from '../../../layouts/project'
-
-export const meta = {
-  title: 'Gutshaus Langensee',
-  subtitle:
-    'This family-run estate invites families to spend relaxing holidays in north-east Germany.',
-  brief:
-    'Within three weeks I restructured the website, rebuilt it on top of Squarespace and implemented a new booking flow.',
-  slug: 'gutshaus-langensee',
-  image: {
-    ...require('./gutshaus-langensee.jpg?resize&sizes[]=400&sizes[]=800&sizes[]=1200&sizes[]=2400'),
-    colors: require('./gutshaus-langensee.jpg?lqip-colors'),
-    alt: 'Screenshot of gutshaus-langensee.de'
-  },
-  link: 'https://gutshaus-langensee.de',
-  client: 'Gutshaus Langensee',
-  skills: ['Concept', 'Design']
-}
-
-export default ({ children }) => <Project {...meta}>{children}</Project>
+---
+title: 'Gutshaus Langensee'
+subtitle: 'This family-run estate invites families to spend relaxing holidays in north-east Germany.'
+brief: 'Within three weeks I restructured the website, rebuilt it on top of Squarespace and implemented a new booking flow.'
+link: 'https://gutshaus-langensee.de'
+client: 'Gutshaus Langensee'
+skills: ['Concept', 'Design']
+layout: 'project'
+---
 
 _In writing..._

@@ -35,7 +35,6 @@ export default class CustomApp extends App {
     });
     Router.events.on('routeChangeComplete', () => {
       this.setState({ isLoading: false });
-      objectFitPolyfill();
     });
     Router.events.on('routeChangeError', () => {
       this.setState({ isLoading: false });

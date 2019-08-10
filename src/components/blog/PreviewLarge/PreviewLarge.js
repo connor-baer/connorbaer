@@ -2,11 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { values, omit } from 'lodash/fp';
+import { omit } from 'lodash/fp';
 import { CoverImage, useTheme } from '@madebyconnor/bamboo-ui';
-
-import { BLOG_PATH } from '../../../constants/paths';
-import * as CATEGORIES from '../../../constants/categories';
 
 import Link from '../../Link';
 import PostMeta from '../PostMeta';
@@ -50,8 +47,8 @@ const descriptionStyles = ({ theme }) => css`
 
 const Description = styled('p')(descriptionStyles);
 
-function PreviewLarge({
-  slug,
+export default function PreviewLarge({
+  url,
   image,
   title,
   description,
@@ -64,7 +61,7 @@ function PreviewLarge({
   /* eslint-disable jsx-a11y/anchor-is-valid */
   return (
     <Article>
-      <Link href={`${BLOG_PATH}/${slug}`} prefetch>
+      <Link href={url}>
         <a>
           {featured && image.src && (
             <CoverImage
@@ -84,12 +81,12 @@ function PreviewLarge({
 }
 
 PreviewLarge.propTypes = {
-  slug: PropTypes.string,
+  url: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
   date: PropTypes.string,
   featured: PropTypes.bool,
-  category: PropTypes.oneOf(values(CATEGORIES)),
+  category: PropTypes.string,
   image: PropTypes.shape({
     src: PropTypes.string,
     srcSet: PropTypes.string,
@@ -102,8 +99,3 @@ PreviewLarge.defaultProps = {
   featured: false,
   image: {}
 };
-
-/**
- * @component
- */
-export default PreviewLarge;
