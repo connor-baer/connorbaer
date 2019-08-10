@@ -6,4 +6,3 @@ plopfile.js
 .eslintrc.js
 jest.*
 .next
-.mdx-data

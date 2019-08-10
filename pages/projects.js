@@ -14,7 +14,7 @@ import {
 } from '@madebyconnor/bamboo-ui';
 
 // eslint-disable-next-line import/no-unresolved
-import { frontMatter as projects } from './projects/**/index.mdx';
+import { frontMatter as projects } from './projects/*.mdx';
 import * as Url from '../services/url';
 import Navigation from '../components/Navigation';
 import PreviewLarge from '../components/projects/PreviewLarge';

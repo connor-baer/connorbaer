@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { omit } from 'lodash/fp';
 import { CoverImage, useTheme } from '@madebyconnor/bamboo-ui';
 
 import Link from '../../Link';
@@ -44,11 +43,7 @@ export default function PreviewLarge({ url, image, title, skills }) {
       <Link href={url}>
         <a>
           {image.src && (
-            <CoverImage
-              {...omit('toString', image)}
-              sizes={sizes}
-              aspectRatio={500 / 500}
-            />
+            <CoverImage {...image} sizes={sizes} aspectRatio={500 / 500} />
           )}
           <Title>{title}</Title>
         </a>

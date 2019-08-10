@@ -90,7 +90,11 @@ export default ({
         <Navigation />
         <Main>
           <article>
-            <StyledParallaxImage {...image} />
+            <StyledParallaxImage
+              {...image}
+              srcSet={[400, 800, 1200, 1600, 2000]}
+              sizes="100vw"
+            />
             <Grid>
               <Row>
                 <Col
