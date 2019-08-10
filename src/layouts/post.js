@@ -1,10 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { withTheme } from 'emotion-theming';
-import { values } from 'lodash/fp';
-import { MDXProvider } from '@mdx-js/tag';
+import { MDXProvider } from '@mdx-js/react';
 import { Grid, Row, Col } from '@sumup/circuit-ui';
 import {
   Anchor,
@@ -14,16 +11,15 @@ import {
   Footer,
   Intro,
   ParallaxImage,
-  sharedPropTypes
+  useTheme
 } from '@madebyconnor/bamboo-ui';
 
 import components, { Paragraph } from './_components';
 import Navigation from '../components/Navigation';
 import PostMeta from '../components/blog/PostMeta';
 
-import * as CATEGORIES from '../constants/categories';
+import * as Url from '../services/url';
 import { SITE_NAME, SITE_TWITTER } from '../constants';
-import { BLOG_PATH, BASE_URL } from '../constants/paths';
 
 const styledParagraphStyles = ({ theme }) => css`
   font-family: ${theme.fontStack.serif};
@@ -65,34 +61,21 @@ const headingStyles = ({ theme }) => css`
 
 const Heading = styled('h1')(headingStyles);
 
-class Post extends Component {
-  static propTypes = {
-    title: PropTypes.string,
-    description: PropTypes.string,
-    slug: PropTypes.string,
-    date: PropTypes.string,
-    image: PropTypes.shape(sharedPropTypes.imagePropType),
-    category: PropTypes.oneOf(values(CATEGORIES)),
-    children: sharedPropTypes.childrenPropType,
-    theme: sharedPropTypes.themePropType
-  };
+export default ({
+  title,
+  description,
+  image,
+  date,
+  category,
+  __resourcePath
+}) =>
+  function Post({ children }) {
+    const theme = useTheme();
+    useEffect(() => {
+      theme.setTheme('blog');
+    });
 
-  constructor(props) {
-    super(props);
-    props.theme.setTheme('blog');
-  }
-
-  render() {
-    const {
-      children,
-      title,
-      description,
-      image,
-      slug,
-      date,
-      category
-    } = this.props;
-    const url = `${BASE_URL}${BLOG_PATH}/${slug}`;
+    const url = Url.formatPath(__resourcePath);
 
     return (
       <>
@@ -139,7 +122,4 @@ class Post extends Component {
         </Footer>
       </>
     );
-  }
-}
-
-export default withTheme(Post);
+  };

@@ -5,8 +5,6 @@ import { css } from '@emotion/core';
 import { omit } from 'lodash/fp';
 import { CoverImage, useTheme } from '@madebyconnor/bamboo-ui';
 
-import { PROJECTS_PATH } from '../../../constants/paths';
-
 import Link from '../../Link';
 import ProjectMeta from '../ProjectMeta';
 
@@ -37,13 +35,13 @@ const titleStyles = ({ theme }) => css`
 
 const Title = styled('h2')(titleStyles);
 
-function PreviewLarge({ slug, image, title, skills }) {
+export default function PreviewLarge({ url, image, title, skills }) {
   const theme = useTheme();
   const sizes = getSizes(theme);
   /* eslint-disable jsx-a11y/anchor-is-valid */
   return (
     <Article>
-      <Link href={`${PROJECTS_PATH}/${slug}`} prefetch>
+      <Link href={url}>
         <a>
           {image.src && (
             <CoverImage
@@ -62,7 +60,7 @@ function PreviewLarge({ slug, image, title, skills }) {
 }
 
 PreviewLarge.propTypes = {
-  slug: PropTypes.string,
+  url: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
   featured: PropTypes.bool,
@@ -79,8 +77,3 @@ PreviewLarge.defaultProps = {
   featured: false,
   image: {}
 };
-
-/**
- * @component
- */
-export default PreviewLarge;

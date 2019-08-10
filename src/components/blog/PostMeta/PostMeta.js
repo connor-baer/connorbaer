@@ -1,20 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { values } from 'lodash/fp';
+import { toLower } from 'lodash/fp';
 import { format } from 'date-fns';
 import { Small } from '@madebyconnor/bamboo-ui';
 
 import { BASE_URL, CATEGORY_PATH } from '../../../constants/paths';
-import * as CATEGORIES from '../../../constants/categories';
 import Link from '../../Link';
 
-function PostMeta({ date, category, className }) {
+export default function PostMeta({ date, category, className }) {
   if (!date && !category) {
     return null;
   }
 
   const formattedDate = format(new Date(date), 'MMMM d, yyyy');
   const datetime = format(new Date(date), 'yyyy-mm-dd');
+  const categorySlug = toLower(category);
 
   /* eslint-disable jsx-a11y/anchor-is-valid */
   return (
@@ -27,10 +27,10 @@ function PostMeta({ date, category, className }) {
       {category && (
         <Small>
           <Link
-            as={`${BASE_URL}${CATEGORY_PATH}/${category.slug}`}
-            href={{ pathname: CATEGORY_PATH, query: { slug: category.slug } }}
+            as={`${BASE_URL}${CATEGORY_PATH}/${categorySlug}`}
+            href={{ pathname: CATEGORY_PATH, query: { category } }}
           >
-            <a>{category.name}</a>
+            <a>{category}</a>
           </Link>
         </Small>
       )}
@@ -41,11 +41,6 @@ function PostMeta({ date, category, className }) {
 
 PostMeta.propTypes = {
   date: PropTypes.string,
-  category: PropTypes.oneOf(values(CATEGORIES)),
+  category: PropTypes.string,
   className: PropTypes.string
 };
-
-/**
- * @component
- */
-export default PostMeta;

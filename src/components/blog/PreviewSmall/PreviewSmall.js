@@ -2,11 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { values, omit } from 'lodash/fp';
+import { omit } from 'lodash/fp';
 import { CoverImage, useTheme } from '@madebyconnor/bamboo-ui';
-
-import { BLOG_PATH } from '../../../constants/paths';
-import * as CATEGORIES from '../../../constants/categories';
 
 import Link from '../../Link';
 import PostMeta from '../PostMeta';
@@ -37,13 +34,13 @@ const titleStyles = ({ theme }) => css`
 
 const Title = styled('h2')(titleStyles);
 
-function PreviewSmall({ slug, image, title, date, category }) {
+export default function PreviewSmall({ url, image, title, date, category }) {
   const theme = useTheme();
   const sizes = getSizes(theme);
   /* eslint-disable jsx-a11y/anchor-is-valid */
   return (
     <Article>
-      <Link href={`${BLOG_PATH}/${slug}`} prefetch>
+      <Link href={url} prefetch>
         <a>
           {image.src && (
             <CoverImage
@@ -62,10 +59,10 @@ function PreviewSmall({ slug, image, title, date, category }) {
 }
 
 PreviewSmall.propTypes = {
-  slug: PropTypes.string,
+  url: PropTypes.string,
   title: PropTypes.string,
   date: PropTypes.string,
-  category: PropTypes.oneOf(values(CATEGORIES)),
+  category: PropTypes.string,
   image: PropTypes.shape({
     src: PropTypes.string,
     srcSet: PropTypes.string,
@@ -77,8 +74,3 @@ PreviewSmall.propTypes = {
 PreviewSmall.defaultProps = {
   image: {}
 };
-
-/**
- * @component
- */
-export default PreviewSmall;

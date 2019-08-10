@@ -1,23 +1,13 @@
+---
+title: 'Jekyll Themes'
+subtitle: 'A collection of customisable, easy-to-use Jekyll themes.'
+brief: 'Jekyll is a simple static site generator. I designed and built these Jekyll themes when I still hosted my personal websites on GitHub Pages. They are optimised for speed and ease of use.'
+client: 'Side Project'
+skills: ['Design', 'Development']
+layout: 'project'
+---
+
 import { Figure } from '@madebyconnor/bamboo-ui'
-
-import Project from '../../../layouts/project'
-
-export const meta = {
-  title: 'Jekyll Themes',
-  subtitle: 'A collection of customisable, easy-to-use Jekyll themes.',
-  brief:
-    'Jekyll is a simple static site generator. I designed and built these Jekyll themes when I still hosted my personal websites on GitHub Pages. They are optimised for speed and ease of use.',
-  slug: 'jekyll-themes',
-  image: {
-    ...require('./jekyll-themes.jpg?resize&sizes[]=400&sizes[]=800&sizes[]=1200&sizes[]=2400'),
-    colors: require('./jekyll-themes.jpg?lqip-colors'),
-    alt: 'Screenshot of the Change Jekyll theme'
-  },
-  client: 'Side Project',
-  skills: ['Design', 'Development']
-}
-
-export default ({ children }) => <Project {...meta}>{children}</Project>
 
 <Figure
   image={{

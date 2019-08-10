@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { find, flow } from 'lodash/fp';
+import { flow, toLower } from 'lodash/fp';
 import { Grid, Row, Col } from '@sumup/circuit-ui';
 import {
   Anchor,
@@ -11,36 +11,33 @@ import {
   Footer
 } from '@madebyconnor/bamboo-ui';
 
-import * as Posts from '../../services/posts';
-import Navigation from '../../components/Navigation';
-import PreviewLarge from '../../components/blog/PreviewLarge';
-import * as CATEGORIES from '../../constants/categories';
-import { SITE_NAME, SITE_TWITTER } from '../../constants';
-import { BASE_URL } from '../../constants/paths';
+// eslint-disable-next-line import/no-unresolved
+import { frontMatter as posts } from './blog/**/index.mdx';
+import sortByDate from '../utils/sort-by-date';
+import filterByCategory from '../utils/filter-by-category';
+import * as Url from '../services/url';
+import Navigation from '../components/Navigation';
+import PreviewLarge from '../components/blog/PreviewLarge';
+import { SITE_NAME, SITE_TWITTER } from '../constants';
 
 const grid = {
   span: { default: 12, kilo: 10, mega: 8 },
   skip: { default: 0, kilo: 1, mega: 2 }
 };
 
-function Blog({ category: categorySlug }) {
-  const category = categorySlug && find({ slug: categorySlug }, CATEGORIES);
+export default function Blog({ category }) {
+  const title = category || 'Blog';
+  const path = category ? 'blog' : `blog/${toLower(category)}`;
+  const url = Url.formatPath(path);
 
-  const title = category ? category.name : 'Blog';
-  const description = category ? category.description : '';
-  const url = category
-    ? `${BASE_URL}/blog`
-    : `${BASE_URL}/blog/${categorySlug}`;
-
-  const posts = flow(
-    Posts.filterByCategory(category),
-    Posts.sortByDate
-  )(Posts.load());
+  const sortedPosts = flow(
+    filterByCategory(category),
+    sortByDate
+  )(posts);
   return (
     <>
       <Meta
         title={title}
-        description={description}
         url={url}
         siteName={SITE_NAME}
         siteTwitter={SITE_TWITTER}
@@ -55,8 +52,12 @@ function Blog({ category: categorySlug }) {
           </Row>
           <Row>
             <Col {...grid}>
-              {posts.map(post => (
-                <PreviewLarge key={post.slug} {...post} />
+              {sortedPosts.map(post => (
+                <PreviewLarge
+                  {...post}
+                  key={post.__resourcePath}
+                  url={Url.formatPath(post.__resourcePath)}
+                />
               ))}
             </Col>
           </Row>
@@ -82,5 +83,3 @@ Blog.getInitialProps = ctx => {
   const { category } = ctx.query;
   return { category };
 };
-
-export default Blog;
