@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import { flow, toLower } from 'lodash/fp';
+import { flow } from 'lodash/fp';
 import {
   Anchor,
   Meta,
@@ -15,8 +15,7 @@ import {
 
 // eslint-disable-next-line import/no-unresolved
 import { frontMatter as posts } from './blog/*.mdx';
-import sortByDate from '../utils/sort-by-date';
-import filterByCategory from '../utils/filter-by-category';
+import * as Blog from '../services/blog';
 import * as Url from '../services/url';
 import Navigation from '../components/Navigation';
 import PreviewLarge from '../components/blog/PreviewLarge';
@@ -38,15 +37,23 @@ const contentStyles = ({ theme }) => css`
 
 const Content = styled('div')(contentStyles);
 
-export default function Blog({ category }) {
-  const title = category || 'Blog';
-  const path = category ? 'blog' : `blog/${toLower(category)}`;
+export default function BlogPage({
+  title = 'Blog',
+  page = 0,
+  category,
+  archived = false
+}) {
+  const path = category ? 'blog' : `blog/${category}`;
   const url = Url.format(path, true);
+  const showArchive = !archived && !category && page === 0;
 
   const sortedPosts = flow(
-    filterByCategory(category),
-    sortByDate()
+    Blog.filterByCategory(category),
+    Blog.filterByArchived(archived),
+    Blog.sortByDate(),
+    Blog.paginate(page)
   )(posts);
+
   return (
     <>
       <Meta
@@ -59,7 +66,7 @@ export default function Blog({ category }) {
       <Main>
         <Grid>
           <Content>
-            <Header title={title} />
+            <Header title={title} />{' '}
             {sortedPosts.map(post => (
               <PreviewLarge
                 {...post}
@@ -67,6 +74,7 @@ export default function Blog({ category }) {
                 url={Url.format(post.__resourcePath)}
               />
             ))}
+            {showArchive && <Anchor href="/blog/archive">Archive →</Anchor>}
           </Content>
         </Grid>
       </Main>
@@ -82,6 +90,9 @@ export default function Blog({ category }) {
   );
 }
 
-Blog.propTypes = {
-  category: PropTypes.string
+BlogPage.propTypes = {
+  title: PropTypes.string,
+  page: PropTypes.number,
+  category: PropTypes.string,
+  archived: PropTypes.bool
 };
