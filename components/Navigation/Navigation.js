@@ -10,7 +10,15 @@ import {
 
 import { SITE_NAME } from '../../constants';
 
-export default function CustomNavigation({ siteName, siteLogo, links = [] }) {
+export default function CustomNavigation({
+  siteName = SITE_NAME,
+  siteLogo = <PandaIcon alt="Panda" />,
+  links = [
+    { url: '/about', label: 'About' },
+    { url: '/projects', label: 'Projects' },
+    { url: '/blog', label: 'Blog' }
+  ]
+}) {
   const router = useRouter();
   const isHomepage = router.asPath === '/';
   const enhancedLinks = links.map(link => {
@@ -40,14 +48,4 @@ CustomNavigation.propTypes = {
       icon: sharedPropTypes.childrenPropType
     })
   )
-};
-
-CustomNavigation.defaultProps = {
-  siteName: SITE_NAME,
-  siteLogo: <PandaIcon alt="Panda" />,
-  links: [
-    { url: '/about', label: 'About' },
-    { url: '/projects', label: 'Projects' },
-    { url: '/blog', label: 'Blog' }
-  ]
 };

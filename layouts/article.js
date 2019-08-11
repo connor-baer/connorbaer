@@ -1,13 +1,15 @@
 import React from 'react';
+import { css } from '@emotion/core';
+import styled from '@emotion/styled';
 import { MDXProvider } from '@mdx-js/react';
-import { Grid, Row, Col } from '@sumup/circuit-ui';
 import {
   Meta,
   Main,
   Header,
   Prefooter,
   Footer,
-  Anchor
+  Anchor,
+  sharedStyles
 } from '@madebyconnor/bamboo-ui';
 
 import components from './_components';
@@ -16,8 +18,24 @@ import Navigation from '../components/Navigation';
 import { SITE_NAME, SITE_TWITTER } from '../constants';
 import * as Url from '../services/url';
 
+const Article = styled('article')(sharedStyles.pageWidth, sharedStyles.grid);
+
+const contentStyles = ({ theme }) => css`
+  grid-column: 1 / 13;
+
+  ${theme.mq.kilo} {
+    grid-column: 1 / 12;
+  }
+
+  ${theme.mq.mega} {
+    grid-column: 3 / 11;
+  }
+`;
+
+const Content = styled('div')(contentStyles);
+
 export default ({ title, subtitle, __resourcePath }) =>
-  function Article({ children }) {
+  function ArticlePage({ children }) {
     const url = Url.format(__resourcePath, true);
     return (
       <>
@@ -30,19 +48,12 @@ export default ({ title, subtitle, __resourcePath }) =>
         />
         <Navigation />
         <Main>
-          <article>
-            <Grid>
-              <Row>
-                <Col
-                  span={{ default: 12, mega: 10, afterTera: 8 }}
-                  skip={{ default: 0, mega: 1, afterTera: 2 }}
-                >
-                  <Header title={title} subtitle={subtitle} />
-                  <MDXProvider components={components}>{children}</MDXProvider>
-                </Col>
-              </Row>
-            </Grid>
-          </article>
+          <Article>
+            <Content>
+              <Header title={title} subtitle={subtitle} />
+              <MDXProvider components={components}>{children}</MDXProvider>
+            </Content>
+          </Article>
         </Main>
         <Prefooter
           text={'Let’s be friends.'}

@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { Grid, Row, Col } from '@sumup/circuit-ui';
 import {
   Anchor,
   Meta,
@@ -9,7 +8,8 @@ import {
   Header,
   Prefooter,
   Footer,
-  Columns
+  Columns,
+  sharedStyles
 } from '@madebyconnor/bamboo-ui';
 
 // eslint-disable-next-line import/no-unresolved
@@ -32,6 +32,8 @@ const spacingStyles = ({ theme }) => css`
 const StyledColumns = styled(Columns)(spacingStyles);
 const StyledHeader = styled(Header)(spacingStyles);
 
+const Grid = styled('div')(sharedStyles.pageWidth);
+
 export default function ProjectsHome() {
   const title = 'Selected Work';
   const subtitle = 'Beautifully functional';
@@ -48,20 +50,16 @@ export default function ProjectsHome() {
       <Navigation />
       <Main>
         <Grid>
-          <Row>
-            <Col span="12">
-              <StyledColumns>
-                <StyledHeader title={title} subtitle={subtitle} />
-                {projects.map(project => (
-                  <PreviewLarge
-                    key={project.__resourcePath}
-                    url={Url.format(project.__resourcePath)}
-                    {...project}
-                  />
-                ))}
-              </StyledColumns>
-            </Col>
-          </Row>
+          <StyledColumns>
+            <StyledHeader title={title} subtitle={subtitle} />
+            {projects.map(project => (
+              <PreviewLarge
+                key={project.__resourcePath}
+                url={Url.format(project.__resourcePath)}
+                {...project}
+              />
+            ))}
+          </StyledColumns>
         </Grid>
       </Main>
       <Prefooter

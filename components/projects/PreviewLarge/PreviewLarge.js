@@ -34,7 +34,7 @@ const titleStyles = ({ theme }) => css`
 
 const Title = styled('h2')(titleStyles);
 
-export default function PreviewLarge({ url, image, title, skills }) {
+export default function PreviewLarge({ url, image = {}, title, skills }) {
   const theme = useTheme();
   const sizes = getSizes(theme);
   /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -58,7 +58,6 @@ PreviewLarge.propTypes = {
   url: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
-  featured: PropTypes.bool,
   skills: PropTypes.arrayOf(PropTypes.string),
   image: PropTypes.shape({
     src: PropTypes.string,
@@ -66,9 +65,4 @@ PreviewLarge.propTypes = {
     colors: PropTypes.array,
     alt: PropTypes.string
   })
-};
-
-PreviewLarge.defaultProps = {
-  featured: false,
-  image: {}
 };

@@ -14,7 +14,6 @@ const nextConfig = {
     // eslint-disable-next-line no-param-reassign
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@sumup/circuit-ui': require.resolve('@sumup/circuit-ui/lib/es'),
       '@madebyconnor/bamboo-ui': require.resolve(
         '@madebyconnor/bamboo-ui/lib/es'
       )
@@ -81,7 +80,7 @@ const offlineConfig = {
 };
 
 const transpileModulesConfig = {
-  transpileModules: ['@sumup/circuit-ui', '@madebyconnor/bamboo-ui']
+  transpileModules: ['@madebyconnor/bamboo-ui']
 };
 
 const bundleAnalyzerConfig = {

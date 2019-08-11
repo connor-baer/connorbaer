@@ -33,7 +33,13 @@ const titleStyles = ({ theme }) => css`
 
 const Title = styled('h2')(titleStyles);
 
-export default function PreviewSmall({ url, image, title, date, category }) {
+export default function PreviewSmall({
+  url,
+  image = {},
+  title,
+  date,
+  category
+}) {
   const theme = useTheme();
   const sizes = getSizes(theme);
   /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -64,8 +70,4 @@ PreviewSmall.propTypes = {
     colors: PropTypes.array,
     alt: PropTypes.string
   })
-};
-
-PreviewSmall.defaultProps = {
-  image: {}
 };

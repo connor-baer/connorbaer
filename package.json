@@ -39,7 +39,6 @@
     "@mdx-js/mdx": "^1.0.0",
     "@mdx-js/react": "^1.0.0",
     "@next/bundle-analyzer": "^9.0.3",
-    "@sumup/circuit-ui": "^1.0.0",
     "date-fns": "^2.0.0-alpha.16",
     "emotion-theming": "^10.0.10",
     "es-cookie": "^1.2.0",

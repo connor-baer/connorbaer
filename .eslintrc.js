@@ -12,6 +12,7 @@ const customConfig = {
   },
   rules: {
     'notice/notice': 'off',
+    'emotion/jsx-import': 'off',
     'no-underscore-dangle': [
       'error',
       { allow: ['__resourcePath', '__DEV__', '__PRODUCTION__', '__TEST__'] }
