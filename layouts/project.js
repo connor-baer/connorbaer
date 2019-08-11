@@ -1,13 +1,15 @@
 import React from 'react';
 import { MDXProvider } from '@mdx-js/react';
-import { Grid, Row, Col } from '@sumup/circuit-ui';
+import { css } from '@emotion/core';
+import styled from '@emotion/styled';
 import {
   Anchor,
   Meta,
   Main,
   Header,
   Prefooter,
-  Footer
+  Footer,
+  sharedStyles
 } from '@madebyconnor/bamboo-ui';
 
 import components from './_components';
@@ -16,6 +18,66 @@ import IntroSection from '../components/projects/IntroSection';
 
 import * as Url from '../services/url';
 import { SITE_NAME, SITE_TWITTER } from '../constants';
+
+const Article = styled('article')(sharedStyles.pageWidth, sharedStyles.grid);
+
+const headerStyles = theme => css`
+  grid-column: 1 / 13;
+
+  ${theme.mq.kilo} {
+    grid-column: 1 / 12;
+  }
+
+  ${theme.mq.mega} {
+    grid-column: 1 / 11;
+  }
+`;
+
+const introBriefStyles = theme => css`
+  grid-column: 1 / 13;
+
+  ${theme.mq.tera} {
+    grid-column: 1 / 7;
+  }
+`;
+
+const introSkillStyles = theme => css`
+  grid-column: 1 / 13;
+
+  ${theme.mq.mega} {
+    grid-column: 1 / 7;
+  }
+
+  ${theme.mq.tera} {
+    grid-column: 7 / 10;
+  }
+`;
+
+const introClientStyles = theme => css`
+  grid-column: 1 / 13;
+
+  ${theme.mq.mega} {
+    grid-column: 7 / 13;
+  }
+
+  ${theme.mq.tera} {
+    grid-column: 10 / 13;
+  }
+`;
+
+const contentStyles = ({ theme }) => css`
+  grid-column: 1 / 13;
+
+  ${theme.mq.kilo} {
+    grid-column: 1 / 12;
+  }
+
+  ${theme.mq.mega} {
+    grid-column: 3 / 11;
+  }
+`;
+
+const Content = styled('div')(contentStyles);
 
 export default ({
   title,
@@ -41,40 +103,25 @@ export default ({
         />
         <Navigation />
         <Main>
-          <article>
-            <Grid>
-              <Row>
-                <Col span={{ default: 12, mega: 10, afterTera: 9 }}>
-                  <Header title={title} subtitle={subtitle} />
-                </Col>
-              </Row>
-              <Row>
-                <Col span={{ default: 12, afterTera: 6 }}>
-                  <IntroSection title="Overview">{brief}</IntroSection>
-                </Col>
-                <Col span={{ default: 12, mega: 6, afterTera: 3 }}>
-                  <IntroSection title="Involvement">
-                    {skills.map(skill => (
-                      <p key={skill}>{skill}</p>
-                    ))}
-                  </IntroSection>
-                </Col>
-                <Col span={{ default: 12, mega: 6, afterTera: 3 }}>
-                  <IntroSection title="Client">{client}</IntroSection>
-                </Col>
-              </Row>
-            </Grid>
-            <Grid>
-              <Row>
-                <Col
-                  span={{ default: 12, mega: 10, afterTera: 8 }}
-                  skip={{ default: 0, mega: 1, afterTera: 2 }}
-                >
-                  <MDXProvider components={components}>{children}</MDXProvider>
-                </Col>
-              </Row>
-            </Grid>
-          </article>
+          <Article>
+            <Header title={title} subtitle={subtitle} css={headerStyles} />
+
+            <IntroSection title="Overview" css={introBriefStyles}>
+              {brief}
+            </IntroSection>
+            <IntroSection title="Involvement" css={introSkillStyles}>
+              {skills.map(skill => (
+                <p key={skill}>{skill}</p>
+              ))}
+            </IntroSection>
+            <IntroSection title="Client" css={introClientStyles}>
+              {client}
+            </IntroSection>
+
+            <Content>
+              <MDXProvider components={components}>{children}</MDXProvider>
+            </Content>
+          </Article>
         </Main>
         <Prefooter
           text={'Let’s be friends.'}

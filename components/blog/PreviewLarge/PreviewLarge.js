@@ -48,12 +48,12 @@ const Description = styled('p')(descriptionStyles);
 
 export default function PreviewLarge({
   url,
-  image,
+  image = {},
   title,
   description,
   date,
   category,
-  featured
+  featured = false
 }) {
   const theme = useTheme();
   const sizes = getSizes(theme);
@@ -88,9 +88,4 @@ PreviewLarge.propTypes = {
     colors: PropTypes.array,
     alt: PropTypes.string
   })
-};
-
-PreviewLarge.defaultProps = {
-  featured: false,
-  image: {}
 };

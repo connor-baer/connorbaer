@@ -1,14 +1,16 @@
 import React from 'react';
+import { css } from '@emotion/core';
+import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { flow, toLower } from 'lodash/fp';
-import { Grid, Row, Col } from '@sumup/circuit-ui';
 import {
   Anchor,
   Meta,
   Main,
   Header,
   Prefooter,
-  Footer
+  Footer,
+  sharedStyles
 } from '@madebyconnor/bamboo-ui';
 
 // eslint-disable-next-line import/no-unresolved
@@ -20,10 +22,21 @@ import Navigation from '../components/Navigation';
 import PreviewLarge from '../components/blog/PreviewLarge';
 import { SITE_NAME, SITE_TWITTER } from '../constants';
 
-const grid = {
-  span: { default: 12, kilo: 10, mega: 8 },
-  skip: { default: 0, kilo: 1, mega: 2 }
-};
+const Grid = styled('div')(sharedStyles.pageWidth, sharedStyles.grid);
+
+const contentStyles = ({ theme }) => css`
+  grid-column: 1 / 13;
+
+  ${theme.mq.kilo} {
+    grid-column: 1 / 12;
+  }
+
+  ${theme.mq.mega} {
+    grid-column: 3 / 11;
+  }
+`;
+
+const Content = styled('div')(contentStyles);
 
 export default function Blog({ category }) {
   const title = category || 'Blog';
@@ -45,22 +58,16 @@ export default function Blog({ category }) {
       <Navigation />
       <Main>
         <Grid>
-          <Row>
-            <Col {...grid}>
-              <Header title={title} />
-            </Col>
-          </Row>
-          <Row>
-            <Col {...grid}>
-              {sortedPosts.map(post => (
-                <PreviewLarge
-                  {...post}
-                  key={post.__resourcePath}
-                  url={Url.format(post.__resourcePath)}
-                />
-              ))}
-            </Col>
-          </Row>
+          <Content>
+            <Header title={title} />
+            {sortedPosts.map(post => (
+              <PreviewLarge
+                {...post}
+                key={post.__resourcePath}
+                url={Url.format(post.__resourcePath)}
+              />
+            ))}
+          </Content>
         </Grid>
       </Main>
       <Prefooter

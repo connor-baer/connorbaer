@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Row, Col } from '@sumup/circuit-ui';
+import { css } from '@emotion/core';
+import styled from '@emotion/styled';
 import {
   Anchor,
   Meta,
   Main,
   Header,
   Prefooter,
-  Footer
+  Footer,
+  sharedStyles
 } from '@madebyconnor/bamboo-ui';
 
 import Navigation from '../components/Navigation';
@@ -28,7 +30,23 @@ const SUBTITLE_MAP = {
 };
 /* eslint-enable max-len */
 
-function Error({ statusCode }) {
+const Grid = styled('div')(sharedStyles.pageWidth, sharedStyles.grid);
+
+const contentStyles = ({ theme }) => css`
+  grid-column: 1 / 13;
+
+  ${theme.mq.kilo} {
+    grid-column: 1 / 12;
+  }
+
+  ${theme.mq.mega} {
+    grid-column: 3 / 11;
+  }
+`;
+
+const Content = styled('div')(contentStyles);
+
+function ErrorPage({ statusCode = 500 }) {
   const title = TITLE_MAP[statusCode];
   const subtitle = SUBTITLE_MAP[statusCode];
   return (
@@ -42,14 +60,9 @@ function Error({ statusCode }) {
       <Navigation />
       <Main>
         <Grid>
-          <Row>
-            <Col
-              span={{ default: 12, kilo: 10, mega: 8 }}
-              skip={{ default: 0, kilo: 1, mega: 2 }}
-            >
-              <Header title={title} subtitle={subtitle} />
-            </Col>
-          </Row>
+          <Content>
+            <Header title={title} subtitle={subtitle} />
+          </Content>
         </Grid>
       </Main>
       <Prefooter
@@ -64,19 +77,15 @@ function Error({ statusCode }) {
   );
 }
 
-Error.getInitialProps = ctx => {
+ErrorPage.getInitialProps = ctx => {
   const { res, err } = ctx;
   const statusCode = (res && res.statusCode) || (err && err.statusCode);
   return { statusCode };
 };
 
-Error.propTypes = {
+ErrorPage.propTypes = {
   title: PropTypes.string,
   statusCode: PropTypes.number
 };
 
-Error.defaultProps = {
-  statusCode: 500
-};
-
-export default Error;
+export default ErrorPage;

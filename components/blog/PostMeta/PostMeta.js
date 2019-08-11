@@ -1,10 +1,18 @@
 import React from 'react';
+import { css } from '@emotion/core';
+import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { toLower } from 'lodash/fp';
 import { format } from 'date-fns';
 import { Small } from '@madebyconnor/bamboo-ui';
 
 import Link from '../../Link';
+
+const wrapperStyles = ({ theme }) => css`
+  margin-top: ${theme.spacings.mega};
+`;
+
+const Wrapper = styled('div')(wrapperStyles);
 
 export default function PostMeta({ date, category, className }) {
   if (!date && !category) {
@@ -17,7 +25,7 @@ export default function PostMeta({ date, category, className }) {
 
   /* eslint-disable jsx-a11y/anchor-is-valid */
   return (
-    <div className={className}>
+    <Wrapper className={className}>
       {date && (
         <Small element="time" dateTime={datetime}>
           {formattedDate}
@@ -33,7 +41,7 @@ export default function PostMeta({ date, category, className }) {
           </Link>
         </Small>
       )}
-    </div>
+    </Wrapper>
   );
   /* eslint-enable jsx-a11y/anchor-is-valid */
 }

@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { MDXProvider } from '@mdx-js/react';
-import { Grid, Row, Col } from '@sumup/circuit-ui';
 import {
   Anchor,
   Meta,
@@ -11,6 +10,7 @@ import {
   Footer,
   Intro,
   ParallaxImage,
+  sharedStyles,
   useTheme
 } from '@madebyconnor/bamboo-ui';
 
@@ -21,6 +21,22 @@ import PostMeta from '../components/blog/PostMeta';
 import * as Url from '../services/url';
 import { SITE_NAME, SITE_TWITTER } from '../constants';
 
+const Grid = styled('div')(sharedStyles.pageWidth, sharedStyles.grid);
+
+const contentStyles = ({ theme }) => css`
+  grid-column: 1 / 13;
+
+  ${theme.mq.kilo} {
+    grid-column: 1 / 12;
+  }
+
+  ${theme.mq.mega} {
+    grid-column: 3 / 11;
+  }
+`;
+
+const Content = styled('div')(contentStyles);
+
 const styledParagraphStyles = ({ theme }) => css`
   font-family: ${theme.fontStack.serif};
 `;
@@ -28,18 +44,18 @@ const styledParagraphStyles = ({ theme }) => css`
 const StyledParagraph = styled(Paragraph)(styledParagraphStyles);
 
 const styledParallaxImageStyles = ({ theme }) => css`
-  height: 180px;
+  height: 12rem;
 
   ${theme.mq.kilo} {
-    height: 240px;
+    height: 15rem;
   }
 
   ${theme.mq.mega} {
-    height: 300px;
+    height: 18rem;
   }
 
   ${theme.mq.tera} {
-    height: 360px;
+    height: 21rem;
   }
 `;
 
@@ -88,33 +104,24 @@ export default ({
           siteTwitter={SITE_TWITTER}
         />
         <Navigation />
-        <Main>
-          <article>
-            <StyledParallaxImage
-              {...image}
-              srcSet={[400, 800, 1200, 1600, 2000]}
-              sizes="100vw"
-            />
-            <Grid>
-              <Row>
-                <Col
-                  span={{ default: 12, mega: 10, afterTera: 8 }}
-                  skip={{ default: 0, mega: 1, afterTera: 2 }}
-                >
-                  <PostHeader>
-                    <Heading>{title}</Heading>
-                    <PostMeta date={date} category={category} />
-                  </PostHeader>
-                  <Intro>{description}</Intro>
-                  <MDXProvider
-                    components={{ ...components, p: StyledParagraph }}
-                  >
-                    {children}
-                  </MDXProvider>
-                </Col>
-              </Row>
-            </Grid>
-          </article>
+        <Main as="article">
+          <StyledParallaxImage
+            {...image}
+            srcSet={[400, 800, 1200, 1600, 2000]}
+            sizes="100vw"
+          />
+          <Grid>
+            <Content>
+              <PostHeader>
+                <Heading>{title}</Heading>
+                <PostMeta date={date} category={category} />
+              </PostHeader>
+              <Intro>{description}</Intro>
+              <MDXProvider components={{ ...components, p: StyledParagraph }}>
+                {children}
+              </MDXProvider>
+            </Content>
+          </Grid>
         </Main>
         <Prefooter
           text={'Let’s be friends.'}
