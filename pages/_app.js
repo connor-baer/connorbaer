@@ -1,5 +1,5 @@
 import React from 'react';
-import App, { Container } from 'next/app';
+import App from 'next/app';
 import Head from 'next/head';
 import Router from 'next/router';
 import {
@@ -21,35 +21,41 @@ export default class CustomApp extends App {
   };
 
   componentDidMount() {
-    Router.events.on('routeChangeStart', () => {
-      this.setState({ isLoading: true });
-    });
-    Router.events.on('routeChangeComplete', () => {
-      this.setState({ isLoading: false });
-    });
-    Router.events.on('routeChangeError', () => {
-      this.setState({ isLoading: false });
-    });
+    Router.events.on('routeChangeStart', this.startLoading);
+    Router.events.on('routeChangeComplete', this.stopLoading);
+    Router.events.on('routeChangeError', this.stopLoading);
   }
+
+  componentWillUnmount() {
+    Router.events.off('routeChangeStart', this.startLoading);
+    Router.events.off('routeChangeComplete', this.stopLoading);
+    Router.events.off('routeChangeError', this.stopLoading);
+  }
+
+  startLoading = () => {
+    this.setState({ isLoading: false });
+  };
+
+  stopLoading = () => {
+    this.setState({ isLoading: false });
+  };
 
   render() {
     const { Component, pageProps, router } = this.props;
     const { isLoading } = this.state;
     const section = router.pathname.split('/')[1];
     return (
-      <Container>
-        <ComponentsContext.Provider value={{ Head, Image, Link }}>
-          <Theme
-            themes={themes}
-            initialThemeId={section}
-            assetPrefix={FONTS_PATH}
-          >
-            <GlobalStyles />
-            <LoadingBar isLoading={isLoading} />
-            <Component {...pageProps} />
-          </Theme>
-        </ComponentsContext.Provider>
-      </Container>
+      <ComponentsContext.Provider value={{ Head, Image, Link }}>
+        <Theme
+          themes={themes}
+          initialThemeId={section}
+          assetPrefix={FONTS_PATH}
+        >
+          <GlobalStyles />
+          <LoadingBar isLoading={isLoading} />
+          <Component {...pageProps} />
+        </Theme>
+      </ComponentsContext.Provider>
     );
   }
 }
