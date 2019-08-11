@@ -3,7 +3,7 @@
 sitemap.xml
 dist/
 .next/
-.mdx-data
+.mdx-data/
 .esm-cache/
 .env.*
 out
