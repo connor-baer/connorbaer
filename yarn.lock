@@ -1038,9 +1038,9 @@
     "@types/yargs" "^12.0.9"
 
 "@madebyconnor/bamboo-ui@^1.0.0":
-  version "1.6.5"
-  resolved "https://registry.yarnpkg.com/@madebyconnor/bamboo-ui/-/bamboo-ui-1.6.5.tgz#cbaf7dc46bd49b9bef57d76e1a24532149b5e12a"
-  integrity sha512-BKD+c1Ju+0BCHHzaUVqwV045obesDsV6smFGIfCHyoM0C/Oa7b3dUNygVr8Mm6oRddvU5eFwdYsdtEKgfP5ecQ==
+  version "1.6.6"
+  resolved "https://registry.yarnpkg.com/@madebyconnor/bamboo-ui/-/bamboo-ui-1.6.6.tgz#de668c2e4a8e3399b5af4dc048493ff92985e4c7"
+  integrity sha512-9eS43UreJLsiDSg19TtO7FKQYHARUtGDYzSSF/MMmGDt6WDp5DiETRcQ34vVfkidZvXybtvh7Dy30i4obtPt4w==
   dependencies:
     "@emotion/core" "^10.0.10"
     "@emotion/styled" "^10.0.10"
