@@ -4,7 +4,7 @@ const emoji = require('remark-emoji');
 const externalLinks = require('remark-external-links');
 const withPlugins = require('next-compose-plugins');
 const withOffline = require('next-offline');
-const withTranspileModules = require('next-transpile-modules');
+// const withTranspileModules = require('next-transpile-modules');
 const withBundleAnalyzer = require('@next/bundle-analyzer');
 const withMdxEnhanced = require('next-mdx-enhanced');
 
@@ -12,12 +12,12 @@ const nextConfig = {
   poweredByHeader: false,
   webpack: (config, { dev, defaultLoaders }) => {
     // eslint-disable-next-line no-param-reassign
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      '@madebyconnor/bamboo-ui': require.resolve(
-        '@madebyconnor/bamboo-ui/lib/es'
-      )
-    };
+    // config.resolve.alias = {
+    //   ...config.resolve.alias,
+    //   '@madebyconnor/bamboo-ui': require.resolve(
+    //     '@madebyconnor/bamboo-ui/lib/es'
+    //   )
+    // };
 
     // eslint-disable-next-line no-param-reassign
     config.node = {
@@ -50,39 +50,6 @@ const nextConfig = {
   }
 };
 
-const offlineConfig = {
-  // Add the homepage to the cache
-  transformManifest: manifest => ['/'].concat(manifest),
-  // Trying to set NODE_ENV=production when running yarn dev causes a
-  // build-time error so we turn on the SW in dev mode so that we can
-  // actually test it
-  generateInDevMode: true,
-  workboxOpts: {
-    swDest: 'static/service-worker.js',
-    runtimeCaching: [
-      {
-        urlPattern: /^https?.*/,
-        handler: 'networkFirst',
-        options: {
-          cacheName: 'https-calls',
-          networkTimeoutSeconds: 15,
-          expiration: {
-            maxEntries: 150,
-            maxAgeSeconds: 30 * 24 * 60 * 60 // 1 month
-          },
-          cacheableResponse: {
-            statuses: [0, 200]
-          }
-        }
-      }
-    ]
-  }
-};
-
-const transpileModulesConfig = {
-  transpileModules: ['@madebyconnor/bamboo-ui']
-};
-
 const bundleAnalyzerConfig = {
   enabled: process.env.ANALYZE === 'true'
 };
@@ -94,10 +61,9 @@ const mdxConfig = {
 
 module.exports = withPlugins(
   [
-    [withOffline, offlineConfig],
-    [withTranspileModules, transpileModulesConfig],
-    [withBundleAnalyzer, bundleAnalyzerConfig],
-    withMdxEnhanced(mdxConfig)
+    withOffline,
+    withMdxEnhanced(mdxConfig),
+    [withBundleAnalyzer, bundleAnalyzerConfig]
   ],
   nextConfig
 );
