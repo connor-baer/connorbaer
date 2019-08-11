@@ -37,18 +37,6 @@
         "cache-control": "public, max-age=43200, immutable",
         "Service-Worker-Allowed": "/"
       }
-    },
-    {
-      "src": "/(.*)",
-      "headers": {
-        "X-Download-Options": "noopen",
-        "X-Frame-Options": "SAMEORIGIN",
-        "Referrer-Policy": "no-referrer-when-downgrade",
-        "X-Xss-Protection": "1",
-        "X-Content-Type-Options": "nosniff",
-        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
-        "Feature-Policy": "geolocation 'self'; microphone 'none'; camera 'none'"
-      }
     }
   ],
   "builds": [
