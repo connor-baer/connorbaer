@@ -14,7 +14,7 @@
         "X-Xss-Protection": "1",
         "X-Content-Type-Options": "nosniff",
         "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
-        "Feature-Policy": "geolocation 'self'; microphone 'none'; camera 'none'; payment: 'none'"
+        "Feature-Policy": "geolocation 'self'; microphone 'none'; camera 'none'"
       }
     },
     {
@@ -27,12 +27,12 @@
         "X-Xss-Protection": "1",
         "X-Content-Type-Options": "nosniff",
         "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
-        "Feature-Policy": "geolocation 'self'; microphone 'none'; camera 'none'; payment: 'none'"
+        "Feature-Policy": "geolocation 'self'; microphone 'none'; camera 'none'"
       }
     },
     {
       "src": "/service-worker.js",
-      "dest": "/_next/static/service-worker.js",
+      "dest": "/_next/service-worker.js",
       "headers": {
         "cache-control": "public, max-age=43200, immutable",
         "Service-Worker-Allowed": "/"
@@ -47,7 +47,7 @@
         "X-Xss-Protection": "1",
         "X-Content-Type-Options": "nosniff",
         "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
-        "Feature-Policy": "geolocation 'self'; microphone 'none'; camera 'none'; payment: 'none'"
+        "Feature-Policy": "geolocation 'self'; microphone 'none'; camera 'none'"
       }
     }
   ],
