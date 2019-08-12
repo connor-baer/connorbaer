@@ -5,7 +5,6 @@ import { css } from '@emotion/core';
 import { CoverImage, useTheme } from '@madebyconnor/bamboo-ui';
 
 import Link from '../../Link';
-import PostMeta from '../PostMeta';
 
 function getSizes(theme) {
   const gigaSize = `(min-width: ${theme.breakpoints.giga}px) 355px`;
@@ -19,26 +18,56 @@ function getSizes(theme) {
 const articleStyles = ({ theme }) => css`
   margin-top: ${theme.spacings.tera};
   margin-bottom: ${theme.spacings.kilo};
+  position: relative;
 `;
 
 const Article = styled('article')(articleStyles);
+
+const contentStyles = ({ theme }) => css`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: ${theme.spacings.peta} ${theme.spacings.giga} ${theme.spacings.giga};
+  background: linear-gradient(transparent, ${theme.colors.shadow});
+  border-bottom-left-radius: ${theme.borderRadius.giga};
+  border-bottom-right-radius: ${theme.borderRadius.giga};
+`;
+
+const Content = styled('h2')(contentStyles);
 
 const titleStyles = ({ theme }) => css`
   font-size: ${theme.fontSizes.giga};
   font-weight: ${theme.fontWeight.bold};
   line-height: ${theme.lineHeights.kilo};
-  margin-top: ${theme.spacings.giga};
-  margin-bottom: ${theme.spacings.bit};
+  color: #fff;
 `;
 
 const Title = styled('h2')(titleStyles);
+
+const subtitleContainerStyles = () => css`
+  overflow: hidden;
+  height: 27px;
+`;
+
+const SubtitleContainer = styled('p')(subtitleContainerStyles);
+
+const subtitleStyles = ({ theme }) => css`
+  font-size: ${theme.fontSizes.kilo};
+  line-height: ${theme.lineHeights.kilo};
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: pre;
+  color: #fff;
+`;
+
+const Subtitle = styled('p')(subtitleStyles);
 
 export default function PreviewSmall({
   url,
   image = {},
   title,
-  date,
-  category,
+  subtitle,
   className
 }) {
   const theme = useTheme();
@@ -49,12 +78,16 @@ export default function PreviewSmall({
       <Link href={url} prefetch>
         <a>
           {image.src && (
-            <CoverImage {...image} sizes={sizes} aspectRatio={7 / 3} />
+            <CoverImage {...image} sizes={sizes} aspectRatio={3 / 5} />
           )}
-          <Title>{title}</Title>
+          <Content>
+            <Title>{title}</Title>
+            <SubtitleContainer>
+              <Subtitle>{subtitle}</Subtitle>
+            </SubtitleContainer>
+          </Content>
         </a>
       </Link>
-      <PostMeta date={date} category={category} />
     </Article>
   );
   /* eslint-enable jsx-a11y/anchor-is-valid */
@@ -63,6 +96,7 @@ export default function PreviewSmall({
 PreviewSmall.propTypes = {
   url: PropTypes.string,
   title: PropTypes.string,
+  subtitle: PropTypes.string,
   date: PropTypes.string,
   category: PropTypes.string,
   image: PropTypes.shape({

@@ -16,7 +16,8 @@ export default function CustomNavigation({
   links = [
     { url: '/about', label: 'About' },
     { url: '/projects', label: 'Projects' },
-    { url: '/blog', label: 'Blog' }
+    { url: '/blog', label: 'Blog' },
+    { url: '/travel', label: 'Travel' }
   ]
 }) {
   const router = useRouter();

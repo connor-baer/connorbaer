@@ -14,9 +14,12 @@ import {
 
 // eslint-disable-next-line import/no-unresolved
 import { frontMatter as posts } from './blog/*.mdx';
+// eslint-disable-next-line import/no-unresolved
+import { frontMatter as guides } from './travel/guides/*.mdx';
 import * as Blog from '../services/blog';
 import Navigation from '../components/Navigation';
 import PreviewSmall from '../components/blog/PreviewSmall';
+import GuidePreview from '../components/travel/GuidePreview';
 
 import { SITE_NAME, SITE_TWITTER } from '../constants';
 import * as Url from '../services/url';
@@ -59,7 +62,26 @@ const postStyles = ({ theme, index, length }) => {
   `;
 };
 
-const Post = styled('div')(postStyles);
+const PostPreview = styled(PreviewSmall)(postStyles);
+
+const guideStyles = ({ theme, index }) => {
+  const kiloColumns = ['1 / 7', '7 / 13'];
+  const megaColumns = ['1 / 4', '4 / 7', '7 / 10', '10 / 13'];
+  return css`
+    align-self: start;
+    grid-column: 1 / 13;
+
+    ${theme.mq.kilo} {
+      grid-column: ${kiloColumns[index]};
+    }
+
+    ${theme.mq.mega} {
+      grid-column: ${megaColumns[index]};
+    }
+  `;
+};
+
+const StyledGuidePreview = styled(GuidePreview)(guideStyles);
 
 export default function HomePage() {
   const sortedPosts = flow(
@@ -85,10 +107,22 @@ export default function HomePage() {
       <Main>
         <Grid>
           <StyledHeader title={TITLE} subtitle={SUBTITLE} />
-          {sortedPosts.map((post, i) => (
-            <Post key={i} index={i} length={sortedPosts.length}>
-              <PreviewSmall url={Url.format(post.__resourcePath)} {...post} />
-            </Post>
+          {sortedPosts.map((post, index) => (
+            <PostPreview
+              url={Url.format(post.__resourcePath)}
+              key={post.title}
+              index={index}
+              length={sortedPosts.length}
+              {...post}
+            />
+          ))}
+          {guides.map((guide, index) => (
+            <StyledGuidePreview
+              key={guide.title}
+              index={index}
+              url={Url.format(guide.__resourcePath)}
+              {...guide}
+            />
           ))}
         </Grid>
       </Main>
