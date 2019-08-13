@@ -29,7 +29,7 @@ const Grid = styled('div')(sharedStyles.pageWidth);
 
 export default function ProjectsHome() {
   const title = 'Selected Work';
-  const subtitle = 'Beautifully functional';
+  const subtitle = 'Make technology human.';
   return (
     <>
       <Meta title={title} description={subtitle} pathname={'projects'} />
