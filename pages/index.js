@@ -2,31 +2,21 @@ import React from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { flow, slice } from 'lodash/fp';
-import {
-  Anchor,
-  Meta,
-  Main,
-  Header,
-  Prefooter,
-  Footer,
-  sharedStyles
-} from '@madebyconnor/bamboo-ui';
+import { Main, Header, sharedStyles } from '@madebyconnor/bamboo-ui';
 
 // eslint-disable-next-line import/no-unresolved
 import { frontMatter as posts } from './blog/*.mdx';
 // eslint-disable-next-line import/no-unresolved
 import { frontMatter as guides } from './travel/guides/*.mdx';
 import * as Blog from '../services/blog';
+import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
+import Prefooter from '../components/Prefooter';
+import Footer from '../components/Footer';
 import PreviewSmall from '../components/blog/PreviewSmall';
 import GuidePreview from '../components/travel/GuidePreview';
 
-import { SITE_NAME, SITE_TWITTER } from '../constants';
 import * as Url from '../services/url';
-
-const TITLE = 'Hello, I’m Connor.';
-const SUBTITLE =
-  'I am a web developer with a strong background in design and a passion for accessibility, currently working as a frontend engineer at SumUp.'; // eslint-disable-line max-len
 
 const Grid = styled('div')(sharedStyles.pageWidth);
 
@@ -130,6 +120,10 @@ const guideStyles = ({ theme }) => css`
 const StyledGuidePreview = styled(GuidePreview)(guideStyles);
 
 export default function HomePage() {
+  const title = 'Hello, I’m Connor.';
+  const subtitle =
+    'I am a web developer with a strong background in design and a passion for accessibility, currently working as a frontend engineer at SumUp.'; // eslint-disable-line max-len
+
   const sortedPosts = flow(
     Blog.filterByArchived(),
     Blog.sortByDate(),
@@ -139,20 +133,18 @@ export default function HomePage() {
   return (
     <>
       <Meta
-        title={TITLE}
-        description={SUBTITLE}
-        url={Url.format('', true)}
-        siteName={SITE_NAME}
-        siteTwitter={SITE_TWITTER}
+        title={title}
+        description={subtitle}
+        pathname={''}
         image={{
-          src: Url.format('/static/images/pages/connor.jpg', true),
+          src: '/static/images/pages/connor.jpg',
           alt: 'Connor Bär smiles at the camera'
         }}
       />
       <Navigation />
       <Main>
         <Grid>
-          <StyledHeader title={TITLE} subtitle={SUBTITLE} />
+          <StyledHeader title={title} subtitle={subtitle} />
 
           <Posts>
             {sortedPosts.map(post => (
@@ -176,14 +168,8 @@ export default function HomePage() {
           ))}
         </Guides>
       </Main>
-      <Prefooter
-        text={'Let’s be friends.'}
-        linkLabel={'Say hi!'}
-        linkUrl={`https://twitter.com/${SITE_TWITTER}`}
-      />
-      <Footer siteName={SITE_NAME} siteTwitter={SITE_TWITTER}>
-        <Anchor href="/disclaimer">Disclaimer</Anchor>
-      </Footer>
+      <Prefooter />
+      <Footer />
     </>
   );
 }

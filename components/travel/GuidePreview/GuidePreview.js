@@ -13,8 +13,8 @@ import {
 import Link from '../../Link';
 
 function getSizes(theme) {
-  const gigaSize = `(min-width: ${theme.breakpoints.giga}px) 355px`;
-  const megaSize = `(min-width: ${theme.breakpoints.mega}px) 290px`;
+  const gigaSize = `(min-width: ${theme.breakpoints.giga}px) 240px`;
+  const megaSize = `(min-width: ${theme.breakpoints.mega}px) 25vw`;
   const kiloSize = `(min-width: ${theme.breakpoints.kilo}px) 50vw`;
   const mobileSize = '100vw';
 
@@ -65,12 +65,12 @@ const subtitleContainerStyles = ({ theme }) => css`
 const SubtitleContainer = styled('p')(subtitleContainerStyles);
 
 const subtitleStyles = ({ theme }) => css`
+  display: block;
   margin-bottom: ${theme.spacings.byte};
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: pre;
   color: #fff;
-  display: block;
 
   a:hover &,
   a:focus & {

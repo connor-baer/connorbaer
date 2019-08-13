@@ -2,21 +2,13 @@ import React from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { MDXProvider } from '@mdx-js/react';
-import {
-  Meta,
-  Main,
-  Header,
-  Prefooter,
-  Footer,
-  Anchor,
-  sharedStyles
-} from '@madebyconnor/bamboo-ui';
+import { Main, Header, sharedStyles } from '@madebyconnor/bamboo-ui';
 
-import components from './_components';
+import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
-
-import { SITE_NAME, SITE_TWITTER } from '../constants';
-import * as Url from '../services/url';
+import Prefooter from '../components/Prefooter';
+import Footer from '../components/Footer';
+import components from './_components';
 
 const Article = styled('article')(sharedStyles.pageWidth, sharedStyles.grid);
 
@@ -36,16 +28,9 @@ const Content = styled('div')(contentStyles);
 
 export default ({ title, subtitle, __resourcePath }) =>
   function ArticlePage({ children }) {
-    const url = Url.format(__resourcePath, true);
     return (
       <>
-        <Meta
-          title={title}
-          description={subtitle}
-          url={url}
-          siteName={SITE_NAME}
-          siteTwitter={SITE_TWITTER}
-        />
+        <Meta title={title} description={subtitle} pathname={__resourcePath} />
         <Navigation />
         <Main>
           <Article>
@@ -55,14 +40,8 @@ export default ({ title, subtitle, __resourcePath }) =>
             </Content>
           </Article>
         </Main>
-        <Prefooter
-          text={'Let’s be friends.'}
-          linkLabel={'Say hi!'}
-          linkUrl={`https://twitter.com/${SITE_TWITTER}`}
-        />
-        <Footer siteName={SITE_NAME} siteTwitter={SITE_TWITTER}>
-          <Anchor href="/disclaimer">Disclaimer</Anchor>
-        </Footer>
+        <Prefooter />
+        <Footer />
       </>
     );
   };

@@ -2,19 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
-import {
-  Anchor,
-  Meta,
-  Main,
-  Header,
-  Prefooter,
-  Footer,
-  sharedStyles
-} from '@madebyconnor/bamboo-ui';
+import { Main, Header, sharedStyles } from '@madebyconnor/bamboo-ui';
 
+import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
-
-import { SITE_NAME, SITE_TWITTER } from '../constants';
+import Prefooter from '../components/Prefooter';
+import Footer from '../components/Footer';
 
 const TITLE_MAP = {
   404: 'Page not found. 🕵',
@@ -51,12 +44,7 @@ function ErrorPage({ statusCode = 500 }) {
   const subtitle = SUBTITLE_MAP[statusCode];
   return (
     <>
-      <Meta
-        title={title}
-        description={subtitle}
-        siteName={SITE_NAME}
-        siteTwitter={SITE_TWITTER}
-      />
+      <Meta title={title} description={subtitle} />
       <Navigation />
       <Main>
         <Grid>
@@ -65,14 +53,8 @@ function ErrorPage({ statusCode = 500 }) {
           </Content>
         </Grid>
       </Main>
-      <Prefooter
-        text={'Let’s be friends.'}
-        linkLabel={'Say hi!'}
-        linkUrl={`https://twitter.com/${SITE_TWITTER}`}
-      />
-      <Footer siteName={SITE_NAME} siteTwitter={SITE_TWITTER}>
-        <Anchor href="/disclaimer">Disclaimer</Anchor>
-      </Footer>
+      <Prefooter />
+      <Footer />
     </>
   );
 }
