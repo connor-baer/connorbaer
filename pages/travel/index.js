@@ -1,7 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
-import { flow, slice } from 'lodash/fp';
 import {
   Anchor,
   Meta,
@@ -13,20 +12,16 @@ import {
 } from '@madebyconnor/bamboo-ui';
 
 // eslint-disable-next-line import/no-unresolved
-import { frontMatter as posts } from './blog/*.mdx';
-// eslint-disable-next-line import/no-unresolved
-import { frontMatter as guides } from './travel/guides/*.mdx';
-import * as Blog from '../services/blog';
-import Navigation from '../components/Navigation';
-import PreviewSmall from '../components/blog/PreviewSmall';
-import GuidePreview from '../components/travel/GuidePreview';
+import { frontMatter as guides } from './guides/*.mdx';
+import Navigation from '../../components/Navigation';
+import GuidePreview from '../../components/travel/GuidePreview';
 
-import { SITE_NAME, SITE_TWITTER } from '../constants';
-import * as Url from '../services/url';
+import { SITE_NAME, SITE_TWITTER } from '../../constants';
+import * as Url from '../../services/url';
 
-const TITLE = 'Hello, I’m Connor.';
+const TITLE = 'Travel guides';
 const SUBTITLE =
-  'I am a web developer with a strong background in design and a passion for accessibility, currently working as a frontend engineer at SumUp.'; // eslint-disable-line max-len
+  'Follow me around the world, explore bustling cities and discover hidden treasures.'; // eslint-disable-line max-len
 
 const Grid = styled('div')(sharedStyles.pageWidth);
 
@@ -43,36 +38,6 @@ const headerStyles = ({ theme }) => css`
 `;
 
 const StyledHeader = styled(Header)(headerStyles);
-
-const postsStyles = ({ theme }) => css`
-  display: flex;
-  flex-wrap: wrap;
-
-  ${theme.mq.mega} {
-    flex-wrap: nowrap;
-  }
-`;
-
-const Posts = styled('div')(postsStyles);
-
-const postStyles = ({ theme, length }) => css`
-  width: 100%;
-
-  ${theme.mq.mega} {
-    width: calc(50% - ${theme.spacings.mega});
-    margin-right: ${theme.spacings.tera};
-  }
-
-  ${theme.mq.giga} {
-    width: ${(100 / length).toFixed(2)}%;
-  }
-
-  &:last-of-type {
-    margin-right: 0;
-  }
-`;
-
-const PostPreview = styled(PreviewSmall)(postStyles);
 
 const guidesStyles = ({ theme }) => css`
   display: flex;
@@ -130,12 +95,6 @@ const guideStyles = ({ theme }) => css`
 const StyledGuidePreview = styled(GuidePreview)(guideStyles);
 
 export default function HomePage() {
-  const sortedPosts = flow(
-    Blog.filterByArchived(),
-    Blog.sortByDate(),
-    slice(0, 3)
-  )(posts);
-
   return (
     <>
       <Meta
@@ -153,17 +112,6 @@ export default function HomePage() {
       <Main>
         <Grid>
           <StyledHeader title={TITLE} subtitle={SUBTITLE} />
-
-          <Posts>
-            {sortedPosts.map(post => (
-              <PostPreview
-                url={Url.format(post.__resourcePath)}
-                key={post.title}
-                length={sortedPosts.length}
-                {...post}
-              />
-            ))}
-          </Posts>
         </Grid>
 
         <Guides>
