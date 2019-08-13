@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
-import { Main, Header, sharedStyles } from '@madebyconnor/bamboo-ui';
+import { Main, Header, Slider, sharedStyles } from '@madebyconnor/bamboo-ui';
 
 // eslint-disable-next-line import/no-unresolved
 import { frontMatter as guides } from './guides/*.mdx';
@@ -29,65 +29,10 @@ const headerStyles = ({ theme }) => css`
 
 const StyledHeader = styled(Header)(headerStyles);
 
-const guidesStyles = ({ theme }) => css`
-  display: flex;
-  flex-wrap: nowrap;
-
-  ${theme.mq.untilMega} {
-    scroll-snap-type: x mandatory;
-    scroll-padding: 0 ${theme.spacings.tera};
-    overflow-x: auto;
-    padding: 0;
-
-    &::after {
-      content: '';
-      display: block;
-      width: ${theme.spacings.tera};
-      height: ${theme.spacings.tera};
-      flex-shrink: 0;
-    }
-  }
-
-  ${theme.mq.untilKilo} {
-    scroll-padding: 0 ${theme.spacings.mega};
-
-    &::after {
-      width: ${theme.spacings.mega};
-    }
-  }
-`;
-
-const Guides = styled('div')(sharedStyles.pageWidth, guidesStyles);
-
-const guideStyles = ({ theme }) => css`
-  ${theme.mq.untilMega} {
-    margin-left: ${theme.spacings.tera};
-    scroll-snap-align: start;
-    width: 75vw;
-    max-width: 21rem;
-    flex-shrink: 0;
-  }
-
-  ${theme.mq.untilKilo} {
-    margin-left: ${theme.spacings.mega};
-  }
-
-  ${theme.mq.mega} {
-    width: 25%;
-    margin-right: ${theme.spacings.tera};
-
-    &:last-of-type {
-      margin-right: 0;
-    }
-  }
-`;
-
-const StyledGuidePreview = styled(GuidePreview)(guideStyles);
-
 export default function TravelPage() {
-  const title = 'Travel guides';
+  const title = 'Travel Guides';
   const subtitle =
-    'Follow me around the world, explore bustling cities and discover hidden treasures.'; // eslint-disable-line max-len
+    'Follow me around the world, explore bustling cities, and discover hidden treasures.'; // eslint-disable-line max-len
   return (
     <>
       <Meta
@@ -105,15 +50,15 @@ export default function TravelPage() {
           <StyledHeader title={title} subtitle={subtitle} />
         </Grid>
 
-        <Guides>
+        <Slider>
           {guides.map(guide => (
-            <StyledGuidePreview
+            <GuidePreview
               key={guide.title}
               url={Url.format(guide.__resourcePath)}
               {...guide}
             />
           ))}
-        </Guides>
+        </Slider>
       </Main>
       <Prefooter />
       <Footer />
