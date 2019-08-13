@@ -2,22 +2,14 @@ import React from 'react';
 import { MDXProvider } from '@mdx-js/react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
-import {
-  Anchor,
-  Meta,
-  Main,
-  Header,
-  Prefooter,
-  Footer,
-  sharedStyles
-} from '@madebyconnor/bamboo-ui';
+import { Main, Header, sharedStyles } from '@madebyconnor/bamboo-ui';
 
 import components from './_components';
+import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
+import Prefooter from '../components/Prefooter';
+import Footer from '../components/Footer';
 import IntroSection from '../components/projects/IntroSection';
-
-import * as Url from '../services/url';
-import { SITE_NAME, SITE_TWITTER } from '../constants';
 
 const Article = styled('article')(sharedStyles.pageWidth, sharedStyles.grid);
 
@@ -89,17 +81,13 @@ export default ({
   __resourcePath
 }) =>
   function Project({ children }) {
-    const url = Url.format(__resourcePath, true);
-
     return (
       <>
         <Meta
           title={title}
           description={brief}
-          url={url}
+          pathname={__resourcePath}
           image={image}
-          siteName={SITE_NAME}
-          siteTwitter={SITE_TWITTER}
         />
         <Navigation />
         <Main>
@@ -123,14 +111,8 @@ export default ({
             </Content>
           </Article>
         </Main>
-        <Prefooter
-          text={'Let’s be friends.'}
-          linkLabel={'Say hi!'}
-          linkUrl={`https://twitter.com/${SITE_TWITTER}`}
-        />
-        <Footer siteName={SITE_NAME} siteTwitter={SITE_TWITTER}>
-          <Anchor href="/disclaimer">Disclaimer</Anchor>
-        </Footer>
+        <Prefooter />
+        <Footer />
       </>
     );
   };

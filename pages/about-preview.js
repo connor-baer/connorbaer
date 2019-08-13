@@ -2,22 +2,21 @@ import React from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import {
-  Meta,
-  Navigation,
   Main,
   Header,
-  Prefooter,
-  Footer,
   Intro,
   Columns,
   Collage,
+  Heading,
+  Paragraph,
   Hr,
   sharedStyles
 } from '@madebyconnor/bamboo-ui';
 
-const TITLE = 'I am Connor.';
-const SUBTITLE =
-  'I am web developer with a strong background in design, born in Germany and currently living in Berlin. Nice to meet you 👋'; // eslint-disable-line max-len
+import Meta from '../components/Meta';
+import Navigation from '../components/Navigation';
+import Prefooter from '../components/Prefooter';
+import Footer from '../components/Footer';
 
 const Grid = styled('div')(sharedStyles.pageWidth, sharedStyles.grid);
 
@@ -37,17 +36,17 @@ const columStyles = () => css`
   grid-column: 1 / 13;
 `;
 
-const Text = styled('p');
-const Heading = styled('h2');
-
-export default function About() {
+export default function AboutPage() {
+  const title = 'I am Connor.';
+  const subtitle =
+    'I am web developer with a strong background in design, born in Germany and currently living in Berlin. Nice to meet you 👋'; // eslint-disable-line max-len
   return (
     <>
-      <Meta title={TITLE} description={SUBTITLE} />
+      <Meta title={title} description={subtitle} />
       <Navigation />
       <Main>
         <Grid>
-          <Header title={TITLE} subtitle={SUBTITLE} css={headerStyles} />
+          <Header title={title} subtitle={subtitle} css={headerStyles} />
         </Grid>
         <Collage
           images={[
@@ -86,24 +85,24 @@ export default function About() {
           <Hr />
           <Heading as="h3">Experience</Heading>
           <Heading as="h4">Frontend Engineer — SumUp Services</Heading>
-          <Text>
+          <Paragraph>
             My goal is to make technology more human. Technology should serve
             and delight its users without getting in the way. I always optimise
             for accessibility, usability, and performance to craft intuitive
             digital experiences for everyone.
-          </Text>
+          </Paragraph>
           <Heading as="h4">Web Developer & Designer — Freelance</Heading>
-          <Text>
+          <Paragraph>
             My goal is to make technology more human. Technology should serve
             and delight its users without getting in the way. I always optimise
             for accessibility, usability, and performance to craft intuitive
             digital experiences for everyone.
-          </Text>
+          </Paragraph>
           <Heading as="h3">Currently learning</Heading>
           <Heading as="h4">Reading</Heading>
-          <Text>Life of Pi</Text>
+          <Paragraph>Life of Pi</Paragraph>
           <Heading as="h4">Courses</Heading>
-          <Text>Udacity VR Foundations Nanodegree</Text>
+          <Paragraph>Udacity VR Foundations Nanodegree</Paragraph>
         </Grid>
       </Main>
       <Prefooter />
