@@ -2,7 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { CoverImage, useTheme } from '@madebyconnor/bamboo-ui';
+import {
+  CoverImage,
+  Heading,
+  Paragraph,
+  useTheme
+} from '@madebyconnor/bamboo-ui';
 
 import Link from '../../Link';
 
@@ -28,7 +33,7 @@ const contentStyles = ({ theme }) => css`
   right: 0;
   bottom: 0;
   left: 0;
-  padding: ${theme.spacings.peta} ${theme.spacings.giga} ${theme.spacings.giga};
+  padding: ${theme.spacings.peta} ${theme.spacings.mega} ${theme.spacings.mega};
   background: linear-gradient(transparent, ${theme.colors.shadow});
   border-bottom-left-radius: ${theme.borderRadius.giga};
   border-bottom-right-radius: ${theme.borderRadius.giga};
@@ -36,32 +41,29 @@ const contentStyles = ({ theme }) => css`
 
 const Content = styled('h2')(contentStyles);
 
-const titleStyles = ({ theme }) => css`
-  font-size: ${theme.fontSizes.giga};
-  font-weight: ${theme.fontWeight.bold};
-  line-height: ${theme.lineHeights.kilo};
+const titleStyles = () => css`
+  margin: 0;
   color: #fff;
 `;
 
-const Title = styled('h2')(titleStyles);
+const Title = styled(Heading)(titleStyles);
 
-const subtitleContainerStyles = () => css`
+const subtitleContainerStyles = ({ theme }) => css`
   overflow: hidden;
-  height: 27px;
+  height: ${theme.spacings.tera};
 `;
 
 const SubtitleContainer = styled('p')(subtitleContainerStyles);
 
-const subtitleStyles = ({ theme }) => css`
-  font-size: ${theme.fontSizes.kilo};
-  line-height: ${theme.lineHeights.kilo};
+const subtitleStyles = () => css`
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: pre;
   color: #fff;
+  display: block;
 `;
 
-const Subtitle = styled('p')(subtitleStyles);
+const Subtitle = styled(Paragraph)(subtitleStyles);
 
 export default function PreviewSmall({
   url,
@@ -83,7 +85,9 @@ export default function PreviewSmall({
           <Content>
             <Title>{title}</Title>
             <SubtitleContainer>
-              <Subtitle>{subtitle}</Subtitle>
+              <Subtitle size="kilo" as="span">
+                {subtitle}
+              </Subtitle>
             </SubtitleContainer>
           </Content>
         </a>

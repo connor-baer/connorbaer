@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { CoverImage, useTheme } from '@madebyconnor/bamboo-ui';
+import { CoverImage, Heading, useTheme } from '@madebyconnor/bamboo-ui';
 
 import Link from '../../Link';
 import PostMeta from '../PostMeta';
@@ -24,14 +24,10 @@ const articleStyles = ({ theme }) => css`
 const Article = styled('article')(articleStyles);
 
 const titleStyles = ({ theme }) => css`
-  font-size: ${theme.fontSizes.giga};
-  font-weight: ${theme.fontWeight.bold};
-  line-height: ${theme.lineHeights.kilo};
   margin-top: ${theme.spacings.giga};
-  margin-bottom: ${theme.spacings.bit};
 `;
 
-const Title = styled('h2')(titleStyles);
+const Title = styled(Heading)(titleStyles);
 
 export default function PreviewSmall({
   url,
@@ -51,7 +47,7 @@ export default function PreviewSmall({
           {image.src && (
             <CoverImage {...image} sizes={sizes} aspectRatio={7 / 3} />
           )}
-          <Title>{title}</Title>
+          <Title size="giga">{title}</Title>
         </a>
       </Link>
       <PostMeta date={date} category={category} />

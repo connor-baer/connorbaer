@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { CoverImage, useTheme } from '@madebyconnor/bamboo-ui';
+import { CoverImage, Heading, useTheme } from '@madebyconnor/bamboo-ui';
 
 import Link from '../../Link';
 import ProjectMeta from '../ProjectMeta';
@@ -26,13 +26,10 @@ const articleStyles = ({ theme }) => css`
 const Article = styled('article')(articleStyles);
 
 const titleStyles = ({ theme }) => css`
-  font-size: ${theme.fontSizes.tera};
-  font-weight: ${theme.fontWeight.bold};
-  line-height: ${theme.lineHeights.kilo};
   margin-top: ${theme.spacings.giga};
 `;
 
-const Title = styled('h2')(titleStyles);
+const Title = styled(Heading)(titleStyles);
 
 export default function PreviewLarge({ url, image = {}, title, skills }) {
   const theme = useTheme();
@@ -45,7 +42,7 @@ export default function PreviewLarge({ url, image = {}, title, skills }) {
           {image.src && (
             <CoverImage {...image} sizes={sizes} aspectRatio={500 / 500} />
           )}
-          <Title>{title}</Title>
+          <Title as="h3">{title}</Title>
         </a>
       </Link>
       <ProjectMeta skills={skills} />

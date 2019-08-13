@@ -1,66 +1,20 @@
+import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { Anchor, Image, Hr } from '@madebyconnor/bamboo-ui';
+import { Anchor, Paragraph, Heading, Image, Hr } from '@madebyconnor/bamboo-ui';
 
 import Blockquote from '../components/blog/Blockquote';
 
-const headingOneStyles = ({ theme }) => css`
-  font-size: ${theme.fontSizes.peta};
-  font-weight: ${theme.fontWeight.bold};
-  line-height: ${theme.lineHeights.kilo};
-  margin-top: ${theme.spacings.exa};
-`;
-
-export const HeadingOne = styled('h2')(headingOneStyles);
-
-const headingTwoStyles = ({ theme }) => css`
-  font-size: ${theme.fontSizes.tera};
-  font-weight: ${theme.fontWeight.bold};
-  line-height: ${theme.lineHeights.kilo};
-  margin-top: ${theme.spacings.exa};
-`;
-
-export const HeadingTwo = styled('h3')(headingTwoStyles);
-
-const headingThreeStyles = ({ theme }) => css`
-  font-size: ${theme.fontSizes.giga};
-  font-weight: ${theme.fontWeight.bold};
-  line-height: ${theme.lineHeights.kilo};
-  margin-top: ${theme.spacings.exa};
-`;
-
-export const HeadingThree = styled('h4')(headingThreeStyles);
-
-const headingFourStyles = ({ theme }) => css`
-  font-size: ${theme.fontSizes.mega};
-  font-weight: ${theme.fontWeight.bold};
-  line-height: ${theme.lineHeights.kilo};
-  margin-top: ${theme.spacings.exa};
-`;
-
-export const HeadingFour = styled('h5')(headingFourStyles);
-
-const textStyles = ({ theme }) => css`
-  font-size: ${theme.fontSizes.mega};
-  line-height: ${theme.lineHeights.giga};
-  margin-top: ${theme.spacings.kilo};
-`;
-
-export const Paragraph = styled('p')(textStyles);
-
-const italicStyles = () => css`
-  font-style: italic;
-`;
-
-export const Em = styled('em')(textStyles, italicStyles);
-
-const boldStyles = ({ theme }) => css`
-  font-weight: ${theme.fontWeight.bold};
-`;
-
-export const Strong = styled('strong')(textStyles, boldStyles);
-
-export const Quote = Em.withComponent('q');
+export { Paragraph };
+export const HeadingOne = props => <Heading as="h2" size="peta" {...props} />;
+export const HeadingTwo = props => <Heading as="h3" size="tera" {...props} />;
+export const HeadingThree = props => <Heading as="h4" size="giga" {...props} />;
+export const HeadingFour = props => <Heading as="h5" size="mega" {...props} />;
+export const Em = props => <Paragraph as="em" slope="italic" {...props} />;
+export const Quote = props => <Em as="q" {...props} />;
+export const Strong = props => (
+  <Paragraph as="strong" weight="bold" {...props} />
+);
 
 const listStyles = ({ theme }) => css`
   margin-bottom: ${theme.spacings.mega};
@@ -78,9 +32,10 @@ const listStyles = ({ theme }) => css`
   }
 `;
 
-export const Ul = styled('ul')(textStyles, listStyles);
+export const List = styled(Paragraph)(listStyles);
 
-export const Ol = Ul.withComponent('ol');
+export const Ol = List.withComponent('ol');
+export const Ul = List.withComponent('ul');
 
 const components = {
   h1: HeadingOne,

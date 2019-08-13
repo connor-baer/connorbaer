@@ -2,7 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { CoverImage, useTheme } from '@madebyconnor/bamboo-ui';
+import {
+  CoverImage,
+  Heading,
+  Paragraph,
+  useTheme
+} from '@madebyconnor/bamboo-ui';
 
 import Link from '../../Link';
 import PostMeta from '../PostMeta';
@@ -27,24 +32,11 @@ const articleStyles = ({ theme }) => css`
 const Article = styled('article')(articleStyles);
 
 const titleStyles = ({ theme }) => css`
-  font-size: ${theme.fontSizes.tera};
-  font-weight: ${theme.fontWeight.bold};
-  line-height: ${theme.lineHeights.kilo};
   margin-top: ${theme.spacings.tera};
   margin-bottom: ${theme.spacings.kilo};
 `;
 
-const Title = styled('h2')(titleStyles);
-
-const descriptionStyles = ({ theme }) => css`
-  font-size: ${theme.fontSizes.mega};
-  line-height: ${theme.lineHeights.mega};
-  margin-top: ${theme.spacings.kilo};
-  margin-bottom: ${theme.spacings.kilo};
-  color: ${theme.colors.bodyColor};
-`;
-
-const Description = styled('p')(descriptionStyles);
+const Title = styled(Heading)(titleStyles);
 
 export default function PreviewLarge({
   url,
@@ -65,8 +57,8 @@ export default function PreviewLarge({
           {featured && image.src && (
             <CoverImage {...image} sizes={sizes} aspectRatio={350 / 150} />
           )}
-          <Title>{title}</Title>
-          {description && <Description>{description}</Description>}
+          <Title size="tera">{title}</Title>
+          {description && <Paragraph>{description}</Paragraph>}
         </a>
       </Link>
       <PostMeta date={date} category={category} />
