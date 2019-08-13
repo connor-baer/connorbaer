@@ -8,6 +8,7 @@ import {
   Main,
   Prefooter,
   Footer,
+  Heading,
   Intro,
   ParallaxImage,
   sharedStyles,
@@ -69,14 +70,6 @@ const postHeaderStyles = ({ theme }) => css`
 
 const PostHeader = styled('header')(postHeaderStyles);
 
-const headingStyles = ({ theme }) => css`
-  font-size: ${theme.fontSizes.exa};
-  font-weight: ${theme.fontWeight.bold};
-  line-height: ${theme.lineHeights.byte};
-`;
-
-const Heading = styled('h1')(headingStyles);
-
 export default ({
   title,
   description,
@@ -113,7 +106,9 @@ export default ({
           <Grid>
             <Content>
               <PostHeader>
-                <Heading>{title}</Heading>
+                <Heading as="h1" size="exa">
+                  {title}
+                </Heading>
                 <PostMeta date={date} category={category} />
               </PostHeader>
               <Intro>{description}</Intro>

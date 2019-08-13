@@ -19,9 +19,7 @@ export default function IntroSection({ title, children, className }) {
   return (
     <div className={className}>
       <Heading>{title}</Heading>
-      <Intro size={Intro.GIGA} element="h4">
-        {children}
-      </Intro>
+      <Intro as="h4">{children}</Intro>
     </div>
   );
 }
