@@ -38,6 +38,12 @@ const titleStyles = ({ theme }) => css`
 
 const Title = styled(Heading)(titleStyles);
 
+const descriptionStyles = ({ theme }) => css`
+  color: ${theme.colors.bodyColor};
+`;
+
+const Description = styled(Paragraph)(descriptionStyles);
+
 export default function PreviewLarge({
   url,
   image = {},
@@ -58,7 +64,7 @@ export default function PreviewLarge({
             <CoverImage {...image} sizes={sizes} aspectRatio={350 / 150} />
           )}
           <Title size="tera">{title}</Title>
-          {description && <Paragraph>{description}</Paragraph>}
+          {description && <Description>{description}</Description>}
         </a>
       </Link>
       <PostMeta date={date} category={category} />

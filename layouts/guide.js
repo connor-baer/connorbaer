@@ -86,8 +86,7 @@ export default ({ title, description, image, __resourcePath }) =>
                 <Heading>{title}</Heading>
                 <Figure
                   image={{
-                    src: '/static/images/pages/connor.jpg',
-                    alt: 'Connor flashes a big smile at the camera.',
+                    ...image,
                     aspectRatio: 1.618
                   }}
                   align={Figure.FULL}
