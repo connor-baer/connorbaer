@@ -10,8 +10,8 @@ const baseStyles = ({ theme }) => css`
   border-bottom: 1px solid ${theme.colors.n300};
   margin-top: ${theme.spacings.giga};
   margin-bottom: ${theme.spacings.giga};
-  padding-top: ${theme.spacings.tera};
-  padding-bottom: ${theme.spacings.kilo};
+  padding-top: ${theme.spacings.mega};
+  padding-bottom: ${theme.spacings.bit};
 `;
 
 const leftStyles = ({ align, theme }) =>
