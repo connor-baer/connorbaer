@@ -81,7 +81,7 @@ const actionStyles = () => css`
 
 const Action = styled(Paragraph)(actionStyles);
 
-export default function PreviewSmall({
+export default function GuidePreview({
   url,
   image = {},
   title,
@@ -123,7 +123,7 @@ export default function PreviewSmall({
   /* eslint-enable jsx-a11y/anchor-is-valid */
 }
 
-PreviewSmall.propTypes = {
+GuidePreview.propTypes = {
   url: PropTypes.string,
   title: PropTypes.string,
   subtitle: PropTypes.string,

@@ -35,10 +35,6 @@ const headerStyles = ({ theme }) => css`
 
 const StyledHeader = styled(Header)(headerStyles);
 
-const columStyles = () => css`
-  grid-column: 1 / 13;
-`;
-
 export default function AboutPage() {
   const title = 'I am Connor.';
   const subtitle =
