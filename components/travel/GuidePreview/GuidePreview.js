@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
@@ -46,7 +46,7 @@ const titleStyles = ({ theme }) => css`
   margin-top: 0;
   margin-bottom: ${theme.spacings.bit};
   color: #fff;
-  font-family: Georgia, ${theme.fontStack.serif};
+  font-family: Playfair Display, ${theme.fontStack.serif};
 `;
 
 const Title = styled(Heading)(titleStyles);

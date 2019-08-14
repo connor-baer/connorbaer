@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
-import { Main, Header, Slider, sharedStyles } from '@madebyconnor/bamboo-ui';
+import {
+  Main,
+  Header,
+  Slider,
+  sharedStyles,
+  useTheme
+} from '@madebyconnor/bamboo-ui';
 
 // eslint-disable-next-line import/no-unresolved
 import { frontMatter as guides } from './guides/*.mdx';
@@ -31,6 +37,11 @@ const headerStyles = ({ theme }) => css`
 const StyledHeader = styled(Header)(headerStyles);
 
 export default function TravelPage() {
+  const theme = useTheme();
+  useEffect(() => {
+    theme.setTheme('travel');
+  });
+
   const title = 'Travel Guides';
   const subtitle =
     'Follow me around the world, explore bustling cities, and discover hidden treasures.'; // eslint-disable-line max-len
@@ -51,7 +62,7 @@ export default function TravelPage() {
           <StyledHeader title={title} subtitle={subtitle} />
         </Grid>
 
-        <Slider css={theme => sharedStyles.pageWidth({ theme })}>
+        <Slider css={sharedStyles.pageWidth({ theme })}>
           {guides.map(guide => (
             <GuidePreview
               key={guide.title}

@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { MDXProvider } from '@mdx-js/react';
 import {
   Main,
-  Intro,
+  Header,
   Small,
   RatioImage,
-  Heading,
   ComponentsProvider,
-  sharedStyles
+  sharedStyles,
+  useTheme
 } from '@madebyconnor/bamboo-ui';
 
 import { formatDate, formatDatetime } from '../utils/date';
@@ -18,13 +18,13 @@ import Navigation from '../components/Navigation';
 import Prefooter from '../components/Prefooter';
 import Footer from '../components/Footer';
 import Align from '../components/travel/Align';
-import Aside from '../components/travel/Aside';
 import components from './_components';
+import TableOfContents from '../components/travel/TableOfContents';
 
 const Container = styled('div')(sharedStyles.pageWidth);
 
 const defaultChildStyles = ({ theme }) => css`
-  * {
+  > * {
     grid-column: 1 / 13;
 
     ${theme.mq.kilo} {
@@ -39,23 +39,24 @@ const defaultChildStyles = ({ theme }) => css`
 
 const Grid = styled('div')(sharedStyles.grid, defaultChildStyles);
 
-const postHeaderStyles = ({ theme }) => css`
-  display: block;
-  margin-top: ${theme.spacings.zetta};
-  margin-bottom: ${theme.spacings.exa};
+const headerStyles = ({ theme }) => css`
+  font-family: ${theme.fontStack.serif};
+  width: 100%;
+
+  ${theme.mq.mega} {
+    width: 90%;
+  }
+
+  ${theme.mq.giga} {
+    width: 80%;
+  }
 `;
 
-const PostHeader = styled('header')(postHeaderStyles);
-
-const headingStyles = ({ theme }) => css`
-  font-family: Georgia, ${theme.fontStack.serif};
-`;
-
-const StyledHeading = styled(Heading)(headingStyles);
+const StyledHeader = styled(Header)(headerStyles);
 
 const ratioImageStyles = ({ theme }) => css`
   margin-top: ${theme.spacings.tera};
-  margin-bottom: ${theme.spacings.tera};
+  margin-bottom: ${theme.spacings.kilo};
 
   ${theme.mq.kilo} {
     margin-top: ${theme.spacings.zetta};
@@ -65,9 +66,20 @@ const ratioImageStyles = ({ theme }) => css`
 
 const StyledRatioImage = styled(RatioImage)(ratioImageStyles);
 
-export default ({ title, subtitle, image, date, contents, __resourcePath }) =>
+export default ({
+  title,
+  subtitle,
+  image,
+  date,
+  tableOfContents,
+  __resourcePath
+}) =>
   function Guide({ children }) {
-    console.log({ contents });
+    const theme = useTheme();
+    useEffect(() => {
+      theme.setTheme('travel');
+    });
+
     const formattedDate = formatDate(date);
     const datetime = formatDatetime(date);
     return (
@@ -81,18 +93,18 @@ export default ({ title, subtitle, image, date, contents, __resourcePath }) =>
         <Navigation />
         <Main as="article">
           <Container>
-            <PostHeader>
-              <StyledHeading size="exa">{title}</StyledHeading>
+            <StyledHeader title={title} subtitle={subtitle}>
               {date && (
-                <Small element="time" dateTime={datetime}>
-                  {formattedDate}
-                </Small>
+                <div>
+                  <Small element="time" dateTime={datetime}>
+                    {formattedDate}
+                  </Small>
+                </div>
               )}
-              <StyledRatioImage aspectRatio={1.618} {...image} />
-            </PostHeader>
+            </StyledHeader>
+            <StyledRatioImage aspectRatio={1.618} {...image} />
             <Grid>
-              <Aside>Connor</Aside>
-              <Intro>{subtitle}</Intro>
+              <TableOfContents tableOfContents={tableOfContents} />
               <ComponentsProvider value={{ Align }}>
                 <MDXProvider components={components}>{children}</MDXProvider>
               </ComponentsProvider>

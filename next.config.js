@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const remark = require('remark');
 const mdx = require('remark-mdx');
+const Slugger = require('github-slugger');
 const slug = require('rehype-slug');
 const emoji = require('remark-emoji');
 const externalLinks = require('remark-external-links');
@@ -47,29 +48,48 @@ const bundleAnalyzerConfig = {
   enabled: process.env.ANALYZE === 'true'
 };
 
+function getValues(node) {
+  if (node.value) {
+    return node.value;
+  }
+  return node.children.map(getValues);
+}
+
+const slugger = new Slugger();
+
+function toTOC(tree) {
+  return tree.children.reduce((allNodes, node) => {
+    const { type, depth } = node;
+
+    if (type !== 'heading' || depth > 2) {
+      return allNodes;
+    }
+
+    const values = getValues(node);
+    const value = values.join('');
+    const id = slugger.slug(value, false).replace(/-\d+$/, '');
+
+    allNodes.push({ value, id, depth });
+
+    return allNodes;
+  }, []);
+}
+
 const mdxConfig = {
   remarkPlugins: [emoji, externalLinks],
   rehypePlugins: [slug],
   extendFrontMatter: {
     process: async mdxContent => {
-      const contents = await remark()
+      let tableOfContents;
+
+      await remark()
         .use(mdx)
         .use(() => tree => {
-          console.log(tree);
-          const headings = tree.children.filter(
-            node => node.type === 'heading'
-          );
-          console.log(headings);
-          return tree;
-          // try {
-          //   return tree.children.filter(node => node.type === 'heading');
-          // } catch (e) {
-          //   console.error(e);
-          //   return tree;
-          // }
+          tableOfContents = toTOC(tree);
         })
         .process(mdxContent);
-      return { contents };
+
+      return { tableOfContents };
     }
   }
 };
