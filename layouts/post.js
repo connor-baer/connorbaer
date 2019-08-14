@@ -24,7 +24,7 @@ const contentStyles = ({ theme }) => css`
   grid-column: 1 / 13;
 
   ${theme.mq.kilo} {
-    grid-column: 1 / 12;
+    grid-column: 2 / 12;
   }
 
   ${theme.mq.mega} {

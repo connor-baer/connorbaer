@@ -1,42 +1,38 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { MDXProvider } from '@mdx-js/react';
 import {
   Main,
   Intro,
-  Figure,
-  sharedStyles,
-  useTheme
+  RatioImage,
+  Heading,
+  sharedStyles
 } from '@madebyconnor/bamboo-ui';
 
 import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
 import Prefooter from '../components/Prefooter';
 import Footer from '../components/Footer';
-import components, { Paragraph } from './_components';
+import components from './_components';
 
-const Grid = styled('div')(sharedStyles.pageWidth, sharedStyles.grid);
+const Container = styled('div')(sharedStyles.pageWidth);
 
-const contentStyles = ({ theme }) => css`
-  grid-column: 1 / 13;
+const defaultChildStyles = ({ theme }) => css`
+  > * {
+    grid-column: 1 / 13;
 
-  ${theme.mq.kilo} {
-    grid-column: 1 / 12;
-  }
+    ${theme.mq.kilo} {
+      grid-column: 2 / 12;
+    }
 
-  ${theme.mq.mega} {
-    grid-column: 3 / 11;
+    ${theme.mq.mega} {
+      grid-column: 5 / 13;
+    }
   }
 `;
 
-const Content = styled('div')(contentStyles);
-
-const styledParagraphStyles = ({ theme }) => css`
-  font-family: ${theme.fontStack.serif};
-`;
-
-const StyledParagraph = styled(Paragraph)(styledParagraphStyles);
+const Grid = styled('div')(sharedStyles.grid, defaultChildStyles);
 
 const postHeaderStyles = ({ theme }) => css`
   display: block;
@@ -47,49 +43,33 @@ const postHeaderStyles = ({ theme }) => css`
 const PostHeader = styled('header')(postHeaderStyles);
 
 const headingStyles = ({ theme }) => css`
-  font-size: ${theme.fontSizes.exa};
-  font-weight: ${theme.fontWeight.bold};
-  line-height: ${theme.lineHeights.byte};
   font-family: Georgia, serif;
 `;
 
-const Heading = styled('h1')(headingStyles);
+const StyledHeading = styled(Heading)(headingStyles);
 
-export default ({ title, description, image, __resourcePath }) =>
-  function Post({ children }) {
-    const theme = useTheme();
-    useEffect(() => {
-      theme.setTheme('blog');
-    });
-
+export default ({ title, subtitle, image, __resourcePath }) =>
+  function Guide({ children }) {
     return (
       <>
         <Meta
           title={title}
-          description={description}
+          description={subtitle}
           pathname={__resourcePath}
           image={image}
         />
         <Navigation />
         <Main as="article">
-          <Grid>
-            <Content>
-              <PostHeader>
-                <Heading>{title}</Heading>
-                <Figure
-                  image={{
-                    ...image,
-                    aspectRatio: 1.618
-                  }}
-                  align={Figure.FULL}
-                />
-              </PostHeader>
-              <Intro>{description}</Intro>
-              <MDXProvider components={{ ...components, p: StyledParagraph }}>
-                {children}
-              </MDXProvider>
-            </Content>
-          </Grid>
+          <Container>
+            <PostHeader>
+              <StyledHeading size="exa">{title}</StyledHeading>
+              <RatioImage aspectRatio={1.618} {...image} />
+            </PostHeader>
+            <Grid>
+              <Intro>{subtitle}</Intro>
+              <MDXProvider components={components}>{children}</MDXProvider>
+            </Grid>
+          </Container>
         </Main>
         <Prefooter />
         <Footer />

@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { flow, slice } from 'lodash/fp';
-import { Main, Header, sharedStyles } from '@madebyconnor/bamboo-ui';
+import { Main, Header, Slider, sharedStyles } from '@madebyconnor/bamboo-ui';
 
 // eslint-disable-next-line import/no-unresolved
 import { frontMatter as posts } from './blog/*.mdx';
@@ -64,65 +64,10 @@ const postStyles = ({ theme, length }) => css`
 
 const PostPreview = styled(PreviewSmall)(postStyles);
 
-const guidesStyles = ({ theme }) => css`
-  display: flex;
-  flex-wrap: nowrap;
-
-  ${theme.mq.untilMega} {
-    scroll-snap-type: x mandatory;
-    scroll-padding: 0 ${theme.spacings.tera};
-    overflow-x: auto;
-    padding: 0;
-
-    &::after {
-      content: '';
-      display: block;
-      width: ${theme.spacings.tera};
-      height: ${theme.spacings.tera};
-      flex-shrink: 0;
-    }
-  }
-
-  ${theme.mq.untilKilo} {
-    scroll-padding: 0 ${theme.spacings.mega};
-
-    &::after {
-      width: ${theme.spacings.mega};
-    }
-  }
-`;
-
-const Guides = styled('div')(sharedStyles.pageWidth, guidesStyles);
-
-const guideStyles = ({ theme }) => css`
-  ${theme.mq.untilMega} {
-    margin-left: ${theme.spacings.tera};
-    scroll-snap-align: start;
-    width: 75vw;
-    max-width: 21rem;
-    flex-shrink: 0;
-  }
-
-  ${theme.mq.untilKilo} {
-    margin-left: ${theme.spacings.mega};
-  }
-
-  ${theme.mq.mega} {
-    width: 25%;
-    margin-right: ${theme.spacings.tera};
-
-    &:last-of-type {
-      margin-right: 0;
-    }
-  }
-`;
-
-const StyledGuidePreview = styled(GuidePreview)(guideStyles);
-
 export default function HomePage() {
   const title = 'Hello, I’m Connor.';
   const subtitle =
-    'I am a web developer with a strong background in design and a passion for accessibility, currently working as a frontend engineer at SumUp.'; // eslint-disable-line max-len
+    'Avid rock climber, scuba diver, and cooking enthusiast. Currently frontend engineer at SumUp.'; // eslint-disable-line max-len
 
   const sortedPosts = flow(
     Blog.filterByArchived(),
@@ -158,15 +103,15 @@ export default function HomePage() {
           </Posts>
         </Grid>
 
-        <Guides>
+        <Slider css={theme => sharedStyles.pageWidth({ theme })}>
           {guides.map(guide => (
-            <StyledGuidePreview
+            <GuidePreview
               key={guide.title}
               url={Url.format(guide.__resourcePath)}
               {...guide}
             />
           ))}
-        </Guides>
+        </Slider>
       </Main>
       <Prefooter />
       <Footer />
