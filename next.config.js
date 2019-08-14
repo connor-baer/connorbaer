@@ -1,24 +1,17 @@
 const webpack = require('webpack');
+const remark = require('remark');
+const mdx = require('remark-mdx');
 const slug = require('rehype-slug');
 const emoji = require('remark-emoji');
 const externalLinks = require('remark-external-links');
 const withPlugins = require('next-compose-plugins');
 const withOffline = require('next-offline');
-// const withTranspileModules = require('next-transpile-modules');
 const withBundleAnalyzer = require('@next/bundle-analyzer');
 const withMdxEnhanced = require('next-mdx-enhanced');
 
 const nextConfig = {
   poweredByHeader: false,
   webpack: (config, { dev, defaultLoaders }) => {
-    // eslint-disable-next-line no-param-reassign
-    // config.resolve.alias = {
-    //   ...config.resolve.alias,
-    //   '@madebyconnor/bamboo-ui': require.resolve(
-    //     '@madebyconnor/bamboo-ui/lib/es'
-    //   )
-    // };
-
     // eslint-disable-next-line no-param-reassign
     config.node = {
       __filename: true,
@@ -56,7 +49,29 @@ const bundleAnalyzerConfig = {
 
 const mdxConfig = {
   remarkPlugins: [emoji, externalLinks],
-  rehypePlugins: [slug]
+  rehypePlugins: [slug],
+  extendFrontMatter: {
+    process: async mdxContent => {
+      const contents = await remark()
+        .use(mdx)
+        .use(() => tree => {
+          console.log(tree);
+          const headings = tree.children.filter(
+            node => node.type === 'heading'
+          );
+          console.log(headings);
+          return tree;
+          // try {
+          //   return tree.children.filter(node => node.type === 'heading');
+          // } catch (e) {
+          //   console.error(e);
+          //   return tree;
+          // }
+        })
+        .process(mdxContent);
+      return { contents };
+    }
+  }
 };
 
 module.exports = withPlugins(

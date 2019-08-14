@@ -8,6 +8,7 @@ import {
   Intro,
   ParallaxImage,
   sharedStyles,
+  ComponentsProvider,
   useTheme
 } from '@madebyconnor/bamboo-ui';
 
@@ -16,6 +17,7 @@ import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
 import Prefooter from '../components/Prefooter';
 import Footer from '../components/Footer';
+import Align from '../components/Align';
 import PostMeta from '../components/blog/PostMeta';
 
 const Grid = styled('div')(sharedStyles.pageWidth, sharedStyles.grid);
@@ -104,9 +106,11 @@ export default ({
                 <PostMeta date={date} category={category} />
               </PostHeader>
               <Intro>{description}</Intro>
-              <MDXProvider components={{ ...components, p: StyledParagraph }}>
-                {children}
-              </MDXProvider>
+              <ComponentsProvider value={{ Align }}>
+                <MDXProvider components={{ ...components, p: StyledParagraph }}>
+                  {children}
+                </MDXProvider>
+              </ComponentsProvider>
             </Content>
           </Grid>
         </Main>

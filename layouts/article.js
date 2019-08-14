@@ -2,12 +2,18 @@ import React from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { MDXProvider } from '@mdx-js/react';
-import { Main, Header, sharedStyles } from '@madebyconnor/bamboo-ui';
+import {
+  Main,
+  Header,
+  ComponentsProvider,
+  sharedStyles
+} from '@madebyconnor/bamboo-ui';
 
 import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
 import Prefooter from '../components/Prefooter';
 import Footer from '../components/Footer';
+import Align from '../components/Align';
 import components from './_components';
 
 const Article = styled('article')(sharedStyles.pageWidth, sharedStyles.grid);
@@ -36,7 +42,9 @@ export default ({ title, subtitle, __resourcePath }) =>
           <Article>
             <Content>
               <Header title={title} subtitle={subtitle} />
-              <MDXProvider components={components}>{children}</MDXProvider>
+              <ComponentsProvider value={{ Align }}>
+                <MDXProvider components={components}>{children}</MDXProvider>
+              </ComponentsProvider>
             </Content>
           </Article>
         </Main>

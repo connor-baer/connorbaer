@@ -3,8 +3,9 @@ import App from 'next/app';
 import Head from 'next/head';
 import Router from 'next/router';
 import {
-  ComponentsContext,
+  ComponentsProvider,
   Theme,
+  Align,
   LoadingBar,
   GlobalStyles
 } from '@madebyconnor/bamboo-ui';
@@ -45,7 +46,7 @@ export default class CustomApp extends App {
     const { isLoading } = this.state;
     const section = router.pathname.split('/')[1];
     return (
-      <ComponentsContext.Provider value={{ Head, Image, Link }}>
+      <ComponentsProvider value={{ Head, Image, Link, Align }}>
         <Theme
           themes={themes}
           initialThemeId={section}
@@ -55,7 +56,7 @@ export default class CustomApp extends App {
           <LoadingBar isLoading={isLoading} />
           <Component {...pageProps} />
         </Theme>
-      </ComponentsContext.Provider>
+      </ComponentsProvider>
     );
   }
 }

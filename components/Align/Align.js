@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
+import { sharedPropTypes } from '@madebyconnor/bamboo-ui';
 
-import { RIGHT, LEFT, CENTER, FULL } from '../../../constants/align';
+import { RIGHT, LEFT, CENTER, FULL } from '../../constants/align';
 
 const baseStyles = ({ theme }) => css`
   margin-top: ${theme.spacings.tera};
@@ -67,10 +67,7 @@ Align.CENTER = CENTER;
 Align.FULL = FULL;
 
 Align.propTypes = {
-  align: PropTypes.oneOf([RIGHT, LEFT, CENTER, FULL])
+  align: sharedPropTypes.alignPropType
 };
 
-/**
- * @component
- */
 export default Align;

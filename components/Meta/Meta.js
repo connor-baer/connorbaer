@@ -30,5 +30,5 @@ export default function CustomMeta({
 
 CustomMeta.propTypes = {
   pathname: PropTypes.string,
-  image: sharedPropTypes.imagePropType
+  image: PropTypes.shape(sharedPropTypes.imagePropType)
 };
