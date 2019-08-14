@@ -5,7 +5,16 @@ import { Meta, sharedPropTypes } from '@madebyconnor/bamboo-ui';
 import { SITE_NAME, SITE_TWITTER } from '../../constants';
 import * as Url from '../../services/url';
 
-export default function CustomMeta({ pathname, image = {}, ...rest }) {
+const DEFAULT_IMAGE = {
+  src: '/static/images/pages/connor.jpg',
+  alt: 'Connor smiles at the camera.'
+};
+
+export default function CustomMeta({
+  pathname,
+  image = DEFAULT_IMAGE,
+  ...rest
+}) {
   const url = pathname && Url.format(pathname, true);
   const src = image.src && Url.format(image.src, true);
   return (

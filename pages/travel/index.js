@@ -16,6 +16,7 @@ import * as Url from '../../services/url';
 const Grid = styled('div')(sharedStyles.pageWidth);
 
 const headerStyles = ({ theme }) => css`
+  font-family: Playfair Display;
   width: 100%;
 
   ${theme.mq.mega} {
@@ -50,7 +51,7 @@ export default function TravelPage() {
           <StyledHeader title={title} subtitle={subtitle} />
         </Grid>
 
-        <Slider>
+        <Slider css={theme => sharedStyles.pageWidth({ theme })}>
           {guides.map(guide => (
             <GuidePreview
               key={guide.title}

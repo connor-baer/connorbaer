@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import {
+  Anchor,
   Main,
   Header,
   Intro,
@@ -18,19 +19,21 @@ import Navigation from '../components/Navigation';
 import Prefooter from '../components/Prefooter';
 import Footer from '../components/Footer';
 
-const Grid = styled('div')(sharedStyles.pageWidth, sharedStyles.grid);
+const Container = styled('div')(sharedStyles.pageWidth);
 
-const headerStyles = theme => css`
-  grid-column: 1 / 13;
-
-  ${theme.mq.kilo} {
-    grid-column: 1 / 12;
-  }
+const headerStyles = ({ theme }) => css`
+  width: 100%;
 
   ${theme.mq.mega} {
-    grid-column: 1 / 11;
+    width: 90%;
+  }
+
+  ${theme.mq.giga} {
+    width: 80%;
   }
 `;
+
+const StyledHeader = styled(Header)(headerStyles);
 
 const columStyles = () => css`
   grid-column: 1 / 13;
@@ -45,30 +48,27 @@ export default function AboutPage() {
       <Meta title={title} description={subtitle} />
       <Navigation />
       <Main>
-        <Grid>
-          <Header title={title} subtitle={subtitle} css={headerStyles} />
-        </Grid>
+        <Container>
+          <StyledHeader title={title} subtitle={subtitle} />
+        </Container>
         <Collage
           images={[
             {
               src: '/static/images/pages/connor.jpg',
-              aspectRatio: 21 / 9,
               alt: 'Connor flashes a big smile at the camera.'
             },
             {
               src: '/static/images/pages/hackathon.jpg',
-              aspectRatio: 21 / 9,
               alt: 'Connor flashes a big smile at the camera.'
             },
             {
               src: '/static/images/pages/beach.jpg',
-              aspectRatio: 21 / 9,
               alt: 'Connor flashes a big smile at the camera.'
             }
           ]}
         />
-        <Grid>
-          <Columns css={columStyles}>
+        <Container>
+          <Columns>
             <Intro>
               My roots lie in the field of design, however I ultimately found my
               passion in programming. The approach I take to my work is fun,
@@ -84,7 +84,9 @@ export default function AboutPage() {
           </Columns>
           <Hr />
           <Heading as="h3">Experience</Heading>
-          <Heading as="h4">Frontend Engineer — SumUp Services</Heading>
+          <Heading as="h4">
+            Frontend Engineer — <Anchor href="https://sumup.com">SumUp</Anchor>
+          </Heading>
           <Paragraph>
             My goal is to make technology more human. Technology should serve
             and delight its users without getting in the way. I always optimise
@@ -103,7 +105,13 @@ export default function AboutPage() {
           <Paragraph>Life of Pi</Paragraph>
           <Heading as="h4">Courses</Heading>
           <Paragraph>Udacity VR Foundations Nanodegree</Paragraph>
-        </Grid>
+          <Anchor href="https://twitter.com/A_single_bear">
+            <span role="img" aria-label="panda">
+              🐼
+            </span>
+            I am a bear
+          </Anchor>
+        </Container>
       </Main>
       <Prefooter />
       <Footer />

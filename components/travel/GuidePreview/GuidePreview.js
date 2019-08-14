@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
@@ -46,18 +46,19 @@ const titleStyles = ({ theme }) => css`
   margin-top: 0;
   margin-bottom: ${theme.spacings.bit};
   color: #fff;
+  font-family: Georgia, ${theme.fontStack.serif};
 `;
 
 const Title = styled(Heading)(titleStyles);
 
 const subtitleContainerStyles = ({ theme }) => css`
   overflow: hidden;
-  max-height: ${theme.spacings.giga};
+  max-height: ${theme.spacings.exa};
   transition: max-height ${theme.animations.standard};
 
   a:hover &,
   a:focus & {
-    max-height: 8rem;
+    max-height: 6.5rem;
     overflow: auto;
   }
 `;
@@ -66,18 +67,8 @@ const SubtitleContainer = styled('p')(subtitleContainerStyles);
 
 const subtitleStyles = ({ theme }) => css`
   display: block;
-  margin-bottom: ${theme.spacings.byte};
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: pre;
+  margin-bottom: ${theme.spacings.bit};
   color: #fff;
-
-  a:hover &,
-  a:focus & {
-    text-overflow: clip;
-    overflow: auto;
-    white-space: normal;
-  }
 `;
 
 const Subtitle = styled(Paragraph)(subtitleStyles);
@@ -101,7 +92,7 @@ export default function PreviewSmall({
   const sizes = getSizes(theme);
   const truncatedSubtitle = truncate(
     {
-      length: 80,
+      length: 55,
       separator: ' '
     },
     subtitle
