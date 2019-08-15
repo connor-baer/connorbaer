@@ -47,7 +47,9 @@ export default function PreviewSmall({
           {image.src && (
             <CoverImage {...image} sizes={sizes} aspectRatio={7 / 3} />
           )}
-          <Title size="giga">{title}</Title>
+          <Title size="giga" as="h4">
+            {title}
+          </Title>
         </a>
       </Link>
       <PostMeta date={date} category={category} />

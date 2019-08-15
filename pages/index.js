@@ -2,7 +2,13 @@ import React from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { flow, slice } from 'lodash/fp';
-import { Main, Header, Slider, sharedStyles } from '@madebyconnor/bamboo-ui';
+import {
+  Main,
+  Header,
+  Slider,
+  Heading,
+  sharedStyles
+} from '@madebyconnor/bamboo-ui';
 
 // eslint-disable-next-line import/no-unresolved
 import { frontMatter as posts } from './blog/*.mdx';
@@ -18,7 +24,7 @@ import GuidePreview from '../components/travel/GuidePreview';
 
 import * as Url from '../services/url';
 
-const Grid = styled('div')(sharedStyles.pageWidth);
+const Container = styled('div')(sharedStyles.pageWidth);
 
 const headerStyles = ({ theme }) => css`
   width: 100%;
@@ -33,6 +39,19 @@ const headerStyles = ({ theme }) => css`
 `;
 
 const StyledHeader = styled(Header)(headerStyles);
+
+const sectionHeadingStyles = ({ theme }) => css`
+  margin-top: ${theme.spacings.exa};
+  margin-bottom: 0;
+  color: ${theme.colors.n700};
+
+  ${theme.mq.kilo} {
+    margin-top: ${theme.spacings.yotta};
+    margin-bottom: ${theme.spacings.bit};
+  }
+`;
+
+const SectionHeading = styled(Heading)(sectionHeadingStyles);
 
 const postsStyles = ({ theme }) => css`
   display: flex;
@@ -88,9 +107,12 @@ export default function HomePage() {
       />
       <Navigation />
       <Main>
-        <Grid>
+        <Container>
           <StyledHeader title={title} subtitle={subtitle} />
 
+          <SectionHeading as="h3" size="mega">
+            Recent posts
+          </SectionHeading>
           <Posts>
             {sortedPosts.map(post => (
               <PostPreview
@@ -101,7 +123,11 @@ export default function HomePage() {
               />
             ))}
           </Posts>
-        </Grid>
+
+          <SectionHeading as="h3" size="mega">
+            City guides
+          </SectionHeading>
+        </Container>
 
         <Slider css={theme => sharedStyles.pageWidth({ theme })}>
           {guides.map(guide => (
