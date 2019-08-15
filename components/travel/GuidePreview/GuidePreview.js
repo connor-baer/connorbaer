@@ -73,10 +73,17 @@ const subtitleStyles = ({ theme }) => css`
 
 const Subtitle = styled(Paragraph)(subtitleStyles);
 
-const actionStyles = () => css`
+const actionStyles = ({ theme }) => css`
   color: #fff;
   display: block;
+  opacity: 0;
   margin: 0;
+  transition: opacity ${theme.animations.standard};
+
+  a:hover &,
+  a:focus & {
+    opacity: 1;
+  }
 `;
 
 const Action = styled(Paragraph)(actionStyles);
@@ -106,7 +113,7 @@ export default function GuidePreview({
             <CoverImage {...image} sizes={sizes} aspectRatio={3 / 5} />
           )}
           <Content>
-            <Title>{title}</Title>
+            <Title as="h4">{title}</Title>
             <SubtitleContainer>
               <Subtitle size="kilo" as="span" lineHeight="kilo">
                 {truncatedSubtitle}
