@@ -1,7 +1,7 @@
 const url = require('url');
 const sharp = require('sharp');
 const fetch = require('isomorphic-unfetch');
-const { includes } = require('lodash/fp');
+// const { includes } = require('lodash/fp');
 
 const getHost = require('../utils/get-host');
 const getProtocol = require('../utils/get-protocol');
@@ -11,11 +11,11 @@ module.exports = async (req, res) => {
   const protocol = getProtocol(req);
   const {
     pathname,
-    query: { src, w, h, fm, fit = 'cover', bg: background = 'black' }
+    query: { src, w, h, fm: format, fit = 'cover', bg: background = 'black' }
   } = url.parse(req.url, true);
 
-  const acceptsWebp = includes('image/webp', req.headers.accept);
-  const format = acceptsWebp ? 'webp' : fm;
+  // const acceptsWebp = includes('image/webp', req.headers.accept);
+  // const format = acceptsWebp ? 'webp' : fm;
 
   let transform = sharp();
 
