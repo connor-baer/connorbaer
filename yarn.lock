@@ -1038,9 +1038,9 @@
     "@types/yargs" "^12.0.9"
 
 "@madebyconnor/bamboo-ui@^1.8.0-canary.4":
-  version "1.8.0-canary.11"
-  resolved "https://registry.yarnpkg.com/@madebyconnor/bamboo-ui/-/bamboo-ui-1.8.0-canary.11.tgz#ebc883f5bd9166735c9e7620ecbf2790e9013560"
-  integrity sha512-Et5XhwgX4l+QhYIsksmo+dOfFanFvqtJZa1R7GpgJv6JUWAXKw7nXtJCszt1rdYPzKoqYP6ym+1ojwI2eR2rCQ==
+  version "1.8.0-canary.12"
+  resolved "https://registry.yarnpkg.com/@madebyconnor/bamboo-ui/-/bamboo-ui-1.8.0-canary.12.tgz#f00e837ef5a2d3f561ec12831367d99379b06194"
+  integrity sha512-HoKZsbl8h2NU9dHzWnIcRnmulw3HyoY+MeBSkSMxJyQtVjt2LpXWvZ1rXzYzQkvDz3u9BFC+upOV4zIAkrL4yQ==
   dependencies:
     "@emotion/core" "^10.0.10"
     "@emotion/is-prop-valid" "^0.8.2"
@@ -5456,14 +5456,16 @@ genfun@^5.0.0:
   integrity sha512-KGDOARWVga7+rnB3z9Sd2Letx515owfk0hSxHGuqjANb1M+x2bGZGqHLiozPsYMdM2OubeMni/Hpwmjq6qIUhA==
 
 gentle-fs@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/gentle-fs/-/gentle-fs-2.0.1.tgz#585cfd612bfc5cd52471fdb42537f016a5ce3687"
-  integrity sha512-cEng5+3fuARewXktTEGbwsktcldA+YsnUEaXZwcK/3pjSE1X9ObnTs+/8rYf8s+RnIcQm2D5x3rwpN7Zom8Bew==
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/gentle-fs/-/gentle-fs-2.2.1.tgz#1f38df4b4ead685566257201fd526de401ebb215"
+  integrity sha512-e7dRgUM5fsS+7wm2oggZpgcRx6sEvJHXujPH5RzgQ1ziQY4+HuVBYsnUzJwJ+C7mjOJN27DjiFy1TaL+TNltow==
   dependencies:
     aproba "^1.1.2"
+    chownr "^1.1.2"
     fs-vacuum "^1.2.10"
     graceful-fs "^4.1.11"
     iferr "^0.1.5"
+    infer-owner "^1.0.4"
     mkdirp "^0.5.1"
     path-is-inside "^1.0.2"
     read-cmd-shim "^1.0.1"
@@ -10012,12 +10014,13 @@ pacote@^8.1.6:
     which "^1.3.0"
 
 pacote@^9.1.0, pacote@^9.5.3, pacote@^9.5.4:
-  version "9.5.5"
-  resolved "https://registry.yarnpkg.com/pacote/-/pacote-9.5.5.tgz#63355a393614c3424e735820c3731e2cbbedaeeb"
-  integrity sha512-jAEP+Nqj4kyMWyNpfTU/Whx1jA7jEc5cCOlurm0/0oL+v8TAp1QSsK83N7bYe+2bEdFzMAtPG5TBebjzzGV0cA==
+  version "9.5.6"
+  resolved "https://registry.yarnpkg.com/pacote/-/pacote-9.5.6.tgz#1f749e25d82921941cf02e58e3312053940e5ea0"
+  integrity sha512-WyfTZU04KGx9h+ZD37vSmCK0KZMAPp2XTVhWdue7/1bAxBYM3YtyBGz1CNgiOvl3u5TYRT8RG4duhyXxQvaIxw==
   dependencies:
     bluebird "^3.5.3"
     cacache "^12.0.2"
+    chownr "^1.1.2"
     figgy-pudding "^3.5.1"
     get-stream "^4.1.0"
     glob "^7.1.3"
@@ -10041,7 +10044,7 @@ pacote@^9.1.0, pacote@^9.5.3, pacote@^9.5.4:
     safe-buffer "^5.1.2"
     semver "^5.6.0"
     ssri "^6.0.1"
-    tar "^4.4.8"
+    tar "^4.4.10"
     unique-filename "^1.1.1"
     which "^1.3.1"
 

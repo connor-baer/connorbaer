@@ -40,11 +40,7 @@ const introBriefStyles = theme => css`
 `;
 
 const introSkillStyles = theme => css`
-  grid-column: 1 / 13;
-
-  ${theme.mq.mega} {
-    grid-column: 1 / 7;
-  }
+  grid-column: 1 / 7;
 
   ${theme.mq.tera} {
     grid-column: 7 / 10;
@@ -52,11 +48,7 @@ const introSkillStyles = theme => css`
 `;
 
 const introClientStyles = theme => css`
-  grid-column: 1 / 13;
-
-  ${theme.mq.mega} {
-    grid-column: 7 / 13;
-  }
+  grid-column: 7 / 13;
 
   ${theme.mq.tera} {
     grid-column: 10 / 13;

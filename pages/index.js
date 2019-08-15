@@ -2,13 +2,7 @@ import React from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { flow, slice } from 'lodash/fp';
-import {
-  Main,
-  Header,
-  Slider,
-  Heading,
-  sharedStyles
-} from '@madebyconnor/bamboo-ui';
+import { Main, Header, Slider, sharedStyles } from '@madebyconnor/bamboo-ui';
 
 // eslint-disable-next-line import/no-unresolved
 import { frontMatter as posts } from './blog/*.mdx';
@@ -19,6 +13,7 @@ import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
 import Prefooter from '../components/Prefooter';
 import Footer from '../components/Footer';
+import SectionHeading from '../components/SectionHeading';
 import PreviewSmall from '../components/blog/PreviewSmall';
 import GuidePreview from '../components/travel/GuidePreview';
 
@@ -39,19 +34,6 @@ const headerStyles = ({ theme }) => css`
 `;
 
 const StyledHeader = styled(Header)(headerStyles);
-
-const sectionHeadingStyles = ({ theme }) => css`
-  margin-top: ${theme.spacings.exa};
-  margin-bottom: 0;
-  color: ${theme.colors.n700};
-
-  ${theme.mq.kilo} {
-    margin-top: ${theme.spacings.yotta};
-    margin-bottom: ${theme.spacings.bit};
-  }
-`;
-
-const SectionHeading = styled(Heading)(sectionHeadingStyles);
 
 const postsStyles = ({ theme }) => css`
   display: flex;
@@ -110,9 +92,7 @@ export default function HomePage() {
         <Container>
           <StyledHeader title={title} subtitle={subtitle} />
 
-          <SectionHeading as="h3" size="mega">
-            Recent posts
-          </SectionHeading>
+          <SectionHeading>Recent posts</SectionHeading>
           <Posts>
             {sortedPosts.map(post => (
               <PostPreview
@@ -124,9 +104,7 @@ export default function HomePage() {
             ))}
           </Posts>
 
-          <SectionHeading as="h3" size="mega">
-            City guides
-          </SectionHeading>
+          <SectionHeading>City guides</SectionHeading>
         </Container>
 
         <Slider css={theme => sharedStyles.pageWidth({ theme })}>

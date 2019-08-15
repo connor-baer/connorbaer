@@ -17,8 +17,8 @@ function getSizes(theme) {
 }
 
 const articleStyles = ({ theme }) => css`
-  margin-top: ${theme.spacings.mega};
-  margin-bottom: ${theme.spacings.mega};
+  margin-top: ${theme.spacings.giga};
+  margin-bottom: ${theme.spacings.giga};
 `;
 
 const Article = styled('article')(articleStyles);
