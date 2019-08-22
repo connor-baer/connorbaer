@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { truncate } from 'lodash/fp';
 import {
   CoverImage,
   Heading,
@@ -44,49 +43,26 @@ const Content = styled('div')(contentStyles);
 
 const titleStyles = ({ theme }) => css`
   margin-top: 0;
-  margin-bottom: ${theme.spacings.bit};
+  margin-bottom: ${theme.spacings.byte};
   color: #fff;
   font-family: Playfair Display, ${theme.fontStack.serif};
 `;
 
 const Title = styled(Heading)(titleStyles);
 
-const subtitleContainerStyles = ({ theme }) => css`
-  overflow: hidden;
-  max-height: ${theme.spacings.exa};
-  transition: max-height ${theme.animations.standard};
-
-  a:hover &,
-  a:focus & {
-    max-height: 7rem;
-    overflow: auto;
-  }
-`;
-
-const SubtitleContainer = styled('p')(subtitleContainerStyles);
-
 const subtitleStyles = ({ theme }) => css`
   display: block;
-  margin-bottom: ${theme.spacings.bit};
   color: #fff;
+  overflow: hidden;
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  margin-bottom: 0;
+  max-height: ${theme.spacings.exa};
 `;
 
 const Subtitle = styled(Paragraph)(subtitleStyles);
-
-const actionStyles = ({ theme }) => css`
-  color: #fff;
-  display: block;
-  opacity: 0;
-  margin: 0;
-  transition: opacity ${theme.animations.standard};
-
-  a:hover &,
-  a:focus & {
-    opacity: 1;
-  }
-`;
-
-const Action = styled(Paragraph)(actionStyles);
 
 export default function GuidePreview({
   url,
@@ -97,13 +73,6 @@ export default function GuidePreview({
 }) {
   const theme = useTheme();
   const sizes = getSizes(theme);
-  const truncatedSubtitle = truncate(
-    {
-      length: 55,
-      separator: ' '
-    },
-    subtitle
-  );
   /* eslint-disable jsx-a11y/anchor-is-valid */
   return (
     <Article className={className}>
@@ -114,14 +83,9 @@ export default function GuidePreview({
           )}
           <Content>
             <Title as="h4">{title}</Title>
-            <SubtitleContainer>
-              <Subtitle size="kilo" as="span" lineHeight="kilo">
-                {truncatedSubtitle}
-              </Subtitle>
-              <Action size="kilo" as="span" weight="bold">
-                Explore →
-              </Action>
-            </SubtitleContainer>
+            <Subtitle size="kilo" lineHeight="kilo">
+              {subtitle}
+            </Subtitle>
           </Content>
         </a>
       </Link>
