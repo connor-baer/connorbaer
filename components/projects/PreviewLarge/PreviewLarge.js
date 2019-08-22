@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { CoverImage, Heading, useTheme } from '@madebyconnor/bamboo-ui';
 
+import { projectPropType } from '../../../utils/prop-types';
 import Link from '../../Link';
 import ProjectMeta from '../ProjectMeta';
 
@@ -51,15 +51,4 @@ export default function PreviewLarge({ url, image = {}, title, skills }) {
   /* eslint-enable jsx-a11y/anchor-is-valid */
 }
 
-PreviewLarge.propTypes = {
-  url: PropTypes.string,
-  title: PropTypes.string,
-  description: PropTypes.string,
-  skills: PropTypes.arrayOf(PropTypes.string),
-  image: PropTypes.shape({
-    src: PropTypes.string,
-    srcSet: PropTypes.string,
-    colors: PropTypes.array,
-    alt: PropTypes.string
-  })
-};
+PreviewLarge.propTypes = projectPropType;

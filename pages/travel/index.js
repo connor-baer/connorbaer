@@ -15,6 +15,7 @@ import Meta from '../../components/Meta';
 import Navigation from '../../components/Navigation';
 import Prefooter from '../../components/Prefooter';
 import Footer from '../../components/Footer';
+import Map from '../../components/Map';
 import GuidePreview from '../../components/travel/GuidePreview';
 
 import * as Url from '../../services/url';
@@ -71,6 +72,11 @@ export default function TravelPage() {
             />
           ))}
         </Slider>
+
+        <Map
+          theme={theme.darkmode ? 'dark-v10' : 'light-v10'}
+          scrollZoom={false}
+        />
       </Main>
       <Prefooter />
       <Footer />
