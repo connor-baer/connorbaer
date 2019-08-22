@@ -19,7 +19,7 @@ const ReactMapGL = dynamic(() => import('react-map-gl'), {
   ssr: false
 });
 
-// Easter island
+// Easter Island
 const DEFAULT_VIEWPORT = {
   width: '100%',
   height: '50vh',
