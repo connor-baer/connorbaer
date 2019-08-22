@@ -1,13 +1,7 @@
 import React, { useEffect } from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
-import {
-  Main,
-  Header,
-  Slider,
-  sharedStyles,
-  useTheme
-} from '@madebyconnor/bamboo-ui';
+import { Main, Header, sharedStyles, useTheme } from '@madebyconnor/bamboo-ui';
 
 // eslint-disable-next-line import/no-unresolved
 import { frontMatter as guides } from './guides/*.mdx';
@@ -16,7 +10,7 @@ import Navigation from '../../components/Navigation';
 import Prefooter from '../../components/Prefooter';
 import Footer from '../../components/Footer';
 import Map from '../../components/Map';
-import GuidePreview from '../../components/travel/GuidePreview';
+import GuideLarge from '../../components/travel/GuideLarge';
 
 import * as Url from '../../services/url';
 
@@ -61,17 +55,15 @@ export default function TravelPage() {
       <Main>
         <Grid>
           <StyledHeader title={title} subtitle={subtitle} />
-        </Grid>
 
-        <Slider css={sharedStyles.pageWidth({ theme })}>
           {guides.map(guide => (
-            <GuidePreview
+            <GuideLarge
               key={guide.title}
               url={Url.format(guide.__resourcePath)}
               {...guide}
             />
           ))}
-        </Slider>
+        </Grid>
 
         <Map
           theme={theme.darkmode ? 'dark-v10' : 'light-v10'}

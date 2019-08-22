@@ -21,22 +21,61 @@ function getSizes(theme) {
 }
 
 const articleStyles = ({ theme }) => css`
-  margin-top: ${theme.spacings.giga};
-  margin-bottom: ${theme.spacings.giga};
-  position: relative;
+  margin-top: ${theme.spacings.peta};
+  margin-bottom: ${theme.spacings.peta};
+
+  ${theme.mq.kilo} {
+    margin-top: ${theme.spacings.exa};
+    margin-bottom: ${theme.spacings.exa};
+  }
+
+  ${theme.mq.mega} {
+    margin-top: ${theme.spacings.zetta};
+    margin-bottom: ${theme.spacings.zetta};
+  }
 `;
 
 const Article = styled('article')(articleStyles);
 
+const aStyles = ({ theme }) => css`
+  display: flex;
+  flex-wrap: wrap;
+
+  ${theme.mq.kilo} {
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+`;
+
+const A = styled('a')(aStyles);
+
+const imageStyles = ({ theme }) => css`
+  width: 100%;
+
+  ${theme.mq.kilo} {
+    width: 50%;
+    margin-right: ${theme.spacings.tera};
+  }
+
+  ${theme.mq.mega} {
+    width: 33.33%;
+  }
+`;
+
+const Image = styled('div')(imageStyles);
+
 const contentStyles = ({ theme }) => css`
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: ${theme.spacings.peta} ${theme.spacings.mega} ${theme.spacings.mega};
-  background: linear-gradient(transparent, ${theme.colors.shadow});
-  border-bottom-left-radius: ${theme.borderRadius.giga};
-  border-bottom-right-radius: ${theme.borderRadius.giga};
+  padding-top: ${theme.spacings.mega};
+  width: 100%;
+
+  ${theme.mq.kilo} {
+    padding: 0;
+    width: 50%;
+  }
+
+  ${theme.mq.mega} {
+    width: 66.66%;
+  }
 `;
 
 const Content = styled('div')(contentStyles);
@@ -44,7 +83,6 @@ const Content = styled('div')(contentStyles);
 const titleStyles = ({ theme }) => css`
   margin-top: 0;
   margin-bottom: ${theme.spacings.byte};
-  color: #fff;
   font-family: Playfair Display, ${theme.fontStack.serif};
 `;
 
@@ -52,19 +90,18 @@ const Title = styled(Heading)(titleStyles);
 
 const subtitleStyles = ({ theme }) => css`
   display: block;
-  color: #fff;
-  overflow: hidden;
-  display: -webkit-box;
-  line-clamp: 2;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
   margin-bottom: 0;
-  max-height: ${theme.spacings.exa};
+  color: ${theme.colors.bodyColor};
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 `;
 
 const Subtitle = styled(Paragraph)(subtitleStyles);
 
-export default function GuidePreview({
+export default function GuideLarge({
   url,
   image = {},
   title,
@@ -77,24 +114,24 @@ export default function GuidePreview({
   return (
     <Article className={className}>
       <Link href={url} prefetch>
-        <a>
+        <A>
           {image.src && (
-            <CoverImage {...image} sizes={sizes} aspectRatio={3 / 5} />
+            <Image>
+              <CoverImage {...image} sizes={sizes} aspectRatio={3 / 2} />
+            </Image>
           )}
           <Content>
-            <Title as="h4">{title}</Title>
-            <Subtitle size="kilo" lineHeight="kilo">
-              {subtitle}
-            </Subtitle>
+            <Title as="h2">{title}</Title>
+            <Subtitle>{subtitle}</Subtitle>
           </Content>
-        </a>
+        </A>
       </Link>
     </Article>
   );
   /* eslint-enable jsx-a11y/anchor-is-valid */
 }
 
-GuidePreview.propTypes = {
+GuideLarge.propTypes = {
   url: PropTypes.string,
   title: PropTypes.string,
   subtitle: PropTypes.string,
