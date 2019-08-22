@@ -15,7 +15,7 @@ import Prefooter from '../components/Prefooter';
 import Footer from '../components/Footer';
 import SectionHeading from '../components/SectionHeading';
 import PreviewSmall from '../components/blog/PreviewSmall';
-import GuidePreview from '../components/travel/GuidePreview';
+import GuideSmall from '../components/travel/GuideSmall';
 
 import * as Url from '../services/url';
 
@@ -109,7 +109,7 @@ export default function HomePage() {
 
         <Slider css={theme => sharedStyles.pageWidth({ theme })}>
           {guides.map(guide => (
-            <GuidePreview
+            <GuideSmall
               key={guide.title}
               url={Url.format(guide.__resourcePath)}
               {...guide}
