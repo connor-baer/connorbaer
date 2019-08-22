@@ -1,20 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { CoverImage, Heading, useTheme } from '@madebyconnor/bamboo-ui';
+import { Heading, Paragraph } from '@madebyconnor/bamboo-ui';
 
+import { blogPostPropType } from '../../../utils/prop-types';
 import Link from '../../Link';
 import PostMeta from '../PostMeta';
-
-function getSizes(theme) {
-  const gigaSize = `(min-width: ${theme.breakpoints.giga}px) 355px`;
-  const megaSize = `(min-width: ${theme.breakpoints.mega}px) 290px`;
-  const kiloSize = `(min-width: ${theme.breakpoints.kilo}px) 50vw`;
-  const mobileSize = '100vw';
-
-  return [gigaSize, megaSize, kiloSize, mobileSize].join(', ');
-}
 
 const articleStyles = ({ theme }) => css`
   margin-top: ${theme.spacings.giga};
@@ -23,33 +14,35 @@ const articleStyles = ({ theme }) => css`
 
 const Article = styled('article')(articleStyles);
 
-const titleStyles = ({ theme }) => css`
-  margin-top: ${theme.spacings.giga};
+const titleStyles = () => css`
+  margin-top: 0;
 `;
 
 const Title = styled(Heading)(titleStyles);
 
+const descriptionStyles = ({ theme }) => css`
+  color: ${theme.colors.bodyColor};
+`;
+
+const Description = styled(Paragraph)(descriptionStyles);
+
 export default function PreviewSmall({
   url,
-  image = {},
   title,
+  description,
   date,
   category,
   className
 }) {
-  const theme = useTheme();
-  const sizes = getSizes(theme);
   /* eslint-disable jsx-a11y/anchor-is-valid */
   return (
     <Article className={className}>
       <Link href={url} prefetch>
         <a>
-          {image.src && (
-            <CoverImage {...image} sizes={sizes} aspectRatio={7 / 3} />
-          )}
           <Title size="giga" as="h4">
             {title}
           </Title>
+          {description && <Description>{description}</Description>}
         </a>
       </Link>
       <PostMeta date={date} category={category} />
@@ -58,16 +51,4 @@ export default function PreviewSmall({
   /* eslint-enable jsx-a11y/anchor-is-valid */
 }
 
-PreviewSmall.propTypes = {
-  url: PropTypes.string,
-  title: PropTypes.string,
-  date: PropTypes.string,
-  category: PropTypes.string,
-  image: PropTypes.shape({
-    src: PropTypes.string,
-    srcSet: PropTypes.string,
-    colors: PropTypes.array,
-    alt: PropTypes.string
-  }),
-  className: PropTypes.string
-};
+PreviewSmall.propTypes = blogPostPropType;

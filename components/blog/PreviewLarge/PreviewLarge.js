@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import {
@@ -9,6 +8,7 @@ import {
   useTheme
 } from '@madebyconnor/bamboo-ui';
 
+import { blogPostPropType } from '../../../utils/prop-types';
 import Link from '../../Link';
 import PostMeta from '../PostMeta';
 
@@ -73,17 +73,4 @@ export default function PreviewLarge({
   /* eslint-enable jsx-a11y/anchor-is-valid */
 }
 
-PreviewLarge.propTypes = {
-  url: PropTypes.string,
-  title: PropTypes.string,
-  description: PropTypes.string,
-  date: PropTypes.string,
-  featured: PropTypes.bool,
-  category: PropTypes.string,
-  image: PropTypes.shape({
-    src: PropTypes.string,
-    srcSet: PropTypes.string,
-    colors: PropTypes.array,
-    alt: PropTypes.string
-  })
-};
+PreviewLarge.propTypes = blogPostPropType;

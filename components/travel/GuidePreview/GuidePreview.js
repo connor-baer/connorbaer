@@ -58,7 +58,7 @@ const subtitleContainerStyles = ({ theme }) => css`
 
   a:hover &,
   a:focus & {
-    max-height: 6.5rem;
+    max-height: 7rem;
     overflow: auto;
   }
 `;
