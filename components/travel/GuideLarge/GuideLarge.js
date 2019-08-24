@@ -117,7 +117,7 @@ export default function GuideLarge({
         <A>
           {image.src && (
             <Image>
-              <CoverImage {...image} sizes={sizes} aspectRatio={3 / 2} />
+              <CoverImage {...image} sizes={sizes} aspectRatio={1.618} />
             </Image>
           )}
           <Content>
