@@ -29,7 +29,7 @@ const DEFAULT_VIEWPORT = {
 };
 
 export default function Map({
-  theme = 'streets-v9',
+  themeId = 'streets-v9',
   viewport: customViewPort,
   ...rest
 }) {
@@ -46,7 +46,7 @@ export default function Map({
       </Head>
       <Placeholder width={viewport.width} height={viewport.height}>
         <ReactMapGL
-          mapStyle={`mapbox://styles/mapbox/${theme}`}
+          mapStyle={`mapbox://styles/mapbox/${themeId}`}
           mapboxApiAccessToken={MAPBOX}
           onViewportChange={v => setViewport(v)}
           {...viewport}
@@ -58,7 +58,7 @@ export default function Map({
 }
 
 Map.propTypes = {
-  theme: PropTypes.string,
+  themeId: PropTypes.string,
   viewport: PropTypes.shape({
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

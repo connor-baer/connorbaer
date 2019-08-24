@@ -9,7 +9,7 @@ export const blogPostPropType = {
   image: PropTypes.shape({
     src: PropTypes.string,
     srcSet: PropTypes.string,
-    colors: PropTypes.array,
+    color: PropTypes.string,
     alt: PropTypes.string
   }),
   className: PropTypes.string
@@ -25,7 +25,32 @@ export const projectPropType = {
   image: PropTypes.shape({
     src: PropTypes.string,
     srcSet: PropTypes.string,
-    colors: PropTypes.array,
+    color: PropTypes.string,
     alt: PropTypes.string
   })
+};
+
+export const mapPropType = {
+  lat: PropTypes.number,
+  lon: PropTypes.number
+};
+
+export const guidePropType = {
+  __resourcePath: PropTypes.string,
+  title: PropTypes.string,
+  subtitle: PropTypes.string,
+  tableOfContents: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string,
+      id: PropTypes.string
+    })
+  ),
+  date: PropTypes.string,
+  image: PropTypes.shape({
+    src: PropTypes.string,
+    srcSet: PropTypes.string,
+    color: PropTypes.string,
+    alt: PropTypes.string
+  }),
+  map: PropTypes.shape(mapPropType)
 };

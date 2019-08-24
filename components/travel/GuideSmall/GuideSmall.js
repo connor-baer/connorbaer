@@ -12,7 +12,7 @@ import {
 import Link from '../../Link';
 
 function getSizes(theme) {
-  const gigaSize = `(min-width: ${theme.breakpoints.giga}px) 240px`;
+  const gigaSize = `(min-width: ${theme.breakpoints.giga}px) 300px`;
   const megaSize = `(min-width: ${theme.breakpoints.mega}px) 25vw`;
   const kiloSize = `(min-width: ${theme.breakpoints.kilo}px) 50vw`;
   const mobileSize = '100vw';

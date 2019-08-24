@@ -11,7 +11,15 @@ module.exports = async (req, res) => {
   const protocol = getProtocol(req);
   const {
     pathname,
-    query: { src, w, h, fm: format, fit = 'cover', bg: background = 'black' }
+    query: {
+      src,
+      w,
+      h,
+      ratio,
+      fm: format,
+      fit = 'cover',
+      bg: background = 'black'
+    }
   } = url.parse(req.url, true);
 
   // const acceptsWebp = includes('image/webp', req.headers.accept);
@@ -27,7 +35,8 @@ module.exports = async (req, res) => {
 
   if (w || h) {
     const width = w && parseInt(w, 10);
-    const height = h && parseInt(h, 10);
+    const height =
+      (h && parseInt(h, 10)) || (width && Math.round(width * (1 / ratio)));
     transform = transform.resize(width, height, { fit, background });
   }
 

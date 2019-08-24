@@ -69,7 +69,7 @@ const StyledRatioImage = styled(RatioImage)(ratioImageStyles);
 export default ({
   title,
   subtitle,
-  image,
+  image = {},
   date,
   tableOfContents,
   __resourcePath
