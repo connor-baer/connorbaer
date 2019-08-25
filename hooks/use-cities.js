@@ -1,7 +1,7 @@
 import { flow, map } from 'lodash/fp';
 
 // eslint-disable-next-line import/no-unresolved
-import { frontMatter as guides } from '../pages/travel/guides/*.mdx';
+import { frontMatter as cities } from '../pages/travel/city/*.mdx';
 import * as Url from '../services/url';
 import { filterByCategory, filterByDraft } from '../utils/filter';
 import { sortByDate } from '../utils/sort';
@@ -9,29 +9,29 @@ import paginate from '../utils/paginate';
 import usePreview from './use-preview';
 
 export function enhance() {
-  return map((guide = {}) => {
-    const url = guide.__resourcePath ? Url.format(guide.__resourcePath) : '';
-    return { ...guide, url };
+  return map((city = {}) => {
+    const url = city.__resourcePath ? Url.format(city.__resourcePath) : '';
+    return { ...city, url };
   });
 }
 
-export default function useGuides({ category, page, skip } = {}) {
+export default function useCities({ category, page, skip } = {}) {
   const isPreview = usePreview();
 
-  const cleanedGuides = flow(
+  const cleanedCities = flow(
     filterByCategory(category),
     filterByDraft(isPreview),
     sortByDate()
-  )(guides);
-  const paginatedGuides = flow(
+  )(cities);
+  const paginatedCities = flow(
     paginate(page, skip),
     enhance()
-  )(cleanedGuides);
+  )(cleanedCities);
   const meta = {
-    total: cleanedGuides.length,
+    total: cleanedCities.length,
     page,
     skip
   };
 
-  return [paginatedGuides, meta];
+  return [paginatedCities, meta];
 }

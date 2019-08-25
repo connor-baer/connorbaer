@@ -9,7 +9,7 @@ import Prefooter from '../../components/Prefooter';
 import Footer from '../../components/Footer';
 import GuideLarge from '../../components/travel/GuideLarge';
 
-import useGuides from '../../hooks/use-guides';
+import useCities from '../../hooks/use-cities';
 
 const Grid = styled('div')(sharedStyles.pageWidth);
 
@@ -34,7 +34,7 @@ export default function TravelPage() {
     theme.setTheme('travel');
   });
 
-  const [guides] = useGuides();
+  const [cities] = useCities();
 
   const title = 'Travel Guides';
   const subtitle =
@@ -55,8 +55,8 @@ export default function TravelPage() {
         <Grid>
           <StyledHeader title={title} subtitle={subtitle} />
 
-          {guides.map(guide => (
-            <GuideLarge key={guide.title} url={guide.url} {...guide} />
+          {cities.map(city => (
+            <GuideLarge key={city.title} url={city.url} {...city} />
           ))}
         </Grid>
       </Main>

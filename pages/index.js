@@ -13,7 +13,7 @@ import PreviewSmall from '../components/blog/PreviewSmall';
 import GuideSmall from '../components/travel/GuideSmall';
 
 import usePosts from '../hooks/use-posts';
-import useGuides from '../hooks/use-guides';
+import useCities from '../hooks/use-cities';
 
 const Container = styled('div')(sharedStyles.pageWidth);
 
@@ -67,7 +67,7 @@ export default function HomePage() {
     'Avid rock climber, scuba diver, and cooking enthusiast. Currently frontend engineer at SumUp.'; // eslint-disable-line max-len
 
   const [posts] = usePosts({ skip: 3 });
-  const [guides] = useGuides({ skip: 4 });
+  const [cities] = useCities({ skip: 4 });
 
   return (
     <>
@@ -102,15 +102,15 @@ export default function HomePage() {
           </Container>
         )}
 
-        {!isEmpty(guides) && (
+        {!isEmpty(cities) && (
           <>
             <Container>
               <SectionHeading>City guides</SectionHeading>
             </Container>
 
             <Slider css={theme => sharedStyles.pageWidth({ theme })}>
-              {guides.map(guide => (
-                <GuideSmall key={guide.title} url={guide.url} {...guide} />
+              {cities.map(city => (
+                <GuideSmall key={city.title} url={city.url} {...city} />
               ))}
             </Slider>
           </>
