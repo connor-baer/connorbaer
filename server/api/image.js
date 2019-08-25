@@ -36,7 +36,8 @@ module.exports = async (req, res) => {
   if (w || h) {
     const width = w && parseInt(w, 10);
     const height =
-      (h && parseInt(h, 10)) || (width && Math.round(width * (1 / ratio)));
+      (h && parseInt(h, 10)) ||
+      (width && ratio && Math.round(width * (1 / ratio)));
     transform = transform.resize(width, height, { fit, background });
   }
 
