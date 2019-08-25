@@ -3,15 +3,13 @@ import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { Main, Header, sharedStyles, useTheme } from '@madebyconnor/bamboo-ui';
 
-// eslint-disable-next-line import/no-unresolved
-import { frontMatter as guides } from './guides/*.mdx';
 import Meta from '../../components/Meta';
 import Navigation from '../../components/Navigation';
 import Prefooter from '../../components/Prefooter';
 import Footer from '../../components/Footer';
 import GuideLarge from '../../components/travel/GuideLarge';
 
-import * as Url from '../../services/url';
+import useGuides from '../../hooks/use-guides';
 
 const Grid = styled('div')(sharedStyles.pageWidth);
 
@@ -36,6 +34,8 @@ export default function TravelPage() {
     theme.setTheme('travel');
   });
 
+  const [guides] = useGuides();
+
   const title = 'Travel Guides';
   const subtitle =
     'Follow me around the world, explore bustling cities, and discover hidden treasures.'; // eslint-disable-line max-len
@@ -56,11 +56,7 @@ export default function TravelPage() {
           <StyledHeader title={title} subtitle={subtitle} />
 
           {guides.map(guide => (
-            <GuideLarge
-              key={guide.title}
-              url={Url.format(guide.__resourcePath)}
-              {...guide}
-            />
+            <GuideLarge key={guide.title} url={guide.url} {...guide} />
           ))}
         </Grid>
       </Main>

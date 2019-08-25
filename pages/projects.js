@@ -3,14 +3,12 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { Main, Header, Columns, sharedStyles } from '@madebyconnor/bamboo-ui';
 
-// eslint-disable-next-line import/no-unresolved
-import { frontMatter as projects } from './projects/*.mdx';
-import * as Url from '../services/url';
 import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
 import Prefooter from '../components/Prefooter';
 import Footer from '../components/Footer';
 import PreviewLarge from '../components/projects/PreviewLarge';
+import useProjects from '../hooks/use-projects';
 
 const spacingStyles = ({ theme }) => css`
   margin-top: ${theme.spacings.giga};
@@ -28,6 +26,7 @@ const StyledHeader = styled(Header)(spacingStyles);
 const Grid = styled('div')(sharedStyles.pageWidth);
 
 export default function ProjectsHome() {
+  const [projects] = useProjects();
   const title = 'Selected Work';
   const subtitle = 'Make technology human.';
   return (
@@ -39,11 +38,7 @@ export default function ProjectsHome() {
           <StyledColumns>
             <StyledHeader title={title} subtitle={subtitle} />
             {projects.map(project => (
-              <PreviewLarge
-                key={project.__resourcePath}
-                url={Url.format(project.__resourcePath)}
-                {...project}
-              />
+              <PreviewLarge key={project.url} url={project.url} {...project} />
             ))}
           </StyledColumns>
         </Grid>

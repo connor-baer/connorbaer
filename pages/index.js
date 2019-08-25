@@ -1,14 +1,9 @@
 import React from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
-import { flow, slice } from 'lodash/fp';
+import { isEmpty } from 'lodash/fp';
 import { Main, Header, Slider, sharedStyles } from '@madebyconnor/bamboo-ui';
 
-// eslint-disable-next-line import/no-unresolved
-import { frontMatter as posts } from './blog/*.mdx';
-// eslint-disable-next-line import/no-unresolved
-import { frontMatter as guides } from './travel/guides/*.mdx';
-import * as Blog from '../services/blog';
 import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
 import Prefooter from '../components/Prefooter';
@@ -17,7 +12,8 @@ import SectionHeading from '../components/SectionHeading';
 import PreviewSmall from '../components/blog/PreviewSmall';
 import GuideSmall from '../components/travel/GuideSmall';
 
-import * as Url from '../services/url';
+import usePosts from '../hooks/use-posts';
+import useGuides from '../hooks/use-guides';
 
 const Container = styled('div')(sharedStyles.pageWidth);
 
@@ -70,11 +66,8 @@ export default function HomePage() {
   const subtitle =
     'Avid rock climber, scuba diver, and cooking enthusiast. Currently frontend engineer at SumUp.'; // eslint-disable-line max-len
 
-  const sortedPosts = flow(
-    Blog.filterByArchived(),
-    Blog.sortByDate(),
-    slice(0, 3)
-  )(posts);
+  const [posts] = usePosts({ skip: 3 });
+  const [guides] = useGuides({ skip: 4 });
 
   return (
     <>
@@ -91,31 +84,37 @@ export default function HomePage() {
       <Main>
         <Container>
           <StyledHeader title={title} subtitle={subtitle} />
-
-          <SectionHeading>Recent posts</SectionHeading>
-          <Posts>
-            {sortedPosts.map(post => (
-              <PostPreview
-                url={Url.format(post.__resourcePath)}
-                key={post.title}
-                length={sortedPosts.length}
-                {...post}
-              />
-            ))}
-          </Posts>
-
-          <SectionHeading>City guides</SectionHeading>
         </Container>
 
-        <Slider css={theme => sharedStyles.pageWidth({ theme })}>
-          {guides.map(guide => (
-            <GuideSmall
-              key={guide.title}
-              url={Url.format(guide.__resourcePath)}
-              {...guide}
-            />
-          ))}
-        </Slider>
+        {!isEmpty(posts) && (
+          <Container>
+            <SectionHeading>Recent posts</SectionHeading>
+            <Posts>
+              {posts.map(post => (
+                <PostPreview
+                  url={post.url}
+                  key={post.title}
+                  length={posts.length}
+                  {...post}
+                />
+              ))}
+            </Posts>
+          </Container>
+        )}
+
+        {!isEmpty(guides) && (
+          <>
+            <Container>
+              <SectionHeading>City guides</SectionHeading>
+            </Container>
+
+            <Slider css={theme => sharedStyles.pageWidth({ theme })}>
+              {guides.map(guide => (
+                <GuideSmall key={guide.title} url={guide.url} {...guide} />
+              ))}
+            </Slider>
+          </>
+        )}
       </Main>
       <Prefooter />
       <Footer />

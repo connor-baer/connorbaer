@@ -2,18 +2,15 @@ import React from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import { flow } from 'lodash/fp';
 import { Anchor, Main, Header, sharedStyles } from '@madebyconnor/bamboo-ui';
 
-// eslint-disable-next-line import/no-unresolved
-import { frontMatter as posts } from './blog/*.mdx';
-import * as Blog from '../services/blog';
-import * as Url from '../services/url';
 import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
 import Prefooter from '../components/Prefooter';
 import Footer from '../components/Footer';
 import PreviewLarge from '../components/blog/PreviewLarge';
+
+import usePosts from '../hooks/use-posts';
 
 const Grid = styled('div')(sharedStyles.pageWidth, sharedStyles.grid);
 
@@ -33,19 +30,13 @@ const Content = styled('div')(contentStyles);
 
 export default function BlogPage({
   title = 'Blog',
-  page = 0,
+  isArchived = false,
   category,
-  archived = false
+  page
 }) {
+  const [posts] = usePosts({ isArchived, category, page });
   const pathname = category ? 'blog' : `blog/${category}`;
-  const showArchive = !archived && !category && page === 0;
-
-  const sortedPosts = flow(
-    Blog.filterByCategory(category),
-    Blog.filterByArchived(archived),
-    Blog.sortByDate(),
-    Blog.paginate(page)
-  )(posts);
+  const showArchive = !isArchived && !category && !(page > 1);
 
   return (
     <>
@@ -55,12 +46,8 @@ export default function BlogPage({
         <Grid>
           <Content>
             <Header title={title} />{' '}
-            {sortedPosts.map(post => (
-              <PreviewLarge
-                {...post}
-                key={post.__resourcePath}
-                url={Url.format(post.__resourcePath)}
-              />
+            {posts.map((post = {}) => (
+              <PreviewLarge {...post} key={post.url} url={post.url} />
             ))}
             {showArchive && <Anchor href="/blog/archive">Archive →</Anchor>}
           </Content>
@@ -76,5 +63,5 @@ BlogPage.propTypes = {
   title: PropTypes.string,
   page: PropTypes.number,
   category: PropTypes.string,
-  archived: PropTypes.bool
+  isArchived: PropTypes.bool
 };
