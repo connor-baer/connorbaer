@@ -24,7 +24,7 @@ function formatSrc(src, { width, height, ratio }) {
 function formatSrcSet(src, srcSet = [400, 800, 1200, 1600, 2000], ratio) {
   return srcSet
     .map(width => {
-      const height = width * (1 / ratio);
+      const height = ratio && width * (1 / ratio);
       const url = formatSrc(src, { width, height, ratio });
       return `${url} ${width}w`;
     })
