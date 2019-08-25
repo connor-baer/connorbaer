@@ -6,13 +6,13 @@ const DEFAULT_WIDTH = 1200;
 function formatSrc(src, { width, height, ratio }) {
   const params = {};
   if (width) {
-    params.w = width;
+    params.w = Math.round(width);
   }
   if (height) {
-    params.h = height;
+    params.h = Math.round(height);
   }
   if (ratio) {
-    params.ratio = ratio;
+    params.ratio = ratio.toFixed(2);
   }
   const query = Object.keys(params)
     .filter(key => !!params[key])
@@ -33,8 +33,7 @@ function formatSrcSet(src, srcSet = [400, 800, 1200, 1600, 2000], ratio) {
 
 export default function Image(props = {}) {
   const { width = DEFAULT_WIDTH, height, aspectRatio } = props;
-  const ratio =
-    aspectRatio || (width && height ? (width / height).toFixed(2) : null);
+  const ratio = aspectRatio || (width && height ? width / height : null);
   const src = formatSrc(props.src, { width, height, ratio });
   const srcSet = formatSrcSet(props.src, props.srcSet, ratio);
   return <BambooImage {...props} src={src} srcSet={srcSet} />;

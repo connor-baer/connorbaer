@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { isNil } from 'lodash/fp';
 import { Meta, sharedPropTypes } from '@madebyconnor/bamboo-ui';
 
 import { SITE_NAME, SITE_TWITTER } from '../../constants';
@@ -15,7 +16,7 @@ export default function CustomMeta({
   image = DEFAULT_IMAGE,
   ...rest
 }) {
-  const url = pathname && Url.format(pathname, true);
+  const url = !isNil(pathname) && Url.format(pathname, true);
   const src = image.src && Url.format(image.src, true);
   return (
     <Meta
