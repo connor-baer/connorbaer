@@ -15,16 +15,16 @@ export default function CustomNavigation({
   siteName = SITE_NAME,
   siteLogo = <PandaIcon alt="Panda" />,
   links = [
-    { url: '/about', label: 'About' },
-    { url: '/projects', label: 'Projects' },
-    { url: '/blog', label: 'Blog' }
+    { url: '/about', label: '✌️ About' },
+    { url: '/projects', label: '💡 Projects' },
+    { url: '/blog', label: '🖋️ Blog' }
   ]
 }) {
   const router = useRouter();
   const isPreview = usePreview();
   const isHomepage = router.asPath === '/';
   if (isPreview) {
-    links.push({ url: '/travel', label: 'Travel' });
+    links.push({ url: '/travel', label: '🧳 Travel' });
   }
   const enhancedLinks = links.map(link => {
     const isActive = startsWith(link.url, router.asPath);
