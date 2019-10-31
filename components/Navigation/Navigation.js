@@ -9,10 +9,10 @@ import {
 } from '@madebyconnor/bamboo-ui';
 
 import usePreview from '../../hooks/use-preview';
-import { SITE_NAME } from '../../constants';
+import { NAME } from '../../constants/site';
 
 export default function CustomNavigation({
-  siteName = SITE_NAME,
+  siteName = NAME,
   siteLogo = <PandaIcon alt="Panda" />,
   links = [
     { url: '/about', label: '✌️ About' },

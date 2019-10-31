@@ -6,12 +6,12 @@ import {
   sharedPropTypes
 } from '@madebyconnor/bamboo-ui';
 
-import { SITE_NAME, SITE_TWITTER } from '../../constants';
+import { NAME, TWITTER } from '../../constants/site';
 
 export default function CustomFooter({ children, ...rest }) {
   const theme = useTheme();
   return (
-    <Footer siteName={SITE_NAME} siteTwitter={SITE_TWITTER} {...rest}>
+    <Footer siteName={NAME} siteTwitter={TWITTER} {...rest}>
       <Anchor href="/disclaimer" backgroundColor={theme.colors.n100}>
         Disclaimer
       </Anchor>

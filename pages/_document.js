@@ -1,7 +1,7 @@
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 
-import { LANG, GA_TOKEN } from '../constants';
+import { LANG } from '../constants/site';
 import { FAVICONS_PATH } from '../constants/paths';
 
 export default class CustomDocument extends Document {
@@ -71,16 +71,6 @@ export default class CustomDocument extends Document {
             rel="apple-touch-icon"
             sizes="180x180"
             href={`${FAVICONS_PATH}/apple-touch-icon-180x180.png`}
-          />
-          <script
-            async
-            src={`https://www.googletagmanager.com/gtag/js?id=${GA_TOKEN}`}
-          />
-          <script
-            dangerouslySetInnerHTML={{
-              // eslint-disable-next-line max-len
-              __html: `window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', '${GA_TOKEN}');`
-            }}
           />
         </Head>
         <body>

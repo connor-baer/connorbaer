@@ -1,1 +1,1 @@
-module.exports = require('@sumup/foundry/lint-staged').base
+module.exports = require('@sumup/foundry/lint-staged').base;

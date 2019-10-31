@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { isNil } from 'lodash/fp';
 import { Meta, sharedPropTypes } from '@madebyconnor/bamboo-ui';
 
-import { SITE_NAME, SITE_TWITTER } from '../../constants';
+import { NAME, TWITTER } from '../../constants/site';
 import * as Url from '../../services/url';
 
 const DEFAULT_IMAGE = {
@@ -21,8 +21,8 @@ export default function CustomMeta({
   return (
     <Meta
       url={url}
-      siteName={SITE_NAME}
-      siteTwitter={SITE_TWITTER}
+      siteName={NAME}
+      siteTwitter={TWITTER}
       image={{ src, alt: image.alt }}
       {...rest}
     />
