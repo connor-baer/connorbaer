@@ -16,7 +16,7 @@ export function constructStaticImageUrl({
   highResolution = false
 } = {}) {
   // eslint-disable-next-line max-len
-  return `${MAPBOX_BASE_URL}/styles/v1/${username}/${themeId}/static/${lon},${lat},${zoom},${bearing},${pitch}/${width}x${height}${
+  return `${MAPBOX_BASE_URL}/styles/v1/${username}/${themeId}/${lon},${lat},${zoom},${bearing},${pitch}/${width}x${height}${
     highResolution ? '@2x' : ''
   }?access_token=${MAPBOX}`;
 }

@@ -37,7 +37,7 @@ export default function PreviewSmall({
   /* eslint-disable jsx-a11y/anchor-is-valid */
   return (
     <Article className={className}>
-      <Link href={url} prefetch>
+      <Link href={url}>
         <a>
           <Title size="giga" as="h4">
             {title}

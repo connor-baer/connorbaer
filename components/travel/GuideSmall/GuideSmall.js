@@ -76,7 +76,7 @@ export default function GuideSmall({
   /* eslint-disable jsx-a11y/anchor-is-valid */
   return (
     <Article className={className}>
-      <Link href={url} prefetch>
+      <Link href={url}>
         <a>
           {image.src && (
             <CoverImage {...image} sizes={sizes} aspectRatio={3 / 5} />

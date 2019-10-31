@@ -12,6 +12,8 @@ const withMdxEnhanced = require('next-mdx-enhanced');
 
 const nextConfig = {
   poweredByHeader: false,
+  reactStrictMode: true,
+  experimental: { deferScripts: true },
   webpack: (config, { dev, defaultLoaders }) => {
     // eslint-disable-next-line no-param-reassign
     config.node = {
