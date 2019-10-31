@@ -72,6 +72,27 @@ export default class CustomDocument extends Document {
             sizes="180x180"
             href={`${FAVICONS_PATH}/apple-touch-icon-180x180.png`}
           />
+          <link
+            rel="preload"
+            crossOrigin="anonymous"
+            href="/fonts/Overpass-300-normal.woff2"
+            as="font"
+            type="font/woff2"
+          />
+          <link
+            rel="preload"
+            crossOrigin="anonymous"
+            href="/fonts/Overpass-400-normal.woff2"
+            as="font"
+            type="font/woff2"
+          />
+          <link
+            rel="preload"
+            crossOrigin="anonymous"
+            href="/fonts/Overpass-700-normal.woff2"
+            as="font"
+            type="font/woff2"
+          />
         </Head>
         <body>
           <Main />
