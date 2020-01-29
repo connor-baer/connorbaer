@@ -14,6 +14,16 @@ const nextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   experimental: { deferScripts: true },
+  env: {
+    GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+    GOOGLE_PROJECT_ID: process.env.GOOGLE_PROJECT_ID,
+    GOOGLE_AUTH_URI: process.env.GOOGLE_AUTH_URI,
+    GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
+    GOOGLE_TOKEN_URI: process.env.GOOGLE_TOKEN_URI,
+    GOOGLE_AUTH_PROVIDER_X509_CERT_URL:
+      process.env.GOOGLE_AUTH_PROVIDER_X509_CERT_URL,
+    GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET
+  },
   webpack: (config, { dev, defaultLoaders }) => {
     // eslint-disable-next-line no-param-reassign
     config.node = {

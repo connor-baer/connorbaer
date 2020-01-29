@@ -31,8 +31,8 @@
       }
     },
     {
-      "src": "/service-worker.js",
-      "dest": "/_next/service-worker.js",
+      "src": "^/service-worker.js$",
+      "dest": "/_next/static/service-worker.js",
       "headers": {
         "cache-control": "public, max-age=43200, immutable",
         "Service-Worker-Allowed": "/"
@@ -42,10 +42,21 @@
   "builds": [
     {
       "src": "server/api/**.js",
-      "use": "@now/node@canary",
+      "use": "@now/node",
       "config": { "maxLambdaSize": "10mb" }
     },
     { "src": "images/**", "use": "@now/static" },
     { "src": "package.json", "use": "@now/next" }
-  ]
+  ],
+  "build": {
+    "env": {
+      "GOOGLE_PROJECT_ID": "@google_project_id",
+      "GOOGLE_CLIENT_ID": "@google_client_id",
+      "GOOGLE_API_KEY": "@google_api_key",
+      "GOOGLE_CLIENT_SECRET": "@google_client_secret",
+      "GOOGLE_AUTH_URI": "@google_auth_uri",
+      "GOOGLE_TOKEN_URI": "@google_token_uri",
+      "GOOGLE_AUTH_PROVIDER_X509_CERT_URL": "@google_auth_provider_x509_cert_url"
+    }
+  }
 }

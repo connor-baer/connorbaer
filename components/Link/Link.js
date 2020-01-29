@@ -29,6 +29,11 @@ export default function Link({ href, as, ...rest }) {
   const asObj = as ? url.parse(as) : hrefObj;
   const hrefWithPreview = withPreview(hrefObj, query.preview);
   const asWithPreview = withPreview(asObj, query.preview);
+  const { protocol, pathname } = hrefObj;
+
+  if (!pathname || protocol) {
+    return children;
+  }
 
   return (
     <NextLink {...rest} href={hrefWithPreview} as={asWithPreview} passHref />

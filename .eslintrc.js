@@ -11,6 +11,7 @@ const customConfig = {
     }
   },
   rules: {
+    'import/prefer-default-export': 'off',
     'notice/notice': 'off',
     'emotion/jsx-import': 'off',
     'no-underscore-dangle': [
