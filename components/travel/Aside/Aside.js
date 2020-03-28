@@ -17,7 +17,7 @@ const baseStyles = ({ theme }) => css`
 const leftStyles = ({ align, theme }) =>
   align === Align.LEFT &&
   css`
-    ${theme.mq.mega} {
+    ${theme.mq.lap} {
       border: 0;
       margin-top: ${theme.spacing.xs};
       margin-bottom: 0;

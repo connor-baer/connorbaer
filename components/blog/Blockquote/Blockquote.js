@@ -11,7 +11,7 @@ const sharedStyles = ({ theme }) => css`
   font-size: 24px;
   line-height: 32px;
 
-  ${theme.mq.kilo} {
+  ${theme.mq.hand} {
     font-size: 32px;
     line-height: 42px;
   }

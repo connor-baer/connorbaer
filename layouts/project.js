@@ -22,11 +22,11 @@ const Article = styled('article')(styles.pageWidth, styles.grid);
 const headerStyles = (theme) => css`
   grid-column: 1 / 13;
 
-  ${theme.mq.kilo} {
+  ${theme.mq.hand} {
     grid-column: 1 / 12;
   }
 
-  ${theme.mq.mega} {
+  ${theme.mq.lap} {
     grid-column: 1 / 11;
   }
 `;
@@ -34,7 +34,7 @@ const headerStyles = (theme) => css`
 const introBriefStyles = (theme) => css`
   grid-column: 1 / 13;
 
-  ${theme.mq.tera} {
+  ${theme.mq.wall} {
     grid-column: 1 / 7;
   }
 `;
@@ -42,7 +42,7 @@ const introBriefStyles = (theme) => css`
 const introSkillStyles = (theme) => css`
   grid-column: 1 / 7;
 
-  ${theme.mq.tera} {
+  ${theme.mq.wall} {
     grid-column: 7 / 10;
   }
 `;
@@ -50,7 +50,7 @@ const introSkillStyles = (theme) => css`
 const introClientStyles = (theme) => css`
   grid-column: 7 / 13;
 
-  ${theme.mq.tera} {
+  ${theme.mq.wall} {
     grid-column: 10 / 13;
   }
 `;
@@ -58,11 +58,11 @@ const introClientStyles = (theme) => css`
 const contentStyles = ({ theme }) => css`
   grid-column: 1 / 13;
 
-  ${theme.mq.kilo} {
+  ${theme.mq.hand} {
     grid-column: 1 / 12;
   }
 
-  ${theme.mq.mega} {
+  ${theme.mq.lap} {
     grid-column: 3 / 11;
   }
 `;

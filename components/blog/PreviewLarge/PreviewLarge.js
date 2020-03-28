@@ -9,18 +9,18 @@ import Link from '../../Link';
 import PostMeta from '../PostMeta';
 
 function getSizes(theme) {
-  const gigaSize = `(min-width: ${theme.breakpoints.giga}px) 755px`;
-  const megaSize = `(min-width: ${theme.breakpoints.mega}px) 620px`;
+  const deskSize = `(min-width: ${theme.breakpoints.desk}) 755px`;
+  const lapSize = `(min-width: ${theme.breakpoints.lap}) 620px`;
   const mobileSize = '100vw';
 
-  return [gigaSize, megaSize, mobileSize].join(', ');
+  return [deskSize, lapSize, mobileSize].join(', ');
 }
 
 const articleStyles = ({ theme }) => css`
   margin-top: ${theme.spacing.xl};
   margin-bottom: ${theme.spacing.xxxxl};
 
-  ${theme.mq.kilo} {
+  ${theme.mq.hand} {
     margin-bottom: 72px;
   }
 `;

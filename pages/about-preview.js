@@ -24,11 +24,11 @@ const Container = styled('div')(styles.pageWidth);
 const headerStyles = ({ theme }) => css`
   width: 100%;
 
-  ${theme.mq.mega} {
+  ${theme.mq.lap} {
     width: 90%;
   }
 
-  ${theme.mq.giga} {
+  ${theme.mq.desk} {
     width: 80%;
   }
 `;

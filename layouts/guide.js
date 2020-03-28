@@ -27,11 +27,11 @@ const defaultChildStyles = ({ theme }) => css`
   > * {
     grid-column: 1 / 13;
 
-    ${theme.mq.kilo} {
+    ${theme.mq.hand} {
       grid-column: 2 / 12;
     }
 
-    ${theme.mq.mega} {
+    ${theme.mq.lap} {
       grid-column: 5 / 13;
     }
   }
@@ -43,11 +43,11 @@ const headerStyles = ({ theme }) => css`
   font-family: ${theme.fontStack.serif};
   width: 100%;
 
-  ${theme.mq.mega} {
+  ${theme.mq.lap} {
     width: 90%;
   }
 
-  ${theme.mq.giga} {
+  ${theme.mq.desk} {
     width: 80%;
   }
 `;
@@ -58,7 +58,7 @@ const ratioImageStyles = ({ theme }) => css`
   margin-top: ${theme.spacing.xl};
   margin-bottom: ${theme.spacing.s};
 
-  ${theme.mq.kilo} {
+  ${theme.mq.hand} {
     margin-top: ${theme.spacing.xxxxl};
     margin-bottom: ${theme.spacing.xxxxl};
   }

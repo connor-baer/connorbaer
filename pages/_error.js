@@ -28,11 +28,11 @@ const Grid = styled('div')(styles.pageWidth, styles.grid);
 const contentStyles = ({ theme }) => css`
   grid-column: 1 / 13;
 
-  ${theme.mq.kilo} {
+  ${theme.mq.hand} {
     grid-column: 1 / 12;
   }
 
-  ${theme.mq.mega} {
+  ${theme.mq.lap} {
     grid-column: 3 / 11;
   }
 `;

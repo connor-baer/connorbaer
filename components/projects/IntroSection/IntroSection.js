@@ -9,7 +9,7 @@ import SectionHeading from '../../SectionHeading';
 const headingStyles = ({ theme }) => css`
   margin-top: ${theme.spacing.s};
 
-  ${theme.mq.kilo} {
+  ${theme.mq.hand} {
     margin-top: ${theme.spacing.s};
   }
 `;

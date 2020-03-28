@@ -20,11 +20,11 @@ const Container = styled('div')(styles.pageWidth);
 const headerStyles = ({ theme }) => css`
   width: 100%;
 
-  ${theme.mq.mega} {
+  ${theme.mq.lap} {
     width: 90%;
   }
 
-  ${theme.mq.giga} {
+  ${theme.mq.desk} {
     width: 80%;
   }
 `;
@@ -35,7 +35,7 @@ const postsStyles = ({ theme }) => css`
   display: flex;
   flex-wrap: wrap;
 
-  ${theme.mq.mega} {
+  ${theme.mq.lap} {
     flex-wrap: nowrap;
   }
 `;
@@ -45,12 +45,12 @@ const Posts = styled('div')(postsStyles);
 const postStyles = ({ theme, length }) => css`
   width: 100%;
 
-  ${theme.mq.mega} {
+  ${theme.mq.lap} {
     width: calc(50% - ${theme.spacing.m});
     margin-right: ${theme.spacing.xl};
   }
 
-  ${theme.mq.giga} {
+  ${theme.mq.desk} {
     width: ${(100 / length).toFixed(2)}%;
   }
 

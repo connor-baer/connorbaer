@@ -12,7 +12,7 @@ const baseStyles = ({ theme }) => css`
   position: relative;
   width: 100vw;
 
-  ${theme.mq.tera} {
+  ${theme.mq.wall} {
     width: 50vw;
   }
 `;
@@ -20,7 +20,7 @@ const baseStyles = ({ theme }) => css`
 const Left = styled('div')(baseStyles);
 
 const rightStyles = ({ theme }) => css`
-  ${theme.mq.tera} {
+  ${theme.mq.wall} {
     position: fixed;
     top: 0;
     right: 0;

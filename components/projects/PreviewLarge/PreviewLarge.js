@@ -9,17 +9,17 @@ import Link from '../../Link';
 import ProjectMeta from '../ProjectMeta';
 
 function getSizes(theme) {
-  const gigaSize = `(min-width: ${theme.breakpoints.giga}px) 555px`;
-  const megaSize = `(min-width: ${theme.breakpoints.mega}px) 455px`;
+  const deskSize = `(min-width: ${theme.breakpoints.desk}) 555px`;
+  const lapSize = `(min-width: ${theme.breakpoints.lap}) 455px`;
   const mobileSize = '100vw';
 
-  return [gigaSize, megaSize, mobileSize].join(', ');
+  return [deskSize, lapSize, mobileSize].join(', ');
 }
 
 const articleStyles = ({ theme }) => css`
   margin-top: ${theme.spacing.l};
 
-  ${theme.mq.kilo} {
+  ${theme.mq.hand} {
     margin-top: ${theme.spacing.xxxl};
   }
 `;

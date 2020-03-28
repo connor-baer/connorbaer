@@ -12,7 +12,7 @@ const baseStyles = ({ theme }) => css`
 const rightStyles = ({ theme, align = CENTER }) =>
   align === RIGHT &&
   css`
-    ${theme.mq.kilo} {
+    ${theme.mq.hand} {
       float: right;
       margin-top: ${theme.spacing.m};
       margin-bottom: ${theme.spacing.l};
@@ -21,7 +21,7 @@ const rightStyles = ({ theme, align = CENTER }) =>
       width: calc(60.5% + ${theme.spacing.xxl} / 2);
     }
 
-    ${theme.mq.mega} {
+    ${theme.mq.lap} {
       margin-right: -26.66%;
     }
   `;
@@ -29,7 +29,7 @@ const rightStyles = ({ theme, align = CENTER }) =>
 const leftStyles = ({ theme, align = CENTER }) =>
   align === LEFT &&
   css`
-    ${theme.mq.kilo} {
+    ${theme.mq.hand} {
       float: left;
       margin-top: ${theme.spacing.m};
       margin-bottom: ${theme.spacing.l};
@@ -38,7 +38,7 @@ const leftStyles = ({ theme, align = CENTER }) =>
       width: calc(60.5% + ${theme.spacing.xxl} / 2);
     }
 
-    ${theme.mq.mega} {
+    ${theme.mq.lap} {
       margin-left: -26.66%;
     }
   `;
@@ -48,12 +48,12 @@ const fullStyles = ({ theme, align = CENTER }) =>
   css`
     text-align: center;
 
-    ${theme.mq.kilo} {
+    ${theme.mq.hand} {
       margin: ${theme.spacing.xxl} -10.5%;
       width: calc(100% + 10.5% * 2);
     }
 
-    ${theme.mq.mega} {
+    ${theme.mq.lap} {
       margin: ${theme.spacing.xxxl} -26%;
       width: calc(100% + 26% * 2);
     }
