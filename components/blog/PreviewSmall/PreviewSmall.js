@@ -8,8 +8,8 @@ import Link from '../../Link';
 import PostMeta from '../PostMeta';
 
 const articleStyles = ({ theme }) => css`
-  margin-top: ${theme.spacings.giga};
-  margin-bottom: ${theme.spacings.giga};
+  margin-top: ${theme.spacing.l};
+  margin-bottom: ${theme.spacing.l};
 `;
 
 const Article = styled('article')(articleStyles);

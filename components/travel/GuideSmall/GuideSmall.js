@@ -17,8 +17,8 @@ function getSizes(theme) {
 }
 
 const articleStyles = ({ theme }) => css`
-  margin-top: ${theme.spacings.giga};
-  margin-bottom: ${theme.spacings.giga};
+  margin-top: ${theme.spacing.l};
+  margin-bottom: ${theme.spacing.l};
   position: relative;
 `;
 
@@ -29,7 +29,7 @@ const contentStyles = ({ theme }) => css`
   right: 0;
   bottom: 0;
   left: 0;
-  padding: ${theme.spacings.peta} ${theme.spacings.mega} ${theme.spacings.mega};
+  padding: ${theme.spacing.xxl} ${theme.spacing.m} ${theme.spacing.m};
   background: linear-gradient(transparent, ${theme.colors.shadow});
   border-bottom-left-radius: ${theme.borderRadius.giga};
   border-bottom-right-radius: ${theme.borderRadius.giga};
@@ -39,7 +39,7 @@ const Content = styled('div')(contentStyles);
 
 const titleStyles = ({ theme }) => css`
   margin-top: 0;
-  margin-bottom: ${theme.spacings.byte};
+  margin-bottom: ${theme.spacing.xs};
   color: #fff;
   font-family: Playfair Display, ${theme.fontStack.serif};
 `;
@@ -55,7 +55,7 @@ const subtitleStyles = ({ theme }) => css`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   margin-bottom: 0;
-  max-height: ${theme.spacings.exa};
+  max-height: ${theme.spacing.xxxl};
 `;
 
 const Subtitle = styled(Paragraph)(subtitleStyles);

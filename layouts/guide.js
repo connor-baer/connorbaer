@@ -55,12 +55,12 @@ const headerStyles = ({ theme }) => css`
 const StyledHeader = styled(Header)(headerStyles);
 
 const ratioImageStyles = ({ theme }) => css`
-  margin-top: ${theme.spacings.tera};
-  margin-bottom: ${theme.spacings.kilo};
+  margin-top: ${theme.spacing.xl};
+  margin-bottom: ${theme.spacing.s};
 
   ${theme.mq.kilo} {
-    margin-top: ${theme.spacings.zetta};
-    margin-bottom: ${theme.spacings.zetta};
+    margin-top: ${theme.spacing.xxxxl};
+    margin-bottom: ${theme.spacing.xxxxl};
   }
 `;
 

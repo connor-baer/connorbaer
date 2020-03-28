@@ -5,8 +5,8 @@ import { propTypes } from '@madebyconnor/bamboo-ui';
 import { RIGHT, LEFT, CENTER, FULL } from '../../constants/align';
 
 const baseStyles = ({ theme }) => css`
-  margin-top: ${theme.spacings.tera};
-  margin-bottom: ${theme.spacings.tera};
+  margin-top: ${theme.spacing.xl};
+  margin-bottom: ${theme.spacing.xl};
 `;
 
 const rightStyles = ({ theme, align = CENTER }) =>
@@ -14,11 +14,11 @@ const rightStyles = ({ theme, align = CENTER }) =>
   css`
     ${theme.mq.kilo} {
       float: right;
-      margin-top: ${theme.spacings.mega};
-      margin-bottom: ${theme.spacings.giga};
+      margin-top: ${theme.spacing.m};
+      margin-bottom: ${theme.spacing.l};
       margin-right: -10.5%;
-      padding-left: ${theme.spacings.peta};
-      width: calc(60.5% + ${theme.spacings.peta} / 2);
+      padding-left: ${theme.spacing.xxl};
+      width: calc(60.5% + ${theme.spacing.xxl} / 2);
     }
 
     ${theme.mq.mega} {
@@ -31,11 +31,11 @@ const leftStyles = ({ theme, align = CENTER }) =>
   css`
     ${theme.mq.kilo} {
       float: left;
-      margin-top: ${theme.spacings.mega};
-      margin-bottom: ${theme.spacings.giga};
+      margin-top: ${theme.spacing.m};
+      margin-bottom: ${theme.spacing.l};
       margin-left: -10.5%;
-      padding-right: ${theme.spacings.peta};
-      width: calc(60.5% + ${theme.spacings.peta} / 2);
+      padding-right: ${theme.spacing.xxl};
+      width: calc(60.5% + ${theme.spacing.xxl} / 2);
     }
 
     ${theme.mq.mega} {
@@ -49,12 +49,12 @@ const fullStyles = ({ theme, align = CENTER }) =>
     text-align: center;
 
     ${theme.mq.kilo} {
-      margin: ${theme.spacings.peta} -10.5%;
+      margin: ${theme.spacing.xxl} -10.5%;
       width: calc(100% + 10.5% * 2);
     }
 
     ${theme.mq.mega} {
-      margin: ${theme.spacings.exa} -26%;
+      margin: ${theme.spacing.xxxl} -26%;
       width: calc(100% + 26% * 2);
     }
   `;

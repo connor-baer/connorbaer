@@ -11,12 +11,12 @@ import PreviewLarge from '../components/projects/PreviewLarge';
 import useProjects from '../hooks/use-projects';
 
 const spacingStyles = ({ theme }) => css`
-  margin-top: ${theme.spacings.giga};
-  margin-bottom: ${theme.spacings.giga};
+  margin-top: ${theme.spacing.l};
+  margin-bottom: ${theme.spacing.l};
 
   ${theme.mq.kilo} {
-    margin-top: ${theme.spacings.exa};
-    margin-bottom: ${theme.spacings.exa};
+    margin-top: ${theme.spacing.xxxl};
+    margin-bottom: ${theme.spacing.xxxl};
   }
 `;
 

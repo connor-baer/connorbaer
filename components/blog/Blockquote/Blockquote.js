@@ -30,7 +30,7 @@ const Quote = styled('blockquote')(quoteStyles);
 
 const citeStyles = ({ theme }) => css`
   display: block;
-  margin-top: ${theme.spacings.kilo};
+  margin-top: ${theme.spacing.s};
   color: ${theme.colors.n700};
 
   &::before {

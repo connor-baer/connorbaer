@@ -22,7 +22,7 @@ const smoothScrollStyles = css`
 
 const detailsStyles = ({ theme }) => css`
   ${theme.mq.kilo} {
-    margin-top: ${theme.spacings.byte};
+    margin-top: ${theme.spacing.xs};
   }
 `;
 
@@ -51,7 +51,7 @@ const summaryStyles = ({ theme }) => css`
       border-radius: 50%;
       text-align: center;
       line-height: 1;
-      margin-right: ${theme.spacings.byte};
+      margin-right: ${theme.spacing.xs};
       transition: transform ${theme.animations.micro};
     }
 
@@ -64,15 +64,15 @@ const summaryStyles = ({ theme }) => css`
 const Summary = styled(Heading)(summaryStyles);
 
 const listStyles = ({ theme }) => css`
-  margin-top: ${theme.spacings.mega};
+  margin-top: ${theme.spacing.m};
 `;
 
 const List = styled('ul')(listStyles);
 
 const listItemStyles = ({ theme, depth }) => css`
   list-style-type: none;
-  padding-left: calc(${theme.spacings.mega} * ${depth - 1});
-  margin-bottom: ${theme.spacings.byte};
+  padding-left: calc(${theme.spacing.m} * ${depth - 1});
+  margin-bottom: ${theme.spacing.xs};
 
   &::before {
     content: '\200B';

@@ -4,15 +4,15 @@ import { css } from '@emotion/core';
 import { Heading, propTypes } from '@madebyconnor/bamboo-ui';
 
 const sectionHeadingStyles = ({ theme }) => css`
-  margin-top: ${theme.spacings.zetta};
-  margin-bottom: ${theme.spacings.kilo};
+  margin-top: ${theme.spacing.xxxxl};
+  margin-bottom: ${theme.spacing.s};
   color: ${theme.colors.n700};
   letter-spacing: 3px;
   text-transform: uppercase;
 
   ${theme.mq.kilo} {
-    margin-top: ${theme.spacings.yotta};
-    margin-bottom: ${theme.spacings.kilo};
+    margin-top: ${theme.spacing.xxxxl};
+    margin-bottom: ${theme.spacing.s};
   }
 `;
 

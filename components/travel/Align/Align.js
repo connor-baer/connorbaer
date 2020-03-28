@@ -10,8 +10,8 @@ import { RIGHT, LEFT, CENTER, FULL } from '../../../constants/align';
  */
 
 const baseStyles = ({ theme }) => css`
-  margin-top: ${theme.spacings.tera};
-  margin-bottom: ${theme.spacings.tera};
+  margin-top: ${theme.spacing.xl};
+  margin-bottom: ${theme.spacing.xl};
 
   grid-column: 1 / 13 !important;
 
@@ -49,7 +49,7 @@ const leftStyles = ({ theme, align = CENTER }) =>
 
     ${theme.mq.mega} {
       grid-column: 1 / 5 !important;
-      margin-top: ${theme.spacings.kilo};
+      margin-top: ${theme.spacing.s};
       margin-bottom: 0;
     }
   `;
