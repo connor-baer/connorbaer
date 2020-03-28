@@ -8,7 +8,7 @@ import {
   Small,
   RatioImage,
   ComponentsProvider,
-  sharedStyles,
+  styles,
   useTheme,
 } from '@madebyconnor/bamboo-ui';
 
@@ -21,7 +21,7 @@ import Align from '../components/travel/Align';
 import components from './_components';
 import TableOfContents from '../components/travel/TableOfContents';
 
-const Container = styled('div')(sharedStyles.pageWidth);
+const Container = styled('div')(styles.pageWidth);
 
 const defaultChildStyles = ({ theme }) => css`
   > * {
@@ -37,7 +37,7 @@ const defaultChildStyles = ({ theme }) => css`
   }
 `;
 
-const Grid = styled('div')(sharedStyles.grid, defaultChildStyles);
+const Grid = styled('div')(styles.grid, defaultChildStyles);
 
 const headerStyles = ({ theme }) => css`
   font-family: ${theme.fontStack.serif};

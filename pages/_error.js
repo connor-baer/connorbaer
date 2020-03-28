@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
-import { Main, Header, sharedStyles } from '@madebyconnor/bamboo-ui';
+import { Main, Header, styles } from '@madebyconnor/bamboo-ui';
 
 import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
@@ -23,7 +23,7 @@ const SUBTITLE_MAP = {
 };
 /* eslint-enable max-len */
 
-const Grid = styled('div')(sharedStyles.pageWidth, sharedStyles.grid);
+const Grid = styled('div')(styles.pageWidth, styles.grid);
 
 const contentStyles = ({ theme }) => css`
   grid-column: 1 / 13;

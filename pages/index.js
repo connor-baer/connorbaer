@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { isEmpty } from 'lodash/fp';
-import { Main, Header, Slider, sharedStyles } from '@madebyconnor/bamboo-ui';
+import { Main, Header, Slider, styles } from '@madebyconnor/bamboo-ui';
 
 import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
@@ -15,7 +15,7 @@ import GuideSmall from '../components/travel/GuideSmall';
 import usePosts from '../hooks/use-posts';
 import useCities from '../hooks/use-cities';
 
-const Container = styled('div')(sharedStyles.pageWidth);
+const Container = styled('div')(styles.pageWidth);
 
 const headerStyles = ({ theme }) => css`
   width: 100%;
@@ -108,7 +108,7 @@ export default function HomePage() {
               <SectionHeading>City guides</SectionHeading>
             </Container>
 
-            <Slider css={(theme) => sharedStyles.pageWidth({ theme })}>
+            <Slider css={(theme) => styles.pageWidth({ theme })}>
               {cities.map((city) => (
                 <GuideSmall key={city.title} url={city.url} {...city} />
               ))}

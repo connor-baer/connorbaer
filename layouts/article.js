@@ -6,7 +6,7 @@ import {
   Main,
   Header,
   ComponentsProvider,
-  sharedStyles,
+  styles,
 } from '@madebyconnor/bamboo-ui';
 
 import Meta from '../components/Meta';
@@ -16,7 +16,7 @@ import Footer from '../components/Footer';
 import Align from '../components/Align';
 import components from './_components';
 
-const Article = styled('article')(sharedStyles.pageWidth, sharedStyles.grid);
+const Article = styled('article')(styles.pageWidth, styles.grid);
 
 const contentStyles = ({ theme }) => css`
   grid-column: 1 / 13;
