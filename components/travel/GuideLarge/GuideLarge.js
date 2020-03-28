@@ -17,17 +17,17 @@ function getSizes(theme) {
 }
 
 const articleStyles = ({ theme }) => css`
-  margin-top: ${theme.spacings.peta};
-  margin-bottom: ${theme.spacings.peta};
+  margin-top: ${theme.spacing.xxl};
+  margin-bottom: ${theme.spacing.xxl};
 
   ${theme.mq.kilo} {
-    margin-top: ${theme.spacings.exa};
-    margin-bottom: ${theme.spacings.exa};
+    margin-top: ${theme.spacing.xxxl};
+    margin-bottom: ${theme.spacing.xxxl};
   }
 
   ${theme.mq.mega} {
-    margin-top: ${theme.spacings.zetta};
-    margin-bottom: ${theme.spacings.zetta};
+    margin-top: ${theme.spacing.xxxxl};
+    margin-bottom: ${theme.spacing.xxxxl};
   }
 `;
 
@@ -50,7 +50,7 @@ const imageStyles = ({ theme }) => css`
 
   ${theme.mq.kilo} {
     width: 50%;
-    margin-right: ${theme.spacings.tera};
+    margin-right: ${theme.spacing.xl};
   }
 
   ${theme.mq.mega} {
@@ -61,7 +61,7 @@ const imageStyles = ({ theme }) => css`
 const Image = styled('div')(imageStyles);
 
 const contentStyles = ({ theme }) => css`
-  padding-top: ${theme.spacings.mega};
+  padding-top: ${theme.spacing.m};
   width: 100%;
 
   ${theme.mq.kilo} {
@@ -78,7 +78,7 @@ const Content = styled('div')(contentStyles);
 
 const titleStyles = ({ theme }) => css`
   margin-top: 0;
-  margin-bottom: ${theme.spacings.byte};
+  margin-bottom: ${theme.spacing.xs};
   font-family: Playfair Display, ${theme.fontStack.serif};
 `;
 

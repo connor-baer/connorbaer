@@ -9,7 +9,7 @@ import { formatDate, formatDatetime } from '../../../utils/date';
 import Link from '../../Link';
 
 const wrapperStyles = ({ theme }) => css`
-  margin-top: ${theme.spacings.mega};
+  margin-top: ${theme.spacing.m};
 `;
 
 const Wrapper = styled('div')(wrapperStyles);

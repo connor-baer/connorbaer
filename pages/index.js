@@ -46,8 +46,8 @@ const postStyles = ({ theme, length }) => css`
   width: 100%;
 
   ${theme.mq.mega} {
-    width: calc(50% - ${theme.spacings.mega});
-    margin-right: ${theme.spacings.tera};
+    width: calc(50% - ${theme.spacing.m});
+    margin-right: ${theme.spacing.xl};
   }
 
   ${theme.mq.giga} {

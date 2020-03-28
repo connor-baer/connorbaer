@@ -6,15 +6,15 @@ import { Anchor, Paragraph, Heading, Image, Hr } from '@madebyconnor/bamboo-ui';
 import Blockquote from '../components/blog/Blockquote';
 
 const listStyles = ({ theme }) => css`
-  margin-bottom: ${theme.spacings.mega};
-  padding-left: ${theme.spacings.giga};
+  margin-bottom: ${theme.spacing.m};
+  padding-left: ${theme.spacing.l};
 `;
 
 const List = styled(Paragraph)(listStyles);
 
 const listItemStyles = (theme) => css`
-  margin-bottom: ${theme.spacings.kilo};
-  margin-left: ${theme.spacings.kilo};
+  margin-bottom: ${theme.spacing.s};
+  margin-left: ${theme.spacing.s};
 `;
 
 export { Paragraph };

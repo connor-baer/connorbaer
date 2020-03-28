@@ -7,10 +7,10 @@ import { Intro, propTypes } from '@madebyconnor/bamboo-ui';
 import SectionHeading from '../../SectionHeading';
 
 const headingStyles = ({ theme }) => css`
-  margin-top: ${theme.spacings.kilo};
+  margin-top: ${theme.spacing.s};
 
   ${theme.mq.kilo} {
-    margin-top: ${theme.spacings.kilo};
+    margin-top: ${theme.spacing.s};
   }
 `;
 

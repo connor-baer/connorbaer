@@ -17,8 +17,8 @@ function getSizes(theme) {
 }
 
 const articleStyles = ({ theme }) => css`
-  margin-top: ${theme.spacings.tera};
-  margin-bottom: ${theme.spacings.zetta};
+  margin-top: ${theme.spacing.xl};
+  margin-bottom: ${theme.spacing.xxxxl};
 
   ${theme.mq.kilo} {
     margin-bottom: 72px;
@@ -28,8 +28,8 @@ const articleStyles = ({ theme }) => css`
 const Article = styled('article')(articleStyles);
 
 const titleStyles = ({ theme }) => css`
-  margin-top: ${theme.spacings.tera};
-  margin-bottom: ${theme.spacings.kilo};
+  margin-top: ${theme.spacing.xl};
+  margin-bottom: ${theme.spacing.s};
 `;
 
 const Title = styled(Heading)(titleStyles);

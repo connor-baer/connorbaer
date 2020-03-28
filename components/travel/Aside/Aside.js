@@ -8,10 +8,10 @@ import Align from '../Align';
 const baseStyles = ({ theme }) => css`
   border-top: 1px solid ${theme.colors.n300};
   border-bottom: 1px solid ${theme.colors.n300};
-  margin-top: ${theme.spacings.giga};
-  margin-bottom: ${theme.spacings.giga};
-  padding-top: ${theme.spacings.mega};
-  padding-bottom: ${theme.spacings.bit};
+  margin-top: ${theme.spacing.l};
+  margin-bottom: ${theme.spacing.l};
+  padding-top: ${theme.spacing.m};
+  padding-bottom: ${theme.spacing.xxs};
 `;
 
 const leftStyles = ({ align, theme }) =>
@@ -19,7 +19,7 @@ const leftStyles = ({ align, theme }) =>
   css`
     ${theme.mq.mega} {
       border: 0;
-      margin-top: ${theme.spacings.byte};
+      margin-top: ${theme.spacing.xs};
       margin-bottom: 0;
       padding: 0;
     }
