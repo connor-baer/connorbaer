@@ -31,7 +31,7 @@ const Quote = styled('blockquote')(quoteStyles);
 const citeStyles = ({ theme }) => css`
   display: block;
   margin-top: ${theme.spacing.s};
-  color: ${theme.colors.n700};
+  color: ${theme.color.neutral[700]};
 
   &::before {
     display: inline;

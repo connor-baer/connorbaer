@@ -87,7 +87,7 @@ const listItemStyles = ({ theme, depth }) => css`
 const ListItem = styled(Paragraph)(listItemStyles);
 
 const anchorStyles = ({ theme }) => css`
-  color: ${theme.colors.n700};
+  color: ${theme.color.neutral[700]};
   font-weight: ${theme.fontWeight.light};
 `;
 
