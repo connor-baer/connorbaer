@@ -7,14 +7,12 @@ import {
   Theme,
   Align,
   LoadingBar,
-  GlobalStyles,
+  BaseStyles,
 } from '@madebyconnor/bamboo-ui';
 
 import * as themes from '../styles/themes';
 import Link from '../components/Link';
 import Image from '../components/Image';
-
-import { FONTS_PATH } from '../constants/paths';
 
 export default class CustomApp extends App {
   state = {
@@ -42,17 +40,13 @@ export default class CustomApp extends App {
   };
 
   render() {
-    const { Component, pageProps, router } = this.props;
+    const { Component, pageProps } = this.props;
     const { isLoading } = this.state;
-    const section = router.pathname.split('/')[1];
+    const theme = Component.theme || themes.standard;
     return (
       <ComponentsProvider value={{ Head, Image, Link, Align }}>
-        <Theme
-          themes={themes}
-          initialThemeId={section}
-          assetPrefix={FONTS_PATH}
-        >
-          <GlobalStyles />
+        <Theme theme={theme}>
+          <BaseStyles />
           <LoadingBar isLoading={isLoading} />
           <Component {...pageProps} />
         </Theme>

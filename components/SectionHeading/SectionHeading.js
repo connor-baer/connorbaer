@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { Heading, sharedPropTypes } from '@madebyconnor/bamboo-ui';
+import { Heading, propTypes } from '@madebyconnor/bamboo-ui';
 
 const sectionHeadingStyles = ({ theme }) => css`
   margin-top: ${theme.spacings.zetta};
@@ -27,5 +27,5 @@ export default function SectionHeading({ children, ...rest }) {
 }
 
 SectionHeading.propTypes = {
-  children: sharedPropTypes.childrenPropType,
+  children: propTypes.childrenPropType,
 };

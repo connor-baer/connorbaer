@@ -2,11 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { startsWith } from 'lodash/fp';
 import { useRouter } from 'next/router';
-import {
-  Navigation,
-  PandaIcon,
-  sharedPropTypes,
-} from '@madebyconnor/bamboo-ui';
+import { Navigation, PandaIcon, propTypes } from '@madebyconnor/bamboo-ui';
 
 import usePreview from '../../hooks/use-preview';
 import { NAME } from '../../constants/site';
@@ -46,12 +42,12 @@ export default function CustomNavigation({
 
 CustomNavigation.propTypes = {
   siteName: PropTypes.string,
-  siteLogo: sharedPropTypes.childrenPropType,
+  siteLogo: propTypes.childrenPropType,
   links: PropTypes.arrayOf(
     PropTypes.shape({
-      label: sharedPropTypes.childrenPropType,
+      label: propTypes.childrenPropType,
       url: PropTypes.string,
-      icon: sharedPropTypes.childrenPropType,
+      icon: propTypes.childrenPropType,
     }),
   ),
 };

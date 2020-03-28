@@ -1,12 +1,12 @@
 import { Component } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
-import { sharedPropTypes } from '@madebyconnor/bamboo-ui';
+import { propTypes } from '@madebyconnor/bamboo-ui';
 
 export default class Portal extends Component {
   static propTypes = {
     selector: PropTypes.string,
-    children: sharedPropTypes.childrenPropType,
+    children: propTypes.childrenPropType,
   };
 
   componentDidMount() {
