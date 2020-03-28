@@ -10,7 +10,7 @@ import { MAPBOX } from '../../constants/tokens';
 const placeholderStyles = ({ theme, width, height }) => css`
   width: ${width};
   height: ${height};
-  background: ${theme.colors.n300};
+  background: ${theme.color.neutral[300]};
 `;
 
 const Placeholder = styled('div')(placeholderStyles);

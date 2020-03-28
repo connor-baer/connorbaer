@@ -6,8 +6,8 @@ import { propTypes } from '@madebyconnor/bamboo-ui';
 import Align from '../Align';
 
 const baseStyles = ({ theme }) => css`
-  border-top: 1px solid ${theme.colors.n300};
-  border-bottom: 1px solid ${theme.colors.n300};
+  border-top: 1px solid ${theme.color.neutral[300]};
+  border-bottom: 1px solid ${theme.color.neutral[300]};
   margin-top: ${theme.spacing.l};
   margin-bottom: ${theme.spacing.l};
   padding-top: ${theme.spacing.m};

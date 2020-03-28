@@ -87,7 +87,7 @@ const Title = styled(Heading)(titleStyles);
 const subtitleStyles = ({ theme }) => css`
   display: block;
   margin-bottom: 0;
-  color: ${theme.colors.bodyColor};
+  color: ${theme.color.bodyColor};
   display: -webkit-box;
   line-clamp: 3;
   -webkit-line-clamp: 3;

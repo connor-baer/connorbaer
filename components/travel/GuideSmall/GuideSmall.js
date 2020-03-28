@@ -30,9 +30,9 @@ const contentStyles = ({ theme }) => css`
   bottom: 0;
   left: 0;
   padding: ${theme.spacing.xxl} ${theme.spacing.m} ${theme.spacing.m};
-  background: linear-gradient(transparent, ${theme.colors.shadow});
-  border-bottom-left-radius: ${theme.borderRadius.giga};
-  border-bottom-right-radius: ${theme.borderRadius.giga};
+  background: linear-gradient(transparent, ${theme.color.shadow});
+  border-bottom-left-radius: ${theme.borderRadius.m};
+  border-bottom-right-radius: ${theme.borderRadius.m};
 `;
 
 const Content = styled('div')(contentStyles);

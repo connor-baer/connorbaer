@@ -21,7 +21,7 @@ const titleStyles = () => css`
 const Title = styled(Heading)(titleStyles);
 
 const descriptionStyles = ({ theme }) => css`
-  color: ${theme.colors.bodyColor};
+  color: ${theme.color.bodyColor};
 `;
 
 const Description = styled(Paragraph)(descriptionStyles);

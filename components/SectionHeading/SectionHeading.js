@@ -6,7 +6,7 @@ import { Heading, propTypes } from '@madebyconnor/bamboo-ui';
 const sectionHeadingStyles = ({ theme }) => css`
   margin-top: ${theme.spacing.xxxxl};
   margin-bottom: ${theme.spacing.s};
-  color: ${theme.colors.n700};
+  color: ${theme.color.neutral[700]};
   letter-spacing: 3px;
   text-transform: uppercase;
 
