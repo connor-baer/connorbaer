@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
-import { sharedPropTypes } from '@madebyconnor/bamboo-ui';
+import { propTypes } from '@madebyconnor/bamboo-ui';
 
 import Align from '../Align';
 
@@ -41,6 +41,6 @@ Aside.CENTER = Align.CENTER;
 Aside.FULL = Align.FULL;
 
 Aside.propTypes = {
-  children: sharedPropTypes.childrenPropType,
-  align: sharedPropTypes.alignPropType,
+  children: propTypes.childrenPropType,
+  align: propTypes.alignPropType,
 };

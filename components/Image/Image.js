@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image as BambooImage, sharedPropTypes } from '@madebyconnor/bamboo-ui';
+import { Image as BambooImage, propTypes } from '@madebyconnor/bamboo-ui';
 
 const DEFAULT_WIDTH = 1200;
 
@@ -39,4 +39,4 @@ export default function Image(props = {}) {
   return <BambooImage {...props} src={src} srcSet={srcSet} />;
 }
 
-Image.propTypes = sharedPropTypes.imagePropType;
+Image.propTypes = propTypes.imagePropType;

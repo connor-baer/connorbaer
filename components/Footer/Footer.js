@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  Anchor,
-  Footer,
-  useTheme,
-  sharedPropTypes,
-} from '@madebyconnor/bamboo-ui';
+import { Anchor, Footer, useTheme, propTypes } from '@madebyconnor/bamboo-ui';
 
 import { NAME, TWITTER } from '../../constants/site';
 
@@ -21,5 +16,5 @@ export default function CustomFooter({ children, ...rest }) {
 }
 
 CustomFooter.propTypes = {
-  children: sharedPropTypes.childrenPropType,
+  children: propTypes.childrenPropType,
 };

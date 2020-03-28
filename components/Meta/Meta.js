@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { isNil } from 'lodash/fp';
-import { Meta, sharedPropTypes } from '@madebyconnor/bamboo-ui';
+import { Meta, propTypes } from '@madebyconnor/bamboo-ui';
 
 import { NAME, TWITTER } from '../../constants/site';
 import * as Url from '../../services/url';
@@ -31,5 +31,5 @@ export default function CustomMeta({
 
 CustomMeta.propTypes = {
   pathname: PropTypes.string,
-  image: PropTypes.shape(sharedPropTypes.imagePropType),
+  image: PropTypes.shape(propTypes.imagePropType),
 };

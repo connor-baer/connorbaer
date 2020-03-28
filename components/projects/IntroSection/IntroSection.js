@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { Intro, sharedPropTypes } from '@madebyconnor/bamboo-ui';
+import { Intro, propTypes } from '@madebyconnor/bamboo-ui';
 
 import SectionHeading from '../../SectionHeading';
 
@@ -27,5 +27,5 @@ export default function IntroSection({ title, children, ...rest }) {
 
 IntroSection.propTypes = {
   title: PropTypes.string.isRequired,
-  children: sharedPropTypes.childrenPropType.isRequired,
+  children: propTypes.childrenPropType.isRequired,
 };

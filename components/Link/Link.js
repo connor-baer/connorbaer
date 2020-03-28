@@ -4,7 +4,7 @@ import { isEmpty, isString } from 'lodash/fp';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import url from 'url';
-import { sharedPropTypes } from '@madebyconnor/bamboo-ui';
+import { propTypes } from '@madebyconnor/bamboo-ui';
 
 function withPreview(urlObj = {}, preview) {
   const { query = {} } = urlObj;
@@ -43,6 +43,6 @@ export default function Link({ href, as, ...rest }) {
 Link.propTypes = {
   href: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   as: PropTypes.string,
-  children: sharedPropTypes.childrenPropType,
+  children: propTypes.childrenPropType,
   onClick: PropTypes.func,
 };

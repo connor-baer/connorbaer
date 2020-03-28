@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { sharedPropTypes } from '@madebyconnor/bamboo-ui';
+import { propTypes } from '@madebyconnor/bamboo-ui';
 
 import Portal from '../components/Portal';
 
@@ -40,7 +40,7 @@ function Split({ children }) {
 }
 
 Split.propTypes = {
-  children: sharedPropTypes.childrenPropType,
+  children: propTypes.childrenPropType,
 };
 
 function Sidebar({ children }) {

@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { sharedPropTypes } from '@madebyconnor/bamboo-ui';
+import { propTypes } from '@madebyconnor/bamboo-ui';
 
 import { RIGHT, LEFT, CENTER, FULL } from '../../constants/align';
 
@@ -67,7 +67,7 @@ Align.CENTER = CENTER;
 Align.FULL = FULL;
 
 Align.propTypes = {
-  align: sharedPropTypes.alignPropType,
+  align: propTypes.alignPropType,
 };
 
 export default Align;
