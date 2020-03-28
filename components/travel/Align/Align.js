@@ -15,11 +15,11 @@ const baseStyles = ({ theme }) => css`
 
   grid-column: 1 / 13 !important;
 
-  ${theme.mq.kilo} {
+  ${theme.mq.hand} {
     grid-column: 2 / 12 !important;
   }
 
-  ${theme.mq.mega} {
+  ${theme.mq.lap} {
     grid-column: 5 / 13 !important;
   }
 `;
@@ -29,11 +29,11 @@ const rightStyles = ({ theme, align = CENTER }) =>
   css`
     grid-column: 1 / 13 !important;
 
-    ${theme.mq.kilo} {
+    ${theme.mq.hand} {
       grid-column: 2 / 12 !important;
     }
 
-    ${theme.mq.mega} {
+    ${theme.mq.lap} {
       grid-column: 5 / 13 !important;
     }
   `;
@@ -43,11 +43,11 @@ const leftStyles = ({ theme, align = CENTER }) =>
   css`
     grid-column: 1 / 13 !important;
 
-    ${theme.mq.kilo} {
+    ${theme.mq.hand} {
       grid-column: 2 / 12 !important;
     }
 
-    ${theme.mq.mega} {
+    ${theme.mq.lap} {
       grid-column: 1 / 5 !important;
       margin-top: ${theme.spacing.s};
       margin-bottom: 0;
@@ -59,11 +59,11 @@ const fullStyles = ({ theme, align = CENTER }) =>
   css`
     grid-column: 1 / 13 !important;
 
-    ${theme.mq.kilo} {
+    ${theme.mq.hand} {
       grid-column: 1 / 13 !important;
     }
 
-    ${theme.mq.mega} {
+    ${theme.mq.lap} {
       grid-column: 1 / 13 !important;
     }
   `;

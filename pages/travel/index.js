@@ -18,11 +18,11 @@ const headerStyles = ({ theme }) => css`
   font-family: Playfair Display;
   width: 100%;
 
-  ${theme.mq.mega} {
+  ${theme.mq.lap} {
     width: 90%;
   }
 
-  ${theme.mq.giga} {
+  ${theme.mq.desk} {
     width: 80%;
   }
 `;

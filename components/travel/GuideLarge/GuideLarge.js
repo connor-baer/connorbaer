@@ -8,24 +8,24 @@ import { CoverImage, Heading, Paragraph } from '@madebyconnor/bamboo-ui';
 import Link from '../../Link';
 
 function getSizes(theme) {
-  const gigaSize = `(min-width: ${theme.breakpoints.giga}px) 240px`;
-  const megaSize = `(min-width: ${theme.breakpoints.mega}px) 25vw`;
-  const kiloSize = `(min-width: ${theme.breakpoints.kilo}px) 50vw`;
+  const deskSize = `(min-width: ${theme.breakpoints.desk}) 240px`;
+  const lapSize = `(min-width: ${theme.breakpoints.lap}) 25vw`;
+  const handSize = `(min-width: ${theme.breakpoints.hand}) 50vw`;
   const mobileSize = '100vw';
 
-  return [gigaSize, megaSize, kiloSize, mobileSize].join(', ');
+  return [deskSize, lapSize, handSize, mobileSize].join(', ');
 }
 
 const articleStyles = ({ theme }) => css`
   margin-top: ${theme.spacing.xxl};
   margin-bottom: ${theme.spacing.xxl};
 
-  ${theme.mq.kilo} {
+  ${theme.mq.hand} {
     margin-top: ${theme.spacing.xxxl};
     margin-bottom: ${theme.spacing.xxxl};
   }
 
-  ${theme.mq.mega} {
+  ${theme.mq.lap} {
     margin-top: ${theme.spacing.xxxxl};
     margin-bottom: ${theme.spacing.xxxxl};
   }
@@ -37,7 +37,7 @@ const aStyles = ({ theme }) => css`
   display: flex;
   flex-wrap: wrap;
 
-  ${theme.mq.kilo} {
+  ${theme.mq.hand} {
     flex-wrap: nowrap;
     align-items: center;
   }
@@ -48,12 +48,12 @@ const A = styled('a')(aStyles);
 const imageStyles = ({ theme }) => css`
   width: 100%;
 
-  ${theme.mq.kilo} {
+  ${theme.mq.hand} {
     width: 50%;
     margin-right: ${theme.spacing.xl};
   }
 
-  ${theme.mq.mega} {
+  ${theme.mq.lap} {
     width: 33.33%;
   }
 `;
@@ -64,12 +64,12 @@ const contentStyles = ({ theme }) => css`
   padding-top: ${theme.spacing.m};
   width: 100%;
 
-  ${theme.mq.kilo} {
+  ${theme.mq.hand} {
     padding: 0;
     width: 50%;
   }
 
-  ${theme.mq.mega} {
+  ${theme.mq.lap} {
     width: 66.66%;
   }
 `;

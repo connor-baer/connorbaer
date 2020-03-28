@@ -8,12 +8,12 @@ import { CoverImage, Heading, Paragraph } from '@madebyconnor/bamboo-ui';
 import Link from '../../Link';
 
 function getSizes(theme) {
-  const gigaSize = `(min-width: ${theme.breakpoints.giga}px) 300px`;
-  const megaSize = `(min-width: ${theme.breakpoints.mega}px) 25vw`;
-  const kiloSize = `(min-width: ${theme.breakpoints.kilo}px) 50vw`;
+  const deskSize = `(min-width: ${theme.breakpoints.desk}) 300px`;
+  const lapSize = `(min-width: ${theme.breakpoints.lap}) 25vw`;
+  const handSize = `(min-width: ${theme.breakpoints.hand}) 50vw`;
   const mobileSize = '100vw';
 
-  return [gigaSize, megaSize, kiloSize, mobileSize].join(', ');
+  return [deskSize, lapSize, handSize, mobileSize].join(', ');
 }
 
 const articleStyles = ({ theme }) => css`

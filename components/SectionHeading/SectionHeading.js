@@ -10,7 +10,7 @@ const sectionHeadingStyles = ({ theme }) => css`
   letter-spacing: 3px;
   text-transform: uppercase;
 
-  ${theme.mq.kilo} {
+  ${theme.mq.hand} {
     margin-top: ${theme.spacing.xxxxl};
     margin-bottom: ${theme.spacing.s};
   }

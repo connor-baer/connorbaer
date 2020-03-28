@@ -14,7 +14,7 @@ const spacingStyles = ({ theme }) => css`
   margin-top: ${theme.spacing.l};
   margin-bottom: ${theme.spacing.l};
 
-  ${theme.mq.kilo} {
+  ${theme.mq.hand} {
     margin-top: ${theme.spacing.xxxl};
     margin-bottom: ${theme.spacing.xxxl};
   }

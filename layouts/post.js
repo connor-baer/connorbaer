@@ -25,11 +25,11 @@ const Grid = styled('div')(styles.pageWidth, styles.grid);
 const contentStyles = ({ theme }) => css`
   grid-column: 1 / 13;
 
-  ${theme.mq.kilo} {
+  ${theme.mq.hand} {
     grid-column: 2 / 12;
   }
 
-  ${theme.mq.mega} {
+  ${theme.mq.lap} {
     grid-column: 3 / 11;
   }
 `;
@@ -45,15 +45,15 @@ const StyledParagraph = styled(Paragraph)(styledParagraphStyles);
 const styledParallaxImageStyles = ({ theme }) => css`
   height: 12rem;
 
-  ${theme.mq.kilo} {
+  ${theme.mq.hand} {
     height: 15rem;
   }
 
-  ${theme.mq.mega} {
+  ${theme.mq.lap} {
     height: 18rem;
   }
 
-  ${theme.mq.tera} {
+  ${theme.mq.wall} {
     height: 21rem;
   }
 `;

@@ -21,7 +21,7 @@ const smoothScrollStyles = css`
 `;
 
 const detailsStyles = ({ theme }) => css`
-  ${theme.mq.kilo} {
+  ${theme.mq.hand} {
     margin-top: ${theme.spacing.xs};
   }
 `;
@@ -40,23 +40,27 @@ const summaryStyles = ({ theme }) => css`
     display: none;
   }
 
-  ${theme.mq.untilMega} {
-    &::before {
-      display: inline-block;
-      position: relative;
-      content: '+';
-      width: 1.25rem;
-      height: 1.25rem;
-      border: 2px solid ${theme.colors.bodyColor};
-      border-radius: 50%;
-      text-align: center;
-      line-height: 1;
-      margin-right: ${theme.spacing.xs};
-      transition: transform ${theme.animations.micro};
-    }
+  &::before {
+    display: inline-block;
+    position: relative;
+    content: '+';
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 2px solid ${theme.color.bodyColor};
+    border-radius: 50%;
+    text-align: center;
+    line-height: 1;
+    margin-right: ${theme.spacing.xs};
+    transition: transform ${theme.animation.micro};
+  }
 
-    details[open] &::before {
-      transform: rotate(45deg);
+  details[open] &::before {
+    transform: rotate(45deg);
+  }
+
+  ${theme.mq.lap} {
+    &::before {
+      display: none;
     }
   }
 `;
@@ -92,7 +96,7 @@ const StyledAnchor = styled(Anchor)(anchorStyles);
 function TableOfContents({ title = 'Table of Contents', tableOfContents }) {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const query = theme.mq.mega.replace('@media ', '');
+  const query = theme.mq.lap.replace('@media ', '');
   useMedia(query, (isMobile) => setOpen(isMobile));
 
   if (isEmpty(tableOfContents)) {
