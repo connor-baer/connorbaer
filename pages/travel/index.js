@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
-import { Main, Header, sharedStyles, useTheme } from '@madebyconnor/bamboo-ui';
+import { Main, Header, styles, useTheme } from '@madebyconnor/bamboo-ui';
 
 import Meta from '../../components/Meta';
 import Navigation from '../../components/Navigation';
@@ -11,7 +11,7 @@ import GuideLarge from '../../components/travel/GuideLarge';
 
 import useCities from '../../hooks/use-cities';
 
-const Grid = styled('div')(sharedStyles.pageWidth);
+const Grid = styled('div')(styles.pageWidth);
 
 const headerStyles = ({ theme }) => css`
   font-family: Playfair Display;

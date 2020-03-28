@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import { Anchor, Main, Header, sharedStyles } from '@madebyconnor/bamboo-ui';
+import { Anchor, Main, Header, styles } from '@madebyconnor/bamboo-ui';
 
 import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
@@ -12,7 +12,7 @@ import PreviewLarge from '../components/blog/PreviewLarge';
 
 import usePosts from '../hooks/use-posts';
 
-const Grid = styled('div')(sharedStyles.pageWidth, sharedStyles.grid);
+const Grid = styled('div')(styles.pageWidth, styles.grid);
 
 const contentStyles = ({ theme }) => css`
   grid-column: 1 / 13;

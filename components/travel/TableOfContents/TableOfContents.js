@@ -7,7 +7,7 @@ import {
   Heading,
   Paragraph,
   Anchor,
-  sharedStyles,
+  styles,
   useTheme,
   useMedia,
 } from '@madebyconnor/bamboo-ui';
@@ -29,7 +29,7 @@ const detailsStyles = ({ theme }) => css`
 const Details = styled(Align)(detailsStyles);
 
 const summaryStyles = ({ theme }) => css`
-  ${sharedStyles.focusOutline({ theme })}
+  ${styles.focusOutline({ theme })}
   margin-top: 0;
   margin-bottom: 0;
   border: none;

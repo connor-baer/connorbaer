@@ -11,7 +11,7 @@ import {
   Heading,
   Paragraph,
   Hr,
-  sharedStyles,
+  styles,
 } from '@madebyconnor/bamboo-ui';
 
 import Meta from '../components/Meta';
@@ -19,7 +19,7 @@ import Navigation from '../components/Navigation';
 import Prefooter from '../components/Prefooter';
 import Footer from '../components/Footer';
 
-const Container = styled('div')(sharedStyles.pageWidth);
+const Container = styled('div')(styles.pageWidth);
 
 const headerStyles = ({ theme }) => css`
   width: 100%;

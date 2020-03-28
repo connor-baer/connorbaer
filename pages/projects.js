@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { Main, Header, Columns, sharedStyles } from '@madebyconnor/bamboo-ui';
+import { Main, Header, Columns, styles } from '@madebyconnor/bamboo-ui';
 
 import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
@@ -23,7 +23,7 @@ const spacingStyles = ({ theme }) => css`
 const StyledColumns = styled(Columns)(spacingStyles);
 const StyledHeader = styled(Header)(spacingStyles);
 
-const Grid = styled('div')(sharedStyles.pageWidth);
+const Grid = styled('div')(styles.pageWidth);
 
 export default function ProjectsHome() {
   const [projects] = useProjects();
