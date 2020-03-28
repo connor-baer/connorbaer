@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { CoverImage, Heading, useTheme } from '@madebyconnor/bamboo-ui';
+import { useTheme } from 'emotion-theming';
+import { CoverImage, Heading } from '@madebyconnor/bamboo-ui';
 
 import { projectPropType } from '../../../utils/prop-types';
 import Link from '../../Link';

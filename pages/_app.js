@@ -10,7 +10,7 @@ import {
   BaseStyles,
 } from '@madebyconnor/bamboo-ui';
 
-import * as themes from '../styles/themes';
+import { standard } from '../styles/themes';
 import Link from '../components/Link';
 import Image from '../components/Image';
 
@@ -42,7 +42,7 @@ export default class CustomApp extends App {
   render() {
     const { Component, pageProps } = this.props;
     const { isLoading } = this.state;
-    const theme = Component.theme || themes.standard;
+    const theme = Component.theme || standard;
     return (
       <ComponentsProvider value={{ Head, Image, Link, Align }}>
         <Theme theme={theme}>

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Anchor, Footer, useTheme, propTypes } from '@madebyconnor/bamboo-ui';
+import { useTheme } from 'emotion-theming';
+import { Anchor, Footer, propTypes } from '@madebyconnor/bamboo-ui';
 
 import { NAME, TWITTER } from '../../constants/site';
 

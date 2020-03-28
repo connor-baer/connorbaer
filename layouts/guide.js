@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { MDXProvider } from '@mdx-js/react';
@@ -9,9 +9,9 @@ import {
   RatioImage,
   ComponentsProvider,
   styles,
-  useTheme,
 } from '@madebyconnor/bamboo-ui';
 
+import { travel } from '../styles/themes';
 import { formatDate, formatDatetime } from '../utils/date';
 import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
@@ -73,13 +73,8 @@ export default ({
   date,
   tableOfContents,
   __resourcePath,
-}) =>
+}) => {
   function Guide({ children }) {
-    const theme = useTheme();
-    useEffect(() => {
-      theme.setTheme('travel');
-    });
-
     const formattedDate = formatDate(date);
     const datetime = formatDatetime(date);
     return (
@@ -115,4 +110,9 @@ export default ({
         <Footer />
       </>
     );
-  };
+  }
+
+  Guide.theme = travel;
+
+  return Guide;
+};
