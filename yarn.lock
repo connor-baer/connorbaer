@@ -1157,10 +1157,10 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
-"@madebyconnor/bamboo-ui@^1.8.0-canary.4":
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/@madebyconnor/bamboo-ui/-/bamboo-ui-1.8.1.tgz#ee456f33fb59a9dc7d9ba3f4c814e759e7a6afd1"
-  integrity sha512-mVVIhsUu5nZhLR1Bkv4cP8oS/wwIidMLpLjmSkXhWwYjmNyBqQ4HUS34AmZSRlOujBmZjrs8qqpaAyng9bJPGw==
+"@madebyconnor/bamboo-ui@^2.0.0-canary":
+  version "2.0.0-canary.3"
+  resolved "https://registry.yarnpkg.com/@madebyconnor/bamboo-ui/-/bamboo-ui-2.0.0-canary.3.tgz#e2025543d383071be5f622d39ffff3ec9355e6ee"
+  integrity sha512-vTSlCpkFxL/xVhZCm/gqCb//+SkFWLvkjYu918tQLFsbeOVlvBHKFKNbBGkQ6D7DPH3O+fY4rV9qN6rQ5rWMNg==
   dependencies:
     "@emotion/core" "^10.0.10"
     "@emotion/is-prop-valid" "^0.8.2"

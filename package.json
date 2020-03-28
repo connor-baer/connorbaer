@@ -37,7 +37,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.10",
     "@emotion/styled": "^10.0.10",
-    "@madebyconnor/bamboo-ui": "^1.8.0-canary.4",
+    "@madebyconnor/bamboo-ui": "^2.0.0-canary",
     "@mdx-js/mdx": "^1.0.0",
     "@mdx-js/react": "^1.0.0",
     "@next/bundle-analyzer": "^9.0.3",
