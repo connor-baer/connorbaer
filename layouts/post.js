@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { MDXProvider } from '@mdx-js/react';
@@ -9,9 +9,9 @@ import {
   ParallaxImage,
   styles,
   ComponentsProvider,
-  useTheme,
 } from '@madebyconnor/bamboo-ui';
 
+import { blog } from '../styles/themes';
 import components, { Paragraph } from './_components';
 import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
@@ -75,13 +75,8 @@ export default ({
   date,
   category,
   __resourcePath,
-}) =>
+}) => {
   function Post({ children }) {
-    const theme = useTheme();
-    useEffect(() => {
-      theme.setTheme('blog');
-    });
-
     return (
       <>
         <Meta
@@ -118,4 +113,9 @@ export default ({
         <Footer />
       </>
     );
-  };
+  }
+
+  Post.theme = blog;
+
+  return Post;
+};

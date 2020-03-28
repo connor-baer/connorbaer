@@ -1,12 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import {
-  CoverImage,
-  Heading,
-  Paragraph,
-  useTheme,
-} from '@madebyconnor/bamboo-ui';
+import { useTheme } from 'emotion-theming';
+import { CoverImage, Heading, Paragraph } from '@madebyconnor/bamboo-ui';
 
 import { blogPostPropType } from '../../../utils/prop-types';
 import Link from '../../Link';

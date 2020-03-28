@@ -2,12 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash/fp';
-import {
-  RatioImage,
-  ComponentsProvider,
-  Image,
-  useTheme,
-} from '@madebyconnor/bamboo-ui';
+import { useTheme } from 'emotion-theming';
+import { RatioImage, ComponentsProvider, Image } from '@madebyconnor/bamboo-ui';
 
 import { constructStaticImageUrl } from '../../../utils/mapbox';
 import { mapPropType } from '../../../utils/prop-types';

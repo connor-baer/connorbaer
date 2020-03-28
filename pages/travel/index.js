@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
-import { Main, Header, styles, useTheme } from '@madebyconnor/bamboo-ui';
+import { Main, Header, styles } from '@madebyconnor/bamboo-ui';
 
+import { travel } from '../../styles/themes';
 import Meta from '../../components/Meta';
 import Navigation from '../../components/Navigation';
 import Prefooter from '../../components/Prefooter';
@@ -29,11 +30,6 @@ const headerStyles = ({ theme }) => css`
 const StyledHeader = styled(Header)(headerStyles);
 
 export default function TravelPage() {
-  const theme = useTheme();
-  useEffect(() => {
-    theme.setTheme('travel');
-  });
-
   const [cities] = useCities();
 
   const title = 'Travel Guides';
@@ -65,3 +61,5 @@ export default function TravelPage() {
     </>
   );
 }
+
+TravelPage.theme = travel;

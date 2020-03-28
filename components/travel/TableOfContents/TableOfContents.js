@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css, Global } from '@emotion/core';
+import { useTheme } from 'emotion-theming';
 import { isEmpty } from 'lodash/fp';
 import {
   Heading,
   Paragraph,
   Anchor,
   styles,
-  useTheme,
   useMedia,
 } from '@madebyconnor/bamboo-ui';
 
