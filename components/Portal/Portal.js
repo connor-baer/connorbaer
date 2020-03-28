@@ -6,7 +6,7 @@ import { sharedPropTypes } from '@madebyconnor/bamboo-ui';
 export default class Portal extends Component {
   static propTypes = {
     selector: PropTypes.string,
-    children: sharedPropTypes.childrenPropType
+    children: sharedPropTypes.childrenPropType,
   };
 
   componentDidMount() {

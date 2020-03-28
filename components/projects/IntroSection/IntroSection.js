@@ -27,5 +27,5 @@ export default function IntroSection({ title, children, ...rest }) {
 
 IntroSection.propTypes = {
   title: PropTypes.string.isRequired,
-  children: sharedPropTypes.childrenPropType.isRequired
+  children: sharedPropTypes.childrenPropType.isRequired,
 };

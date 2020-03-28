@@ -10,9 +10,9 @@ export const blogPostPropType = {
     src: PropTypes.string,
     srcSet: PropTypes.string,
     color: PropTypes.string,
-    alt: PropTypes.string
+    alt: PropTypes.string,
   }),
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export const projectPropType = {
@@ -26,13 +26,13 @@ export const projectPropType = {
     src: PropTypes.string,
     srcSet: PropTypes.string,
     color: PropTypes.string,
-    alt: PropTypes.string
-  })
+    alt: PropTypes.string,
+  }),
 };
 
 export const mapPropType = {
   lat: PropTypes.number,
-  lon: PropTypes.number
+  lon: PropTypes.number,
 };
 
 export const guidePropType = {
@@ -42,15 +42,15 @@ export const guidePropType = {
   tableOfContents: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.string,
-      id: PropTypes.string
-    })
+      id: PropTypes.string,
+    }),
   ),
   date: PropTypes.string,
   image: PropTypes.shape({
     src: PropTypes.string,
     srcSet: PropTypes.string,
     color: PropTypes.string,
-    alt: PropTypes.string
+    alt: PropTypes.string,
   }),
-  map: PropTypes.shape(mapPropType)
+  map: PropTypes.shape(mapPropType),
 };

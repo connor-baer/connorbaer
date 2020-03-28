@@ -17,7 +17,7 @@ export default function useGoogle(scope, discoveryDocs) {
           apiKey: process.env.GOOGLE_API_KEY,
           clientId: process.env.GOOGLE_CLIENT_ID,
           discoveryDocs,
-          scope
+          scope,
         })
         .then(() => {
           setInitialized(true);
@@ -43,6 +43,6 @@ export default function useGoogle(scope, discoveryDocs) {
     isAuthorized,
     signIn: gapi.auth2.getAuthInstance().signIn,
     signOut: gapi.auth2.getAuthInstance().signOut,
-    client: gapi.client
+    client: gapi.client,
   };
 }

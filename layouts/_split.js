@@ -40,7 +40,7 @@ function Split({ children }) {
 }
 
 Split.propTypes = {
-  children: sharedPropTypes.childrenPropType
+  children: sharedPropTypes.childrenPropType,
 };
 
 function Sidebar({ children }) {
@@ -48,7 +48,7 @@ function Sidebar({ children }) {
 }
 
 Sidebar.propTypes = {
-  children: PropTypes.element
+  children: PropTypes.element,
 };
 
 export { Sidebar };

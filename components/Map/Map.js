@@ -16,7 +16,7 @@ const placeholderStyles = ({ theme, width, height }) => css`
 const Placeholder = styled('div')(placeholderStyles);
 
 const ReactMapGL = dynamic(() => import('react-map-gl'), {
-  ssr: false
+  ssr: false,
 });
 
 // Easter Island
@@ -25,7 +25,7 @@ const DEFAULT_VIEWPORT = {
   height: '50vh',
   latitude: -27.1227,
   longitude: -109.3497,
-  zoom: 11
+  zoom: 11,
 };
 
 export default function Map({
@@ -48,7 +48,7 @@ export default function Map({
         <ReactMapGL
           mapStyle={`mapbox://styles/mapbox/${themeId}`}
           mapboxApiAccessToken={MAPBOX}
-          onViewportChange={v => setViewport(v)}
+          onViewportChange={(v) => setViewport(v)}
           {...viewport}
           {...rest}
         />
@@ -64,6 +64,6 @@ Map.propTypes = {
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     latitude: PropTypes.number,
     longitude: PropTypes.number,
-    zoom: PropTypes.number
-  })
+    zoom: PropTypes.number,
+  }),
 };

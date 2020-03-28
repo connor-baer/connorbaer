@@ -9,7 +9,7 @@ import {
   RatioImage,
   ComponentsProvider,
   sharedStyles,
-  useTheme
+  useTheme,
 } from '@madebyconnor/bamboo-ui';
 
 import { formatDate, formatDatetime } from '../utils/date';
@@ -72,7 +72,7 @@ export default ({
   image = {},
   date,
   tableOfContents,
-  __resourcePath
+  __resourcePath,
 }) =>
   function Guide({ children }) {
     const theme = useTheme();

@@ -77,7 +77,7 @@ export default function HomePage() {
         pathname={''}
         image={{
           src: '/static/images/pages/connor.jpg',
-          alt: 'Connor Bär smiles at the camera'
+          alt: 'Connor Bär smiles at the camera',
         }}
       />
       <Navigation />
@@ -90,7 +90,7 @@ export default function HomePage() {
           <Container>
             <SectionHeading>Recent posts</SectionHeading>
             <Posts>
-              {posts.map(post => (
+              {posts.map((post) => (
                 <PostPreview
                   url={post.url}
                   key={post.title}
@@ -108,8 +108,8 @@ export default function HomePage() {
               <SectionHeading>City guides</SectionHeading>
             </Container>
 
-            <Slider css={theme => sharedStyles.pageWidth({ theme })}>
-              {cities.map(city => (
+            <Slider css={(theme) => sharedStyles.pageWidth({ theme })}>
+              {cities.map((city) => (
                 <GuideSmall key={city.title} url={city.url} {...city} />
               ))}
             </Slider>

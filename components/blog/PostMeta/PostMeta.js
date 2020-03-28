@@ -49,5 +49,5 @@ export default function PostMeta({ date, category, className }) {
 PostMeta.propTypes = {
   date: PropTypes.string,
   category: PropTypes.string,
-  className: PropTypes.string
+  className: PropTypes.string,
 };

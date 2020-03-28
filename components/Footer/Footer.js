@@ -3,7 +3,7 @@ import {
   Anchor,
   Footer,
   useTheme,
-  sharedPropTypes
+  sharedPropTypes,
 } from '@madebyconnor/bamboo-ui';
 
 import { NAME, TWITTER } from '../../constants/site';
@@ -21,5 +21,5 @@ export default function CustomFooter({ children, ...rest }) {
 }
 
 CustomFooter.propTypes = {
-  children: sharedPropTypes.childrenPropType
+  children: sharedPropTypes.childrenPropType,
 };

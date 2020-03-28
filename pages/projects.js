@@ -37,7 +37,7 @@ export default function ProjectsHome() {
         <Grid>
           <StyledColumns>
             <StyledHeader title={title} subtitle={subtitle} />
-            {projects.map(project => (
+            {projects.map((project) => (
               <PreviewLarge key={project.url} url={project.url} {...project} />
             ))}
           </StyledColumns>

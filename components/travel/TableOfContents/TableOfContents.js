@@ -9,7 +9,7 @@ import {
   Anchor,
   sharedStyles,
   useTheme,
-  useMedia
+  useMedia,
 } from '@madebyconnor/bamboo-ui';
 
 import Align from '../Align';
@@ -93,7 +93,7 @@ function TableOfContents({ title = 'Table of Contents', tableOfContents }) {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const query = theme.mq.mega.replace('@media ', '');
-  useMedia(query, isMobile => setOpen(isMobile));
+  useMedia(query, (isMobile) => setOpen(isMobile));
 
   if (isEmpty(tableOfContents)) {
     return null;
@@ -137,9 +137,9 @@ TableOfContents.propTypes = {
   tableOfContents: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.string,
-      id: PropTypes.string
-    })
-  )
+      id: PropTypes.string,
+    }),
+  ),
 };
 
 export default TableOfContents;

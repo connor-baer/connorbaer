@@ -44,5 +44,5 @@ Link.propTypes = {
   href: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   as: PropTypes.string,
   children: sharedPropTypes.childrenPropType,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
 };

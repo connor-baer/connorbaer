@@ -8,7 +8,7 @@ const cachedScripts = {};
 export default function useScript(src, async = true) {
   const [state, setState] = useState({
     loaded: false,
-    error: false
+    error: false,
   });
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function useScript(src, async = true) {
     if (cachedScripts[src]) {
       setState({
         loaded: true,
-        error: false
+        error: false,
       });
       return undefined;
     }
@@ -36,7 +36,7 @@ export default function useScript(src, async = true) {
     const onScriptLoad = () => {
       setState({
         loaded: true,
-        error: false
+        error: false,
       });
     };
 
@@ -47,7 +47,7 @@ export default function useScript(src, async = true) {
 
       setState({
         loaded: true,
-        error: true
+        error: true,
       });
     };
 

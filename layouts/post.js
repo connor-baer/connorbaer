@@ -9,7 +9,7 @@ import {
   ParallaxImage,
   sharedStyles,
   ComponentsProvider,
-  useTheme
+  useTheme,
 } from '@madebyconnor/bamboo-ui';
 
 import components, { Paragraph } from './_components';
@@ -74,7 +74,7 @@ export default ({
   image,
   date,
   category,
-  __resourcePath
+  __resourcePath,
 }) =>
   function Post({ children }) {
     const theme = useTheme();

@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import {
   Navigation,
   PandaIcon,
-  sharedPropTypes
+  sharedPropTypes,
 } from '@madebyconnor/bamboo-ui';
 
 import usePreview from '../../hooks/use-preview';
@@ -17,8 +17,8 @@ export default function CustomNavigation({
   links = [
     { url: '/about', label: '✌️ About' },
     { url: '/projects', label: '💡 Projects' },
-    { url: '/blog', label: '🖋️ Blog' }
-  ]
+    { url: '/blog', label: '🖋️ Blog' },
+  ],
 }) {
   const router = useRouter();
   const isPreview = usePreview();
@@ -26,7 +26,7 @@ export default function CustomNavigation({
   if (isPreview) {
     links.push({ url: '/travel', label: '🧳 Travel' });
   }
-  const enhancedLinks = links.map(link => {
+  const enhancedLinks = links.map((link) => {
     const isActive = startsWith(link.url, router.asPath);
     return { ...link, isActive };
   });
@@ -51,7 +51,7 @@ CustomNavigation.propTypes = {
     PropTypes.shape({
       label: sharedPropTypes.childrenPropType,
       url: PropTypes.string,
-      icon: sharedPropTypes.childrenPropType
-    })
-  )
+      icon: sharedPropTypes.childrenPropType,
+    }),
+  ),
 };

@@ -47,7 +47,7 @@ export default function TravelPage() {
         url={'travel'}
         image={{
           src: '/static/images/pages/connor.jpg',
-          alt: 'Connor Bär smiles at the camera'
+          alt: 'Connor Bär smiles at the camera',
         }}
       />
       <Navigation />
@@ -55,7 +55,7 @@ export default function TravelPage() {
         <Grid>
           <StyledHeader title={title} subtitle={subtitle} />
 
-          {cities.map(city => (
+          {cities.map((city) => (
             <GuideLarge key={city.title} url={city.url} {...city} />
           ))}
         </Grid>

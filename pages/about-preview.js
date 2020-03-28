@@ -11,7 +11,7 @@ import {
   Heading,
   Paragraph,
   Hr,
-  sharedStyles
+  sharedStyles,
 } from '@madebyconnor/bamboo-ui';
 
 import Meta from '../components/Meta';
@@ -51,16 +51,16 @@ export default function AboutPage() {
           images={[
             {
               src: '/static/images/pages/connor.jpg',
-              alt: 'Connor flashes a big smile at the camera.'
+              alt: 'Connor flashes a big smile at the camera.',
             },
             {
               src: '/static/images/pages/hackathon.jpg',
-              alt: 'Connor flashes a big smile at the camera.'
+              alt: 'Connor flashes a big smile at the camera.',
             },
             {
               src: '/static/images/pages/beach.jpg',
-              alt: 'Connor flashes a big smile at the camera.'
-            }
+              alt: 'Connor flashes a big smile at the camera.',
+            },
           ]}
         />
         <Container>

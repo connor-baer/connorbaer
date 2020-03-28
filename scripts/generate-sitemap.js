@@ -38,8 +38,8 @@ async function buildPageXml(page, baseUrl) {
   pageXml += '<url>';
   pageXml += `<loc>${loc}</loc>`;
   pageXml += `<lastmod>${lastMod}</lastmod>`;
-  pageXml += `<changefreq>always</changefreq>`;
-  pageXml += `<priority>0.5</priority>`;
+  pageXml += '<changefreq>always</changefreq>';
+  pageXml += '<priority>0.5</priority>';
   pageXml += '</url>';
 
   return pageXml;
@@ -50,7 +50,7 @@ async function buildSitemap(pages, baseUrl) {
   xml += '<?xml version="1.0" encoding="UTF-8"?>';
   xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
-  const pagePromises = pages.map(page => buildPageXml(page, baseUrl));
+  const pagePromises = pages.map((page) => buildPageXml(page, baseUrl));
   const pagesXml = await Promise.all(pagePromises);
 
   xml += pagesXml.join('');

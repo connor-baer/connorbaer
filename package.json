@@ -28,9 +28,11 @@
     "build": "next build",
     "start": "next start",
     "export": "next export",
-    "lint": "foundry run eslint --fix \"**/*.js\"",
     "analyze": "ANALYZE=true yarn build",
-    "create:component": "foundry run plop component"
+    "create:component": "foundry run plop component",
+    "lint": "foundry run eslint . --ext .js,.jsx",
+    "lint:fix": "yarn lint --fix",
+    "lint:ci": "yarn lint --format junit -o __reports__/junit/eslint-results.xml"
   },
   "dependencies": {
     "@emotion/core": "^10.0.10",
@@ -69,7 +71,7 @@
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@emotion/babel-preset-css-prop": "^10.0.9",
-    "@sumup/foundry": "^1.0.0",
+    "@sumup/foundry": "^2.0.0",
     "babel-eslint": "^9.0.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-import-glob-array": "^0.2.0",

@@ -6,14 +6,14 @@ export function filterByCategory(category) {
       return items;
     }
     return items.filter(
-      (item = {}) => toLower(item.category) === toLower(category)
+      (item = {}) => toLower(item.category) === toLower(category),
     );
   };
 }
 
 export function filterByArchived(archived = false) {
   return filter((item = {}) =>
-    item.archived ? item.archived === archived : !archived
+    item.archived ? item.archived === archived : !archived,
   );
 }
 

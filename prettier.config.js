@@ -1,15 +1,13 @@
-const baseConfig = require('@sumup/foundry/prettier').base;
-
-const config = {
-  ...baseConfig,
-  overrides: [
-    {
-      files: '*.mdx',
-      options: {
-        semi: false
-      }
-    }
-  ]
-};
-
-module.exports = config;
+module.exports = require('@sumup/foundry/prettier')(
+  {},
+  {
+    overrides: [
+      {
+        files: '*.mdx',
+        options: {
+          semi: false,
+        },
+      },
+    ],
+  },
+);

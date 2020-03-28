@@ -27,5 +27,5 @@ export default function Clock({ showSeconds = true, ...rest }) {
 }
 
 Clock.propTypes = {
-  showSeconds: PropTypes.bool
+  showSeconds: PropTypes.bool,
 };

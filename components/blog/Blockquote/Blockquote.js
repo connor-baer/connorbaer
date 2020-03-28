@@ -67,6 +67,6 @@ Blockquote.propTypes = {
     Blockquote.RIGHT,
     Blockquote.LEFT,
     Blockquote.CENTER,
-    Blockquote.FULL
-  ])
+    Blockquote.FULL,
+  ]),
 };

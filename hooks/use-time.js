@@ -10,7 +10,7 @@ function getTime() {
     now,
     hours: now.getHours(),
     minutes: now.getMinutes(),
-    seconds: now.getSeconds()
+    seconds: now.getSeconds(),
   };
 }
 

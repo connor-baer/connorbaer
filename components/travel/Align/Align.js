@@ -76,7 +76,7 @@ Align.CENTER = CENTER;
 Align.FULL = FULL;
 
 Align.propTypes = {
-  align: PropTypes.oneOf([RIGHT, LEFT, CENTER, FULL])
+  align: PropTypes.oneOf([RIGHT, LEFT, CENTER, FULL]),
 };
 
 export default Align;

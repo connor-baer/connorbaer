@@ -5,7 +5,7 @@ import {
   CoverImage,
   Heading,
   Paragraph,
-  useTheme
+  useTheme,
 } from '@madebyconnor/bamboo-ui';
 
 import { blogPostPropType } from '../../../utils/prop-types';
@@ -51,7 +51,7 @@ export default function PreviewLarge({
   description,
   date,
   category,
-  featured = false
+  featured = false,
 }) {
   const theme = useTheme();
   const sizes = getSizes(theme);

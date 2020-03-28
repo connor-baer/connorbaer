@@ -32,7 +32,7 @@ export default function BlogPage({
   title = 'Blog',
   isArchived = false,
   category,
-  page
+  page,
 }) {
   const [posts] = usePosts({ isArchived, category, page });
   const pathname = category ? 'blog' : `blog/${category}`;
@@ -63,5 +63,5 @@ BlogPage.propTypes = {
   title: PropTypes.string,
   page: PropTypes.number,
   category: PropTypes.string,
-  isArchived: PropTypes.bool
+  isArchived: PropTypes.bool,
 };

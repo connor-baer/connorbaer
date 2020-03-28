@@ -11,9 +11,9 @@ export default function UpcomingEvent() {
     isInitialized,
     isAuthorized,
     signIn,
-    client
+    client,
   } = useGoogle('https://www.googleapis.com/auth/calendar.readonly', [
-    'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'
+    'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest',
   ]);
 
   useEffect(() => {
@@ -25,9 +25,9 @@ export default function UpcomingEvent() {
           showDeleted: false,
           singleEvents: true,
           maxResults: 1,
-          orderBy: 'startTime'
+          orderBy: 'startTime',
         })
-        .then(response => {
+        .then((response) => {
           setEvent(first(response.result.items));
         });
     }

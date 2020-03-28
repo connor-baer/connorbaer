@@ -12,14 +12,14 @@ import Footer from '../components/Footer';
 const TITLE_MAP = {
   404: 'Page not found. 🕵',
   500: 'An error occured. 💩',
-  503: 'Bear with me please. 🚧'
+  503: 'Bear with me please. 🚧',
 };
 
 /* eslint-disable max-len */
 const SUBTITLE_MAP = {
   404: 'What’s worse, a hilarious 404 page can’t be found either.',
   500: 'Something has gone wrong. Try to refresh the page or go back to the homepage.',
-  503: 'I’m currently carrying out some maintenance on my website. It will only take a minute.'
+  503: 'I’m currently carrying out some maintenance on my website. It will only take a minute.',
 };
 /* eslint-enable max-len */
 
@@ -59,7 +59,7 @@ function ErrorPage({ statusCode = 500 }) {
   );
 }
 
-ErrorPage.getInitialProps = ctx => {
+ErrorPage.getInitialProps = (ctx) => {
   const { res, err } = ctx;
   const statusCode = (res && res.statusCode) || (err && err.statusCode);
   return { statusCode };
@@ -67,7 +67,7 @@ ErrorPage.getInitialProps = ctx => {
 
 ErrorPage.propTypes = {
   title: PropTypes.string,
-  statusCode: PropTypes.number
+  statusCode: PropTypes.number,
 };
 
 export default ErrorPage;

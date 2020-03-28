@@ -6,7 +6,7 @@ import {
   Main,
   Header,
   ComponentsProvider,
-  sharedStyles
+  sharedStyles,
 } from '@madebyconnor/bamboo-ui';
 
 import components from './_components';
@@ -19,7 +19,7 @@ import IntroSection from '../components/projects/IntroSection';
 
 const Article = styled('article')(sharedStyles.pageWidth, sharedStyles.grid);
 
-const headerStyles = theme => css`
+const headerStyles = (theme) => css`
   grid-column: 1 / 13;
 
   ${theme.mq.kilo} {
@@ -31,7 +31,7 @@ const headerStyles = theme => css`
   }
 `;
 
-const introBriefStyles = theme => css`
+const introBriefStyles = (theme) => css`
   grid-column: 1 / 13;
 
   ${theme.mq.tera} {
@@ -39,7 +39,7 @@ const introBriefStyles = theme => css`
   }
 `;
 
-const introSkillStyles = theme => css`
+const introSkillStyles = (theme) => css`
   grid-column: 1 / 7;
 
   ${theme.mq.tera} {
@@ -47,7 +47,7 @@ const introSkillStyles = theme => css`
   }
 `;
 
-const introClientStyles = theme => css`
+const introClientStyles = (theme) => css`
   grid-column: 7 / 13;
 
   ${theme.mq.tera} {
@@ -76,7 +76,7 @@ export default ({
   image,
   skills,
   client,
-  __resourcePath
+  __resourcePath,
 }) =>
   function Project({ children }) {
     return (
@@ -96,7 +96,7 @@ export default ({
               {brief}
             </IntroSection>
             <IntroSection title="Involvement" css={introSkillStyles}>
-              {skills.map(skill => (
+              {skills.map((skill) => (
                 <p key={skill}>{skill}</p>
               ))}
             </IntroSection>
