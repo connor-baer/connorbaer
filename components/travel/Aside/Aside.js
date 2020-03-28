@@ -42,5 +42,5 @@ Aside.FULL = Align.FULL;
 
 Aside.propTypes = {
   children: sharedPropTypes.childrenPropType,
-  align: sharedPropTypes.alignPropType
+  align: sharedPropTypes.alignPropType,
 };

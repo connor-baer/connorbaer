@@ -6,7 +6,7 @@ import {
   RatioImage,
   ComponentsProvider,
   Image,
-  useTheme
+  useTheme,
 } from '@madebyconnor/bamboo-ui';
 
 import { constructStaticImageUrl } from '../../../utils/mapbox';
@@ -24,7 +24,7 @@ export default function MapImage({ map, width = 500, height = 300, ...rest }) {
     themeId: theme.darkmode ? 'dark-v10' : 'light-v10',
     width,
     height,
-    ...map
+    ...map,
   };
 
   const src = constructStaticImageUrl(params);
@@ -57,5 +57,5 @@ export default function MapImage({ map, width = 500, height = 300, ...rest }) {
 MapImage.propTypes = {
   map: PropTypes.shape(mapPropType),
   width: PropTypes.number,
-  height: PropTypes.number
+  height: PropTypes.number,
 };

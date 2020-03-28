@@ -22,16 +22,16 @@ export default function useProjects({ page, skip } = {}) {
 
   const cleanedProjects = flow(
     filterByDraft(isPreview),
-    sortByDate()
+    sortByDate(),
   )(projects);
   const paginatedProjects = flow(
     paginate(page, skip),
-    enhance()
+    enhance(),
   )(cleanedProjects);
   const meta = {
     total: cleanedProjects.length,
     page,
-    skip
+    skip,
   };
 
   return [paginatedProjects, meta];

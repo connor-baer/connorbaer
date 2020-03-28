@@ -7,7 +7,7 @@ import {
   Theme,
   Align,
   LoadingBar,
-  GlobalStyles
+  GlobalStyles,
 } from '@madebyconnor/bamboo-ui';
 
 import * as themes from '../styles/themes';
@@ -18,7 +18,7 @@ import { FONTS_PATH } from '../constants/paths';
 
 export default class CustomApp extends App {
   state = {
-    isLoading: false
+    isLoading: false,
   };
 
   componentDidMount() {

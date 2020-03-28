@@ -32,7 +32,7 @@ export default function PreviewSmall({
   description,
   date,
   category,
-  className
+  className,
 }) {
   /* eslint-disable jsx-a11y/anchor-is-valid */
   return (

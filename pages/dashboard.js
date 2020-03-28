@@ -27,7 +27,7 @@ export default function Dashboard() {
 
   const [showSeconds, setShowSeconds] = useState(true);
   const toggleSeconds = () => {
-    setShowSeconds(prev => !prev);
+    setShowSeconds((prev) => !prev);
   };
 
   return (

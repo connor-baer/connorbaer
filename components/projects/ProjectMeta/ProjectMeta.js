@@ -18,5 +18,5 @@ export default function ProjectMeta({ skills, ...props }) {
 }
 
 ProjectMeta.propTypes = {
-  skills: PropTypes.arrayOf(PropTypes.string)
+  skills: PropTypes.arrayOf(PropTypes.string),
 };

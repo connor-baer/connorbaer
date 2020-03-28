@@ -15,15 +15,15 @@ function formatSrc(src, { width, height, ratio }) {
     params.ratio = ratio.toFixed(2);
   }
   const query = Object.keys(params)
-    .filter(key => !!params[key])
-    .map(key => `${key}=${params[key]}`)
+    .filter((key) => !!params[key])
+    .map((key) => `${key}=${params[key]}`)
     .join('&');
   return `${src}?${query}`;
 }
 
 function formatSrcSet(src, srcSet = [400, 800, 1200, 1600, 2000], ratio) {
   return srcSet
-    .map(width => {
+    .map((width) => {
       const height = ratio && width * (1 / ratio);
       const url = formatSrc(src, { width, height, ratio });
       return `${url} ${width}w`;

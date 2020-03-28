@@ -6,7 +6,7 @@ import {
   Main,
   Header,
   ComponentsProvider,
-  sharedStyles
+  sharedStyles,
 } from '@madebyconnor/bamboo-ui';
 
 import Meta from '../components/Meta';

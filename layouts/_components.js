@@ -12,25 +12,27 @@ const listStyles = ({ theme }) => css`
 
 const List = styled(Paragraph)(listStyles);
 
-const listItemStyles = theme => css`
+const listItemStyles = (theme) => css`
   margin-bottom: ${theme.spacings.kilo};
   margin-left: ${theme.spacings.kilo};
 `;
 
 export { Paragraph };
-export const HeadingOne = props => <Heading as="h2" size="tera" {...props} />;
-export const HeadingTwo = props => <Heading as="h3" size="giga" {...props} />;
-export const HeadingThree = props => <Heading as="h4" size="mega" {...props} />;
-export const Strong = props => (
+export const HeadingOne = (props) => <Heading as="h2" size="tera" {...props} />;
+export const HeadingTwo = (props) => <Heading as="h3" size="giga" {...props} />;
+export const HeadingThree = (props) => (
+  <Heading as="h4" size="mega" {...props} />
+);
+export const Strong = (props) => (
   <Paragraph as="strong" weight="bold" {...props} />
 );
-export const Emphasis = props => (
+export const Emphasis = (props) => (
   <Paragraph as="em" slope="italic" {...props} />
 );
-export const Quote = props => <Emphasis as="q" {...props} />;
-export const OrderedList = props => <List as="ol" {...props} />;
-export const UnorderedList = props => <List as="ul" {...props} />;
-export const ListItem = props => (
+export const Quote = (props) => <Emphasis as="q" {...props} />;
+export const OrderedList = (props) => <List as="ol" {...props} />;
+export const UnorderedList = (props) => <List as="ul" {...props} />;
+export const ListItem = (props) => (
   <Paragraph as="li" css={listItemStyles} {...props} />
 );
 
@@ -48,7 +50,7 @@ const components = {
   q: Quote,
   blockquote: Blockquote,
   img: Image,
-  hr: Hr
+  hr: Hr,
 };
 
 export default components;

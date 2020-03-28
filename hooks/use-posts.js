@@ -6,7 +6,7 @@ import * as Url from '../services/url';
 import {
   filterByCategory,
   filterByArchived,
-  filterByDraft
+  filterByDraft,
 } from '../utils/filter';
 import { sortByDate } from '../utils/sort';
 import paginate from '../utils/paginate';
@@ -26,16 +26,13 @@ export default function usePosts({ category, isArchived, page, skip } = {}) {
     filterByCategory(category),
     filterByArchived(isArchived),
     filterByDraft(isPreview),
-    sortByDate()
+    sortByDate(),
   )(posts);
-  const paginatedPosts = flow(
-    paginate(page, skip),
-    enhance()
-  )(cleanedPosts);
+  const paginatedPosts = flow(paginate(page, skip), enhance())(cleanedPosts);
   const meta = {
     total: cleanedPosts.length,
     page,
-    skip
+    skip,
   };
 
   return [paginatedPosts, meta];

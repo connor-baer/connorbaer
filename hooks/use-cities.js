@@ -21,16 +21,13 @@ export default function useCities({ category, page, skip } = {}) {
   const cleanedCities = flow(
     filterByCategory(category),
     filterByDraft(isPreview),
-    sortByDate()
+    sortByDate(),
   )(cities);
-  const paginatedCities = flow(
-    paginate(page, skip),
-    enhance()
-  )(cleanedCities);
+  const paginatedCities = flow(paginate(page, skip), enhance())(cleanedCities);
   const meta = {
     total: cleanedCities.length,
     page,
-    skip
+    skip,
   };
 
   return [paginatedCities, meta];

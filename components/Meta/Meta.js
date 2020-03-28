@@ -8,7 +8,7 @@ import * as Url from '../../services/url';
 
 const DEFAULT_IMAGE = {
   src: '/static/images/pages/connor.jpg',
-  alt: 'Connor smiles at the camera.'
+  alt: 'Connor smiles at the camera.',
 };
 
 export default function CustomMeta({
@@ -31,5 +31,5 @@ export default function CustomMeta({
 
 CustomMeta.propTypes = {
   pathname: PropTypes.string,
-  image: PropTypes.shape(sharedPropTypes.imagePropType)
+  image: PropTypes.shape(sharedPropTypes.imagePropType),
 };

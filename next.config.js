@@ -22,13 +22,13 @@ const nextConfig = {
     GOOGLE_TOKEN_URI: process.env.GOOGLE_TOKEN_URI,
     GOOGLE_AUTH_PROVIDER_X509_CERT_URL:
       process.env.GOOGLE_AUTH_PROVIDER_X509_CERT_URL,
-    GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET
+    GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
   },
   webpack: (config, { dev, defaultLoaders }) => {
     // eslint-disable-next-line no-param-reassign
     config.node = {
       __filename: true,
-      __dirname: true
+      __dirname: true,
     };
 
     config.module.rules.push({
@@ -38,26 +38,26 @@ const nextConfig = {
         {
           loader: 'react-svg-loader',
           options: {
-            es5: true
-          }
-        }
-      ]
+            es5: true,
+          },
+        },
+      ],
     });
 
     config.plugins.push(
       new webpack.DefinePlugin({
         __DEV__: JSON.stringify(dev),
         __PRODUCTION__: JSON.stringify(!dev),
-        __TEST__: false
-      })
+        __TEST__: false,
+      }),
     );
 
     return config;
-  }
+  },
 };
 
 const bundleAnalyzerConfig = {
-  enabled: process.env.ANALYZE === 'true'
+  enabled: process.env.ANALYZE === 'true',
 };
 
 function getValues(node) {
@@ -91,26 +91,26 @@ const mdxConfig = {
   remarkPlugins: [emoji, externalLinks],
   rehypePlugins: [slug],
   extendFrontMatter: {
-    process: async mdxContent => {
+    process: async (mdxContent) => {
       let tableOfContents;
 
       await remark()
         .use(mdx)
-        .use(() => tree => {
+        .use(() => (tree) => {
           tableOfContents = toTOC(tree);
         })
         .process(mdxContent);
 
       return { tableOfContents };
-    }
-  }
+    },
+  },
 };
 
 module.exports = withPlugins(
   [
     withOffline,
     withMdxEnhanced(mdxConfig),
-    [withBundleAnalyzer, bundleAnalyzerConfig]
+    [withBundleAnalyzer, bundleAnalyzerConfig],
   ],
-  nextConfig
+  nextConfig,
 );

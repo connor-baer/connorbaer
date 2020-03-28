@@ -27,5 +27,5 @@ export default function SectionHeading({ children, ...rest }) {
 }
 
 SectionHeading.propTypes = {
-  children: sharedPropTypes.childrenPropType
+  children: sharedPropTypes.childrenPropType,
 };

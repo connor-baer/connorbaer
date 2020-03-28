@@ -67,7 +67,7 @@ Align.CENTER = CENTER;
 Align.FULL = FULL;
 
 Align.propTypes = {
-  align: sharedPropTypes.alignPropType
+  align: sharedPropTypes.alignPropType,
 };
 
 export default Align;

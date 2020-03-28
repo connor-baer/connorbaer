@@ -5,7 +5,7 @@ export function sortByDate(descending = true) {
   return (items = []) => {
     const sortedItems = sortBy(
       (item = {}) => new Date(item.date).getTime(),
-      items
+      items,
     );
     return descending ? reverse(sortedItems) : sortedItems;
   };

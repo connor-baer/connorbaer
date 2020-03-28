@@ -6,7 +6,7 @@ import {
   CoverImage,
   Heading,
   Paragraph,
-  useTheme
+  useTheme,
 } from '@madebyconnor/bamboo-ui';
 
 import Link from '../../Link';
@@ -69,7 +69,7 @@ export default function GuideSmall({
   image = {},
   title,
   subtitle,
-  className
+  className,
 }) {
   const theme = useTheme();
   const sizes = getSizes(theme);
@@ -104,7 +104,7 @@ GuideSmall.propTypes = {
     src: PropTypes.string,
     srcSet: PropTypes.string,
     colors: PropTypes.array,
-    alt: PropTypes.string
+    alt: PropTypes.string,
   }),
-  className: PropTypes.string
+  className: PropTypes.string,
 };

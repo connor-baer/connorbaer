@@ -18,8 +18,8 @@ module.exports = async (req, res) => {
       ratio,
       fm: format,
       fit = 'cover',
-      bg: background = 'black'
-    }
+      bg: background = 'black',
+    },
   } = url.parse(req.url, true);
 
   // const acceptsWebp = includes('image/webp', req.headers.accept);
@@ -52,7 +52,7 @@ module.exports = async (req, res) => {
     return;
   }
 
-  fetch(imageUrl).then(image => {
+  fetch(imageUrl).then((image) => {
     const contentType = format
       ? `image/${format}`
       : image.headers.get('content-type');
@@ -60,12 +60,12 @@ module.exports = async (req, res) => {
     res.setHeader('content-type', contentType);
     res.setHeader(
       'cache-control',
-      'max-age=604800, s-maxage=3600, stale-while-revalidate'
+      'max-age=604800, s-maxage=3600, stale-while-revalidate',
     );
 
     image.body
       .pipe(transform)
-      .on('error', error => {
+      .on('error', (error) => {
         if (
           error.message === 'Input buffer contains unsupported image format'
         ) {

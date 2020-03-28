@@ -15,25 +15,25 @@ export function blog({ darkmode, reducedMotion }) {
         name: 'Lora',
         localName: 'Lora Regular',
         weight: '400',
-        style: 'normal'
+        style: 'normal',
       },
       {
         name: 'Lora',
         localName: 'Lora Italic',
         weight: '400',
-        style: 'italic'
+        style: 'italic',
       },
       {
         name: 'Lora',
         localName: 'Lora Bold',
         weight: '700',
-        style: 'normal'
-      }
+        style: 'normal',
+      },
     ],
     fontStack: {
       ...base.fontStack,
-      serif: 'Lora, Georgia, serif'
-    }
+      serif: 'Lora, Georgia, serif',
+    },
   };
 }
 
@@ -48,18 +48,18 @@ export function travel({ darkmode, reducedMotion }) {
         name: 'Playfair Display',
         localName: 'Playfair Display',
         weight: '400',
-        style: 'normal'
+        style: 'normal',
       },
       {
         name: 'Playfair Display',
         localName: 'Playfair Display Bold',
         weight: '700',
-        style: 'normal'
-      }
+        style: 'normal',
+      },
     ],
     fontStack: {
       ...base.fontStack,
-      serif: 'Playfair Display, Lora, Georgia, serif'
-    }
+      serif: 'Playfair Display, Lora, Georgia, serif',
+    },
   };
 }

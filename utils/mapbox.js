@@ -13,7 +13,7 @@ export function constructStaticImageUrl({
   pitch = 0,
   width = 1000,
   height = 600,
-  highResolution = false
+  highResolution = false,
 } = {}) {
   // eslint-disable-next-line max-len
   return `${MAPBOX_BASE_URL}/styles/v1/${username}/${themeId}/${lon},${lat},${zoom},${bearing},${pitch}/${width}x${height}${
