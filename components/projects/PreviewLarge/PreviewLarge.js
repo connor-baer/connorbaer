@@ -17,17 +17,14 @@ function getSizes(theme) {
 }
 
 const articleStyles = ({ theme }) => css`
-  margin-top: ${theme.spacing.l};
-
-  ${theme.mq.hand} {
-    margin-top: ${theme.spacing.xxxl};
-  }
+  margin-top: ${theme.spacing.xxl};
 `;
 
 const Article = styled('article')(articleStyles);
 
 const titleStyles = ({ theme }) => css`
   margin-top: ${theme.spacing.l};
+  margin-bottom: ${theme.spacing.s};
 `;
 
 const Title = styled(Heading)(titleStyles);

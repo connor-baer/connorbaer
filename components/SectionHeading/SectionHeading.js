@@ -20,7 +20,7 @@ const StyledHeading = styled(Heading)(sectionHeadingStyles);
 
 export default function SectionHeading({ children, ...rest }) {
   return (
-    <StyledHeading as="h3" size="kilo" {...rest}>
+    <StyledHeading as="h3" size="m" {...rest}>
       {children}
     </StyledHeading>
   );

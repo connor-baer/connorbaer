@@ -7,8 +7,8 @@ import {
   Heading,
   Intro,
   ParallaxImage,
-  styles,
   ComponentsProvider,
+  styles,
 } from '@madebyconnor/bamboo-ui';
 
 import { blog } from '../styles/themes';
@@ -95,12 +95,14 @@ export default ({
           <Grid>
             <Content>
               <PostHeader>
-                <Heading as="h1" size="exa">
+                <Heading as="h1" size="xxl">
                   {title}
                 </Heading>
                 <PostMeta date={date} category={category} />
               </PostHeader>
-              <Intro>{description}</Intro>
+              <Intro css={styles.spacing({ bottom: 'xl' })}>
+                {description}
+              </Intro>
               <ComponentsProvider value={{ Align }}>
                 <MDXProvider components={{ ...components, p: StyledParagraph }}>
                   {children}

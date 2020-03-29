@@ -79,7 +79,7 @@ export default function GuideSmall({
           )}
           <Content>
             <Title as="h4">{title}</Title>
-            <Subtitle size="kilo" lineHeight="kilo">
+            <Subtitle size="m" lineHeight="m">
               {subtitle}
             </Subtitle>
           </Content>

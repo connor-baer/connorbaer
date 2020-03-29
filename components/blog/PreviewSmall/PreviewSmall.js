@@ -1,18 +1,13 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { Heading, Paragraph } from '@madebyconnor/bamboo-ui';
+import { Heading, Paragraph, styles } from '@madebyconnor/bamboo-ui';
 
 import { blogPostPropType } from '../../../utils/prop-types';
 import Link from '../../Link';
 import PostMeta from '../PostMeta';
 
-const articleStyles = ({ theme }) => css`
-  margin-top: ${theme.spacing.l};
-  margin-bottom: ${theme.spacing.l};
-`;
-
-const Article = styled('article')(articleStyles);
+const Article = styled('article')(styles.spacing([1, 0]));
 
 const titleStyles = () => css`
   margin-top: 0;
@@ -32,14 +27,14 @@ export default function PreviewSmall({
   description,
   date,
   category,
-  className,
+  ...props
 }) {
   /* eslint-disable jsx-a11y/anchor-is-valid */
   return (
-    <Article className={className}>
+    <Article {...props}>
       <Link href={url}>
         <a>
-          <Title size="giga" as="h4">
+          <Title size="l" as="h4">
             {title}
           </Title>
           {description && <Description>{description}</Description>}

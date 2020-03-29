@@ -17,18 +17,17 @@ function getSizes(theme) {
 }
 
 const articleStyles = ({ theme }) => css`
-  margin-top: ${theme.spacing.xl};
-  margin-bottom: ${theme.spacing.xxxxl};
+  margin-top: calc(${theme.spacing.gutter} * 2);
+  margin-bottom: calc(${theme.spacing.gutter} * 4);
 
   ${theme.mq.hand} {
-    margin-bottom: 72px;
+    margin-bottom: calc(${theme.spacing.gutter} * 2);
   }
 `;
 
 const Article = styled('article')(articleStyles);
 
 const titleStyles = ({ theme }) => css`
-  margin-top: ${theme.spacing.xl};
   margin-bottom: ${theme.spacing.s};
 `;
 
@@ -39,6 +38,10 @@ const descriptionStyles = ({ theme }) => css`
 `;
 
 const Description = styled(Paragraph)(descriptionStyles);
+
+const imageStyles = (theme) => css`
+  margin-bottom: ${theme.spacing.xl};
+`;
 
 export default function PreviewLarge({
   url,
@@ -57,9 +60,14 @@ export default function PreviewLarge({
       <Link href={url}>
         <a>
           {featured && image.src && (
-            <CoverImage {...image} sizes={sizes} aspectRatio={350 / 150} />
+            <CoverImage
+              {...image}
+              sizes={sizes}
+              aspectRatio={350 / 150}
+              css={imageStyles}
+            />
           )}
-          <Title size="tera">{title}</Title>
+          <Title size="xl">{title}</Title>
           {description && <Description>{description}</Description>}
         </a>
       </Link>
