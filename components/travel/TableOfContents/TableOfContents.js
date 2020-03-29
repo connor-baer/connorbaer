@@ -115,18 +115,12 @@ function TableOfContents({ title = 'Table of Contents', tableOfContents }) {
         align={Align.LEFT}
         as="details"
       >
-        <Summary as="summary" size="mega">
+        <Summary as="summary" size="l">
           {title}
         </Summary>
         <List>
           {tableOfContents.map(({ value, id, depth }) => (
-            <ListItem
-              key={id}
-              as="li"
-              size="kilo"
-              depth={depth}
-              lineHeight="mega"
-            >
+            <ListItem key={id} as="li" size="m" depth={depth} lineHeight="l">
               <StyledAnchor href={`#${id}`}>{value}</StyledAnchor>
             </ListItem>
           ))}
