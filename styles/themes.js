@@ -4,34 +4,7 @@ const { standard } = themes;
 
 export { standard };
 
-export const blog = {
-  ...standard,
-  fonts: [
-    ...standard.fonts,
-    {
-      name: 'Lora',
-      localName: 'Lora Regular',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      name: 'Lora',
-      localName: 'Lora Italic',
-      weight: '400',
-      style: 'italic',
-    },
-    {
-      name: 'Lora',
-      localName: 'Lora Bold',
-      weight: '700',
-      style: 'normal',
-    },
-  ],
-  fontStack: {
-    ...standard.fontStack,
-    serif: 'Lora, Georgia, serif',
-  },
-};
+const ASSET_BASEURL = 'https://assets.connor.li';
 
 export const travel = {
   ...standard,
@@ -42,12 +15,20 @@ export const travel = {
       localName: 'Playfair Display',
       weight: '400',
       style: 'normal',
+      sources: [
+        `${ASSET_BASEURL}/fonts/playfair-display-v20-latin-400.woff2`,
+        `${ASSET_BASEURL}/fonts/playfair-display-v20-latin-400.woff`,
+      ],
     },
     {
       name: 'Playfair Display',
       localName: 'Playfair Display Bold',
       weight: '700',
       style: 'normal',
+      sources: [
+        `${ASSET_BASEURL}/fonts/playfair-display-v20-latin-700.woff2`,
+        `${ASSET_BASEURL}/fonts/playfair-display-v20-latin-700.woff`,
+      ],
     },
   ],
   fontStack: {
