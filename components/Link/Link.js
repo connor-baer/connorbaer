@@ -32,7 +32,7 @@ export default function Link({ href, as, ...rest }) {
   const { protocol, pathname } = hrefObj;
 
   if (!pathname || protocol) {
-    return children;
+    return cloneElement(child, { href, onClick });
   }
 
   return (

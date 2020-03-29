@@ -3,16 +3,20 @@ import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { toLower } from 'lodash/fp';
-import { Small } from '@madebyconnor/bamboo-ui';
+import { Small, Anchor } from '@madebyconnor/bamboo-ui';
 
 import { formatDate, formatDatetime } from '../../../utils/date';
-import Link from '../../Link';
 
 const wrapperStyles = ({ theme }) => css`
   margin-top: ${theme.spacing.m};
 `;
 
 const Wrapper = styled('div')(wrapperStyles);
+
+const anchorStyles = (theme) => css`
+  font-weight: ${theme.fontWeight.regular};
+  color: ${theme.color.neutral[700]};
+`;
 
 export default function PostMeta({ date, category, className }) {
   if (!date && !category) {
@@ -33,12 +37,13 @@ export default function PostMeta({ date, category, className }) {
       )}
       {category && (
         <Small>
-          <Link
+          <Anchor
             href="/blog/category/[category]"
             as={`/blog/category/${categorySlug}`}
+            css={anchorStyles}
           >
-            <a>{category}</a>
-          </Link>
+            {category}
+          </Anchor>
         </Small>
       )}
     </Wrapper>

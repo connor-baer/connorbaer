@@ -34,7 +34,7 @@ const headerStyles = (theme) => css`
 const introBriefStyles = (theme) => css`
   grid-column: 1 / 13;
 
-  ${theme.mq.wall} {
+  ${theme.mq.desk} {
     grid-column: 1 / 7;
   }
 `;
@@ -42,7 +42,7 @@ const introBriefStyles = (theme) => css`
 const introSkillStyles = (theme) => css`
   grid-column: 1 / 7;
 
-  ${theme.mq.wall} {
+  ${theme.mq.desk} {
     grid-column: 7 / 10;
   }
 `;
@@ -50,7 +50,7 @@ const introSkillStyles = (theme) => css`
 const introClientStyles = (theme) => css`
   grid-column: 7 / 13;
 
-  ${theme.mq.wall} {
+  ${theme.mq.desk} {
     grid-column: 10 / 13;
   }
 `;
