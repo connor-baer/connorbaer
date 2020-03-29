@@ -62,8 +62,13 @@ const StyledParallaxImage = styled(ParallaxImage)(styledParallaxImageStyles);
 
 const postHeaderStyles = ({ theme }) => css`
   display: block;
-  margin-top: ${theme.spacing.xxxxl};
-  margin-bottom: ${theme.spacing.xxxl};
+  margin-top: ${theme.spacing.xxl};
+  margin-bottom: ${theme.spacing.xl};
+
+  ${theme.mq.lap} {
+    margin-top: ${theme.spacing.xxxxl};
+    margin-bottom: ${theme.spacing.xxxl};
+  }
 `;
 
 const PostHeader = styled('header')(postHeaderStyles);

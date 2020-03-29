@@ -18,11 +18,9 @@ const listItemStyles = (theme) => css`
 `;
 
 export { Paragraph };
-export const HeadingOne = (props) => <Heading as="h2" size="tera" {...props} />;
-export const HeadingTwo = (props) => <Heading as="h3" size="giga" {...props} />;
-export const HeadingThree = (props) => (
-  <Heading as="h4" size="mega" {...props} />
-);
+export const HeadingOne = (props) => <Heading as="h2" size="xl" {...props} />;
+export const HeadingTwo = (props) => <Heading as="h3" size="l" {...props} />;
+export const HeadingThree = (props) => <Heading as="h4" size="m" {...props} />;
 export const Strong = (props) => (
   <Paragraph as="strong" weight="bold" {...props} />
 );
