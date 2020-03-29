@@ -11,7 +11,6 @@ import {
   styles,
 } from '@madebyconnor/bamboo-ui';
 
-import { blog } from '../styles/themes';
 import components, { Paragraph } from './_components';
 import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
@@ -80,7 +79,7 @@ export default ({
   date,
   category,
   __resourcePath,
-}) => {
+}) =>
   function Post({ children }) {
     return (
       <>
@@ -120,9 +119,4 @@ export default ({
         <Footer />
       </>
     );
-  }
-
-  Post.theme = blog;
-
-  return Post;
-};
+  };

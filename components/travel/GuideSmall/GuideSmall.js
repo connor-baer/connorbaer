@@ -55,7 +55,7 @@ const subtitleStyles = ({ theme }) => css`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   margin-bottom: 0;
-  max-height: ${theme.spacing.xxxl};
+  max-height: ${theme.spacing.xxxxl};
 `;
 
 const Subtitle = styled(Paragraph)(subtitleStyles);
