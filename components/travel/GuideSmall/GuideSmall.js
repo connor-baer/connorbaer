@@ -30,7 +30,7 @@ const contentStyles = ({ theme }) => css`
   bottom: 0;
   left: 0;
   padding: ${theme.spacing.xxl} ${theme.spacing.m} ${theme.spacing.m};
-  background: linear-gradient(transparent, ${theme.color.shadow});
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.33) 33%);
   border-bottom-left-radius: ${theme.borderRadius.m};
   border-bottom-right-radius: ${theme.borderRadius.m};
 `;
