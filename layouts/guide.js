@@ -7,6 +7,7 @@ import {
   Header,
   Small,
   RatioImage,
+  Intro,
   ComponentsProvider,
   styles,
 } from '@madebyconnor/bamboo-ui';
@@ -69,6 +70,7 @@ const StyledRatioImage = styled(RatioImage)(ratioImageStyles);
 export default ({
   title,
   subtitle,
+  description,
   image = {},
   date,
   tableOfContents,
@@ -80,13 +82,14 @@ export default ({
     return (
       <>
         <Meta
-          title={title}
-          description={subtitle}
+          title={`${title} ${subtitle}`}
+          description={description}
           pathname={__resourcePath}
           image={image}
         />
         <Navigation />
         <Main as="article">
+          <RatioImage aspectRatio={1.618} {...image} />
           <Container>
             <StyledHeader title={title} subtitle={subtitle}>
               {date && (
@@ -97,9 +100,10 @@ export default ({
                 </div>
               )}
             </StyledHeader>
-            <StyledRatioImage aspectRatio={1.618} {...image} />
+
             <Grid>
               <TableOfContents tableOfContents={tableOfContents} />
+              <Intro>{description}</Intro>
               <ComponentsProvider value={{ Align }}>
                 <MDXProvider components={components}>{children}</MDXProvider>
               </ComponentsProvider>

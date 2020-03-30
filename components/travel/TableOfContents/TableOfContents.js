@@ -22,6 +22,7 @@ const smoothScrollStyles = css`
 
 const detailsStyles = ({ theme }) => css`
   ${theme.mq.hand} {
+    grid-row: span 3;
     margin-top: ${theme.spacing.xs};
   }
 `;
@@ -29,7 +30,6 @@ const detailsStyles = ({ theme }) => css`
 const Details = styled(Align)(detailsStyles);
 
 const summaryStyles = ({ theme }) => css`
-  ${styles.focusOutline({ theme })}
   margin-top: 0;
   margin-bottom: 0;
   border: none;
@@ -44,8 +44,8 @@ const summaryStyles = ({ theme }) => css`
     display: inline-block;
     position: relative;
     content: '+';
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 1.5rem;
+    height: 1.5rem;
     border: 2px solid ${theme.color.bodyColor};
     border-radius: 50%;
     text-align: center;
@@ -65,7 +65,7 @@ const summaryStyles = ({ theme }) => css`
   }
 `;
 
-const Summary = styled(Heading)(summaryStyles);
+const Summary = styled(Heading)(summaryStyles, styles.focusOutline);
 
 const listStyles = ({ theme }) => css`
   margin-top: ${theme.spacing.m};
@@ -97,20 +97,25 @@ function TableOfContents({ title = 'Table of Contents', tableOfContents }) {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const query = theme.mq.lap.replace('@media ', '');
-  useMedia(query, (isMobile) => setOpen(isMobile));
+  const permanentlyOpen = useMedia(query);
 
   if (isEmpty(tableOfContents)) {
     return null;
   }
 
-  const handleClick = () => setOpen(!open);
+  const handleClick = (event) => {
+    event.preventDefault();
+    setOpen((prev) => !prev);
+  };
+
+  console.log({ permanentlyOpen, open });
 
   return (
     <>
       <Global styles={smoothScrollStyles} />
 
       <Details
-        open={open}
+        open={permanentlyOpen || open}
         onClick={handleClick}
         align={Align.LEFT}
         as="details"
