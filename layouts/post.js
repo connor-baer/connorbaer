@@ -101,6 +101,7 @@ export default function Post({ children, frontMatter }) {
           {...image}
           srcSet={[400, 800, 1200, 1600, 2000]}
           sizes="100vw"
+          loading="eager"
         />
         <Grid>
           <Content>

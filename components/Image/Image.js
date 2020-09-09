@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image as BambooImage, propTypes } from '@madebyconnor/bamboo-ui';
 
-const DEFAULT_WIDTH = 2000;
+const DEFAULT_WIDTH = 1200;
 
 function formatSrc(src, { width, height, ratio }) {
   const params = { src };
