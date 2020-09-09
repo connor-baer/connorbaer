@@ -38,7 +38,7 @@ const StyledHeader = styled(Header)(headerStyles);
 export default function AboutPage() {
   const title = 'I am Connor.';
   const subtitle =
-    'I am web developer with a strong background in design, born in Germany and currently living in São Paulo. Nice to meet you 👋'; // eslint-disable-line max-len
+    'I am web developer with a strong background in design, born in Germany and currently living in São Paulo. Nice to meet you 👋';
   return (
     <>
       <Meta title={title} description={subtitle} />
