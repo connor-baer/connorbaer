@@ -7,7 +7,7 @@ import { NAME, TWITTER } from '../../constants/site';
 import * as Url from '../../services/url';
 
 const DEFAULT_IMAGE = {
-  src: '/static/images/pages/connor.jpg',
+  src: '/images/pages/connor.jpg',
   alt: 'Connor smiles at the camera.',
 };
 

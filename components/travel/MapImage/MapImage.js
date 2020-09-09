@@ -5,7 +5,7 @@ import { isEmpty } from 'lodash/fp';
 import { useTheme } from 'emotion-theming';
 import { RatioImage, ComponentsProvider, Image } from '@madebyconnor/bamboo-ui';
 
-import { constructStaticImageUrl } from '../../../utils/mapbox';
+import { constructStaticImageUrl } from '../../../services/mapbox';
 import { mapPropType } from '../../../utils/prop-types';
 import Link from '../../Link';
 

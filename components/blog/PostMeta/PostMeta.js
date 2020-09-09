@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { toLower } from 'lodash/fp';
 import { Small, Anchor } from '@madebyconnor/bamboo-ui';
 
-import { formatDate, formatDatetime } from '../../../utils/date';
+import { formatDate, formatDatetime } from '../../../services/date';
 
 const wrapperStyles = ({ theme }) => css`
   margin-top: ${theme.spacing.m};

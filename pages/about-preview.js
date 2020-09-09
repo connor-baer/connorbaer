@@ -50,16 +50,16 @@ export default function AboutPage() {
         <Collage
           images={[
             {
-              src: '/static/images/pages/connor.jpg',
-              alt: 'Connor flashes a big smile at the camera.',
+              src: '/images/pages/connor.jpg',
+              alt: 'Connor smiles into the camera',
             },
             {
-              src: '/static/images/pages/hackathon.jpg',
-              alt: 'Connor flashes a big smile at the camera.',
+              src: '/images/pages/hackathon.jpg',
+              alt: 'Connor smiles into the camera',
             },
             {
-              src: '/static/images/pages/beach.jpg',
-              alt: 'Connor flashes a big smile at the camera.',
+              src: '/images/pages/beach.jpg',
+              alt: 'Connor smiles into the camera',
             },
           ]}
         />

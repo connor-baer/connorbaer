@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { isEmpty } from 'lodash/fp';
 import { Main, Header, Slider, styles } from '@madebyconnor/bamboo-ui';
 
+import { getPreview } from '../services/preview';
 import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
 import Prefooter from '../components/Prefooter';
@@ -11,7 +12,6 @@ import Footer from '../components/Footer';
 import SectionHeading from '../components/SectionHeading';
 import PreviewSmall from '../components/blog/PreviewSmall';
 import GuideSmall from '../components/travel/GuideSmall';
-
 import usePosts from '../hooks/use-posts';
 import useCities from '../hooks/use-cities';
 
@@ -61,10 +61,14 @@ const postStyles = ({ theme, length }) => css`
 
 const PostPreview = styled(PreviewSmall)(postStyles);
 
+export function getStaticProps(context) {
+  return { props: { preview: getPreview(context) } };
+}
+
 export default function HomePage() {
   const title = 'Hello, I’m Connor.';
   const subtitle =
-    'Avid rock climber, scuba diver, and cooking enthusiast. Currently frontend engineer at SumUp.'; // eslint-disable-line max-len
+    'Avid rock climber, scuba diver, and cooking enthusiast. Currently frontend engineer at SumUp.';
 
   const [posts] = usePosts({ skip: 3 });
   const [cities] = useCities({ skip: 4 });
@@ -76,7 +80,7 @@ export default function HomePage() {
         description={subtitle}
         pathname={''}
         image={{
-          src: '/static/images/pages/connor.jpg',
+          src: '/images/pages/connor.jpg',
           alt: 'Connor Bär smiles at the camera',
         }}
       />
@@ -108,7 +112,7 @@ export default function HomePage() {
               <SectionHeading>City guides</SectionHeading>
             </Container>
 
-            <Slider css={(theme) => styles.pageWidth({ theme })}>
+            <Slider css={styles.pageWidth}>
               {cities.map((city) => (
                 <GuideSmall key={city.title} url={city.url} {...city} />
               ))}

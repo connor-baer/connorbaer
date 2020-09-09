@@ -17,9 +17,9 @@ export default function CustomNavigation({
   ],
 }) {
   const router = useRouter();
-  const isPreview = usePreview();
+  const isTravelPreview = usePreview('travel');
   const isHomepage = router.asPath === '/';
-  if (isPreview) {
+  if (isTravelPreview) {
     links.push({ url: '/travel', label: '🧳 Travel' });
   }
   const enhancedLinks = links.map((link) => {

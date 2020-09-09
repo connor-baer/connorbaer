@@ -45,13 +45,15 @@ export default function UpcomingEvent() {
     return <span>Loading...</span>;
   }
 
+  const startTime = event.start.dateTime || event.start.date;
+
   return (
     <div>
       <a href={event.htmlLink} target="_blank" rel="noopener noreferrer">
         {event.summary}
       </a>{' '}
       <Text as="span" slope="italic">
-        in {formatDistanceToNow(parseISO(event.start.dateTime))}
+        in {formatDistanceToNow(parseISO(startTime))}
       </Text>
     </div>
   );

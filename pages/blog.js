@@ -4,12 +4,12 @@ import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { Anchor, Main, Header, styles } from '@madebyconnor/bamboo-ui';
 
+import { getPreview } from '../services/preview';
 import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
 import Prefooter from '../components/Prefooter';
 import Footer from '../components/Footer';
 import PreviewLarge from '../components/blog/PreviewLarge';
-
 import usePosts from '../hooks/use-posts';
 
 const Grid = styled('div')(styles.pageWidth, styles.grid);
@@ -27,6 +27,10 @@ const contentStyles = ({ theme }) => css`
 `;
 
 const Content = styled('div')(contentStyles);
+
+export function getStaticProps(context) {
+  return { props: { preview: getPreview(context) } };
+}
 
 export default function BlogPage({
   title = 'Blog',

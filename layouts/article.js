@@ -9,11 +9,13 @@ import {
   styles,
 } from '@madebyconnor/bamboo-ui';
 
+import { getPreview } from '../services/preview';
 import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
 import Prefooter from '../components/Prefooter';
 import Footer from '../components/Footer';
 import Align from '../components/Align';
+
 import components from './_components';
 
 const Article = styled('article')(styles.pageWidth, styles.grid);
@@ -32,24 +34,28 @@ const contentStyles = ({ theme }) => css`
 
 const Content = styled('div')(contentStyles);
 
-export default ({ title, subtitle, __resourcePath }) =>
-  function ArticlePage({ children }) {
-    return (
-      <>
-        <Meta title={title} description={subtitle} pathname={__resourcePath} />
-        <Navigation />
-        <Main>
-          <Article>
-            <Content>
-              <Header title={title} subtitle={subtitle} />
-              <ComponentsProvider value={{ Align }}>
-                <MDXProvider components={components}>{children}</MDXProvider>
-              </ComponentsProvider>
-            </Content>
-          </Article>
-        </Main>
-        <Prefooter />
-        <Footer />
-      </>
-    );
-  };
+// export function getStaticProps(context) {
+//   return { props: { preview: getPreview(context) } };
+// }
+
+export default function ArticlePage({ children, frontMatter }) {
+  const { title, subtitle, __resourcePath } = frontMatter;
+  return (
+    <>
+      <Meta title={title} description={subtitle} pathname={__resourcePath} />
+      <Navigation />
+      <Main>
+        <Article>
+          <Content>
+            <Header title={title} subtitle={subtitle} />
+            <ComponentsProvider value={{ Align }}>
+              <MDXProvider components={components}>{children}</MDXProvider>
+            </ComponentsProvider>
+          </Content>
+        </Article>
+      </Main>
+      <Prefooter />
+      <Footer />
+    </>
+  );
+}

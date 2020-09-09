@@ -15,13 +15,11 @@ const TITLE_MAP = {
   503: 'Bear with me please. 🚧',
 };
 
-/* eslint-disable max-len */
 const SUBTITLE_MAP = {
   404: 'What’s worse, a hilarious 404 page can’t be found either.',
   500: 'Something has gone wrong. Try to refresh the page or go back to the homepage.',
   503: 'I’m currently carrying out some maintenance on my website. It will only take a minute.',
 };
-/* eslint-enable max-len */
 
 const Grid = styled('div')(styles.pageWidth, styles.grid);
 
@@ -39,7 +37,7 @@ const contentStyles = ({ theme }) => css`
 
 const Content = styled('div')(contentStyles);
 
-function ErrorPage({ statusCode = 500 }) {
+export default function ErrorPage({ statusCode = 500 }) {
   const title = TITLE_MAP[statusCode];
   const subtitle = SUBTITLE_MAP[statusCode];
   return (
@@ -66,8 +64,5 @@ ErrorPage.getInitialProps = (ctx) => {
 };
 
 ErrorPage.propTypes = {
-  title: PropTypes.string,
   statusCode: PropTypes.number,
 };
-
-export default ErrorPage;

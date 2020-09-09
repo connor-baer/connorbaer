@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { Main, Header, Columns, styles } from '@madebyconnor/bamboo-ui';
 
+import { getPreview } from '../services/preview';
 import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
 import Prefooter from '../components/Prefooter';
@@ -25,10 +26,15 @@ const StyledHeader = styled(Header)(spacingStyles);
 
 const Grid = styled('div')(styles.pageWidth);
 
+export function getStaticProps(context) {
+  return { props: { preview: getPreview(context) } };
+}
+
 export default function ProjectsHome() {
   const [projects] = useProjects();
   const title = 'Selected Work';
   const subtitle = 'Make technology human.';
+
   return (
     <>
       <Meta title={title} description={subtitle} pathname={'projects'} />

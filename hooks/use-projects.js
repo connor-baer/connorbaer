@@ -4,8 +4,9 @@ import { flow, map } from 'lodash/fp';
 import { frontMatter as projects } from '../pages/projects/*.mdx';
 import * as Url from '../services/url';
 import { filterByDraft } from '../utils/filter';
-import { sortByDate } from '../utils/sort';
+import { sortByTitle } from '../utils/sort';
 import paginate from '../utils/paginate';
+
 import usePreview from './use-preview';
 
 export function enhance() {
@@ -22,7 +23,7 @@ export default function useProjects({ page, skip } = {}) {
 
   const cleanedProjects = flow(
     filterByDraft(isPreview),
-    sortByDate(),
+    sortByTitle(),
   )(projects);
   const paginatedProjects = flow(
     paginate(page, skip),

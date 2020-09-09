@@ -6,6 +6,7 @@ import * as Url from '../services/url';
 import { filterByCategory, filterByDraft } from '../utils/filter';
 import { sortByDate } from '../utils/sort';
 import paginate from '../utils/paginate';
+
 import usePreview from './use-preview';
 
 export function enhance() {
@@ -16,7 +17,7 @@ export function enhance() {
 }
 
 export default function useCities({ category, page, skip } = {}) {
-  const isPreview = usePreview();
+  const isPreview = usePreview('travel');
 
   const cleanedCities = flow(
     filterByCategory(category),

@@ -36,6 +36,10 @@ const summaryStyles = ({ theme }) => css`
   outline: none;
   list-style: none;
 
+  &:focus {
+    ${styles.focusOutline({ theme })}
+  }
+
   &::-webkit-details-marker {
     display: none;
   }
@@ -65,7 +69,7 @@ const summaryStyles = ({ theme }) => css`
   }
 `;
 
-const Summary = styled(Heading)(summaryStyles, styles.focusOutline);
+const Summary = styled(Heading)(summaryStyles);
 
 const listStyles = ({ theme }) => css`
   margin-top: ${theme.spacing.m};
@@ -104,11 +108,12 @@ function TableOfContents({ title = 'Table of Contents', tableOfContents }) {
   }
 
   const handleClick = (event) => {
-    event.preventDefault();
+    if (event.target.tagName !== 'A') {
+      event.preventDefault();
+    }
+
     setOpen((prev) => !prev);
   };
-
-  console.log({ permanentlyOpen, open });
 
   return (
     <>
