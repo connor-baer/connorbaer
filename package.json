@@ -1,6 +1,6 @@
 {
   "name": "connorbaer.co",
-  "version": "5.0.0",
+  "version": "6.0.0",
   "description": "Website for Connor Bär.",
   "main": "next.config.js",
   "author": "Connor Bär, connor-baer <hello@connorbaer.co>",
