@@ -9,13 +9,15 @@ import {
   styles,
 } from '@madebyconnor/bamboo-ui';
 
-import components from './_components';
+import { getPreview } from '../services/preview';
 import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
 import Prefooter from '../components/Prefooter';
 import Footer from '../components/Footer';
 import Align from '../components/Align';
 import IntroSection from '../components/projects/IntroSection';
+
+import components from './_components';
 
 const Article = styled('article')(styles.pageWidth, styles.grid);
 
@@ -69,50 +71,54 @@ const contentStyles = ({ theme }) => css`
 
 const Content = styled('div')(contentStyles);
 
-export default ({
-  title,
-  subtitle,
-  brief,
-  image,
-  skills,
-  client,
-  __resourcePath,
-}) =>
-  function Project({ children }) {
-    return (
-      <>
-        <Meta
-          title={title}
-          description={brief}
-          pathname={__resourcePath}
-          image={image}
-        />
-        <Navigation />
-        <Main>
-          <Article>
-            <Header title={title} subtitle={subtitle} css={headerStyles} />
+// export function getStaticProps(context) {
+//   return { props: { preview: getPreview(context) } };
+// }
 
-            <IntroSection title="Overview" css={introBriefStyles}>
-              {brief}
-            </IntroSection>
-            <IntroSection title="Involvement" css={introSkillStyles}>
-              {skills.map((skill) => (
-                <p key={skill}>{skill}</p>
-              ))}
-            </IntroSection>
-            <IntroSection title="Client" css={introClientStyles}>
-              {client}
-            </IntroSection>
+export default function Project({ children, frontMatter }) {
+  const {
+    title,
+    subtitle,
+    brief,
+    image,
+    skills,
+    client,
+    __resourcePath,
+  } = frontMatter;
+  return (
+    <>
+      <Meta
+        title={title}
+        description={brief}
+        pathname={__resourcePath}
+        image={image}
+      />
+      <Navigation />
+      <Main>
+        <Article>
+          <Header title={title} subtitle={subtitle} css={headerStyles} />
 
-            <Content>
-              <ComponentsProvider value={{ Align }}>
-                <MDXProvider components={components}>{children}</MDXProvider>
-              </ComponentsProvider>
-            </Content>
-          </Article>
-        </Main>
-        <Prefooter />
-        <Footer />
-      </>
-    );
-  };
+          <IntroSection title="Overview" css={introBriefStyles}>
+            {brief}
+          </IntroSection>
+          <IntroSection title="Involvement" css={introSkillStyles}>
+            {skills.map((skill) => (
+              <p key={skill}>{skill}</p>
+            ))}
+          </IntroSection>
+          <IntroSection title="Client" css={introClientStyles}>
+            {client}
+          </IntroSection>
+
+          <Content>
+            <ComponentsProvider value={{ Align }}>
+              <MDXProvider components={components}>{children}</MDXProvider>
+            </ComponentsProvider>
+          </Content>
+        </Article>
+      </Main>
+      <Prefooter />
+      <Footer />
+    </>
+  );
+}

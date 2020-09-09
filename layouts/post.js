@@ -11,13 +11,15 @@ import {
   styles,
 } from '@madebyconnor/bamboo-ui';
 
-import components, { Paragraph } from './_components';
+import { getPreview } from '../services/preview';
 import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
 import Prefooter from '../components/Prefooter';
 import Footer from '../components/Footer';
 import Align from '../components/Align';
 import PostMeta from '../components/blog/PostMeta';
+
+import components, { Paragraph } from './_components';
 
 const Grid = styled('div')(styles.pageWidth, styles.grid);
 
@@ -72,51 +74,53 @@ const postHeaderStyles = ({ theme }) => css`
 
 const PostHeader = styled('header')(postHeaderStyles);
 
-export default ({
-  title,
-  description,
-  image,
-  date,
-  category,
-  __resourcePath,
-}) =>
-  function Post({ children }) {
-    return (
-      <>
-        <Meta
-          title={title}
-          description={description}
-          pathname={__resourcePath}
-          image={image}
+// export function getStaticProps(context) {
+//   return { props: { preview: getPreview(context) } };
+// }
+
+export default function Post({ children, frontMatter }) {
+  const {
+    title,
+    description,
+    image,
+    date,
+    category,
+    __resourcePath,
+  } = frontMatter;
+  return (
+    <>
+      <Meta
+        title={title}
+        description={description}
+        pathname={__resourcePath}
+        image={image}
+      />
+      <Navigation />
+      <Main as="article">
+        <StyledParallaxImage
+          {...image}
+          srcSet={[400, 800, 1200, 1600, 2000]}
+          sizes="100vw"
         />
-        <Navigation />
-        <Main as="article">
-          <StyledParallaxImage
-            {...image}
-            srcSet={[400, 800, 1200, 1600, 2000]}
-            sizes="100vw"
-          />
-          <Grid>
-            <Content>
-              <PostHeader>
-                <Heading as="h1" size="xxl">
-                  {title}
-                </Heading>
-                <PostMeta date={date} category={category} />
-              </PostHeader>
-              <Intro css={styles.spacing({ bottom: 'xl' })}>
-                {description}
-              </Intro>
-              <ComponentsProvider value={{ Align }}>
-                <MDXProvider components={{ ...components, p: StyledParagraph }}>
-                  {children}
-                </MDXProvider>
-              </ComponentsProvider>
-            </Content>
-          </Grid>
-        </Main>
-        <Prefooter />
-        <Footer />
-      </>
-    );
-  };
+        <Grid>
+          <Content>
+            <PostHeader>
+              <Heading as="h1" size="xxl">
+                {title}
+              </Heading>
+              <PostMeta date={date} category={category} />
+            </PostHeader>
+            <Intro css={styles.spacing({ bottom: 'xl' })}>{description}</Intro>
+            <ComponentsProvider value={{ Align }}>
+              <MDXProvider components={{ ...components, p: StyledParagraph }}>
+                {children}
+              </MDXProvider>
+            </ComponentsProvider>
+          </Content>
+        </Grid>
+      </Main>
+      <Prefooter />
+      <Footer />
+    </>
+  );
+}

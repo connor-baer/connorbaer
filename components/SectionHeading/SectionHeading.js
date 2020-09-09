@@ -6,13 +6,17 @@ import { Heading, propTypes } from '@madebyconnor/bamboo-ui';
 const sectionHeadingStyles = ({ theme }) => css`
   margin-top: ${theme.spacing.xxxxl};
   margin-bottom: ${theme.spacing.s};
-  color: ${theme.color.neutral[700]};
+  color: ${theme.color.primary[700]};
   letter-spacing: 3px;
   text-transform: uppercase;
 
   ${theme.mq.hand} {
     margin-top: ${theme.spacing.xxxxl};
     margin-bottom: ${theme.spacing.s};
+  }
+
+  ${theme.mq.darkmode} {
+    color: ${theme.color.primary[100]};
   }
 `;
 

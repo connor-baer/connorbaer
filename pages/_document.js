@@ -1,22 +1,14 @@
 import React from 'react';
-import Document, { Head, Main, NextScript } from 'next/document';
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 
 import { LANG } from '../constants/site';
 import { FAVICONS_PATH } from '../constants/paths';
 
 export default class CustomDocument extends Document {
-  constructor(props) {
-    super(props);
-    const { __NEXT_DATA__ } = props;
-    if (global.publicConfig) {
-      __NEXT_DATA__.publicConfig = global.publicConfig;
-    }
-  }
-
   // eslint-disable-next-line class-methods-use-this
   render() {
     return (
-      <html lang={LANG}>
+      <Html lang={LANG}>
         <Head>
           <link
             rel="shortcut icon"
@@ -98,7 +90,7 @@ export default class CustomDocument extends Document {
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     );
   }
 }

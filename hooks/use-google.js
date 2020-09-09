@@ -26,7 +26,8 @@ export default function useGoogle(scope, discoveryDocs) {
 
           // Handle the initial sign-in state.
           setAuthorized(gapi.auth2.getAuthInstance().isSignedIn.get());
-        }, console.error);
+        })
+        .catch(console.error);
     }
 
     if (isLoaded) {

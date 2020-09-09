@@ -6,21 +6,23 @@ import {
   Main,
   Header,
   Small,
-  RatioImage,
+  CoverImage,
   Intro,
   ComponentsProvider,
   styles,
 } from '@madebyconnor/bamboo-ui';
 
+import { getPreview } from '../services/preview';
+import { formatDate, formatDatetime } from '../services/date';
 import { travel } from '../styles/themes';
-import { formatDate, formatDatetime } from '../utils/date';
 import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
 import Prefooter from '../components/Prefooter';
 import Footer from '../components/Footer';
 import Align from '../components/travel/Align';
-import components from './_components';
 import TableOfContents from '../components/travel/TableOfContents';
+
+import components from './_components';
 
 const Container = styled('div')(styles.pageWidth);
 
@@ -55,68 +57,70 @@ const headerStyles = ({ theme }) => css`
 
 const StyledHeader = styled(Header)(headerStyles);
 
-const ratioImageStyles = ({ theme }) => css`
-  margin-top: ${theme.spacing.xl};
+const heroImageStyles = ({ theme }) => css`
   margin-bottom: ${theme.spacing.s};
 
   ${theme.mq.hand} {
-    margin-top: ${theme.spacing.xxxxl};
     margin-bottom: ${theme.spacing.xxxxl};
   }
 `;
 
-const StyledRatioImage = styled(RatioImage)(ratioImageStyles);
+const HeroImage = styled(CoverImage)(heroImageStyles);
 
-export default ({
-  title,
-  subtitle,
-  description,
-  image = {},
-  date,
-  tableOfContents,
-  __resourcePath,
-}) => {
-  function Guide({ children }) {
-    const formattedDate = formatDate(date);
-    const datetime = formatDatetime(date);
-    return (
-      <>
-        <Meta
-          title={`${title} ${subtitle}`}
-          description={description}
-          pathname={__resourcePath}
-          image={image}
-        />
-        <Navigation />
-        <Main as="article">
-          <RatioImage aspectRatio={1.618} {...image} />
-          <Container>
-            <StyledHeader title={title} subtitle={subtitle}>
-              {date && (
-                <div>
-                  <Small element="time" dateTime={datetime}>
-                    {formattedDate}
-                  </Small>
-                </div>
-              )}
-            </StyledHeader>
+// export function getStaticProps(context) {
+//   return { props: { preview: getPreview(context) } };
+// }
 
-            <Grid>
-              <TableOfContents tableOfContents={tableOfContents} />
-              <Intro>{description}</Intro>
-              <ComponentsProvider value={{ Align }}>
-                <MDXProvider components={components}>{children}</MDXProvider>
-              </ComponentsProvider>
-            </Grid>
-          </Container>
-        </Main>
-        <Prefooter />
-        <Footer />
-      </>
-    );
-  }
+export default function Guide({ children, frontMatter }) {
+  const {
+    title,
+    subtitle,
+    description,
+    image = {},
+    date,
+    tableOfContents,
+    __resourcePath,
+  } = frontMatter;
+  const formattedDate = formatDate(date);
+  const datetime = formatDatetime(date);
 
-  Guide.theme = travel;
+  return (
+    <>
+      <Meta
+        title={`${title} ${subtitle}`}
+        description={description}
+        pathname={__resourcePath}
+        image={image}
+      />
+      <Navigation />
+      <Main as="article" style={{ minHeight: '200vh' }}>
+        <Container>
+          <StyledHeader title={title} subtitle={subtitle}>
+            {date && (
+              <div>
+                <Small element="time" dateTime={datetime}>
+                  {formattedDate}
+                </Small>
+              </div>
+            )}
+          </StyledHeader>
+          {image && (
+            <HeroImage aspectRatio={1.618} {...image} loading="eager" />
+          )}
 
-  return Guide;
-};
+          <Grid>
+            <TableOfContents tableOfContents={tableOfContents} />
+            <Intro>{description}</Intro>
+            <ComponentsProvider value={{ Align }}>
+              <MDXProvider components={components}>{children}</MDXProvider>
+            </ComponentsProvider>
+          </Grid>
+        </Container>
+      </Main>
+      <Prefooter />
+      <Footer />
+    </>
+  );
+}
+
+Guide.theme = travel;

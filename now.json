@@ -2,51 +2,6 @@
   "version": 2,
   "alias": "connorbaer.co",
   "regions": ["lhr", "bru"],
-  "routes": [
-    {
-      "src": "/static/images/(.*)",
-      "dest": "/server/api/image.js",
-      "headers": {
-        "X-Download-Options": "noopen",
-        "X-Frame-Options": "SAMEORIGIN",
-        "Referrer-Policy": "no-referrer-when-downgrade",
-        "X-Xss-Protection": "1",
-        "X-Content-Type-Options": "nosniff",
-        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
-        "Feature-Policy": "geolocation 'self'; microphone 'none'; camera 'none'"
-      }
-    },
-    {
-      "src": "/api/(.+)",
-      "dest": "/server/api/$1.js",
-      "headers": {
-        "X-Download-Options": "noopen",
-        "X-Frame-Options": "SAMEORIGIN",
-        "Referrer-Policy": "no-referrer-when-downgrade",
-        "X-Xss-Protection": "1",
-        "X-Content-Type-Options": "nosniff",
-        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
-        "Feature-Policy": "geolocation 'self'; microphone 'none'; camera 'none'"
-      }
-    },
-    {
-      "src": "^/service-worker.js$",
-      "dest": "/_next/static/service-worker.js",
-      "headers": {
-        "cache-control": "public, max-age=43200, immutable",
-        "Service-Worker-Allowed": "/"
-      }
-    }
-  ],
-  "builds": [
-    {
-      "src": "server/api/**.js",
-      "use": "@now/node",
-      "config": { "maxLambdaSize": "10mb" }
-    },
-    { "src": "images/**", "use": "@now/static" },
-    { "src": "package.json", "use": "@now/next" }
-  ],
   "build": {
     "env": {
       "GOOGLE_PROJECT_ID": "@google_project_id",

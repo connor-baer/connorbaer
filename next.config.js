@@ -6,7 +6,6 @@ const slug = require('rehype-slug');
 const emoji = require('remark-emoji');
 const externalLinks = require('remark-external-links');
 const withPlugins = require('next-compose-plugins');
-const withOffline = require('next-offline');
 const withBundleAnalyzer = require('@next/bundle-analyzer');
 const withMdxEnhanced = require('next-mdx-enhanced');
 
@@ -54,6 +53,43 @@ const nextConfig = {
 
     return config;
   },
+  async headers() {
+    return [
+      {
+        source: '/:all*',
+        headers: [
+          {
+            key: 'X-Download-Options',
+            value: 'noopen',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'no-referrer-when-downgrade',
+          },
+          {
+            key: 'X-Xss-Protection',
+            value: '1',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=31536000; includeSubDomains',
+          },
+          {
+            key: 'Feature-Policy',
+            value: "geolocation 'self'; microphone 'none'; camera 'none'",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 const bundleAnalyzerConfig = {
@@ -88,6 +124,7 @@ function toTOC(tree) {
 }
 
 const mdxConfig = {
+  reExportDataFetching: true,
   remarkPlugins: [emoji, externalLinks],
   rehypePlugins: [slug],
   extendFrontMatter: {
@@ -107,10 +144,6 @@ const mdxConfig = {
 };
 
 module.exports = withPlugins(
-  [
-    withOffline,
-    withMdxEnhanced(mdxConfig),
-    [withBundleAnalyzer, bundleAnalyzerConfig],
-  ],
+  [withMdxEnhanced(mdxConfig), [withBundleAnalyzer, bundleAnalyzerConfig]],
   nextConfig,
 );

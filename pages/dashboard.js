@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 
+import { getPreview } from '../services/preview';
 import Meta from '../components/Meta';
 import Clock from '../components/dashboard/Clock';
 import UpcomingEvent from '../components/dashboard/UpcomingEvent';
@@ -20,6 +21,10 @@ const StyledClock = styled(Clock)`
   font-weight: bold;
   font-size: 11vw;
 `;
+
+export function getStaticProps(context) {
+  return { props: { preview: getPreview(context) } };
+}
 
 export default function Dashboard() {
   const title = 'Dashboard';

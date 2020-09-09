@@ -1,10 +1,11 @@
 import { toNumber } from 'lodash/fp';
 
+import { getPreview } from '../../../services/preview';
 import Blog from '../../blog';
 
-Blog.getInitialProps = (ctx) => {
-  const page = toNumber(ctx.query.page);
-  return { page };
-};
+export function getServerSideProps({ query, ...context }) {
+  const page = toNumber(query.page);
+  return { props: { page, preview: getPreview(context) } };
+}
 
 export default Blog;

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Image as BambooImage, propTypes } from '@madebyconnor/bamboo-ui';
 
-const DEFAULT_WIDTH = 1200;
+const DEFAULT_WIDTH = 2000;
 
 function formatSrc(src, { width, height, ratio }) {
-  const params = {};
+  const params = { src };
   if (width) {
     params.w = Math.round(width);
   }
@@ -18,7 +18,7 @@ function formatSrc(src, { width, height, ratio }) {
     .filter((key) => !!params[key])
     .map((key) => `${key}=${params[key]}`)
     .join('&');
-  return `${src}?${query}`;
+  return `/api/image/?${query}`;
 }
 
 function formatSrcSet(src, srcSet = [400, 800, 1200, 1600, 2000], ratio) {
@@ -36,7 +36,7 @@ export default function Image(props = {}) {
   const ratio = aspectRatio || (width && height ? width / height : null);
   const src = formatSrc(props.src, { width, height, ratio });
   const srcSet = formatSrcSet(props.src, props.srcSet, ratio);
-  return <BambooImage {...props} src={src} srcSet={srcSet} />;
+  return <BambooImage loading="lazy" {...props} src={src} srcSet={srcSet} />;
 }
 
 Image.propTypes = propTypes.imagePropType;

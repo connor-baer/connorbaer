@@ -1,12 +1,13 @@
 import fs from 'fs';
 import path from 'path';
-import glob from 'glob';
 import { promisify } from 'util';
+
+import glob from 'glob';
 
 const globAsync = promisify(glob);
 const statAsync = promisify(fs.stat);
 
-const EXTENSIONS = ['js', 'jsx', 'mdx', 'md'];
+const EXTENSIONS = ['js', 'jsx', 'tsx', 'mdx', 'md'];
 const EXTENSIONS_REGEXP = new RegExp(`.(${EXTENSIONS.join('|')})$`);
 const ROOT_DIR = path.resolve(__dirname, '../src');
 const PAGES_DIR = `${ROOT_DIR}/pages`;
