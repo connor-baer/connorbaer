@@ -11,9 +11,9 @@ export default function CustomNavigation({
   siteName = NAME,
   siteLogo = <PandaIcon alt="Panda" />,
   links = [
-    { url: '/about', label: '✌️ About' },
-    { url: '/projects', label: '💡 Projects' },
-    { url: '/blog', label: '🖋️ Blog' },
+    { url: '/about', icon: '✌️', label: 'About' },
+    { url: '/projects', icon: '💡', label: 'Projects' },
+    { url: '/blog', icon: '🖋️', label: 'Blog' },
   ],
 }) {
   const router = useRouter();
