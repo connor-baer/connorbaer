@@ -12,7 +12,10 @@ const withMdxEnhanced = require('next-mdx-enhanced');
 const nextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
-  experimental: { deferScripts: true },
+  experimental: {
+    deferScripts: true,
+    granularChunks: true,
+  },
   env: {
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_PROJECT_ID: process.env.GOOGLE_PROJECT_ID,
