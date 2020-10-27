@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { useTheme } from 'emotion-theming';
-import { CoverImage, Heading, Paragraph } from '@madebyconnor/bamboo-ui';
+import { CoverImage, Heading, Paragraph, Small } from '@madebyconnor/bamboo-ui';
 
 import Link from '../../Link';
+import { formatDate, formatDatetime } from '../../../utils/date';
 
 function getSizes(theme) {
   const deskSize = `(min-width: ${theme.breakpoints.desk}) 240px`;
@@ -45,21 +46,6 @@ const aStyles = ({ theme }) => css`
 
 const A = styled('a')(aStyles);
 
-const imageStyles = ({ theme }) => css`
-  width: 100%;
-
-  ${theme.mq.hand} {
-    width: 50%;
-    margin-right: ${theme.spacing.xl};
-  }
-
-  ${theme.mq.lap} {
-    width: 33.33%;
-  }
-`;
-
-const Image = styled('div')(imageStyles);
-
 const contentStyles = ({ theme }) => css`
   padding-top: ${theme.spacing.m};
   width: 100%;
@@ -70,7 +56,7 @@ const contentStyles = ({ theme }) => css`
   }
 
   ${theme.mq.lap} {
-    width: 66.66%;
+    width: 33.33%;
   }
 `;
 
@@ -89,37 +75,64 @@ const subtitleStyles = ({ theme }) => css`
   margin-bottom: 0;
   color: ${theme.color.bodyColor};
   display: -webkit-box;
-  line-clamp: 3;
-  -webkit-line-clamp: 3;
+  line-clamp: 5;
+  -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   overflow: hidden;
 `;
 
 const Subtitle = styled(Paragraph)(subtitleStyles);
 
+const imageStyles = ({ theme }) => css`
+  width: 100%;
+
+  ${theme.mq.hand} {
+    width: 50%;
+    margin-left: ${theme.spacing.xl};
+  }
+
+  ${theme.mq.lap} {
+    width: 66.66%;
+  }
+`;
+
+const Image = styled('div')(imageStyles);
+
 export default function GuideLarge({
   url,
   image = {},
   title,
   subtitle,
+  date,
   className,
 }) {
   const theme = useTheme();
   const sizes = getSizes(theme);
+  const formattedDate = formatDate(date);
+  const datetime = formatDatetime(date);
   /* eslint-disable jsx-a11y/anchor-is-valid */
   return (
     <Article className={className}>
       <Link href={url}>
         <A>
+          <Content>
+            <Title as="h2" size="xl">
+              {title}
+            </Title>
+            <Subtitle>{subtitle}</Subtitle>
+            {date && (
+              <div>
+                <Small>
+                  <time dateTime={datetime}>{formattedDate}</time>
+                </Small>
+              </div>
+            )}
+          </Content>
           {image.src && (
             <Image>
               <CoverImage {...image} sizes={sizes} aspectRatio={1.618} />
             </Image>
           )}
-          <Content>
-            <Title as="h2">{title}</Title>
-            <Subtitle>{subtitle}</Subtitle>
-          </Content>
         </A>
       </Link>
     </Article>

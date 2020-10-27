@@ -37,7 +37,8 @@ const summaryStyles = ({ theme }) => css`
   list-style: none;
 
   &:focus {
-    ${styles.focusOutline({ theme })}
+    border-radius: ${theme.borderRadius.s};
+    ${styles.focusOutline(theme)};
   }
 
   &::-webkit-details-marker {
@@ -102,17 +103,17 @@ function TableOfContents({ title = 'Table of Contents', tableOfContents }) {
   const [open, setOpen] = useState(false);
   const query = theme.mq.lap.replace('@media ', '');
   const permanentlyOpen = useMedia(query);
+  const isOpen = permanentlyOpen || open;
 
   if (isEmpty(tableOfContents)) {
     return null;
   }
 
   const handleClick = (event) => {
-    if (event.target.tagName !== 'A') {
+    if (event.target.tagName === 'SUMMARY') {
       event.preventDefault();
+      setOpen((prev) => !prev);
     }
-
-    setOpen((prev) => !prev);
   };
 
   return (
@@ -120,12 +121,12 @@ function TableOfContents({ title = 'Table of Contents', tableOfContents }) {
       <Global styles={smoothScrollStyles} />
 
       <Details
-        open={permanentlyOpen || open}
+        open={isOpen}
         onClick={handleClick}
         align={Align.LEFT}
         as="details"
       >
-        <Summary as="summary" size="l">
+        <Summary as="summary" size="m">
           {title}
         </Summary>
         <List>

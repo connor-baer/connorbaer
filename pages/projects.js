@@ -33,8 +33,7 @@ export function getStaticProps(context) {
 export default function ProjectsHome() {
   const [projects] = useProjects();
   const title = 'Selected Work';
-  const subtitle = 'Make technology human.';
-
+  const subtitle = 'Built for all humans.';
   return (
     <>
       <Meta title={title} description={subtitle} pathname={'projects'} />

@@ -12,16 +12,6 @@ export const travel = {
     ...standard.fonts,
     {
       name: 'Playfair Display',
-      localName: 'Playfair Display',
-      weight: '400',
-      style: 'normal',
-      sources: [
-        `${ASSET_BASEURL}/fonts/playfair-display-v20-latin-400.woff2`,
-        `${ASSET_BASEURL}/fonts/playfair-display-v20-latin-400.woff`,
-      ],
-    },
-    {
-      name: 'Playfair Display',
       localName: 'Playfair Display Bold',
       weight: '700',
       style: 'normal',

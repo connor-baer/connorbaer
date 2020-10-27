@@ -31,8 +31,8 @@ export default function PostMeta({ date, category, className }) {
   return (
     <Wrapper className={className}>
       {date && (
-        <Small element="time" dateTime={datetime}>
-          {formattedDate}
+        <Small>
+          <time dateTime={datetime}>{formattedDate}</time>
         </Small>
       )}
       {category && (
