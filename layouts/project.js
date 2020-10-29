@@ -9,7 +9,6 @@ import {
   styles,
 } from '@madebyconnor/bamboo-ui';
 
-import { getPreview } from '../services/preview';
 import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
 import Prefooter from '../components/Prefooter';
@@ -83,14 +82,14 @@ export default function Project({ children, frontMatter }) {
     image,
     skills,
     client,
-    __resourcePath,
+    __resourcePath: pathname,
   } = frontMatter;
   return (
     <>
       <Meta
         title={title}
         description={brief}
-        pathname={__resourcePath}
+        pathname={pathname}
         image={image}
       />
       <Navigation />

@@ -27,6 +27,7 @@ export default function useGoogle(scope, discoveryDocs) {
           // Handle the initial sign-in state.
           setAuthorized(gapi.auth2.getAuthInstance().isSignedIn.get());
         })
+        // eslint-disable-next-line no-console
         .catch(console.error);
     }
 

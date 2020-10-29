@@ -9,7 +9,6 @@ import {
   styles,
 } from '@madebyconnor/bamboo-ui';
 
-import { getPreview } from '../services/preview';
 import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
 import Prefooter from '../components/Prefooter';
@@ -39,10 +38,10 @@ const Content = styled('div')(contentStyles);
 // }
 
 export default function ArticlePage({ children, frontMatter }) {
-  const { title, subtitle, __resourcePath } = frontMatter;
+  const { title, subtitle, __resourcePath: pathname } = frontMatter;
   return (
     <>
-      <Meta title={title} description={subtitle} pathname={__resourcePath} />
+      <Meta title={title} description={subtitle} pathname={pathname} />
       <Navigation />
       <Main>
         <Article>

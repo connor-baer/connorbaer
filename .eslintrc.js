@@ -2,7 +2,7 @@ module.exports = require('@sumup/foundry/eslint')(
   {
     language: 'TypeScript',
     environments: ['Browser'],
-    frameworks: ['React', 'Emotion', 'Jest'],
+    frameworks: ['React', 'Emotion'],
     openSource: false,
   },
   {
@@ -17,6 +17,17 @@ module.exports = require('@sumup/foundry/eslint')(
         files: ['layouts/*.js'],
         rules: {
           'react/prop-types': 'off',
+        },
+      },
+      {
+        files: ['**/*.js'],
+        rules: {
+          '@typescript-eslint/explicit-module-boundary-types': 'off',
+          '@typescript-eslint/restrict-template-expressions': 'off',
+          '@typescript-eslint/no-unsafe-member-access': 'off',
+          '@typescript-eslint/no-unsafe-assignment': 'off',
+          '@typescript-eslint/no-unsafe-return': 'off',
+          '@typescript-eslint/no-unsafe-call': 'off',
         },
       },
     ],
