@@ -12,7 +12,6 @@ import {
   styles,
 } from '@madebyconnor/bamboo-ui';
 
-import { getPreview } from '../services/preview';
 import { formatDate, formatDatetime } from '../services/date';
 import { travel } from '../styles/themes';
 import Meta from '../components/Meta';
@@ -79,7 +78,7 @@ export default function Guide({ children, frontMatter }) {
     image = {},
     date,
     tableOfContents,
-    __resourcePath,
+    __resourcePath: pathname,
   } = frontMatter;
   const formattedDate = formatDate(date);
   const datetime = formatDatetime(date);
@@ -89,7 +88,7 @@ export default function Guide({ children, frontMatter }) {
       <Meta
         title={`${title} ${subtitle}`}
         description={description}
-        pathname={__resourcePath}
+        pathname={pathname}
         image={image}
       />
       <Navigation />
