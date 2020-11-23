@@ -16,14 +16,14 @@ const activeStyles = {
 };
 
 interface EditOptions {
-  id: string;
+  path: string;
   initialValue: string;
   onChange?: (value: string) => void;
   multiline?: boolean;
 }
 
 export function useEdit({
-  id,
+  path,
   initialValue,
   onChange,
   multiline = false,
@@ -51,7 +51,7 @@ export function useEdit({
   const handleChange = (nextValue: string) => {
     const sanitizedValue = sanitize(nextValue);
     value.current = sanitizedValue;
-    dispatch({ id, value: sanitizedValue });
+    dispatch({ path, value: sanitizedValue });
     onChange?.(sanitizedValue);
   };
 
@@ -80,7 +80,7 @@ export function useEdit({
     'contentEditable': true,
     'suppressContentEditableWarning': true,
     'role': 'textbox',
-    'aria-label': `Edit ${id}`,
+    'aria-label': `Edit ${path}`,
     'aria-multiline': multiline,
     'onFocus': handleFocus,
     'onBlur': handleBlur,

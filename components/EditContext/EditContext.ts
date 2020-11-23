@@ -1,6 +1,16 @@
 import { createContext } from 'react';
 
-type Dispatch = ({ id, value }: { id: string; value: string }) => void;
+type Action = 'UPDATE' | 'DELETE' | 'ADD';
+
+type Dispatch = ({
+  path,
+  value,
+  action,
+}: {
+  path: string;
+  value: string;
+  action?: Action;
+}) => void;
 
 type EditContextType = [boolean, Dispatch];
 
