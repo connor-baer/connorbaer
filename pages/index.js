@@ -14,6 +14,7 @@ import PreviewSmall from '../components/blog/PreviewSmall';
 import GuideSmall from '../components/travel/GuideSmall';
 import usePosts from '../hooks/use-posts';
 import useCities from '../hooks/use-cities';
+import { useEdit } from '../hooks/use-edit';
 
 const Container = styled('div')(styles.pageWidth);
 
@@ -72,6 +73,10 @@ export default function HomePage() {
 
   const [posts] = usePosts({ skip: 3 });
   const [cities] = useCities({ skip: 4 });
+  const elProps = useEdit({
+    path: 'section.heading',
+    initialValue: 'Recent posts',
+  });
 
   return (
     <>
@@ -92,7 +97,7 @@ export default function HomePage() {
 
         {!isEmpty(posts) && (
           <Container>
-            <SectionHeading>Recent posts</SectionHeading>
+            <SectionHeading {...elProps} />
             <Posts>
               {posts.map((post) => (
                 <PostPreview

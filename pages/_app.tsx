@@ -13,11 +13,14 @@ import {
   LoadingBar,
   BaseStyles,
 } from '@madebyconnor/bamboo-ui';
+import { set } from 'lodash/fp';
 
 import { standard } from '../styles/themes';
 import { PreviewContext } from '../components/PreviewContext';
 import Link from '../components/Link';
 import Image from '../components/Image';
+import { EditContext } from '../components/EditContext';
+import { sessionStore, parse, serialize } from '../services/storage';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [isLoading, setLoading] = useState(false);
@@ -36,15 +39,25 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const theme = getTheme(Component);
 
+  const isEditable = pageProps.preview?.[1].includes('edit');
+  const handleEdit = ({ path, value }) => {
+    const currentEdits =
+      (parse(sessionStore.getItem('edits')) as Record<string, unknown>) || {};
+    const newEdits = set(path, value, currentEdits);
+    sessionStore.setItem('edits', serialize(newEdits));
+  };
+
   return (
     <PreviewContext.Provider value={pageProps.preview}>
-      <ComponentsProvider value={{ Head, Image, Link, Align }}>
-        <Theme theme={theme}>
-          <BaseStyles />
-          <LoadingBar isLoading={isLoading} />
-          <Component {...pageProps} />
-        </Theme>
-      </ComponentsProvider>
+      <EditContext.Provider value={[isEditable, handleEdit]}>
+        <ComponentsProvider value={{ Head, Image, Link, Align }}>
+          <Theme theme={theme}>
+            <BaseStyles />
+            <LoadingBar isLoading={isLoading} />
+            <Component {...pageProps} />
+          </Theme>
+        </ComponentsProvider>
+      </EditContext.Provider>
     </PreviewContext.Provider>
   );
 }
