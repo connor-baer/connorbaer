@@ -4,7 +4,8 @@ sitemap.xml
 dist/
 .next/
 .esm-cache/
-.env*
+.env.*
+prisma/.env
 out
 bundles
 
@@ -12,9 +13,6 @@ bundles
 node_modules/
 package-lock.json
 
-# Install by running `composer update` #
-vendor/
-composer.lock
 
 # Compiled source #
 ###################
