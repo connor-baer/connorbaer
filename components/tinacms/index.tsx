@@ -1,0 +1,1 @@
+export { withTina } from './withTina';

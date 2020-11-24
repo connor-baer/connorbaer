@@ -14,6 +14,12 @@ module.exports = require('@sumup/foundry/eslint')(
     },
     overrides: [
       {
+        files: ['*'],
+        rules: {
+          'react/react-in-jsx-scope': 'off',
+        },
+      },
+      {
         files: ['layouts/*.js'],
         rules: {
           'react/prop-types': 'off',
