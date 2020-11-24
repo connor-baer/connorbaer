@@ -17,11 +17,19 @@ export default function CustomNavigation({
   ],
 }) {
   const router = useRouter();
+
   const isTravelPreview = usePreview('travel');
-  const isHomepage = router.asPath === '/';
+  const isFoodPreview = usePreview('food');
+
   if (isTravelPreview) {
     links.push({ url: '/travel', icon: '🧳', label: 'Travel' });
   }
+  if (isFoodPreview) {
+    links.push({ url: '/food', label: '🥑 Food' });
+  }
+
+  const isHomepage = router.asPath === '/';
+
   const enhancedLinks = links.map((link) => {
     const isActive = startsWith(link.url, router.asPath);
     return { ...link, isActive };
