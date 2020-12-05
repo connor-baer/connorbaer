@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { startsWith } from 'lodash/fp';
 import { useRouter } from 'next/router';
 import { Navigation, PandaIcon, propTypes } from '@madebyconnor/bamboo-ui';
+import { css } from '@emotion/core';
 
 import usePreview from '../../hooks/use-preview';
 import { NAME } from '../../constants/site';
@@ -18,6 +19,7 @@ export default function CustomNavigation({
 }) {
   const router = useRouter();
 
+  const isEditable = usePreview('edit');
   const isTravelPreview = usePreview('travel');
   const isFoodPreview = usePreview('food');
 
@@ -39,6 +41,12 @@ export default function CustomNavigation({
     <Navigation
       brand={{ siteName, siteLogo, isHomepage }}
       links={enhancedLinks}
+      css={
+        isEditable &&
+        css`
+          top: 62px !important;
+        `
+      }
     />
   );
 }

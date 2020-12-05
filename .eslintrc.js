@@ -17,6 +17,9 @@ module.exports = require('@sumup/foundry/eslint')(
         files: ['*'],
         rules: {
           'react/react-in-jsx-scope': 'off',
+          '@typescript-eslint/no-unsafe-call': 'warn',
+          '@typescript-eslint/no-unsafe-member-access': 'warn',
+          '@typescript-eslint/no-unsafe-assignment': 'warn',
         },
       },
       {

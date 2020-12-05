@@ -1,30 +1,67 @@
-import { Fragment } from 'react';
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
-import { useForm, usePlugin } from '@tinacms/react-core';
-import { InlineForm, InlineText } from 'react-tinacms-inline';
+import { Fragment, useContext } from 'react';
+import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import { Main, Header } from '@madebyconnor/bamboo-ui';
+import { Node } from 'slate';
 
 import Meta from '../../components/Meta';
 import Navigation from '../../components/Navigation';
-import { withTina } from '../../components/tinacms';
+import { withTina, TinaComponentsContext } from '../../cms/components/withTina';
 import { getPreview } from '../../services/preview';
+import { prisma } from '../../prisma/client';
+import { serialize } from '../../utils/serialize';
+import { toPlainText } from '../../services/rich-text';
 
-// eslint-disable-next-line @typescript-eslint/require-await
-export const getStaticProps: GetStaticProps = async (context) => ({
-  props: {
-    preview: getPreview(context),
-    title: 'Hello world',
-    subtitle: 'This is me.',
-  },
-});
-
-// type FoodProps = InferGetStaticPropsType<typeof getStaticProps>;
-type FoodProps = {
-  title: string;
-  subtitle: string;
+const renderElement = ({ element, attributes = {}, children }) => {
+  switch (element.type) {
+    case 'link': {
+      return (
+        <a {...attributes} href={element.url}>
+          {children}
+        </a>
+      );
+    }
+    default: {
+      return <p {...attributes}>{children}</p>;
+    }
+  }
 };
 
-function Food(props: FoodProps) {
+const renderLeaf = ({ attributes, children, ...rest }) => {
+  console.log({ attributes, children, ...rest });
+  return <span {...attributes}>{children}</span>;
+};
+
+export const getStaticProps = async (context: GetStaticPropsContext) => {
+  const recipe = await prisma.recipe.findFirst({
+    include: {
+      ingredients: {
+        include: {
+          ingredient: true,
+        },
+      },
+    },
+  });
+  return {
+    props: {
+      preview: getPreview(context),
+      ...serialize(recipe),
+    },
+  };
+};
+
+type FoodProps = InferGetStaticPropsType<typeof getStaticProps>;
+
+function Food({
+  preview,
+  ...props
+}: InferGetStaticPropsType<typeof getStaticProps>) {
+  const {
+    useForm,
+    usePlugin,
+    InlineForm,
+    InlineText,
+    InlineSlate,
+  } = useContext(TinaComponentsContext);
   const [modifiedValues, form] = useForm<FoodProps>({
     id: 'food-index',
     label: 'Edit Page',
@@ -35,13 +72,14 @@ function Food(props: FoodProps) {
         component: 'text',
       },
       {
-        name: 'subtitle',
-        label: 'Subtitle',
-        component: 'text',
+        name: 'description',
+        label: 'Description',
+        component: 'slate-editor',
       },
     ],
     initialValues: props,
-    onSubmit: () => {
+    onSubmit: (values) => {
+      console.debug(values);
       window.alert('Saved!');
     },
   });
@@ -52,7 +90,7 @@ function Food(props: FoodProps) {
     <Fragment>
       <Meta
         title={modifiedValues.title}
-        description={modifiedValues.subtitle}
+        description={toPlainText(modifiedValues.description as Node[])}
         pathname={''}
         image={{
           src: '/images/pages/connor.jpg',
@@ -64,8 +102,21 @@ function Food(props: FoodProps) {
         <InlineForm form={form}>
           <Header
             title={<InlineText name="title" />}
-            subtitle={<InlineText name="subtitle" />}
+            subtitle={
+              <InlineSlate
+                name="description"
+                renderElement={renderElement}
+                renderLeaf={renderLeaf}
+              />
+            }
           />
+          <ul>
+            {modifiedValues.ingredients.map(({ amount, unit, ingredient }) => (
+              <li key={ingredient.id}>
+                {amount} {unit} {ingredient.title}
+              </li>
+            ))}
+          </ul>
         </InlineForm>
       </Main>
     </Fragment>
