@@ -2,7 +2,7 @@ import { TinaCMS, TinaCMSConfig } from 'tinacms';
 
 import { slateFieldPlugin } from '../plugins/field-slate';
 
-export { TinaProvider } from 'tinacms';
+export { TinaProvider, useCMS } from 'tinacms';
 export { useForm, usePlugin } from '@tinacms/react-core';
 
 // Fields

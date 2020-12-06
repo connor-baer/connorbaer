@@ -6,13 +6,15 @@ import {
   ComponentType,
   ReactNode,
 } from 'react';
-import { Node } from 'slate';
+import { Button } from '@madebyconnor/bamboo-ui';
+import type { Node } from 'slate';
 import type * as Tina from 'tinacms';
+import { css } from '@emotion/core';
 
 import usePreview from '../../hooks/use-preview';
 import { RichTextOptions, toReact } from '../../services/rich-text';
 
-import type * as LazyLoad from './lazy-load';
+import type * as LazyTinaImport from './lazy-tina';
 
 type Form = Record<string, unknown>;
 
@@ -42,11 +44,11 @@ const noop = () => {};
 const NoopComponent = ({ children }: { children: ReactNode }) =>
   children || null;
 
-type Components = Omit<typeof LazyLoad, 'initCMS'> & {
+type LazyTina = Omit<typeof LazyTinaImport, 'initCMS'> & {
   cms: Tina.TinaCMS;
 };
 
-const initialComponents: { [key in keyof Components]: any } = {
+const initialTina: { [key in keyof LazyTina]: any } = {
   cms: {},
   TinaProvider: NoopComponent,
   InlineForm,
@@ -58,11 +60,28 @@ const initialComponents: { [key in keyof Components]: any } = {
     initialValues: T;
   }): [T, T] => [initialValues, initialValues],
   usePlugin: noop,
+  useCMS: () => ({}),
 };
 
-export const TinaComponentsContext = createContext<Components>(
-  initialComponents,
-);
+export const LazyTinaContext = createContext<LazyTina>(initialTina);
+
+function EditButton() {
+  const { useCMS } = useContext(LazyTinaContext);
+  const cms = useCMS();
+  return (
+    <Button
+      onClick={() => cms.toggle()}
+      css={css`
+        position: fixed;
+        z-index: 99999;
+        bottom: 2.75rem;
+        right: 2.25rem;
+      `}
+    >
+      {cms.enabled ? 'Exit edit mode' : 'Edit'}
+    </Button>
+  );
+}
 
 export function withTina<T>(
   Component: ComponentType<T>,
@@ -70,16 +89,16 @@ export function withTina<T>(
 ) {
   return (props: T): JSX.Element => {
     const enabled = usePreview('edit');
-    const [components, setComponents] = useState<Components>(initialComponents);
+    const [components, setComponents] = useState<LazyTina>(initialTina);
 
     useEffect(() => {
       if (enabled) {
-        import('./lazy-load')
+        import('./lazy-tina')
           .then(({ initCMS, ...rest }) => {
             const cms = initCMS({
-              sidebar: enabled,
-              toolbar: enabled,
-              enabled,
+              sidebar: true,
+              toolbar: true,
+              enabled: false,
               ...config,
             });
 
@@ -89,14 +108,15 @@ export function withTina<T>(
       }
     }, [enabled]);
 
-    const { cms, TinaProvider } = components;
+    const { TinaProvider } = components;
 
     return (
-      <TinaComponentsContext.Provider value={components}>
-        <TinaProvider cms={cms} styled={enabled}>
+      <LazyTinaContext.Provider value={components}>
+        <TinaProvider cms={components.cms} styled={enabled}>
           <Component {...props} />
+          {enabled && <EditButton />}
         </TinaProvider>
-      </TinaComponentsContext.Provider>
+      </LazyTinaContext.Provider>
     );
   };
 }

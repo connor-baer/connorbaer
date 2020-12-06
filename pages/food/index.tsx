@@ -5,7 +5,7 @@ import { Node } from 'slate';
 
 import Meta from '../../components/Meta';
 import Navigation from '../../components/Navigation';
-import { withTina, TinaComponentsContext } from '../../cms/components/withTina';
+import { withTina, LazyTinaContext } from '../../cms/components/withTina';
 import { getPreview } from '../../services/preview';
 import { prisma } from '../../prisma/client';
 import { serialize } from '../../utils/serialize';
@@ -61,7 +61,7 @@ function Food({
     InlineForm,
     InlineText,
     InlineSlate,
-  } = useContext(TinaComponentsContext);
+  } = useContext(LazyTinaContext);
   const [modifiedValues, form] = useForm<FoodProps>({
     id: 'food-index',
     label: 'Edit Page',

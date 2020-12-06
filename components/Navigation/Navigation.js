@@ -7,6 +7,7 @@ import { css } from '@emotion/core';
 
 import usePreview from '../../hooks/use-preview';
 import { NAME } from '../../constants/site';
+import { useCMS } from '../../cms';
 
 export default function CustomNavigation({
   siteName = NAME,
@@ -19,7 +20,8 @@ export default function CustomNavigation({
 }) {
   const router = useRouter();
 
-  const isEditable = usePreview('edit');
+  const cms = useCMS();
+  const isEditable = cms.enabled;
   const isTravelPreview = usePreview('travel');
   const isFoodPreview = usePreview('food');
 
