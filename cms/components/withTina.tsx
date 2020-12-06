@@ -44,7 +44,7 @@ const noop = () => {};
 const NoopComponent = ({ children }: { children: ReactNode }) =>
   children || null;
 
-type LazyTina = Omit<typeof LazyTinaImport, 'initCMS'> & {
+export type LazyTina = Omit<typeof LazyTinaImport, 'initCMS'> & {
   cms: Tina.TinaCMS;
 };
 
@@ -68,17 +68,22 @@ export const LazyTinaContext = createContext<LazyTina>(initialTina);
 function EditButton() {
   const { useCMS } = useContext(LazyTinaContext);
   const cms = useCMS();
+
+  if (cms.enabled) {
+    return null;
+  }
+
   return (
     <Button
-      onClick={() => cms.toggle()}
+      onClick={cms.enable}
       css={css`
         position: fixed;
         z-index: 99999;
-        bottom: 2.75rem;
-        right: 2.25rem;
+        top: 1.25rem;
+        right: 1.5rem;
       `}
     >
-      {cms.enabled ? 'Exit edit mode' : 'Edit'}
+      Edit
     </Button>
   );
 }
@@ -96,7 +101,6 @@ export function withTina<T>(
         import('./lazy-tina')
           .then(({ initCMS, ...rest }) => {
             const cms = initCMS({
-              sidebar: true,
               toolbar: true,
               enabled: false,
               ...config,

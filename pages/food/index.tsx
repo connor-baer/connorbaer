@@ -1,11 +1,12 @@
-import { Fragment, useContext } from 'react';
+import { Fragment } from 'react';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import { Main, Header } from '@madebyconnor/bamboo-ui';
 import { Node } from 'slate';
+import { Recipe } from '@prisma/client';
 
 import Meta from '../../components/Meta';
 import Navigation from '../../components/Navigation';
-import { withTina, LazyTinaContext } from '../../cms/components/withTina';
+import { withTina, useLazyTina } from '../../cms';
 import { getPreview } from '../../services/preview';
 import { prisma } from '../../prisma/client';
 import { serialize } from '../../utils/serialize';
@@ -39,6 +40,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
           ingredient: true,
         },
       },
+      instructions: true,
     },
   });
   return {
@@ -53,16 +55,20 @@ type FoodProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 function Food({
   preview,
-  ...props
+  ingredients,
+  instructions,
+  ...recipe
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const {
+    useCMS,
     useForm,
     usePlugin,
     InlineForm,
     InlineText,
     InlineSlate,
-  } = useContext(LazyTinaContext);
-  const [modifiedValues, form] = useForm<FoodProps>({
+  } = useLazyTina();
+  const cms = useCMS();
+  const [modifiedRecipe, recipeForm] = useForm<Recipe>({
     id: 'food-index',
     label: 'Edit Page',
     fields: [
@@ -77,20 +83,36 @@ function Food({
         component: 'slate-editor',
       },
     ],
-    initialValues: props,
-    onSubmit: (values) => {
-      console.debug(values);
-      window.alert('Saved!');
+    initialValues: recipe,
+    onSubmit: async ({ id, ...values }: Recipe) => {
+      try {
+        cms.alerts.info('Saving content...');
+
+        await fetch(`/api/cms/recipes/${id}`, {
+          method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(values),
+        });
+
+        cms.alerts.success('Saved content.');
+      } catch (error) {
+        cms.alerts.error('Error saving content!');
+        console.error(error);
+      }
     },
   });
 
-  usePlugin(form);
+  usePlugin(recipeForm);
+
+  const { title, description } = modifiedRecipe;
 
   return (
     <Fragment>
       <Meta
-        title={modifiedValues.title}
-        description={toPlainText(modifiedValues.description as Node[])}
+        title={title}
+        description={description && toPlainText(description as Node[])}
         pathname={''}
         image={{
           src: '/images/pages/connor.jpg',
@@ -99,7 +121,7 @@ function Food({
       />
       <Navigation />
       <Main>
-        <InlineForm form={form}>
+        <InlineForm form={recipeForm}>
           <Header
             title={<InlineText name="title" />}
             subtitle={
@@ -110,14 +132,14 @@ function Food({
               />
             }
           />
-          <ul>
-            {modifiedValues.ingredients.map(({ amount, unit, ingredient }) => (
-              <li key={ingredient.id}>
-                {amount} {unit} {ingredient.title}
-              </li>
-            ))}
-          </ul>
         </InlineForm>
+        <ul>
+          {ingredients.map(({ amount, unit, ingredient }) => (
+            <li key={ingredient.id}>
+              {amount} {unit} {ingredient.title}
+            </li>
+          ))}
+        </ul>
       </Main>
     </Fragment>
   );

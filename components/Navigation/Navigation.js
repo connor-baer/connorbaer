@@ -2,12 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { startsWith } from 'lodash/fp';
 import { useRouter } from 'next/router';
-import { Navigation, PandaIcon, propTypes } from '@madebyconnor/bamboo-ui';
 import { css } from '@emotion/core';
+import { Navigation, PandaIcon, propTypes } from '@madebyconnor/bamboo-ui';
 
 import usePreview from '../../hooks/use-preview';
 import { NAME } from '../../constants/site';
 import { useCMS } from '../../cms';
+
+const editableStyles = (isEditable) => (theme) =>
+  isEditable &&
+  css`
+    ${theme.mq.lap} {
+      top: 62px !important;
+    }
+  `;
 
 export default function CustomNavigation({
   siteName = NAME,
@@ -29,7 +37,7 @@ export default function CustomNavigation({
     links.push({ url: '/travel', icon: '🧳', label: 'Travel' });
   }
   if (isFoodPreview) {
-    links.push({ url: '/food', label: '🥑 Food' });
+    links.push({ url: '/food', icon: '🥑', label: 'Food' });
   }
 
   const isHomepage = router.asPath === '/';
@@ -43,12 +51,7 @@ export default function CustomNavigation({
     <Navigation
       brand={{ siteName, siteLogo, isHomepage }}
       links={enhancedLinks}
-      css={
-        isEditable &&
-        css`
-          top: 62px !important;
-        `
-      }
+      css={editableStyles(isEditable)}
     />
   );
 }

@@ -30,7 +30,9 @@ export function InlineSlate({
             />
           );
         }
-        return toReact(input.value, { renderElement, renderLeaf });
+        return input.value
+          ? toReact(input.value, { renderElement, renderLeaf })
+          : null;
       }}
     </InlineField>
   );
