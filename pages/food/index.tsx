@@ -1,142 +1,99 @@
-import { Fragment } from 'react';
+import { useEffect, Fragment } from 'react';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
-import { Main, Header } from '@madebyconnor/bamboo-ui';
+import { useRouter } from 'next/router';
 import { Node } from 'slate';
+import { Anchor, Main, Header } from '@madebyconnor/bamboo-ui';
 import { Recipe } from '@prisma/client';
 
 import Meta from '../../components/Meta';
 import Navigation from '../../components/Navigation';
-import { withTina, useLazyTina } from '../../cms';
-import { getPreview } from '../../services/preview';
+import { useCMS, withTina } from '../../cms';
 import { prisma } from '../../prisma/client';
 import { serialize } from '../../utils/serialize';
+import { createSlug } from '../../utils/id';
+import { getPreview } from '../../services/preview';
 import { toPlainText } from '../../services/rich-text';
+import * as logger from '../../services/logger';
 
-const renderElement = ({ element, attributes = {}, children }) => {
-  switch (element.type) {
-    case 'link': {
-      return (
-        <a {...attributes} href={element.url}>
-          {children}
-        </a>
-      );
+const BlogPostCreatorPlugin = (router) => ({
+  __type: 'content-creator',
+  name: 'BlogPostCreator',
+  fields: [
+    {
+      label: 'Title',
+      name: 'title',
+      component: 'text',
+      validation(title) {
+        if (!title) {
+          return 'Required.';
+        }
+        return false;
+      },
+    },
+  ],
+  async onSubmit(values) {
+    try {
+      const response = await fetch(`/api/cms/recipes`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+      });
+      const recipe: Recipe = await response.json();
+      const slug = createSlug(recipe.id, recipe.title);
+      router.push(`/food/${slug}`);
+    } catch (error) {
+      logger.error(error);
     }
-    default: {
-      return <p {...attributes}>{children}</p>;
-    }
-  }
-};
-
-const renderLeaf = ({ attributes, children, ...rest }) => {
-  console.log({ attributes, children, ...rest });
-  return <span {...attributes}>{children}</span>;
-};
+  },
+});
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
-  const recipe = await prisma.recipe.findFirst({
+  const recipes = await prisma.recipe.findMany({
     include: {
       ingredients: {
         include: {
           ingredient: true,
         },
       },
-      instructions: true,
     },
   });
   return {
     props: {
       preview: getPreview(context),
-      ...serialize(recipe),
+      recipes: recipes.map(serialize),
     },
   };
 };
 
-type FoodProps = InferGetStaticPropsType<typeof getStaticProps>;
+type FoodPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
-function Food({
-  preview,
-  ingredients,
-  instructions,
-  ...recipe
-}: InferGetStaticPropsType<typeof getStaticProps>) {
-  const {
-    useCMS,
-    useForm,
-    usePlugin,
-    InlineForm,
-    InlineText,
-    InlineSlate,
-  } = useLazyTina();
+function FoodPage({ recipes }: FoodPageProps) {
+  const title = 'Recipes';
+  const description = 'Delicious. Healthy. Sustainable.';
+
   const cms = useCMS();
-  const [modifiedRecipe, recipeForm] = useForm<Recipe>({
-    id: 'food-index',
-    label: 'Edit Page',
-    fields: [
-      {
-        name: 'title',
-        label: 'Title',
-        component: 'text',
-      },
-      {
-        name: 'description',
-        label: 'Description',
-        component: 'slate-editor',
-      },
-    ],
-    initialValues: recipe,
-    onSubmit: async ({ id, ...values }: Recipe) => {
-      try {
-        cms.alerts.info('Saving content...');
+  const router = useRouter();
 
-        await fetch(`/api/cms/recipes/${id}`, {
-          method: 'PUT', // *GET, POST, PUT, DELETE, etc.
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(values),
-        });
-
-        cms.alerts.success('Saved content.');
-      } catch (error) {
-        cms.alerts.error('Error saving content!');
-        console.error(error);
-      }
-    },
-  });
-
-  usePlugin(recipeForm);
-
-  const { title, description } = modifiedRecipe;
+  useEffect(() => {
+    if (cms && cms.plugins) {
+      cms.plugins.add(BlogPostCreatorPlugin(router));
+    }
+  }, [cms, router]);
 
   return (
     <Fragment>
-      <Meta
-        title={title}
-        description={description && toPlainText(description as Node[])}
-        pathname={''}
-        image={{
-          src: '/images/pages/connor.jpg',
-          alt: 'Connor Bär smiles at the camera',
-        }}
-      />
+      <Meta title={title} description={description} pathname="/food" />
       <Navigation />
       <Main>
-        <InlineForm form={recipeForm}>
-          <Header
-            title={<InlineText name="title" />}
-            subtitle={
-              <InlineSlate
-                name="description"
-                renderElement={renderElement}
-                renderLeaf={renderLeaf}
-              />
-            }
-          />
-        </InlineForm>
+        <Header title={title} subtitle={description} />
         <ul>
-          {ingredients.map(({ amount, unit, ingredient }) => (
-            <li key={ingredient.id}>
-              {amount} {unit} {ingredient.title}
+          {recipes.map((recipe) => (
+            <li key={recipe.id}>
+              <Anchor href={`/food/${createSlug(recipe.id, recipe.title)}`}>
+                {recipe.title}{' '}
+                {recipe.description &&
+                  toPlainText(recipe.description as Node[])}
+              </Anchor>
             </li>
           ))}
         </ul>
@@ -145,4 +102,4 @@ function Food({
   );
 }
 
-export default withTina(Food);
+export default withTina(FoodPage);

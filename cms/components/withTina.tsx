@@ -13,6 +13,7 @@ import { css } from '@emotion/core';
 
 import usePreview from '../../hooks/use-preview';
 import { RichTextOptions, toReact } from '../../services/rich-text';
+import { sessionStore } from '../../services/storage';
 
 import type * as LazyTinaImport from './lazy-tina';
 
@@ -102,8 +103,15 @@ export function withTina<T>(
           .then(({ initCMS, ...rest }) => {
             const cms = initCMS({
               toolbar: true,
-              enabled: false,
+              enabled: sessionStore.getItem('cms') === 'enabled',
               ...config,
+            });
+
+            cms.events.subscribe('cms:enable', () => {
+              sessionStore.setItem('cms', 'enabled');
+            });
+            cms.events.subscribe('cms:disable', () => {
+              sessionStore.setItem('cms', 'disabled');
             });
 
             setComponents({ cms, ...rest });

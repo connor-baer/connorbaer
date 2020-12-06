@@ -1,6 +1,8 @@
 /* global gapi */
 import { useState, useEffect } from 'react';
 
+import * as logger from '../services/logger';
+
 import useScript from './use-script';
 
 const GOOGLE_API_SOURCE = 'https://apis.google.com/js/api.js';
@@ -27,8 +29,7 @@ export default function useGoogle(scope, discoveryDocs) {
           // Handle the initial sign-in state.
           setAuthorized(gapi.auth2.getAuthInstance().isSignedIn.get());
         })
-        // eslint-disable-next-line no-console
-        .catch(console.error);
+        .catch(logger.error);
     }
 
     if (isLoaded) {

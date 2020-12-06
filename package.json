@@ -76,6 +76,7 @@
     "slate-history": "^0.59.0",
     "slate-hyperscript": "^0.59.0",
     "slate-react": "^0.59.0",
+    "slugify": "^1.4.6",
     "styled-components": "^5.2.1",
     "tinacms": "^0.33.0",
     "typescript": "^4.1.2",
