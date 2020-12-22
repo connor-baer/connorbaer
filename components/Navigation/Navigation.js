@@ -20,7 +20,7 @@ export default function CustomNavigation({
   const isTravelPreview = usePreview('travel');
   const isHomepage = router.asPath === '/';
   if (isTravelPreview) {
-    links.push({ url: '/travel', label: '🧳 Travel' });
+    links.push({ url: '/travel', icon: '🧳', label: 'Travel' });
   }
   const enhancedLinks = links.map((link) => {
     const isActive = startsWith(link.url, router.asPath);
@@ -28,15 +28,10 @@ export default function CustomNavigation({
   });
 
   return (
-    <Navigation>
-      <Navigation.Brand
-        siteName={siteName}
-        siteLogo={siteLogo}
-        isHomepage={isHomepage}
-      />
-      <Navigation.Links links={enhancedLinks} />
-      <Navigation.Menu />
-    </Navigation>
+    <Navigation
+      brand={{ siteName, siteLogo, isHomepage }}
+      links={enhancedLinks}
+    />
   );
 }
 
