@@ -29,6 +29,11 @@ const Article = styled('article')(articleStyles);
 
 const titleStyles = ({ theme }) => css`
   margin-bottom: ${theme.spacing.s};
+
+  a:focus &,
+  a:hover & {
+    text-decoration: underline;
+  }
 `;
 
 const Title = styled(Heading)(titleStyles);

@@ -8,7 +8,7 @@ import { getPreview } from '../services/preview';
 import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
 import Prefooter from '../components/Prefooter';
-import Footer from '../components/Footer';
+import { Footer } from '../components/Footer';
 import PreviewLarge from '../components/blog/PreviewLarge';
 import usePosts from '../hooks/use-posts';
 

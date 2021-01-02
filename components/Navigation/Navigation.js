@@ -3,13 +3,18 @@ import PropTypes from 'prop-types';
 import { startsWith } from 'lodash/fp';
 import { useRouter } from 'next/router';
 import { css } from '@emotion/core';
-import { Navigation, PandaIcon, propTypes } from '@madebyconnor/bamboo-ui';
+import styled from '@emotion/styled';
+import {
+  Navigation as BambooNavigation,
+  PandaIcon,
+  propTypes,
+} from '@madebyconnor/bamboo-ui';
 
-import usePreview from '../../hooks/use-preview';
+import usePreview from '../../hooks/usePreview';
 import { NAME } from '../../constants/site';
 import { useCMS } from '../../cms';
 
-const editableStyles = (isEditable) => (theme) =>
+const editableStyles = ({ theme, isEditable }) =>
   isEditable &&
   css`
     ${theme.mq.lap} {
@@ -17,7 +22,21 @@ const editableStyles = (isEditable) => (theme) =>
     }
   `;
 
-export default function CustomNavigation({
+const variantStyles = ({ theme, variant }) =>
+  variant === 'sidebar' &&
+  css`
+    ${theme.mq.lap} {
+      width: calc(100vw - 25rem);
+      min-width: calc(100vw - 30vw);
+    }
+  `;
+
+const StyledNavigation = styled(BambooNavigation)(
+  variantStyles,
+  editableStyles,
+);
+
+export default function Navigation({
   siteName = NAME,
   siteLogo = <PandaIcon alt="Panda" />,
   links = [
@@ -25,6 +44,7 @@ export default function CustomNavigation({
     { url: '/projects', icon: '💡', label: 'Projects' },
     { url: '/blog', icon: '🖋️', label: 'Blog' },
   ],
+  variant,
 }) {
   const router = useRouter();
 
@@ -48,15 +68,16 @@ export default function CustomNavigation({
   });
 
   return (
-    <Navigation
+    <StyledNavigation
       brand={{ siteName, siteLogo, isHomepage }}
       links={enhancedLinks}
-      css={editableStyles(isEditable)}
+      isEditable={isEditable}
+      variant={variant}
     />
   );
 }
 
-CustomNavigation.propTypes = {
+Navigation.propTypes = {
   siteName: PropTypes.string,
   siteLogo: propTypes.childrenPropType,
   links: PropTypes.arrayOf(
@@ -66,4 +87,5 @@ CustomNavigation.propTypes = {
       icon: propTypes.childrenPropType,
     }),
   ),
+  variant: PropTypes.oneOf(['sidebar']),
 };

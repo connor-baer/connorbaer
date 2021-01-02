@@ -9,11 +9,14 @@ import PostMeta from '../PostMeta';
 
 const Article = styled('article')(styles.spacing([1, 0]));
 
-const titleStyles = () => css`
+const Title = styled(Heading)`
   margin-top: 0;
-`;
 
-const Title = styled(Heading)(titleStyles);
+  a:focus &,
+  a:hover & {
+    text-decoration: underline;
+  }
+`;
 
 const descriptionStyles = ({ theme }) => css`
   color: ${theme.color.bodyColor};

@@ -17,7 +17,7 @@ import { travel } from '../styles/themes';
 import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
 import Prefooter from '../components/Prefooter';
-import Footer from '../components/Footer';
+import { Footer } from '../components/Footer';
 import Align from '../components/travel/Align';
 import TableOfContents from '../components/travel/TableOfContents';
 

@@ -1,23 +1,33 @@
 import { useEffect, Fragment } from 'react';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
-import { useRouter } from 'next/router';
-import { Node } from 'slate';
-import { Anchor, Main, Header } from '@madebyconnor/bamboo-ui';
+import { NextRouter, useRouter } from 'next/router';
+import { css } from '@emotion/core';
+import { Header } from '@madebyconnor/bamboo-ui';
 import { Recipe } from '@prisma/client';
+import { TinaCMS } from 'tinacms';
 
 import Meta from '../../components/Meta';
-import Navigation from '../../components/Navigation';
 import { useCMS, withTina } from '../../cms';
+import { createSubmit } from '../../cms/helpers';
 import { prisma } from '../../prisma/client';
 import { serialize } from '../../utils/serialize';
 import { createSlug } from '../../utils/id';
 import { getPreview } from '../../services/preview';
-import { toPlainText } from '../../services/rich-text';
-import * as logger from '../../services/logger';
+import { FoodLayout } from '../../sections/food/layouts';
+import { foodTheme } from '../../sections/food/theme';
+import { RecipePreview } from '../../sections/food/components/RecipePreview';
 
-const BlogPostCreatorPlugin = (router) => ({
+const pageWidth = (theme) => css`
+  max-width: ${theme.maxWidth};
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: ${theme.spacing.gutter};
+  padding-left: ${theme.spacing.gutter};
+`;
+
+const RecipeCreatorPlugin = (cms: TinaCMS, router: NextRouter) => ({
   __type: 'content-creator',
-  name: 'BlogPostCreator',
+  name: 'Recipe',
   fields: [
     {
       label: 'Title',
@@ -31,25 +41,23 @@ const BlogPostCreatorPlugin = (router) => ({
       },
     },
   ],
-  async onSubmit(values) {
-    try {
-      const response = await fetch(`/api/cms/recipes`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(values),
-      });
-      const recipe: Recipe = await response.json();
-      const slug = createSlug(recipe.id, recipe.title);
-      router.push(`/food/${slug}`);
-    } catch (error) {
-      logger.error(error);
-    }
-  },
+  onSubmit: createSubmit(cms, async (values) => {
+    const response = await fetch(`/api/cms/recipes`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(values),
+    });
+    const recipe = (await response.json()) as Recipe;
+    const slug = createSlug(recipe.id, recipe.title);
+    return router.push(`/food/${slug}`);
+  }),
 });
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const recipes = await prisma.recipe.findMany({
+    orderBy: { id: 'asc' },
     include: {
+      image: true,
       ingredients: {
         include: {
           ingredient: true,
@@ -76,30 +84,30 @@ function FoodPage({ recipes }: FoodPageProps) {
 
   useEffect(() => {
     if (cms && cms.plugins) {
-      cms.plugins.add(BlogPostCreatorPlugin(router));
+      cms.plugins.add(RecipeCreatorPlugin(cms, router));
     }
   }, [cms, router]);
 
   return (
     <Fragment>
       <Meta title={title} description={description} pathname="/food" />
-      <Navigation />
-      <Main>
-        <Header title={title} subtitle={description} />
-        <ul>
+      <FoodLayout>
+        <Header title={title} css={pageWidth} />
+        <div css={pageWidth}>
           {recipes.map((recipe) => (
-            <li key={recipe.id}>
-              <Anchor href={`/food/${createSlug(recipe.id, recipe.title)}`}>
-                {recipe.title}{' '}
-                {recipe.description &&
-                  toPlainText(recipe.description as Node[])}
-              </Anchor>
-            </li>
+            <RecipePreview
+              key={recipe.id}
+              url={`/food/${createSlug(recipe.id, recipe.title)}`}
+              title={recipe.title}
+              image={recipe.image}
+            />
           ))}
-        </ul>
-      </Main>
+        </div>
+      </FoodLayout>
     </Fragment>
   );
 }
+
+FoodPage.theme = foodTheme;
 
 export default withTina(FoodPage);

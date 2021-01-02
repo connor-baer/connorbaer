@@ -8,7 +8,7 @@ import { travel } from '../../styles/themes';
 import Meta from '../../components/Meta';
 import Navigation from '../../components/Navigation';
 import Prefooter from '../../components/Prefooter';
-import Footer from '../../components/Footer';
+import { Footer } from '../../components/Footer';
 import GuideLarge from '../../components/travel/GuideLarge';
 import useCities from '../../hooks/use-cities';
 

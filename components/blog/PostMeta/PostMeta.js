@@ -37,11 +37,7 @@ export default function PostMeta({ date, category, className }) {
       )}
       {category && (
         <Small>
-          <Anchor
-            href="/blog/category/[category]"
-            as={`/blog/category/${categorySlug}`}
-            css={anchorStyles}
-          >
+          <Anchor href={`/blog/category/${categorySlug}`} css={anchorStyles}>
             {category}
           </Anchor>
         </Small>

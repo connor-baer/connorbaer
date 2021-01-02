@@ -16,7 +16,7 @@ const sectionHeadingStyles = ({ theme }) => css`
   }
 
   ${theme.mq.darkmode} {
-    color: ${theme.color.primary[100]};
+    color: ${theme.color.primary[500]};
   }
 `;
 

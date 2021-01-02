@@ -1,13 +1,18 @@
 import { slugify } from './slugify';
 
-export function parseId(id: string | string[]): number {
-  return parseInt(id as string, 10);
+const SEPARATOR = '-';
+
+export function parseId(id: string): number {
+  return parseInt(id, 10);
 }
 
-// TODO: Might need more robust parsing for slugs in the future.
-export const parseSlug = parseId;
+export function parseSlug(slug: string): number {
+  const parts = slug.split(SEPARATOR);
+  const id = parts[parts.length - 1];
+  return parseId(id);
+}
 
 export function createSlug(id: number | string, title: string): string {
   const slug = slugify(title);
-  return `${id}-${slug}`;
+  return `${slug}${SEPARATOR}${id}`;
 }

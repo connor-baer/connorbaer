@@ -7,10 +7,7 @@ module.exports = require('@sumup/foundry/eslint')(
   },
   {
     rules: {
-      'no-underscore-dangle': [
-        'error',
-        { allow: ['__resourcePath', '__DEV__', '__PRODUCTION__', '__TEST__'] },
-      ],
+      'no-underscore-dangle': ['error', { allow: ['__resourcePath'] }],
     },
     overrides: [
       {

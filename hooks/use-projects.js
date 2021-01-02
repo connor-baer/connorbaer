@@ -7,7 +7,7 @@ import { filterByDraft } from '../utils/filter';
 import { sortByTitle } from '../utils/sort';
 import paginate from '../utils/paginate';
 
-import usePreview from './use-preview';
+import usePreview from './usePreview';
 
 export function enhance() {
   return map((project = {}) => {

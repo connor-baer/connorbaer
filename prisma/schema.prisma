@@ -10,6 +10,18 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model Image {
+  src       String   @id
+  alt       String
+  color     String?
+  createdAt DateTime @default(now())
+  recipe    Recipe?  @relation(fields: [recipeId], references: [id])
+  recipeId  Int?
+
+  @@index([alt])
+  @@map(name: "images")
+}
+
 model Tag {
   id       Int     @id @default(autoincrement())
   title    String
@@ -23,7 +35,8 @@ model Tag {
 model Recipe {
   id           Int                  @id @default(autoincrement())
   title        String
-  description  Json?
+  description  String?
+  image        Image?
   serves       Int?
   prepTime     Int?
   cookTime     Int?
@@ -43,43 +56,39 @@ model IngredientInRecipe {
   recipeId     Int
   ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
   ingredientId Int
-  amount       Int
+  count        Int
   unit         Unit?
+  description  String?
 
   @@id([recipeId, ingredientId])
   @@map(name: "ingredientsInRecipes")
 }
 
 model Ingredient {
-  id            Int                  @id @default(autoincrement())
-  title         String
-  recipes       IngredientInRecipe[]
-  instruction   Instruction?         @relation(fields: [instructionId], references: [id])
-  instructionId Int?
+  id      Int                  @id @default(autoincrement())
+  title   String
+  recipes IngredientInRecipe[]
 
   @@index([title])
   @@map(name: "ingredients")
 }
 
 model Utensil {
-  id            Int          @id @default(autoincrement())
-  title         String
-  recipe        Recipe?      @relation(fields: [recipeId], references: [id])
-  recipeId      Int?
-  instruction   Instruction? @relation(fields: [instructionId], references: [id])
-  instructionId Int?
+  id       Int     @id @default(autoincrement())
+  title    String
+  recipe   Recipe? @relation(fields: [recipeId], references: [id])
+  recipeId Int?
 
   @@index([title])
   @@map(name: "utensils")
 }
 
 model Instruction {
-  id          Int          @id @default(autoincrement())
-  content     Json
-  recipe      Recipe?      @relation(fields: [recipeId], references: [id])
-  recipeId    Int?
-  ingredients Ingredient[]
-  utensils    Utensil[]
+  id       Int     @id @default(autoincrement())
+  step     Int
+  content  String
+  recipe   Recipe? @relation(fields: [recipeId], references: [id])
+  recipeId Int?
 
   @@map(name: "instructions")
 }
@@ -90,21 +99,29 @@ enum Unit {
   Milliliter
   Gallon
   FluidOunce
-  Cup
   Tablespoon
   Teaspoon
   // Weight
   Kilogram
   Gram
-  Milligram
-  Pund
+  Pound
   Ounce
   // Length
   Meter
   Centimeter
   Millimeter
+  Foot
   Inch
   // Temperature
   Celsius
   Fahrenheit
+  // Time
+  Millisecond
+  Second
+  Minute
+  Hour
+  Day
+  Week
+  Month
+  Year
 }
