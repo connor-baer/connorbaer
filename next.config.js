@@ -16,6 +16,9 @@ const nextConfig = {
     deferScripts: true,
     granularChunks: true,
   },
+  images: {
+    domains: ['source.unsplash.com', 'res.cloudinary.com'],
+  },
   env: {
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_PROJECT_ID: process.env.GOOGLE_PROJECT_ID,
@@ -45,14 +48,6 @@ const nextConfig = {
         },
       ],
     });
-
-    config.plugins.push(
-      new webpack.DefinePlugin({
-        __DEV__: JSON.stringify(dev),
-        __PRODUCTION__: JSON.stringify(!dev),
-        __TEST__: false,
-      }),
-    );
 
     return config;
   },

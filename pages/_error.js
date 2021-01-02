@@ -7,7 +7,7 @@ import { Main, Header, styles } from '@madebyconnor/bamboo-ui';
 import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
 import Prefooter from '../components/Prefooter';
-import Footer from '../components/Footer';
+import { Footer } from '../components/Footer';
 
 const TITLE_MAP = {
   404: 'Page not found. 🕵',

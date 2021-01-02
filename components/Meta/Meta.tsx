@@ -1,28 +1,36 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { isNil } from 'lodash/fp';
-import { Meta, propTypes } from '@madebyconnor/bamboo-ui';
+import { Meta as BambooMeta } from '@madebyconnor/bamboo-ui';
 
 import { NAME, TWITTER } from '../../constants/site';
 import { FAVICONS_PATH } from '../../constants/paths';
 import * as Url from '../../services/url';
+import { ImageProps } from '../../types/media';
 
 const DEFAULT_IMAGE = {
   src: '/images/pages/connor.jpg',
   alt: 'Connor smiles at the camera.',
 };
 
-export default function CustomMeta({
+export interface MetaProps {
+  title: string;
+  description: string;
+  pathname: string;
+  image?: ImageProps;
+}
+
+export default function Meta({
   pathname,
-  image = DEFAULT_IMAGE,
+  image: customImage,
   ...rest
-}) {
+}: MetaProps) {
+  const image = customImage || DEFAULT_IMAGE;
   const url = !isNil(pathname) && Url.format(pathname, true);
   const src = image.src && Url.format(image.src, true);
   return (
     <>
-      <Meta
+      <BambooMeta
         url={url}
         siteName={NAME}
         siteTwitter={TWITTER}
@@ -88,8 +96,3 @@ export default function CustomMeta({
     </>
   );
 }
-
-CustomMeta.propTypes = {
-  pathname: PropTypes.string,
-  image: PropTypes.shape(propTypes.imagePropType),
-};

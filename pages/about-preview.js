@@ -17,7 +17,7 @@ import {
 import Meta from '../components/Meta';
 import Navigation from '../components/Navigation';
 import Prefooter from '../components/Prefooter';
-import Footer from '../components/Footer';
+import { Footer } from '../components/Footer';
 
 const Container = styled('div')(styles.pageWidth);
 

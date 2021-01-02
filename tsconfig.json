@@ -14,6 +14,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.js", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.js", "**/*.ts", "**/*.tsx", "**/*.json"],
   "exclude": ["node_modules"]
 }

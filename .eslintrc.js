@@ -7,12 +7,18 @@ module.exports = require('@sumup/foundry/eslint')(
   },
   {
     rules: {
-      'no-underscore-dangle': [
-        'error',
-        { allow: ['__resourcePath', '__DEV__', '__PRODUCTION__', '__TEST__'] },
-      ],
+      'no-underscore-dangle': ['error', { allow: ['__resourcePath'] }],
     },
     overrides: [
+      {
+        files: ['*'],
+        rules: {
+          'react/react-in-jsx-scope': 'off',
+          '@typescript-eslint/no-unsafe-call': 'warn',
+          '@typescript-eslint/no-unsafe-member-access': 'warn',
+          '@typescript-eslint/no-unsafe-assignment': 'warn',
+        },
+      },
       {
         files: ['layouts/*.js'],
         rules: {

@@ -1,0 +1,127 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Image {
+  src       String   @id
+  alt       String
+  color     String?
+  createdAt DateTime @default(now())
+  recipe    Recipe?  @relation(fields: [recipeId], references: [id])
+  recipeId  Int?
+
+  @@index([alt])
+  @@map(name: "images")
+}
+
+model Tag {
+  id       Int     @id @default(autoincrement())
+  title    String
+  recipe   Recipe? @relation(fields: [recipeId], references: [id])
+  recipeId Int?
+
+  @@index([title])
+  @@map(name: "tags")
+}
+
+model Recipe {
+  id           Int                  @id @default(autoincrement())
+  title        String
+  description  String?
+  image        Image?
+  serves       Int?
+  prepTime     Int?
+  cookTime     Int?
+  updatedAt    DateTime             @updatedAt
+  createdAt    DateTime             @default(now())
+  tags         Tag[]
+  utensils     Utensil[]
+  instructions Instruction[]
+  ingredients  IngredientInRecipe[]
+
+  @@index([title])
+  @@map(name: "recipes")
+}
+
+model IngredientInRecipe {
+  recipe       Recipe     @relation(fields: [recipeId], references: [id])
+  recipeId     Int
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+  ingredientId Int
+  count        Int
+  unit         Unit?
+  description  String?
+
+  @@id([recipeId, ingredientId])
+  @@map(name: "ingredientsInRecipes")
+}
+
+model Ingredient {
+  id      Int                  @id @default(autoincrement())
+  title   String
+  recipes IngredientInRecipe[]
+
+  @@index([title])
+  @@map(name: "ingredients")
+}
+
+model Utensil {
+  id       Int     @id @default(autoincrement())
+  title    String
+  recipe   Recipe? @relation(fields: [recipeId], references: [id])
+  recipeId Int?
+
+  @@index([title])
+  @@map(name: "utensils")
+}
+
+model Instruction {
+  id       Int     @id @default(autoincrement())
+  step     Int
+  content  String
+  recipe   Recipe? @relation(fields: [recipeId], references: [id])
+  recipeId Int?
+
+  @@map(name: "instructions")
+}
+
+enum Unit {
+  // Volume
+  Liter
+  Milliliter
+  Gallon
+  FluidOunce
+  Tablespoon
+  Teaspoon
+  // Weight
+  Kilogram
+  Gram
+  Pound
+  Ounce
+  // Length
+  Meter
+  Centimeter
+  Millimeter
+  Foot
+  Inch
+  // Temperature
+  Celsius
+  Fahrenheit
+  // Time
+  Millisecond
+  Second
+  Minute
+  Hour
+  Day
+  Week
+  Month
+  Year
+}

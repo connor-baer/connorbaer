@@ -11,7 +11,7 @@ import {
 import { sortByDate } from '../utils/sort';
 import paginate from '../utils/paginate';
 
-import usePreview from './use-preview';
+import usePreview from './usePreview';
 
 export function enhance() {
   return map((post = {}) => {
