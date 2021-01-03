@@ -185,9 +185,6 @@ export type RawIngredient = IngredientInRecipe & {
 
 export type Ingredient = {
   id: number;
-  count: number;
-  unit?: Unit;
   title: string;
-  amount: string;
   description?: string;
 };

@@ -249,11 +249,11 @@ export function Ingredients({
       <Hr />
 
       <List>
-        {ingredients.map(({ id, amount, description }) => (
+        {ingredients.map(({ id, title, description }) => (
           <ListItem key={id}>
             <Text size="s" weight="bold">
-              {amount},
-            </Text>{' '}
+              {`${title}${description ? ', ' : ' '}`}
+            </Text>
             {description}
           </ListItem>
         ))}

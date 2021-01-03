@@ -56,7 +56,7 @@ model IngredientInRecipe {
   recipeId     Int
   ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
   ingredientId Int
-  count        Int
+  count        Int?
   unit         Unit?
   description  String?
 
@@ -74,10 +74,11 @@ model Ingredient {
 }
 
 model Utensil {
-  id       Int     @id @default(autoincrement())
-  title    String
-  recipe   Recipe? @relation(fields: [recipeId], references: [id])
-  recipeId Int?
+  id          Int     @id @default(autoincrement())
+  title       String
+  description String?
+  recipe      Recipe? @relation(fields: [recipeId], references: [id])
+  recipeId    Int?
 
   @@index([title])
   @@map(name: "utensils")

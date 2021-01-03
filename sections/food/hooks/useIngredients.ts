@@ -12,26 +12,31 @@ export function useIngredients(
   return useMemo(
     () =>
       ingredients.map(({ count: baseCount, unit, description, ingredient }) => {
-        const { id, title } = ingredient;
+        const { id, title: name } = ingredient;
         const count = baseCount * multiplier;
+        if (!count) {
+          const title = name;
+          return { id, title, description };
+        }
 
         if (!unit) {
-          const amount = pluralize(count, title);
-          return { id, count, title, amount };
+          const title = pluralize(count, name);
+          return { id, title, description };
         }
+
         const converted = convertUnit(count, unit, system);
 
         if (!converted.unit) {
           // if (process.env.NODE_ENV !== 'production') {
-          //   throw Error(`No matching unit found for ${amount} ${unit}.`);
+          //   throw Error(`No matching unit found for ${count} ${unit}.`);
           // }
-          const amount = `${count} ${unit} ${title}`;
-          return { id, count, unit, title, amount, description };
+          const title = `${count} ${unit} ${name}`;
+          return { id, title, description };
         }
 
         const formatted = formatUnit(converted.value, converted.unit);
-        const amount = `${formatted} ${title}`;
-        return { id, count, unit, title, amount, description };
+        const title = `${formatted} ${name}`;
+        return { id, title, description };
       }),
     [ingredients, system, multiplier],
   );
