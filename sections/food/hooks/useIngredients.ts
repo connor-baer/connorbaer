@@ -14,8 +14,9 @@ export function useIngredients(
       ingredients.map(({ count: baseCount, unit, description, ingredient }) => {
         const { id, title: name } = ingredient;
         const count = baseCount * multiplier;
+
         if (!count) {
-          const title = name;
+          const title = name.charAt(0).toUpperCase() + name.slice(1);
           return { id, title, description };
         }
 

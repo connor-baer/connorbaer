@@ -120,7 +120,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     where: { id: recipeId },
     include: {
       ingredients: { include: { ingredient: true } },
-      instructions: true,
+      instructions: { orderBy: { step: 'asc' } },
       utensils: true,
       image: true,
     },

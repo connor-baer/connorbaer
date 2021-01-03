@@ -22,7 +22,8 @@ function connect(data, relations, key) {
         let relation;
 
         switch (type) {
-          case 'one-to-one': {
+          case 'one-to-one':
+          case 'many-to-one': {
             relation = pick(reference, faker.random.arrayElement(items));
             break;
           }
@@ -171,11 +172,13 @@ async function main() {
     const images = await seedMultiple(20, seedImage);
     const tags = await seedMultiple(20, seedTag);
     const ingredients = await seedMultiple(INGREDIENTS.length, seedIngredient);
-    const instructions = await seedMultiple(100, seedInstruction);
     const recipes = await seedMultiple(20, seedRecipe, [
       { name: 'image', items: images, type: 'one-to-one', reference: 'src' },
       { name: 'tags', items: tags, min: 2, max: 5 },
-      { name: 'instructions', items: instructions, min: 3, max: 9 },
+    ]);
+
+    await seedMultiple(100, seedInstruction, [
+      { name: 'recipe', items: recipes, type: 'many-to-one' },
     ]);
 
     await seedMultiple(100, seedIngredientInRecipe, [

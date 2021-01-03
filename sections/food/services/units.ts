@@ -16,7 +16,21 @@ function convertBest(
   const converted = convert(value)
     .from(from)
     // FIXME: Fix types once convert-units is forked.
-    .toBest({ exclude: ['qt', 'pnt', 'cup', 'kanna'] as any });
+    .toBest({
+      exclude: [
+        'qt',
+        'pnt',
+        'cup',
+        'kanna',
+        'cm3',
+        'glas',
+        'kkp',
+        'cl',
+        'dl',
+        'msk',
+        'tsk',
+      ] as any,
+    });
   return {
     // Round to nearest 0.5.
     // TODO: Do this while converting to the best unit.

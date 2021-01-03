@@ -74,22 +74,21 @@ model Ingredient {
 }
 
 model Utensil {
-  id          Int     @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   title       String
   description String?
-  recipe      Recipe? @relation(fields: [recipeId], references: [id])
-  recipeId    Int?
+  recipes     Recipe[]
 
   @@index([title])
   @@map(name: "utensils")
 }
 
 model Instruction {
-  id       Int     @id @default(autoincrement())
+  id       Int    @id @default(autoincrement())
   step     Int
   content  String
-  recipe   Recipe? @relation(fields: [recipeId], references: [id])
-  recipeId Int?
+  recipe   Recipe @relation(fields: [recipeId], references: [id])
+  recipeId Int
 
   @@map(name: "instructions")
 }
