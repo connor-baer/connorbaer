@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 
 import { getPreview } from '../services/preview';
+import { useLocalStorage } from '../hooks/useStorage';
 import Meta from '../components/Meta';
 import Clock from '../components/dashboard/Clock';
-import UpcomingEvent from '../components/dashboard/UpcomingEvent';
+import Countdown from '../components/dashboard/Countdown';
+// import UpcomingEvent from '../components/dashboard/UpcomingEvent';
 
 const Centered = styled.div`
   position: fixed;
@@ -30,7 +32,10 @@ export default function Dashboard() {
   const title = 'Dashboard';
   const description = 'Personal dashboard';
 
-  const [showSeconds, setShowSeconds] = useState(true);
+  const [showSeconds, setShowSeconds] = useLocalStorage(
+    '@mbc/show-seconds',
+    true,
+  );
   const toggleSeconds = () => {
     setShowSeconds((prev) => !prev);
   };
@@ -40,7 +45,8 @@ export default function Dashboard() {
       <Meta title={title} description={description} index={false} />
       <Centered>
         <StyledClock showSeconds={showSeconds} onClick={toggleSeconds} />
-        <UpcomingEvent />
+        <Countdown title="moving day 🚚" date={new Date('2021-04-01')} />
+        {/* <UpcomingEvent /> */}
       </Centered>
     </>
   );
