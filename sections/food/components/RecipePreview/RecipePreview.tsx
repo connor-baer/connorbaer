@@ -33,17 +33,7 @@ const titleStyles = ({ theme }) => css`
 const Title = styled(Heading)(titleStyles);
 
 const aStyles = ({ theme }) => css`
-  &:focus {
-    ${styles.focusOutline(theme)};
-  }
-
-  &:focus:not(:focus-visible) {
-    box-shadow: none;
-  }
-
-  &:focus-visible {
-    ${styles.focusOutline(theme)};
-  }
+  ${styles.focusVisible(theme)};
 
   ${theme.mq.hand} {
     display: grid;

@@ -75,18 +75,7 @@ const buttonStyles = ({ theme }) => css`
     border-color: ${theme.color.neutral[700]};
   }
 
-  &:focus {
-    ${styles.focusOutline(theme)};
-    z-index: 3;
-  }
-
-  &:focus:not(:focus-visible) {
-    box-shadow: none;
-  }
-
-  &:focus-visible {
-    ${styles.focusOutline(theme)};
-  }
+  ${styles.focusVisible(theme)};
 `;
 
 const leftStyles = ({ theme }) => css`

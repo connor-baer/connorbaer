@@ -754,9 +754,9 @@
   integrity sha512-QPcGmICAPbGLGb6F/yNf/KzKqvFx8z5qx3D1yFqVAjoFmXK35EgyW+cJ57Te3CNsmzblwtzakLGFqHPqrfb4Tw==
 
 "@madebyconnor/bamboo-ui@^2.0.0-canary":
-  version "2.0.0-canary.51"
-  resolved "https://registry.yarnpkg.com/@madebyconnor/bamboo-ui/-/bamboo-ui-2.0.0-canary.51.tgz#2de62cfbbbccbb381c3483d932b96283af87d50b"
-  integrity sha512-7jvl/2EGVVGoAN0rvo/cgGX10yiBlE13+A9vJfrHObrMGPbszwuORzqdaqW8X1X+hA7wj/bCKG3SiMADpcGYwg==
+  version "2.0.0-canary.52"
+  resolved "https://registry.yarnpkg.com/@madebyconnor/bamboo-ui/-/bamboo-ui-2.0.0-canary.52.tgz#861c4708fab919242dc3813a8ab0a6ef243b68ee"
+  integrity sha512-8PVk+XzZUq2F6Cvozs2KjIAgnqeNVfhDvASRaW4lrjJmtwiXYkttv1gpZbfNoVw0oYnWwNwywr35ZSa/jBrwOg==
   dependencies:
     "@emotion/core" "^10.0.10"
     "@emotion/is-prop-valid" "^0.8.2"
@@ -1518,9 +1518,9 @@
   integrity sha512-tjSSOTHhI5mCHTy/OOXYIhi2Wt1qcbHmuXD1Ha7q70CgI/I71afO4XtLb/cVexki1oVYchpul/TOuu3Arcdxrg==
 
 "@types/lodash@^4.14.165":
-  version "4.14.166"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.166.tgz#07e7f2699a149219dbc3c35574f126ec8737688f"
-  integrity sha512-A3YT/c1oTlyvvW/GQqG86EyqWNrT/tisOIh2mW3YCgcx71TNjiTZA3zYZWA5BCmtsOTXjhliy4c4yEkErw6njA==
+  version "4.14.167"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.167.tgz#ce7d78553e3c886d4ea643c37ec7edc20f16765e"
+  integrity sha512-w7tQPjARrvdeBkX/Rwg95S592JwxqOjmms3zWQ0XZgSyxSLdzWaYH3vErBhdVS/lRBX7F8aBYcYJYTr5TMGOzw==
 
 "@types/mdast@^3.0.0":
   version "3.0.3"
@@ -1701,19 +1701,19 @@
     "@typescript-eslint/types" "4.9.0"
     eslint-visitor-keys "^2.0.0"
 
-"@udecode/slate-plugins-core@^0.71.9":
-  version "0.71.9"
-  resolved "https://registry.yarnpkg.com/@udecode/slate-plugins-core/-/slate-plugins-core-0.71.9.tgz#279f7edd20c172f16fc250dec8c9353a2944db22"
-  integrity sha512-ZX03hwawJP/qKKrLDBnGJwjNlFshy5oQuQGCDV9CXBJCt7z8xkjgfBvn2sQEEFINTBUEBU9jbz4qagQfGUdU9Q==
+"@udecode/slate-plugins-core@^0.71.11":
+  version "0.71.11"
+  resolved "https://registry.yarnpkg.com/@udecode/slate-plugins-core/-/slate-plugins-core-0.71.11.tgz#6e8e7c4af4e484b990031a4762165f28c45163cb"
+  integrity sha512-JbMbwl8V7fwK4JPbkhspDeBJ8+pk1QGw5l0IDREBCFaviqBg5shYs1ij6jnN7xKEQ+bIc0ogqxJ8B8zhq9pC5w==
 
 "@udecode/slate-plugins@^0.71.0":
-  version "0.71.9"
-  resolved "https://registry.yarnpkg.com/@udecode/slate-plugins/-/slate-plugins-0.71.9.tgz#07ccf5a8d1dcd2e72f02640fb90f0ed2476472ba"
-  integrity sha512-ieB40EkqgpGYTiJH40QPC7eCq5EPnDzBdXBEtj+ua/fyjgeFHHW4oHpaG8pWZyYhSqpRi2QeYthbmWj8eco5FA==
+  version "0.71.11"
+  resolved "https://registry.yarnpkg.com/@udecode/slate-plugins/-/slate-plugins-0.71.11.tgz#6cafecdb524e331ad6d2306ea85a6f93075480a4"
+  integrity sha512-aodKa+b08aHrX7pGzijzt85JwvLfK7MWu84OieCOSBFWxPniZ1PLwNlSuFJYqVC25g6O8jJdjzIoQQtS/aEBBg==
   dependencies:
     "@react-hook/merged-ref" "^1.3.0"
     "@tippyjs/react" "^4.0.2"
-    "@udecode/slate-plugins-core" "^0.71.9"
+    "@udecode/slate-plugins-core" "^0.71.11"
     "@uifabric/styling" "^7.12.11"
     "@uifabric/utilities" "^7.19.0"
     image-extensions "^1.1.0"
@@ -1724,7 +1724,7 @@
     react-dnd-html5-backend "^11.1.3"
     react-use "^15.1.0"
     remark-parse "^9.0.0"
-    remark-slate "^1.1.1"
+    remark-slate "^1.4.0"
     unified "^9.1.0"
     utility-types "^3.10.0"
 
@@ -8319,7 +8319,19 @@ mime-db@1.44.0:
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.44.0.tgz#fa11c5eb0aca1334b4233cb4d52f10c5a6272f92"
   integrity sha512-/NOTfLrsPBVeH7YtFPgsVWveuL+4SjjYxaQ1xtM1KMFj7HdxlBlxeyNLzhyJVx7r4rZGJAZ/6lkKCitSc/Nmpg==
 
-mime-types@^2.1.12, mime-types@^2.1.27, mime-types@~2.1.19, mime-types@~2.1.24:
+mime-db@1.45.0:
+  version "1.45.0"
+  resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.45.0.tgz#cceeda21ccd7c3a745eba2decd55d4b73e7879ea"
+  integrity sha512-CkqLUxUk15hofLoLyljJSrukZi8mAtgd+yE5uO4tqRZsdsAJKv0O+rFMhVDRJgozy+yG6md5KwuXhD4ocIoP+w==
+
+mime-types@^2.1.12, mime-types@~2.1.19:
+  version "2.1.28"
+  resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.28.tgz#1160c4757eab2c5363888e005273ecf79d2a0ecd"
+  integrity sha512-0TO2yJ5YHYr7M2zzT7gDU1tbwHxEUWBCLt0lscSNpcdAfFyJOVEpRYNS7EXVcTLNj/25QO8gulHC5JtTzSE2UQ==
+  dependencies:
+    mime-db "1.45.0"
+
+mime-types@^2.1.27, mime-types@~2.1.24:
   version "2.1.27"
   resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.27.tgz#47949f98e279ea53119f5722e0f34e529bec009f"
   integrity sha512-JIhqnCasI9yD+SsmkquHBxTSEuZdQX5BuQnS2Vc7puQQQ+8yiP5AY5uWhpdv4YL4VM5c6iliiYWPgJ/nJQLp7w==
@@ -10111,9 +10123,9 @@ prettier@^2.0.0:
   integrity sha512-PqyhM2yCjg/oKkFPtTGUojv7gnZAoG80ttl45O6x2Ug/rMJw4wcc9k6aaf2hibP7BGVCCM33gZoGjyvt9mm16Q==
 
 prismjs@^1.20.0:
-  version "1.22.0"
-  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.22.0.tgz#73c3400afc58a823dd7eed023f8e1ce9fd8977fa"
-  integrity sha512-lLJ/Wt9yy0AiSYBf212kK3mM5L8ycwlyTlSxHBAneXLR0nzFMlZ5y7riFPF3E33zXOF2IH95xdY5jIyZbM9z/w==
+  version "1.23.0"
+  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.23.0.tgz#d3b3967f7d72440690497652a9d40ff046067f33"
+  integrity sha512-c29LVsqOaLbBHuIbsTxaKENh1N2EQBOHaWv7gkHN4dgRbxSREqDnDbtFJYdpPauS4YCplMSNCABQ6Eeor69bAA==
   optionalDependencies:
     clipboard "^2.0.0"
 
@@ -10882,10 +10894,10 @@ remark-parse@^9.0.0:
   dependencies:
     mdast-util-from-markdown "^0.8.0"
 
-remark-slate@^1.1.1:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/remark-slate/-/remark-slate-1.3.0.tgz#fab7528047dc1009e32603d56aca203ef9c19c9c"
-  integrity sha512-sRYuru9l3QG0ezFd5bzd17K3qGy1lAeVQdoN4+g8o+9ntZnpw7UxqcK8fEz6s2uv8os8/vmM3KS3/LoGqhDjdg==
+remark-slate@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/remark-slate/-/remark-slate-1.4.0.tgz#d546e4eab254d7d896a80c56c7f45e071bc2227b"
+  integrity sha512-L+/rXpb//aVD/O5jNXR663NbNwHMqlIey22FJfSt0uXRE+vfjd8TBomt14glx6TjLwuqwBUbbLm45KLRLb+sog==
   dependencies:
     "@types/escape-html" "^1.0.0"
     escape-html "^1.0.3"
