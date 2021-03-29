@@ -3,7 +3,30 @@ import { Text } from '@madebyconnor/bamboo-ui';
 
 import useTime from '../../../hooks/useTime';
 
+enum TimeUnit {
+  'MINUTES' = 'minutes',
+  'HOURS' = 'hours',
+  'DAYS' = 'days',
+}
+
 const TEN_MINUTES = 10 * 60 * 1000;
+
+const TIME_UNIT_FACTORS: {
+  [key in TimeUnit]: number;
+} = {
+  minutes: 1000 * 60,
+  hours: 1000 * 60 * 60,
+  days: 1000 * 60 * 60 * 24,
+};
+
+function convertTime(time: number, unit: TimeUnit) {
+  const timeFactor = TIME_UNIT_FACTORS[unit];
+  return Math.trunc(Math.abs(time / timeFactor));
+}
+
+function pluralize(string: string, number: number) {
+  return number > 1 ? `${string}s` : string;
+}
 
 export interface CountdownProps {
   title: string;
@@ -17,14 +40,28 @@ export default function Countdown({ title, date, ...props }: CountdownProps) {
     return null;
   }
 
-  const msUntil = date.getTime() - time.now.getTime();
-  const daysUntil = Math.ceil(msUntil / (1000 * 60 * 60 * 24));
+  const msDiff = date.getTime() - time.now.getTime();
+
+  const betweenLabel = msDiff > 0 ? 'until' : 'since';
+  let timeLabel: string;
+
+  if (convertTime(msDiff, TimeUnit.MINUTES) < 60) {
+    const minutes = convertTime(msDiff, TimeUnit.MINUTES);
+    timeLabel = `${minutes} ${pluralize('minute', minutes)}`;
+  } else if (convertTime(msDiff, TimeUnit.HOURS) < 24) {
+    const hours = convertTime(msDiff, TimeUnit.HOURS);
+    timeLabel = `${hours} ${pluralize('hour', hours)}`;
+  } else {
+    const days = convertTime(msDiff, TimeUnit.DAYS);
+    timeLabel = `${days} ${pluralize('day', days)}`;
+  }
+
   return (
     <Text {...props}>
       <Text weight="bold" as="strong">
-        {daysUntil} days
+        {timeLabel}
       </Text>{' '}
-      until{' '}
+      {betweenLabel}{' '}
       <Text weight="bold" as="strong">
         {title}
       </Text>

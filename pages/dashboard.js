@@ -45,7 +45,10 @@ export default function Dashboard() {
       <Meta title={title} description={description} index={false} />
       <Centered>
         <StyledClock showSeconds={showSeconds} onClick={toggleSeconds} />
-        <Countdown title="moving day 🚚" date={new Date('2021-04-01')} />
+        <Countdown
+          title="moving day 🚚"
+          date={new Date('2021-04-01T10:00:00.000+02:00')}
+        />
         {/* <UpcomingEvent /> */}
       </Centered>
     </>
