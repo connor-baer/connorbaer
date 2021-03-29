@@ -19,9 +19,10 @@ const TIME_UNIT_FACTORS: {
   days: 1000 * 60 * 60 * 24,
 };
 
-function convertTime(time: number, unit: TimeUnit) {
+function convertTime(time: number, unit: TimeUnit, roundUp = false) {
   const timeFactor = TIME_UNIT_FACTORS[unit];
-  return Math.trunc(Math.abs(time / timeFactor));
+  const convertedTime = Math.abs(time / timeFactor);
+  return roundUp ? Math.ceil(convertedTime) : Math.floor(convertedTime);
 }
 
 function pluralize(string: string, number: number) {
@@ -52,7 +53,7 @@ export default function Countdown({ title, date, ...props }: CountdownProps) {
     const hours = convertTime(msDiff, TimeUnit.HOURS);
     timeLabel = `${hours} ${pluralize('hour', hours)}`;
   } else {
-    const days = convertTime(msDiff, TimeUnit.DAYS);
+    const days = convertTime(msDiff, TimeUnit.DAYS, msDiff > 0);
     timeLabel = `${days} ${pluralize('day', days)}`;
   }
 
